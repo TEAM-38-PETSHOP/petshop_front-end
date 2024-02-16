@@ -1,0 +1,9 @@
+@import './reset.scss';
+@import './fonts.scss';
+@import './variables.scss';
+@import './extends.scss';
+
+html {
+  font-size: var(--font-size-base);
+  color: var(--color-gray-10);
+}

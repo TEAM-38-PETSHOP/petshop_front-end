@@ -1,0 +1,57 @@
+// Fonts
+:root {
+  --font-size-base: 16px;
+  --primary-font: 'Montserrat', sans-serif;
+  --secondary-font: 'JimmyScript', serif;
+}
+
+// Primary colors
+:root {
+  --color-primary-100: #fb8801;
+  --color-primary-40: #fdcf99;
+}
+
+// Secondary colors
+:root {
+  --color-secondary-yellow: #ffd553;
+  --color-secondary-green: #008a51;
+  --color-secondary-red: #ee4733;
+}
+
+// Additional colors
+:root {
+  --color-additional-beige: #f3f2ee;
+  --color-additional-green: #7ebc89;
+}
+
+// System colors
+:root {
+  --color-system-error: #f43e34;
+  --color-system-info: #417eff;
+  --color-system-warning: #feb600;
+  --color-system-success: #00c662;
+}
+
+// Gray colors
+:root {
+  --color-gray-100: #ffffff;
+  --color-gray-80: #f8f8fa;
+  --color-gray-70: #f0f1f5;
+  --color-gray-50: #dcdee3;
+  --color-gray-40: #a9a9b0;
+  --color-gray-30: #67666b;
+  --color-gray-20: #35353b;
+  --color-gray-10: #161c22;
+}
+
+// Transition
+:root {
+  --transition-duration: 0.3s;
+}
+
+// Border radius
+:root {
+  --radius-100: 100px;
+  --radius-40: 40px;
+  --radius-30: 30px;
+}

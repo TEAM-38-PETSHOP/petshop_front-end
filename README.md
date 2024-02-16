@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# TEAM 38 Front-end part of the pet store on Next.js
 
-## Getting Started
+## Tasks
+- Create `pages`, `components` and `helpers` and other folders for structuring the program.
+- Use `SCSS module` files for each component.
+- Use component names as BEM block names with all the other BEM rules applied.
+- Use a RESTful API for data exchange between the client and server.
+- Use SSR (Server-Side Rendering).
 
-First, run the development server:
+### App
+- Add `<header>` with links to all the pages.
+- Highlight current page in `Header`.
+- Add `<footer>`.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Home page
+- Popular products.
+- Special offers.
+- Categories of products.
+- Contacts.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Product Catalog
+- Add filters by categories price, etc.
+- Add list of products with short descriptions, prices, and images.
+- Add button `Add to Cart` for each product.
+  
+### Product Page
+- Add product description.
+- Add product image.
+- Develop selection options (size, weight, etc.).
+- Add button `Add to Cart`.
+  
+### Grooming
+- Add description.
+- Add examples work.
+- Add location and price.
+- Add contact information for ordering.
+  
+### Cart
+- Add list of selected products.
+- Implement changing the quantity of the product.
+- Add total cost.
+- Add button "Proceed to Checkout".
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Checkout
+- Add form for entering delivery address and contact information.
