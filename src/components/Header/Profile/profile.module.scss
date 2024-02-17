@@ -1,0 +1,19 @@
+.ProfileIcon {
+  border: 2px solid var(--color-gray-20);
+
+  &:hover {
+    background-color: var(--color-primary-100);
+    border-color: var(--color-primary-100);
+
+    * {
+      stroke: white;
+    }
+  }
+
+  &__Selected {
+    background-color: var(--color-gray-20);
+    * {
+      stroke: white;
+    }
+  }
+}
