@@ -1,0 +1,80 @@
+@import '../../app/styles/mixins.scss';
+@import '../../app/styles/extends.scss';
+
+.productSlider {
+  margin-bottom: 273px;
+
+  @include lg {
+    margin-bottom: 180px;
+  }
+
+  @include sm {
+    margin-bottom: 120px;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    @extend %h1-primary;
+
+    margin-bottom: 45px;
+
+    @include lg {
+      font-size: 1.25rem;
+      line-height: 1.2;
+      margin-bottom: 30px;
+    }
+
+    @include sm {
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+  }
+
+  &__image {
+    @include lg {
+      width: 16%;
+      height: 16%;
+    }
+
+    @include sm {
+      width: 22%;
+      height: 22%;
+    }
+  }
+
+  &__slider {
+    div > div:first-child {
+      margin: auto;
+    }
+  }
+}
+
+.arrow {
+  position: absolute;
+  z-index: 5;
+  top: 45%;
+  right: -40px;
+
+  background-color: var(--color-secondary-green);
+
+  &__prev {
+    right: auto;
+    left: -40px;
+  }
+}
+
+.indicators {
+  height: 1px;
+  width: 1px;
+  margin: 0 10px;
+  border-radius: 50%;
+  background-color: var(--color-gray-50);
+
+  cursor: initial;
+}
+
+.active {
+  background-color: var(--color-gray-30);
+}

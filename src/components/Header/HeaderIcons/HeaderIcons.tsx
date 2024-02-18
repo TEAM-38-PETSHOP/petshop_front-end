@@ -2,7 +2,7 @@
 import classNames from 'classnames';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import style from './headerIcons.module.scss';
+import styles from './headerIcons.module.scss';
 
 import Favorites from '@@/images/icons/like.svg';
 import Cart from '@@/images/icons/cart.svg';
@@ -11,14 +11,14 @@ import Profile from '@/components/Header/Profile/Profile';
 export default function HeaderIcons() {
   const pathname = usePathname();
   return (
-    <div className={style.headerRight}>
+    <div className={styles.headerRight}>
       <Link
         href="favorites"
         className={classNames(
-          [style.headerRight__iconsBase],
-          [style.headerRight__iconCartAndFavorite],
+          [styles.headerRight__iconsBase],
+          [styles.headerRight__iconCartAndFavorite],
           {
-            [style.headerRight__iconLike]: pathname === '/favorites',
+            [styles.headerRight__iconLike]: pathname === '/favorites',
           }
         )}
       >
@@ -28,17 +28,17 @@ export default function HeaderIcons() {
       <Link
         href="cart"
         className={classNames(
-          [style.headerRight__iconsBase],
-          [style.headerRight__iconCartAndFavorite],
+          [styles.headerRight__iconsBase],
+          [styles.headerRight__iconCartAndFavorite],
           {
-            [style.headerRight__iconCart]: pathname === '/cart',
+            [styles.headerRight__iconCart]: pathname === '/cart',
           }
         )}
       >
         <Cart />
       </Link>
 
-      <Profile className={style.headerRight__iconsBase} />
+      <Profile className={styles.headerRight__iconsBase} />
     </div>
   );
 }

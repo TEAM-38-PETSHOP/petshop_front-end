@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import classNames from 'classnames';
-import style from './profile.module.scss';
+import styles from './profile.module.scss';
 import ProfileIcon from '@@/images/icons/profile.svg';
 
 type Props = {
@@ -12,8 +12,8 @@ export default function Profile({ className }: Props) {
   return (
     <button
       onClick={() => setOpen(!open)}
-      className={classNames([className], [style.ProfileIcon], {
-        [style.ProfileIcon__Selected]: open,
+      className={classNames([className], [styles.ProfileIcon], {
+        [styles.ProfileIcon__Selected]: open,
       })}
     >
       <ProfileIcon />

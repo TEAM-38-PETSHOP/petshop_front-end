@@ -23,6 +23,9 @@ const nextConfig = {
 
     return config;
   },
+  images: {
+    domains: ['encrypted-tbn0.gstatic.com'],
+  },
 };
 
 export default nextConfig;

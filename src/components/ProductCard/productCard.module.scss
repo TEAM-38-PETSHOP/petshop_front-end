@@ -1,0 +1,51 @@
+@import '../../app/styles/mixins.scss';
+@import '../../app/styles/extends.scss';
+
+.productCard {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  padding: 15px;
+  width: min-content;
+  background-color: var(--color-gray-80);
+  border-radius: var(--radius-30);
+
+  @include sm {
+    gap: 10px;
+  }
+
+  &__image {
+    align-self: center;
+
+    img {
+      border-radius: var(--radius-30);
+      transition: transform var(--transition-duration);
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &__title {
+    @extend %small-text;
+    font-weight: 600;
+    color: var(--color-gray-40);
+  }
+
+  &__description {
+    @extend %secondary-text;
+  }
+
+  &__price {
+    @extend %main-text;
+    font-weight: 600;
+
+    s {
+      @extend %small-text;
+      color: var(--color-gray-40);
+      text-decoration: none;
+    }
+  }
+}
