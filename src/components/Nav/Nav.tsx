@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import style from './nav.module.scss';
+import styles from './nav.module.scss';
 import { usePathname } from 'next/navigation';
 import classNames from 'classnames';
 
@@ -31,14 +31,14 @@ type Props = {
 export default function Nav({ isOpen, setOpenMenu }: Props) {
   const pathname = usePathname();
   return (
-    <nav className={classNames([style.nav], { [style.nav__open]: isOpen })}>
+    <nav className={classNames([styles.nav], { [styles.nav__open]: isOpen })}>
       {links.map((link) => (
         <Link
           key={link.href}
           onClick={() => setOpenMenu(false)}
           href={link.href}
-          className={classNames([style.nav_link], {
-            [style.nav_linkActive]: pathname === link.href,
+          className={classNames([styles.nav_link], {
+            [styles.nav_linkActive]: pathname === link.href,
           })}
         >
           {link.title}
