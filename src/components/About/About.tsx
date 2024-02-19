@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import style from './about.module.scss';
 
 import dogImg from '@@/images/dogs/dog-1.png';
+import Buttons from '../Buttons/Buttons';
 export default function About() {
   return (
     <section className={style.about}>
@@ -25,20 +25,16 @@ export default function About() {
           це частина вашого сімейного кола, і ми завжди тут, щоб подарувати йому
           та вам тільки найкраще.
         </p>
-        <div className={style.about__btns}>
-          <Link
-            href={'/'}
-            className={style.about__btn}
-          >
-            СПА для пухнастиків
-          </Link>
-          <Link
-            href={'/'}
-            className={style.about__btn}
-          >
-            Шоппінг для улюбленців
-          </Link>
-        </div>
+        <Buttons
+          firstBtn={{
+            btnText: 'СПА для пухнастиків',
+            btnLink: '/',
+          }}
+          secondBtn={{
+            btnText: 'Шоппінг для улюбленців',
+            btnLink: '/',
+          }}
+        />
       </div>
     </section>
   );
