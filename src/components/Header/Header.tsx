@@ -1,4 +1,6 @@
 'use client';
+import { useCallback, useState } from 'react';
+import classNames from 'classnames';
 import Image from 'next/image';
 import Logo from '@@/images/icons/logo.svg?url';
 
@@ -7,10 +9,12 @@ import styles from './header.module.scss';
 import Nav from '../Nav/Nav';
 import Link from 'next/link';
 import HeaderIcons from './HeaderIcons/HeaderIcons';
-import classNames from 'classnames';
-import { useState } from 'react';
 export default function Header() {
   const [openMenu, setOpenMenu] = useState(false);
+  const toggleMenu = useCallback(() => {
+    setOpenMenu((prevOpenMenu) => !prevOpenMenu);
+  }, []);
+
   return (
     <header
       className={classNames([styles.header], { [styles.headerOpen]: openMenu })}
@@ -19,7 +23,7 @@ export default function Header() {
         className={classNames([styles.header__menu], {
           [styles.header__menuOpen]: openMenu,
         })}
-        onClick={() => setOpenMenu(!openMenu)}
+        onClick={toggleMenu}
       ></div>
       <Link href="/">
         <Image
