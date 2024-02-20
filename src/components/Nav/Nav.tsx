@@ -15,7 +15,7 @@ const links = [
   },
   {
     title: 'Магазин',
-    href: '/store',
+    href: '/catalog',
   },
   {
     title: 'Контакти',
