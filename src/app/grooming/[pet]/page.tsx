@@ -1,8 +1,19 @@
-import Goal from "@/components/Goal/Goal";
+'use client'; // can be server side rendered
 
-export default function GroomingPet() {
-  return <>
-    <h1 style={{ textAlign: "center", marginBottom: "50px" }}>Grooming</h1>
-    <Goal />
-  </>;
+import Goal from "@/components/Goal/Goal";
+import GroomingHead from "@/components/GroomingHead/GroomingHead";
+
+type Props = {
+  params: {
+    pet: string
+  }
+}
+
+export default function GroomingPet({ params: { pet } }: Props) {
+  return (
+    <>
+      <GroomingHead pet={pet} />
+      <Goal />
+    </>
+  );
 }
