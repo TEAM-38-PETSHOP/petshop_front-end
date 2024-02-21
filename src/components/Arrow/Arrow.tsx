@@ -8,6 +8,7 @@ type Props = {
   direction?: direction;
   onClick?: () => void;
   isCarousel?: boolean;
+  isWhite?: boolean;
 };
 
 export default function Arrow({
@@ -15,6 +16,7 @@ export default function Arrow({
   direction = 'up',
   onClick,
   isCarousel,
+  isWhite,
 }: Props) {
   return (
     <button
@@ -22,6 +24,7 @@ export default function Arrow({
       onClick={onClick}
       className={classNames([styleName], [styles.arrow], {
         [styles[direction]]: direction,
+        [styles.arrow__white]: isWhite,
         [styles.arrow__disabled]: isCarousel && !onClick,
       })}
     ></button>
