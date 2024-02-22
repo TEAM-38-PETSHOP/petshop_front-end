@@ -1,0 +1,106 @@
+@import '../../app/styles/extends.scss';
+@import '../../app/styles/mixins.scss';
+
+.mainBenefits {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 250px 0;
+
+  // border: 1px solid green;
+
+  &__messages {
+    @extend %h3-primary;
+
+    @include lg {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    @include md {
+      font-size: 0.875rem;
+      line-height: 1.2;
+    }
+
+    small {
+      @extend %secondary-text;
+      font-weight: 600;
+      color: var(--color-gray-30);
+
+      @include lg {
+        font-size: 0.75rem;
+      }
+    }
+  }
+
+  &__message {
+    position: relative;
+    border-radius: var(--radius-40);
+    padding: 44px;
+    max-width: Min(75%, 41vw);
+
+    @include lg {
+      padding: 22px;
+    }
+
+    @include md {
+      padding: 16px;
+    }
+
+    &Triangle {
+      position: absolute;
+      top: 40%;
+      right: -30px;
+    }
+
+    &:first-child {
+      background-color: var(--color-gray-50);
+      transform: rotate(-5deg) translate(-50px, 50px);
+
+      @include md {
+        transform: rotate(-5deg) translate(0, 0);
+      }
+
+      svg path {
+        fill: var(--color-gray-50);
+      }
+    }
+    &:nth-child(2) {
+      z-index: 5;
+      background-color: var(--color-gray-70);
+      transform: rotate(8deg) translateX(50%);
+      padding-right: 20%;
+
+      @include md {
+        transform: rotate(8deg) translateX(20%);
+        padding-right: 0;
+      }
+
+      svg path {
+        fill: var(--color-gray-70);
+      }
+    }
+    &:last-child {
+      padding: 40px;
+      background-color: var(--color-secondary-yellow);
+    }
+  }
+
+  &__img {
+    position: absolute;
+    top: 50%;
+    right: -20vw;
+    transform: translateY(-50%) rotate(-40deg);
+
+    width: Min(33vw, 100%);
+    height: Min(33vw, 100%);
+
+    @include md {
+      width: 65vw;
+      height: 65vw;
+      // transform: translateY(-50%) rotate(-30deg);
+
+      right: -35vw;
+    }
+  }
+}
