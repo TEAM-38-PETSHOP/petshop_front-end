@@ -4,6 +4,7 @@ import './styles/main.scss';
 import style from './layout.module.scss';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
+import ScrollToTop from '@/components/ScrollToTop/ScrollToTop';
 
 const font = Montserrat({
   subsets: ['cyrillic'],
@@ -38,6 +39,7 @@ export default function RootLayout({
         <main className={style.main}>{children}</main>
 
         <Footer />
+        <ScrollToTop />
       </body>
     </html>
   );
