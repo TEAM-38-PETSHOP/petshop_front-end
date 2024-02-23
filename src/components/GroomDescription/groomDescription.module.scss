@@ -1,0 +1,39 @@
+@import '../../app//styles/extends.scss';
+@import '../../app/styles/mixins.scss';
+
+.description {
+  padding-top: 15px;
+  min-width: 20%;
+
+  @include lg {
+    display: none;
+  }
+  
+  &__title {
+    margin-bottom: 15px;
+
+    @extend %h4-primary;
+    font-weight: 500;
+  }
+
+  &__text {
+    @extend %small-text;
+
+    margin-bottom: 30px;
+  }
+
+  ul {
+    margin-bottom: 30px;
+
+    li {
+      @extend %small-text;
+      font-weight: 500;
+    }
+  }
+
+  &__additional {
+    @extend %small-text;
+    font-weight: 600;
+    color: var(--color-gray-40);
+  }
+}
