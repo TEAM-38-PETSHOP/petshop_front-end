@@ -1,5 +1,3 @@
-// @ts-nocheck  delete it when when you take data from the back-end
-
 import { useMemo, useState } from 'react';
 import style from './groomingForm.module.scss';
 import CaresList from '../CaresList/CaresList';
@@ -291,17 +289,19 @@ export default function GroomingForm({ pet }: Props) {
   const visibleCares = pet === 'dogs' ? caresForDogs : caresForCats;
 
   const currentCare = useMemo(() => {
-    let result = visibleCares.find((care: CatCare | DogCare) => care.name === activeDogCare) || visibleCares[0];
+    let result: CatCare | DogCare;
     
-    if (pet === 'cats') {
-      result = visibleCares.find((care: CatCare | DogCare) => care.name === activeCatCare) || visibleCares[0];
+    if (pet === 'dogs') {
+      result = visibleCares.find((care: CatCare | DogCare) => care.name === activeDogCare) as DogCare;
+    } else {
+      result = visibleCares.find((care: CatCare | DogCare) => care.name === activeCatCare) as CatCare;
     }
 
-    return result;
+    return result || (visibleCares[0] as CatCare | DogCare);
   }, [activeDogCare, activeCatCare, pet, visibleCares]);
 
-  // Don't forget to fix this typescript error
-  const breeds = pet === 'dogs' ? currentCare.dogBreeds : currentCare.catBreeds;
+  // const breeds = pet === 'dogs' ? currentCare.dogBreeds : currentCare.catBreeds;
+  const breeds = pet === 'dogs' ? (currentCare as DogCare).dogBreeds : (currentCare as CatCare).catBreeds;
   const activeCare= pet === 'dogs' ? activeDogCare : activeCatCare;
   const setActiveCare= pet === 'dogs' ? setActiveDogCare : setActiveCatCare;
   const to = pet === 'dogs' ? 'cats' : 'dogs';
