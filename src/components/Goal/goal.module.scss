@@ -9,11 +9,6 @@
   max-width: 1046px;
   margin: 0 auto 210px auto;
 
-  &:hover &__img {
-    animation: beat 1s infinite alternate;
-    transform-origin: center;
-  }
-
   @include lg {
     max-width: 330px;
     flex-direction: column;
@@ -48,6 +43,8 @@
 
   &__img {
     object-fit: cover;
+    animation: beat 1s infinite alternate;
+    transform-origin: center;
 
     @include lg {
       margin-bottom: 30px;
