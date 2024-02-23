@@ -300,7 +300,7 @@ export default function GroomingForm({ pet }: Props) {
     return result || (visibleCares[0] as CatCare | DogCare);
   }, [activeDogCare, activeCatCare, pet, visibleCares]);
 
-  // const breeds = pet === 'dogs' ? currentCare.dogBreeds : currentCare.catBreeds;
+  /// const breeds = pet === 'dogs' ? currentCare.dogBreeds : currentCare.catBreeds;
   const breeds = pet === 'dogs' ? (currentCare as DogCare).dogBreeds : (currentCare as CatCare).catBreeds;
   const activeCare= pet === 'dogs' ? activeDogCare : activeCatCare;
   const setActiveCare= pet === 'dogs' ? setActiveDogCare : setActiveCatCare;
