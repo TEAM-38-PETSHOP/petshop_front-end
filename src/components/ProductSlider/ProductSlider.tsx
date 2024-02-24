@@ -44,7 +44,7 @@ export default function ProductSlider() {
     infinite: false,
     speed: 300,
     swipe: (windowWidth || 0) < 768,
-    slidesToShow: Math.min(Math.floor((windowWidth || 275) / 265), 5),
+    slidesToShow: Math.floor((windowWidth || 275) / 265),
     slidesToScroll: 1,
     dots: true,
     nextArrow: (
