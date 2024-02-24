@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Arrow from '../Arrow/Arrow';
-import style from './GroomingHead.module.scss';
+import style from './groomingHead.module.scss';
 import dog from '@@/images/grooming/small-dog.svg?url';
 import cat from '@@/images/grooming/small-cat.svg?url';
 import Image from 'next/image';
