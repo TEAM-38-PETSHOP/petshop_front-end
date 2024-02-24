@@ -2,10 +2,10 @@
 @import '../../app/styles/mixins.scss';
 
 .groomingForm {
+  @extend %container;
   display: flex;
-  
+
   margin-bottom: 210px;
-  min-width: 100%;
   max-height: 645px;
   padding: 40px;
 
@@ -54,7 +54,7 @@
 
       @include lg {
         min-width: 100%;
-        
+
         padding-right: 30px;
         margin-right: 0;
       }
