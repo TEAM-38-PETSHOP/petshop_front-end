@@ -2,6 +2,8 @@
 @import '../../app/styles/extends.scss';
 
 .productSlider {
+  overflow: hidden;
+  padding-bottom: 60px;
   margin-bottom: 273px;
 
   @include lg {
@@ -13,6 +15,8 @@
   }
 
   &__title {
+    @extend %container;
+
     display: flex;
     align-items: center;
     font-weight: 500;
@@ -45,6 +49,8 @@
   }
 
   &__slider {
+    // margin-left: 1vw;
+
     div > div:first-child {
       margin: auto;
     }
@@ -55,13 +61,13 @@
   position: absolute;
   z-index: 5;
   top: 45%;
-  right: -40px;
+  right: 0;
 
   background-color: var(--color-secondary-green);
 
   &__prev {
     right: auto;
-    left: -40px;
+    left: 0;
   }
 }
 
