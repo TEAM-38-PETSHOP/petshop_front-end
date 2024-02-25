@@ -3,8 +3,8 @@ import Arrow from '../Arrow/Arrow';
 import style from './choicePet.module.scss';
 import Link from 'next/link';
 
-import dog from '@@/images/grooming/dog.png';
-import cat from '@@/images/grooming/cat.png';
+import dog from '@@/images/drawn/dog.svg?url';
+import cat from '@@/images/drawn/cat.svg?url';
 
 type Props = {
   choice: 'dogs' | 'cats';
