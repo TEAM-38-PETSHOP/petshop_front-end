@@ -5,9 +5,18 @@
   position: relative;
   display: flex;
   align-items: center;
-  margin: 250px 0;
+  overflow: hidden;
 
-  // border: 1px solid green;
+  margin: 250px 0;
+  padding: 70px 0 70px 5%;
+
+  @include lg {
+    padding: 70px 0 70px 10%;
+  }
+
+  @include md {
+    padding: 70px 0 70px 5%;
+  }
 
   &__messages {
     @extend %h3-primary;
@@ -89,18 +98,20 @@
   &__img {
     position: absolute;
     top: 50%;
-    right: -20vw;
-    transform: translateY(-50%) rotate(-40deg);
+    right: 0;
+    transform: translate(20%, -50%) rotate(-40deg);
 
-    width: Min(33vw, 100%);
-    height: Min(33vw, 100%);
+    width: Min(30vw, 100%);
+    height: Min(30vw, 100%);
+
+    @include md {
+      width: 45vw;
+      height: 45vw;
+    }
 
     @include md {
       width: 65vw;
       height: 65vw;
-      // transform: translateY(-50%) rotate(-30deg);
-
-      right: -35vw;
     }
   }
 }
