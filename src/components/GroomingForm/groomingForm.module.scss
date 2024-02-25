@@ -1,0 +1,104 @@
+@import '../../app//styles/extends.scss';
+@import '../../app/styles/mixins.scss';
+
+.groomingForm {
+  @extend %container;
+  display: flex;
+
+  margin-bottom: 210px;
+  max-height: 645px;
+  padding: 40px;
+
+  background-color: var(--color-additional-beige);
+  border-radius: var(--radius-40);
+
+  @include lg {
+    margin-bottom: 75px;
+    padding: 30px;
+  }
+
+  @include md {
+    flex-direction: column;
+    max-height: fit-content;
+  }
+
+  &__line {
+    width: 1px;
+    min-height: 100%;
+    background: var(--color-gray-50);
+    margin-right: 30px;
+
+    @include md {
+      display: none;
+    }
+  }
+
+  &__breeds {
+    display: flex;
+    min-width: 60%;
+
+    @include md {
+      display: block;
+      min-width: 100%;
+
+      margin-bottom: 15px;
+    }
+
+    &Container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 55%;
+
+      margin-right: 30px;
+
+      @include lg {
+        min-width: 100%;
+
+        padding-right: 30px;
+        margin-right: 0;
+      }
+
+      @include md {
+        padding-right: 0;
+      }
+    }
+
+    &Input {
+      min-width: 100%;
+      padding: 16.5px 55px;
+      border-radius: var(--radius-100);
+
+      background-image: url('../../../public/images/icons/search.svg');
+      background-position: 20px center;
+      background-repeat: no-repeat;
+
+      font-size: 1rem;
+      line-height: 1.5;
+      font-weight: 500;
+      color: var(--color-gray-20);
+
+      @include md {
+        display: none;
+      }
+    }
+  }
+
+  &__move {
+    display: none;
+
+    margin: 0 auto;
+    width: fit-content;
+    padding-right: 20px;
+    background-image: url('../../../public/images/icons/arrow_gray.svg');
+    background-position: right;
+    background-repeat: no-repeat;
+
+    @extend %main-text;
+    color: var(--color-gray-30);
+
+    @include md {
+      display: flex;
+    }
+  }
+}
