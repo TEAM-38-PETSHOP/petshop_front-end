@@ -2,6 +2,8 @@
 @import '../../app/styles/mixins.scss';
 
 .about {
+  @extend %container;
+
   display: flex;
   justify-content: center;
   gap: 15px;
