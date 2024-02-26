@@ -1,14 +1,35 @@
+import classNames from 'classnames';
 import styles from './buttonWithArrow.module.scss';
-import Arrow from '@@/images/icons/arrow_right.svg';
 
+type variants = 'white' | 'green' | 'orange';
 type Props = {
   text: string;
+  variant?: variants;
+  onClick?: () => void;
+  classNameBtn?: string;
 };
-export default function ButtonWithArrow({ text }: Props) {
+export default function ButtonWithArrow({
+  text,
+  variant,
+  onClick,
+  classNameBtn,
+}: Props) {
   return (
-    <button className={styles.buttonWithArrow}>
+    <button
+      className={classNames([styles.buttonWithArrow], [classNameBtn], {
+        [styles.buttonWithArrowGreen]: variant === 'green',
+        [styles.buttonWithArrowOrange]: variant === 'orange',
+      })}
+      onClick={onClick}
+      type="button"
+    >
       {text}
-      <Arrow />
+      <span
+        className={classNames([styles.buttonWithArrow__arrow], {
+          [styles.buttonWithArrow__arrowGreen]: variant === 'green',
+          [styles.buttonWithArrow__arrowOrange]: variant === 'orange',
+        })}
+      />
     </button>
   );
 }

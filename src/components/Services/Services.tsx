@@ -9,7 +9,10 @@ export default function Services() {
       <div className={styles.services__blocks}></div>
       <div className={styles.services__block}></div>
       <div className={styles.services__imgBlock}>
-        <ButtonWithArrow text="Доглянути котика" />
+        <ButtonWithArrow
+          text="Доглянути котика"
+          variant="orange"
+        />
       </div>
       <div className={styles.services__block}></div>
     </section>
