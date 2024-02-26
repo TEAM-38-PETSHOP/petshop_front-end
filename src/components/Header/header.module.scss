@@ -2,8 +2,9 @@
 @import '../../app/styles/mixins.scss';
 
 .header {
+  @extend %container;
+
   position: relative;
-  width: 100%;
   padding: 10px;
   margin-bottom: 90px;
 
