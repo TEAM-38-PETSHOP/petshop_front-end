@@ -1,0 +1,10 @@
+@import '../../app/styles/extends.scss';
+
+.services {
+  @extend %container;
+  background-image: url('../../../public/images/dogs/dog-1.png');
+  background-position: center;
+
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+}
