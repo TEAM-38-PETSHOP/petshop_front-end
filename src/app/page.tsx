@@ -1,4 +1,5 @@
 import About from '@/components/About/About';
+import MainBenefits from '@/components/MainBenefits/MainBenefits';
 import ProductSlider from '@/components/ProductSlider/ProductSlider';
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
     <>
       <About />
       <ProductSlider />
+      <MainBenefits />
     </>
   );
 }
