@@ -39,14 +39,16 @@ export default function CaresList({ visibleCares, activeCare, setActiveCare }: P
               })}
               onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}
             >
-              <span>
-                Опис процедури
-              </span>
-              <span 
-                className={cn(style.caresList__descriptionArrow, {
-                  [style.caresList__descriptionArrowActive]: isDescriptionOpen,
-                })}
-              ></span>
+              <div className={style.caresList__descriptionHead}>
+                <span>
+                  Опис процедури
+                </span>
+                <span 
+                  className={cn(style.caresList__descriptionArrow, {
+                    [style.caresList__descriptionArrowActive]: isDescriptionOpen,
+                  })}
+                ></span>
+              </div>
 
               <div className={cn(style.caresList__descriptionMenu, {
                 [style.caresList__descriptionMenuActive]: isDescriptionOpen,
