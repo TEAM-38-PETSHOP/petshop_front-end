@@ -1,9 +1,12 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import style from './groomingForm.module.scss';
 import CaresList from '../CaresList/CaresList';
 import BreedsList from '../BreedsList/BreedsList';
 import GroomDescription from '../GroomDescription/GroomDescription';
 import Link from 'next/link';
+import CareSelect from '../CareSelect/CareSelect';
+import { getAllTypeOfPetServices } from '@/helpers/fetchData';
+import { TypeOfService } from '@/types/TypeOfService';
 
 interface Props {
   pet: string;
@@ -286,6 +289,16 @@ export default function GroomingForm({ pet }: Props) {
   const [activeDogCare, setActiveDogCare] = useState('01 Комплексний догляд');
   const [activeCatCare, setActiveCatCare] = useState('01 Комплексний догляд');
 
+  useEffect(() => {
+    getAllTypeOfPetServices()
+      .then((data) => {
+        console.log(data)
+      })
+      .catch((err) => {
+        throw new Error(`${err}`);
+      });
+  }, []);
+
   const visibleCares = pet === 'dogs' ? caresForDogs : caresForCats;
 
   const currentCare = useMemo(() => {
@@ -315,6 +328,13 @@ export default function GroomingForm({ pet }: Props) {
         activeCare={activeCare}
         setActiveCare={setActiveCare}
       />
+
+      {/* <CareSelect
+        currentCare={currentCare}
+        visibleCares={visibleCares}
+        activeCare={activeCare}
+        setActiveCare={setActiveCare}
+      /> */}
 
       <div className={style.groomingForm__line}></div>
       

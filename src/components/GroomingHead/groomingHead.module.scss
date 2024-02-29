@@ -4,6 +4,9 @@
 .groomingHead {
   @extend %container;
 
+  position: relative;
+  top: 15px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -69,6 +72,10 @@
   }
 
   &__move {
+    position: relative;
+    top: 15px;
+
+    min-width: fit-content;
     padding-right: 20px;
     background-image: url('../../../public/images/icons/arrow_gray.svg');
     background-position: right;
@@ -79,6 +86,11 @@
     font-weight: 400;
 
     @include lg {
+      font-size: 0.875rem;
+      line-height: 1.2;
+    }
+
+    @include md {
       display: none;
     }
   }
