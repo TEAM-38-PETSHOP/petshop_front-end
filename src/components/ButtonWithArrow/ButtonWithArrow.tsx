@@ -1,26 +1,27 @@
 import classNames from 'classnames';
 import styles from './buttonWithArrow.module.scss';
+import Link from 'next/link';
 
 type variants = 'white' | 'green' | 'orange';
 type Props = {
   text: string;
+  href: string;
   variant?: variants;
-  onClick?: () => void;
   classNameBtn?: string;
 };
 export default function ButtonWithArrow({
   text,
+  href,
   variant,
-  onClick,
   classNameBtn,
 }: Props) {
   return (
-    <button
+    <Link
+      href={href}
       className={classNames([styles.buttonWithArrow], [classNameBtn], {
         [styles.buttonWithArrowGreen]: variant === 'green',
         [styles.buttonWithArrowOrange]: variant === 'orange',
       })}
-      onClick={onClick}
       type="button"
     >
       {text}
@@ -30,6 +31,6 @@ export default function ButtonWithArrow({
           [styles.buttonWithArrow__arrowOrange]: variant === 'orange',
         })}
       />
-    </button>
+    </Link>
   );
 }
