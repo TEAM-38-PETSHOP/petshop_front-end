@@ -8,8 +8,8 @@ export default function Home() {
     <>
       <About />
       <ProductSlider />
-      <Services />
       <MainBenefits />
+      <Services />
     </>
   );
 }
