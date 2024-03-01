@@ -41,7 +41,7 @@ export default function Services() {
         >
           <ButtonWithArrow
             classNameBtn={styles.services__buttons}
-            text="Доглянути котика"
+            text="Доглянути песика"
             href="/grooming/dogs"
             variant="orange"
           />
