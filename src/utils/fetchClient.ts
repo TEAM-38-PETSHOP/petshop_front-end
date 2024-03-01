@@ -1,4 +1,6 @@
-const BASE_URL = 'http://ec2-3-83-240-44.compute-1.amazonaws.com';
+// const BASE_URL = 'http://ec2-3-83-240-44.compute-1.amazonaws.com';
+const BASE_URL = 'http://ec2-18-234-133-153.compute-1.amazonaws.com';
+
 
 type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
@@ -13,6 +15,7 @@ function request<T>(
     options.body = JSON.stringify(data);
     options.headers = {
       'Content-Type': 'application/json',
+      'mode': 'no-cors'
     };
   }
 

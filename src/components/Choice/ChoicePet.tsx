@@ -11,8 +11,10 @@ type Props = {
 }
 
 export default function ChoicePet({ choice }: Props) {
+  // const mobile = '';
+
   return choice === 'dogs' ? (
-    <div className={style.choice}>
+    <Link href={`/grooming/${choice}`} className={style.choice}>
       <div className={style.choice__btn}>
         <h4 className={style.choice__title}>Песика</h4>
         <Link href={`/grooming/${choice}`}>
@@ -27,9 +29,9 @@ export default function ChoicePet({ choice }: Props) {
           priority
         />
       </div>
-    </div>
+    </Link>
   ) : (
-    <div className={style.choice}>
+    <Link href={`/grooming/${choice}`} className={style.choice}>
       <div className={style.choice__btn}>
         <h4 className={style.choice__title}>Котика</h4>
         <Link href={`/grooming/${choice}`}>
@@ -44,6 +46,6 @@ export default function ChoicePet({ choice }: Props) {
           priority
         />
       </div>
-    </div>
+    </Link>
   );
 }
