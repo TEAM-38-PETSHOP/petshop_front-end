@@ -18,6 +18,10 @@
     margin-bottom: 15px;
   }
 
+  // @include sm {
+  //   display: none;
+  // }
+
   &__active {
     &Item {
       color: var(--color-gray-100);
@@ -45,9 +49,7 @@
   &__description {
     position: relative;
     display: none;
-    justify-content: space-between;
 
-    z-index: 2;
     cursor: pointer;
     border: 1px solid var(--color-gray-10);
     border-radius: var(--radius-100);
@@ -55,6 +57,7 @@
 
     @include lg {
       display: flex;
+      justify-content: space-between;
     }
 
     &Active {
@@ -74,22 +77,35 @@
       }
     }
 
+    &Head {
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
     &Menu {
       // Add some animation from 0 to 100 height or smth else
       display: none;
       position: absolute;
-      top: 100%;
+      top: 50px;
+      bottom: 0;
       left: 0;
-      width: 100%;
+      right: 0;
       overflow: hidden;
-      background-color: var(--color-additional-beige);
+      background-color: var(--color-gray-100);
       border-radius: var(--radius-30);
-      padding: 30px 30px 30px 30px;
+      // padding: 80px 30px 30px 30px;
       border: 1px solid var(--color-gray-10);
       color: var(--color-gray-10);
+      transition: all, 4s;
 
       &Active {
         display: block;
+        bottom: auto;
+        z-index: 2;
+        padding: 30px;
+        transition: all, 4s;
       }
     }
 
