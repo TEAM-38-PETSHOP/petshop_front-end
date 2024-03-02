@@ -1,0 +1,85 @@
+@import '../../app//styles/extends.scss';
+@import '../../app/styles/mixins.scss';
+
+.about {
+  @extend %container;
+
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+
+  margin-bottom: 165px;
+
+  @include lg {
+    gap: 10px;
+    margin-bottom: 120px;
+  }
+
+  @include md {
+    align-items: center;
+    flex-direction: column;
+  }
+
+  @include sm {
+    margin-bottom: 60px;
+  }
+
+  &__img {
+    border-radius: var(--radius-40);
+    width: 40vw;
+    object-fit: cover;
+
+    @include md {
+      width: 100%;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+
+    @extend %secondary-text;
+
+    padding: 4%;
+    background-color: var(--color-additional-beige);
+    border-radius: var(--radius-40);
+  }
+
+  &__title {
+    font-weight: 600;
+    color: var(--color-gray-40);
+
+    margin-bottom: 90px;
+
+    @include lg {
+      margin-bottom: 60px;
+    }
+
+    @include md {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__slogan {
+    @extend %h1-primary;
+    margin-bottom: 15px;
+
+    span {
+      font-family: var(--secondary-font);
+      font-size: 2.5rem;
+    }
+
+    @include md {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__description {
+    flex-grow: 1;
+    margin-bottom: 10px;
+
+    @include md {
+      margin-bottom: 30px;
+    }
+  }
+}

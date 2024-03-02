@@ -1,0 +1,65 @@
+@import '../../app/styles/mixins.scss';
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include md {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+
+    background-color: var(--color-gray-70);
+    border-radius: 0 0 var(--radius-30) var(--radius-30);
+    height: 0;
+    overflow: hidden;
+
+    transition: height, var(--transition-duration) linear;
+  }
+
+  &__open {
+    height: 90vh;
+  }
+
+  .nav_link {
+    padding: 0;
+    margin: 15px 30px;
+    border-radius: var(--radius-100);
+    transition: background-color, padding, margin, var(--transition-duration);
+
+    @include lg {
+      margin: 7.5px 15px;
+    }
+
+    @include md {
+      margin: 0;
+      padding: 15px;
+      width: 70vw;
+      display: block;
+      border: 1px solid var(--color-gray-20);
+      font-weight: 500;
+      text-align: center;
+    }
+  }
+
+  .nav_linkActive {
+    background-color: var(--color-gray-100);
+    font-weight: 500;
+    padding: 15px 30px;
+    margin: 0;
+
+    @include lg {
+      padding: 7.5px 15px;
+    }
+
+    @include md {
+      padding: 15px;
+    }
+  }
+}
