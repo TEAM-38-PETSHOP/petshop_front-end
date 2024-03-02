@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import style from './about.module.scss';
 
-import dogImg from '@@/images/dogs/dog-1.png';
+import dogImg from '@@/images/homepage/dog-about.png';
 import Buttons from '../Buttons/Buttons';
 export default function About() {
   return (
