@@ -8,6 +8,12 @@
   height: Min(77vw, 600px);
   @extend %container;
 
+  margin-top: -90px;
+
+  @include lg {
+    margin-top: 0;
+  }
+
   @include md {
     background: url('../../../public/images/drawn/pawsMobile.png') no-repeat
       center / contain;
