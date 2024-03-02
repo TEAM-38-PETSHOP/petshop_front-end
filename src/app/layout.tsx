@@ -1,10 +1,6 @@
 import type { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
 import './styles/main.scss';
-import style from './layout.module.scss';
-import Header from '@/components/Header/Header';
-import Footer from '@/components/Footer/Footer';
-import ScrollToTop from '@/components/ScrollToTop/ScrollToTop';
 
 const font = Montserrat({
   subsets: ['cyrillic'],
@@ -33,13 +29,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ua">
-      <body className={`${font.className} ${style.wrapper}`}>
-        <Header />
-
-        <main className={style.main}>{children}</main>
-
-        <Footer />
-        <ScrollToTop />
+      <body className={font.className}>
+        <main>{children}</main>
       </body>
     </html>
   );

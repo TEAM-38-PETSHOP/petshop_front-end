@@ -1,32 +1,9 @@
 @import './reset.scss';
 @import './fonts.scss';
 @import './variables.scss';
-@import './mixins.scss';
+@import './extends.scss';
 
 html {
   font-size: var(--font-size-base);
   color: var(--color-gray-10);
-}
-
-.slick-dots {
-  bottom: -60px !important;
-  right: 0 !important;
-  width: max-content !important;
-
-  @include lg {
-    bottom: -45px !important;
-  }
-
-  @include md {
-    width: 100% !important;
-    bottom: -30px !important;
-  }
-
-  li {
-    margin: 0 !important;
-
-    button:before {
-      font-size: 10px !important;
-    }
-  }
 }
