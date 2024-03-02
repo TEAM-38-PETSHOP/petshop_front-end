@@ -1,0 +1,33 @@
+@import '../../app/styles/extends.scss';
+@import '../../app/styles/mixins.scss';
+
+.roadToUs {
+  position: relative;
+  background: url('../../../public/images/drawn/pawsDesktop.png') no-repeat
+    center / contain;
+  height: Min(77vw, 600px);
+  @extend %container;
+
+  @include md {
+    background: url('../../../public/images/drawn/pawsMobile.png') no-repeat
+      center / contain;
+    height: 438px;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__title {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: -1;
+
+    font-size: Min(5.9vw, 86px);
+    color: var(--color-gray-70);
+  }
+}
