@@ -32,43 +32,48 @@ export default function CaresList({ visibleCares, activeCare, setActiveCare }: P
             {care.name}
           </p>
 
-          {activeCare === care.name && (
-            <div
-              className={cn(style.caresList__description, {
-                [style.caresList__descriptionActive]: isDescriptionOpen,
-              })}
-              onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}
-            >
-              <div className={style.caresList__descriptionHead}>
-                <span>
-                  Опис процедури
-                </span>
-                <span 
-                  className={cn(style.caresList__descriptionArrow, {
-                    [style.caresList__descriptionArrowActive]: isDescriptionOpen,
-                  })}
-                ></span>
-              </div>
+          <div 
+            className={style.caresList__container}
+            // onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}
+          >
+            {activeCare === care.name && (
+              <div
+                className={cn(style.caresList__description, {
+                  [style.caresList__descriptionActive]: isDescriptionOpen,
+                })}
+                onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}
+              >
+                <div className={style.caresList__descriptionHead}>
+                  <span>
+                    Опис процедури
+                  </span>
+                  <span 
+                    className={cn(style.caresList__descriptionArrow, {
+                      [style.caresList__descriptionArrowActive]: isDescriptionOpen,
+                    })}
+                  ></span>
+                </div>
 
-              <div className={cn(style.caresList__descriptionMenu, {
-                [style.caresList__descriptionMenuActive]: isDescriptionOpen,
-              })}>
-                <p className={style.caresList__descriptionText}>
-                  {care.description}
-                </p>
+                <div className={cn(style.caresList__descriptionMenu, {
+                  [style.caresList__descriptionMenuActive]: isDescriptionOpen,
+                })}>
+                  <p className={style.caresList__descriptionText}>
+                    {care.description}
+                  </p>
 
-                <ul>
-                  {care.other.map((item, index) => (
-                    <li key={index}>{item}</li>
-                  ))}
-                </ul>
-                
-                <p className={style.caresList__descriptionAdditional}>
-                  *за агресію хвостика + 50% до прайсу чи майстер має право відмовити в проведенні послуги
-                </p>
+                  <ul>
+                    {care.other.map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
+                  
+                  <p className={style.caresList__descriptionAdditional}>
+                    *за агресію хвостика + 50% до прайсу чи майстер має право відмовити в проведенні послуги
+                  </p>
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </li>
       ))}
     </ul>

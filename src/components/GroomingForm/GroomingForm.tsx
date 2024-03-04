@@ -289,15 +289,15 @@ export default function GroomingForm({ pet }: Props) {
   const [activeDogCare, setActiveDogCare] = useState('01 Комплексний догляд');
   const [activeCatCare, setActiveCatCare] = useState('01 Комплексний догляд');
 
-  useEffect(() => {
-    getAllTypeOfPetServices()
-      .then((data) => {
-        console.log(data)
-      })
-      .catch((err) => {
-        throw new Error(`${err}`);
-      });
-  }, []);
+  // useEffect(() => {
+  //   getAllTypeOfPetServices()
+  //     .then((data) => {
+  //       console.log(data)
+  //     })
+  //     .catch((err) => {
+  //       throw new Error(`${err}`);
+  //     });
+  // }, []);
 
   const visibleCares = pet === 'dogs' ? caresForDogs : caresForCats;
 
