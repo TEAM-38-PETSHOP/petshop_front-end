@@ -3,6 +3,7 @@ import MainBenefits from '@/components/MainBenefits/MainBenefits';
 import ProductSlider from '@/components/ProductSlider/ProductSlider';
 import Services from '@/components/Services/Services';
 import RoadToUs from '@/components/RoadToUs/RoadToUs';
+import OurLocation from '@/components/OurLocation/OurLocation';
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <MainBenefits />
       <Services />
       <RoadToUs />
+      <OurLocation />
     </>
   );
 }
