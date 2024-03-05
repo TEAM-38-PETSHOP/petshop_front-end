@@ -6,65 +6,48 @@ import Image from 'next/image';
 type Btn = {
   btnText: string;
   btnLink: string;
+  className?: string;
   btnIcon?: string;
   isDisabled?: boolean;
+  target?: string;
 };
 
 type Props = {
   firstBtn: Btn;
   secondBtn?: Btn;
+  className?: string;
 };
 
-export default function Buttons({ firstBtn, secondBtn }: Props) {
+export default function Buttons({ firstBtn, secondBtn, className }: Props) {
+  const renderButton = (btn: Btn) => (
+    <Link
+      target={btn.target || '_self'}
+      href={btn.btnLink}
+      className={classNames([styles.btns__btn], {
+        [styles.btns__btnSecond]: btn === secondBtn,
+        [styles.btns__btnDisabled]: btn.isDisabled,
+        [btn.className as string]: btn.className,
+      })}
+    >
+      {btn.btnIcon && (
+        <Image
+          src={btn.btnIcon}
+          alt={btn.btnText}
+        />
+      )}
+      {btn.btnText}
+    </Link>
+  );
+
   return (
     <>
       {secondBtn ? (
-        <div className={styles.btns}>
-          <Link
-            href={firstBtn.btnLink}
-            className={classNames([styles.btns__btn], {
-              [styles.btns__btnDisabled]: firstBtn.isDisabled,
-            })}
-          >
-            {firstBtn.btnIcon && (
-              <Image
-                src={firstBtn.btnIcon}
-                alt={firstBtn.btnText}
-              />
-            )}
-            {firstBtn.btnText}
-          </Link>
-          <Link
-            href={secondBtn.btnLink}
-            className={classNames([styles.btns__btn], {
-              [styles.btns__btnSecond]: secondBtn,
-              [styles.btns__btnDisabled]: secondBtn.isDisabled,
-            })}
-          >
-            {secondBtn.btnIcon && (
-              <Image
-                src={secondBtn.btnIcon}
-                alt={secondBtn.btnText}
-              />
-            )}
-            {secondBtn.btnText}
-          </Link>
+        <div className={classNames([styles.btns], [className])}>
+          {renderButton(firstBtn)}
+          {renderButton(secondBtn)}
         </div>
       ) : (
-        <Link
-          href={firstBtn.btnLink}
-          className={classNames([styles.btns__btn], {
-            [styles.btns__btnDisabled]: firstBtn.isDisabled,
-          })}
-        >
-          {firstBtn.btnIcon && (
-            <Image
-              src={firstBtn.btnIcon}
-              alt={firstBtn.btnText}
-            />
-          )}
-          {firstBtn.btnText}
-        </Link>
+        renderButton(firstBtn)
       )}
     </>
   );
