@@ -17,7 +17,13 @@
     padding: 3% 5.6%;
     border: 1px solid var(--color-gray-10);
     border-radius: var(--radius-100);
+
+    cursor: pointer;
     transition: background-color, border-color, var(--transition-duration);
+
+    * {
+      transition: stroke, fill, var(--transition-duration);
+    }
 
     &Disabled {
       z-index: 1;
@@ -43,6 +49,7 @@
     }
     &:last-child:hover {
       z-index: 1;
+      color: var(--color-gray-100);
       background-color: var(--color-secondary-green);
       border-color: var(--color-secondary-green);
     }
