@@ -9,14 +9,13 @@
   
   @extend %secondary-text;
 
-
   @include md {
     display: block;
   }
 
   &__btn {
     position: relative;
-    z-index: 3;
+    z-index: 5;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -51,7 +50,7 @@
     overflow: hidden;
 
     &Active {
-      z-index: 2;
+      z-index: 4;
       padding: 4.6em 0 0 0;
       height: fit-content;
       max-height: none;
