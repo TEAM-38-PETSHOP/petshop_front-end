@@ -14,6 +14,8 @@
   }
 
   @include md {
+    display: none;
+
     min-width: 100%;
     margin-bottom: 15px;
   }
@@ -106,18 +108,18 @@
       color: transparent;
       height: 0;
       max-height: 0px;
-      transition: padding 0.3s ease-in-out 0s,
-        max-height 0.3s ease-in-out 0s;
+      transition: padding var(--transition-duration) ease-in-out 0s,
+        max-height var(--transition-duration) ease-in-out 0s;
 
       &Active {
         padding: 75px 30px 30px 30px;
-        transition: padding 1s ease-in-out 0s,
-          max-height 1s ease-in-out 0s;
         border-color: #FD7B19;
         background-color: var(--color-gray-100);
         height: fit-content;
         max-height: none;
         color: var(--color-gray-10);
+        transition: padding var(--transition-duration) ease-in-out 0s,
+          max-height var(--transition-duration) ease-in-out 0s;
       }
     }
 

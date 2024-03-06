@@ -1,0 +1,83 @@
+@import '../../app//styles/extends.scss';
+@import '../../app/styles/mixins.scss';
+
+.dropdown {
+  display: none;
+  position: relative;
+  min-height: 50px;
+  margin-bottom: 5px;
+  
+  @extend %secondary-text;
+
+
+  @include md {
+    display: block;
+  }
+
+  &__btn {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 16.5px 30px;
+    background: var(--color-gray-20);
+    box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+    border-radius: var(--radius-100);
+    color: var(--color-gray-100);
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  &__img {
+    &Active {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__content {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    max-height: 0;
+    padding: 0;
+    background-color: var(--color-gray-100);
+    border: 1px solid transparent;
+    border-radius: var(--radius-40);
+    overflow: hidden;
+
+    &Active {
+      z-index: 2;
+      padding: 4.6em 0 0 0;
+      height: fit-content;
+      max-height: none;
+      border-color: var(--color-gray-20);
+      transition: padding var(--transition-duration) ease-in-out 0s,
+          max-height var(--transition-duration) ease-in-out 0s;
+    }
+  }
+
+  &__item {
+    font-weight: 500;
+    cursor: pointer;
+    padding: 11.5px 30px;
+
+    &:not(:last-child) {
+      margin-bottom: 5px;
+    }
+
+    &:hover {
+      background-color: var(--color-gray-30);
+      color: var(--color-gray-100);
+    }
+
+    &Active {
+      background-color: var(--color-gray-30);
+      color: var(--color-gray-100);
+    }
+  }
+}

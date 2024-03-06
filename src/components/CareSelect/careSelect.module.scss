@@ -1,65 +1,105 @@
 @import '../../app//styles/extends.scss';
 @import '../../app/styles/mixins.scss';
 
-
 .careSelect {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+  &__container {
+    display: none;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: fit-content;
 
-  display: none;
-  position: relative;
-  min-width: 100%;
-  max-height: 50px;
+    margin-bottom: 15px;
 
-  margin: 0 30px 5px 0;
-  padding: 13px 30px 13px 30px;
-  border-radius: var(--radius-100);
-  background-color: var(--color-gray-20);
-  color: var(--color-gray-100);
-  font-weight: 600;
-  @extend %secondary-text;
-
-  background-image: url('../../../public/images/icons/smallArrowUp.svg');
-  background-repeat: no-repeat;
-  background-position: right 10% center;
-
-  @include sm {
-    display: flex;
+    @include md {
+      display: block;
+    }
   }
 
-  // &__option {}
-
   &__description {
-    position: relative;
     display: none;
-    justify-content: space-between;
-  
-    z-index: 2;
+
     cursor: pointer;
     border: 1px solid var(--color-gray-10);
     border-radius: var(--radius-100);
     padding: 16.5px 30px;
-  
-    @include lg {
+
+    @include md {
       display: flex;
+      justify-content: space-between;
     }
-  
+
     &Active {
       border-color: #FD7B19; // Add this color to variables file
       background-color: #FD7B19;
       color: var(--color-gray-100);
     }
-  
+
     &Arrow {
       padding: 5px 20px 5px 5px;
       background-image: url('../../../public/images/icons/smallArrowDown.svg');
       background-position: right;
       background-repeat: no-repeat;
-  
+
       &Active {
         background-image: url('../../../public/images/icons/smallArrowUp.svg');
       }
+    }
+
+    &Head {
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    &Menu {
+      position: absolute;
+      top: 0%;
+      left: 0;
+      right: 0;
+      z-index: -1;
+      padding: 0 30px;
+
+      overflow: hidden;
+      border-radius: var(--radius-40);
+      border: 1px solid transparent;
+      color: transparent;
+      height: 0;
+      max-height: 0px;
+      transition: padding var(--transition-duration) ease-in-out 0s,
+        max-height var(--transition-duration) ease-in-out 0s;
+
+      &Active {
+        padding: 75px 30px 30px 30px;
+        transition: padding var(--transition-duration) ease-in-out 0s,
+          max-height var(--transition-duration) ease-in-out 0s;
+        border-color: #FD7B19;
+        background-color: var(--color-gray-100);
+        height: fit-content;
+        max-height: none;
+        color: var(--color-gray-10);
+      }
+    }
+
+    &Text {
+      @extend %small-text;
+      margin-bottom: 30px;
+    }
+
+    ul {
+      margin-bottom: 30px;
+  
+      li {
+        @extend %small-text;
+        font-weight: 500;
+      }
+    }
+
+    &Additional {
+      @extend %small-text;
+      font-weight: 600;
+      color: var(--color-gray-40);
     }
   }
 }
