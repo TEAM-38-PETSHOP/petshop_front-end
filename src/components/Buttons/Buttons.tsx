@@ -7,7 +7,7 @@ type Btn = {
   btnText: string;
   btnLink: string;
   className?: string;
-  btnIcon?: string;
+  btnIcon?: React.FC<React.SVGProps<SVGSVGElement>>;
   isDisabled?: boolean;
   target?: string;
 };
@@ -19,23 +19,18 @@ type Props = {
 };
 
 export default function Buttons({ firstBtn, secondBtn, className }: Props) {
-  const renderButton = (btn: Btn) => (
+  const renderButton = (Btn: Btn) => (
     <Link
-      target={btn.target || '_self'}
-      href={btn.btnLink}
+      target={Btn.target || '_self'}
+      href={Btn.btnLink}
       className={classNames([styles.btns__btn], {
-        [styles.btns__btnSecond]: btn === secondBtn,
-        [styles.btns__btnDisabled]: btn.isDisabled,
-        [btn.className as string]: btn.className,
+        [styles.btns__btnSecond]: Btn === secondBtn,
+        [styles.btns__btnDisabled]: Btn.isDisabled,
+        [Btn.className as string]: Btn.className,
       })}
     >
-      {btn.btnIcon && (
-        <Image
-          src={btn.btnIcon}
-          alt={btn.btnText}
-        />
-      )}
-      {btn.btnText}
+      {Btn.btnIcon && <Btn.btnIcon />}
+      {Btn.btnText}
     </Link>
   );
 
