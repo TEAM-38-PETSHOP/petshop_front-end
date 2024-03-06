@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import style from './goal.module.scss';
-import heart from '@@/images/heart/heart.svg?url';
+import heart from '@@/images/heart/red-heart.svg?url';
+import heartBorder from '@@/images/heart/heart-border.svg?url';
+import heartText from '@@/images/heart/heart-text.svg?url';
 
 export default function Goal() {
   return (
@@ -12,12 +14,26 @@ export default function Goal() {
           використовуються безпечні засоби для гігієни та догляду.
         </p>
       </div>
-      <Image
-        className={style.goal__img}
-        src={heart}
-        alt='heart'
-        priority
-      />
+      <div className={style.goal__imgContainer}>
+        <Image
+          className={style.goal__imgBorder}
+          src={heartBorder}
+          alt='heart border'
+          priority
+        />
+        <Image
+          className={style.goal__imgHeart}
+          src={heart}
+          alt='heart'
+          priority
+        />
+        <Image
+          className={style.goal__imgText}
+          src={heartText}
+          alt='heart text'
+          priority
+        />
+      </div>
       <div className={style.goal__descriptionContainer}>
         <p className={style.goal__secondDescription}>
           <span>Наша мета</span> - забезпечити ваших улюбленців гарним виглядом та 

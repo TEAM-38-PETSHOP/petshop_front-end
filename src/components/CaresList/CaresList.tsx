@@ -32,10 +32,7 @@ export default function CaresList({ visibleCares, activeCare, setActiveCare }: P
             {care.name}
           </p>
 
-          <div 
-            className={style.caresList__container}
-            // onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}
-          >
+          <div className={style.caresList__container}>
             {activeCare === care.name && (
               <div
                 className={cn(style.caresList__description, {

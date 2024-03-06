@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useMemo, useState } from 'react';
 import style from './groomingForm.module.scss';
 import CaresList from '../CaresList/CaresList';
@@ -286,19 +288,20 @@ const caresForCats = [
 ];
 
 export default function GroomingForm({ pet }: Props) {
+  const [query, setQuery] = useState('');
   const [activeDogCare, setActiveDogCare] = useState('01 Комплексний догляд');
   const [activeCatCare, setActiveCatCare] = useState('01 Комплексний догляд');
 
-  // useEffect(() => {
-  //   getAllTypeOfPetServices()
-  //     .then((data) => {
-  //       console.log(data)
-  //     })
-  //     .catch((err) => {
-  //       throw new Error(`${err}`);
-  //     });
-  // }, []);
-
+  useEffect(() => {
+    getAllTypeOfPetServices()
+      .then((data) => {
+        console.log(data)
+      })
+      .catch((err) => {
+        throw new Error(`${err}`);
+      });
+  }, []);
+  
   const visibleCares = pet === 'dogs' ? caresForDogs : caresForCats;
 
   const currentCare = useMemo(() => {
@@ -315,6 +318,7 @@ export default function GroomingForm({ pet }: Props) {
 
   /// const breeds = pet === 'dogs' ? currentCare.dogBreeds : currentCare.catBreeds;
   const breeds = pet === 'dogs' ? (currentCare as DogCare).dogBreeds : (currentCare as CatCare).catBreeds;
+  const filteredBreeds = breeds.filter((breed) => breed.name.toLowerCase().includes(query.toLowerCase()));
   const activeCare= pet === 'dogs' ? activeDogCare : activeCatCare;
   const setActiveCare= pet === 'dogs' ? setActiveDogCare : setActiveCatCare;
   const to = pet === 'dogs' ? 'cats' : 'dogs';
@@ -329,26 +333,28 @@ export default function GroomingForm({ pet }: Props) {
         setActiveCare={setActiveCare}
       />
 
-      {/* <CareSelect
+      <CareSelect
         currentCare={currentCare}
         visibleCares={visibleCares}
         activeCare={activeCare}
         setActiveCare={setActiveCare}
-      /> */}
+      />
 
       <div className={style.groomingForm__line}></div>
       
       <div className={style.groomingForm__breeds}>
         <div className={style.groomingForm__breedsContainer}>
-          {pet === 'dogs' && (
+          {breeds.length > 9 && (
             <input 
               className={style.groomingForm__breedsInput} 
               type="text" 
               placeholder="Пошук"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
             />
           )}
           
-          <BreedsList breeds={breeds} />
+          <BreedsList breeds={filteredBreeds} />
         </div>
 
         <GroomDescription careInfo={currentCare}/>
