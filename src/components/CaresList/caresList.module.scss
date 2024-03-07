@@ -14,13 +14,18 @@
   }
 
   @include md {
+    display: none;
+
     min-width: 100%;
     margin-bottom: 15px;
   }
 
-  // @include sm {
-  //   display: none;
-  // }
+  &__container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: fit-content;
+  }
 
   &__active {
     &Item {
@@ -35,19 +40,24 @@
   &__Item {
     cursor: pointer;
     border-radius: var(--radius-100);
+    border: 1px solid transparent;
     padding: 13px 30px 13px 30px;
     @extend %main-text;
     font-weight: 400;
     margin-bottom: 5px;
-    transition: box-shadow var(--transition-duration) linear 0s;
 
     &:hover {
-      box-shadow: 2px 3px 22px 0px #0000001A;
+      transition: border-color var(--transition-duration) linear 0s;
+      border-color: var(--color-gray-10);
+    }
+
+    &:active {
+      box-shadow: -4px -4px 4px 0px #0000001A inset, 
+        4px 4px 4px 0px #0000001A inset;
     }
   }
 
   &__description {
-    position: relative;
     display: none;
 
     cursor: pointer;
@@ -85,27 +95,31 @@
     }
 
     &Menu {
-      // Add some animation from 0 to 100 height or smth else
-      display: none;
       position: absolute;
-      top: 50px;
-      bottom: 0;
+      top: 0%;
       left: 0;
       right: 0;
+      z-index: -1;
+      padding: 0 30px;
+
       overflow: hidden;
-      background-color: var(--color-gray-100);
-      border-radius: var(--radius-30);
-      // padding: 80px 30px 30px 30px;
-      border: 1px solid var(--color-gray-10);
-      color: var(--color-gray-10);
-      transition: all, 4s;
+      border-radius: var(--radius-40);
+      border: 1px solid transparent;
+      color: transparent;
+      height: 0;
+      max-height: 0px;
+      transition: padding var(--transition-duration) ease-in-out 0s,
+        max-height var(--transition-duration) ease-in-out 0s;
 
       &Active {
-        display: block;
-        bottom: auto;
-        z-index: 2;
-        padding: 30px;
-        transition: all, 4s;
+        padding: 75px 30px 30px 30px;
+        border-color: #FD7B19;
+        background-color: var(--color-gray-100);
+        height: fit-content;
+        max-height: none;
+        color: var(--color-gray-10);
+        transition: padding var(--transition-duration) ease-in-out 0s,
+          max-height var(--transition-duration) ease-in-out 0s;
       }
     }
 
