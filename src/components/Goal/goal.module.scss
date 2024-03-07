@@ -41,14 +41,32 @@
     }
   }
 
-  &__img {
+  &__imgContainer {
+    position: relative;
+  }
+
+  &__imgBorder {
     object-fit: cover;
-    animation: beat 1s infinite alternate;
-    transform-origin: center;
 
     @include lg {
       margin-bottom: 30px;
     }
+  }
+
+  &__imgHeart {
+    position: absolute;
+    top: 40%;
+    left: 28%;
+    animation: beat 1s infinite alternate;
+    transform-origin: center;
+  }
+
+  &__imgText {
+    position: absolute;
+    top: 45%;
+    left: 30%;
+    animation: beat 1s infinite alternate;
+    transform-origin: center;
   }
 
   &__secondDescription {
@@ -71,6 +89,6 @@
 
 @keyframes beat{
 	to {
-    transform: scale(1.1); 
+    transform: scale(1.2); 
   }
 }

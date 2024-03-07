@@ -1,65 +1,95 @@
 @import '../../app//styles/extends.scss';
 @import '../../app/styles/mixins.scss';
 
-
-.careSelect {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-
+.description {
   display: none;
   position: relative;
-  min-width: 100%;
-  max-height: 50px;
+  min-height: 50px;
+  margin-bottom: 15px;
 
-  margin: 0 30px 5px 0;
-  padding: 13px 30px 13px 30px;
-  border-radius: var(--radius-100);
-  background-color: var(--color-gray-20);
-  color: var(--color-gray-100);
-  font-weight: 600;
-  @extend %secondary-text;
-
-  background-image: url('../../../public/images/icons/smallArrowUp.svg');
-  background-repeat: no-repeat;
-  background-position: right 10% center;
-
-  @include sm {
+  @include md {
     display: flex;
   }
 
-  // &__option {}
-
-  &__description {
-    position: relative;
-    display: none;
+  &__btn {
+    display: flex;
     justify-content: space-between;
-  
-    z-index: 2;
-    cursor: pointer;
-    border: 1px solid var(--color-gray-10);
-    border-radius: var(--radius-100);
+    align-items: center;
+    position: relative;
+    z-index: 3;
+    width: 100%;
+
     padding: 16.5px 30px;
-  
-    @include lg {
-      display: flex;
-    }
-  
+    border-radius: var(--radius-100);
+    border: 1px solid var(--color-gray-10);
+    color: var(--color-gray-10);
+    font-weight: 500;
+    cursor: pointer;
+
     &Active {
       border-color: #FD7B19; // Add this color to variables file
       background-color: #FD7B19;
       color: var(--color-gray-100);
     }
-  
-    &Arrow {
-      padding: 5px 20px 5px 5px;
-      background-image: url('../../../public/images/icons/smallArrowDown.svg');
-      background-position: right;
-      background-repeat: no-repeat;
-  
-      &Active {
-        background-image: url('../../../public/images/icons/smallArrowUp.svg');
-      }
+  }
+
+  &__arrow {
+    padding: 5px 20px 5px 5px;
+    background-image: url('../../../public/images/icons/smallArrowDown.svg');
+    background-position: right;
+    background-repeat: no-repeat;
+
+    &Active {
+      background-image: url('../../../public/images/icons/smallArrowUp.svg');
     }
+  }
+
+  &__menu {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    max-height: 0;
+    padding: 0 30px;
+
+    overflow: hidden;
+    border-radius: var(--radius-40);
+    border: 1px solid transparent;
+    transition: padding var(--transition-duration) ease-in-out 0s,
+      max-height var(--transition-duration) ease-in-out 0s;
+
+    &Active {
+      z-index: 2;
+      padding: 4.6em 30px 30px 30px;
+      transition: padding var(--transition-duration) ease-in-out 0s,
+        max-height var(--transition-duration) ease-in-out 0s;
+      border-color: #FD7B19;
+      background-color: var(--color-gray-100);
+      height: fit-content;
+      max-height: none;
+      color: var(--color-gray-10);
+    }
+  }
+
+  &__text {
+    @extend %small-text;
+    margin-bottom: 30px;
+  }
+
+  ul {
+    margin-bottom: 30px;
+
+    li {
+      @extend %small-text;
+      font-weight: 500;
+    }
+  }
+
+  &__additional {
+    @extend %small-text;
+    font-weight: 600;
+    color: var(--color-gray-40);
   }
 }

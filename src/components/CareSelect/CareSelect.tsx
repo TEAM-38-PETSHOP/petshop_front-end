@@ -1,7 +1,8 @@
 import cn from 'classnames';
 import style from './careSelect.module.scss';
+
 import { useState } from 'react';
-import GroomDescription from '../GroomDescription/GroomDescription';
+import Dropdown from '../Dropdown/Dropdown';
 
 interface Care {
   id: number, 
@@ -21,44 +22,43 @@ interface Props {
 export default function CareSelect({ visibleCares, activeCare, setActiveCare, currentCare }: Props) {
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
 
+  const changeHandler = (careName: string) => {
+    setIsDescriptionOpen(false);
+    setActiveCare(careName);
+  };
+
   return (
     <>
-      <select 
-        className={style.careSelect} 
-        onChange={e => setActiveCare(e.target.value)}
-        defaultValue={activeCare}
-      >
-        {visibleCares.map(care => (
-          <option
-            key={care.id}
-            value={care.name}
-            className={style.careSelect__option}
-          >
-            {care.name}
-          </option>
-        ))}
-      </select>
+      <Dropdown 
+        visibleCares={visibleCares}
+        activeCare={activeCare}
+        changeHandler={changeHandler}
+      />
 
-      {/* {activeCare === currentCare.name && (
-        <div
-          className={cn(style.careSelect__description, {
-            [style.careSelect__descriptionActive]: isDescriptionOpen,
-          })}
-          onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}
-        >
-          <span>
-            Опис процедури
-          </span>
-          <span 
-            className={cn(style.careSelect__descriptionArrow, {
-              [style.careSelect__descriptionArrowActive]: isDescriptionOpen,
+      {activeCare === currentCare.name && (
+        <div className={style.description}>
+          <div 
+            className={cn(style.description__btn, {
+              [style.description__btnActive]: isDescriptionOpen,
             })}
-          ></span>
+            onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}
+          >
+            Опис процедури
+            
+            <span 
+              className={cn(style.description__arrow, {
+                [style.description__arrowActive]: isDescriptionOpen,
+              })}
+            ></span>
+          </div>
 
-          <div className={cn(style.careSelect__descriptionMenu, {
-            [style.careSelect__descriptionMenuActive]: isDescriptionOpen,
-          })}>
-            <p className={style.careSelect__descriptionText}>
+          <div 
+            className={cn(style.description__menu, {
+              [style.description__menuActive]: isDescriptionOpen,
+            })}
+            onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}
+          >
+            <p className={style.description__text}>
               {currentCare.description}
             </p>
 
@@ -68,12 +68,12 @@ export default function CareSelect({ visibleCares, activeCare, setActiveCare, cu
               ))}
             </ul>
             
-            <p className={style.careSelect__descriptionAdditional}>
+            <p className={style.description__additional}>
               *за агресію хвостика + 50% до прайсу чи майстер має право відмовити в проведенні послуги
             </p>
           </div>
         </div>
-      )} */}
+      )}
     </>
   );
 }
