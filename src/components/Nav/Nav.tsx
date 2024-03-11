@@ -3,6 +3,10 @@ import Link from 'next/link';
 import styles from './nav.module.scss';
 import { usePathname } from 'next/navigation';
 import classNames from 'classnames';
+import Buttons from '../Buttons/Buttons';
+
+import cart from '@@/images/icons/cart.svg';
+import like from '@@/images/icons/like.svg';
 
 const links = [
   {
@@ -30,6 +34,10 @@ type Props = {
 
 export default function Nav({ isOpen, setOpenMenu }: Props) {
   const pathname = usePathname();
+  const isActiveLink = (href: string) =>
+    (pathname.includes(href) && href.length !== 1) ||
+    (pathname === '/' && href === '/');
+
   return (
     <nav className={classNames([styles.nav], { [styles.nav__open]: isOpen })}>
       {links.map((link) => (
@@ -37,13 +45,31 @@ export default function Nav({ isOpen, setOpenMenu }: Props) {
           key={link.href}
           onClick={() => setOpenMenu(false)}
           href={link.href}
-          className={classNames([styles.nav_link], {
-            [styles.nav_linkActive]: pathname === link.href,
+          className={classNames([styles.nav__link], {
+            [styles.nav__linkActive]: isActiveLink(link.href),
           })}
         >
           {link.title}
         </Link>
       ))}
+
+      <Buttons
+        firstBtn={{
+          btnText: 'Обране',
+          btnLink: '/favorites',
+          btnIcon: like,
+          className: pathname === '/favorites' ? styles.nav__like : '',
+          onClick: () => setOpenMenu(false),
+        }}
+        secondBtn={{
+          btnText: 'Корзина',
+          btnLink: '/cart',
+          btnIcon: cart,
+          className: pathname === '/cart' ? styles.nav__cart : '',
+          onClick: () => setOpenMenu(false),
+        }}
+        className={styles.nav__btns}
+      />
     </nav>
   );
 }

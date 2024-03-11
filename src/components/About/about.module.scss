@@ -43,6 +43,10 @@
     padding: 4%;
     background-color: var(--color-additional-beige);
     border-radius: var(--radius-40);
+
+    @include sm {
+      padding: 8%;
+    }
   }
 
   &__title {

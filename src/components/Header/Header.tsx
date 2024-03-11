@@ -38,7 +38,7 @@ export default function Header() {
         isOpen={openMenu}
         setOpenMenu={setOpenMenu}
       />
-      <HeaderIcons />
+      <HeaderIcons setOpenMenu={setOpenMenu} />
     </header>
   );
 }
