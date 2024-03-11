@@ -28,11 +28,11 @@ export default function About() {
         <Buttons
           firstBtn={{
             btnText: 'СПА для пухнастиків',
-            btnLink: '/',
+            btnLink: '/grooming',
           }}
           secondBtn={{
             btnText: 'Шоппінг для улюбленців',
-            btnLink: '/',
+            btnLink: '/catalog',
           }}
         />
       </div>
