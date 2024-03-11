@@ -1,5 +1,11 @@
+@import '../../../app/styles/mixins.scss';
+
 .ProfileIcon {
   border: 2px solid var(--color-gray-20);
+
+  @include lg {
+    padding: 5.5px 7.5px 0px !important;
+  }
 
   &:hover {
     background-color: var(--color-primary-100);

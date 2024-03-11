@@ -1,22 +1,26 @@
 'use client';
-import { useState } from 'react';
 import classNames from 'classnames';
 import styles from './profile.module.scss';
 import ProfileIcon from '@@/images/icons/profile.svg';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 type Props = {
   className?: string;
+  onClick?: () => void;
 };
-export default function Profile({ className }: Props) {
-  const [open, setOpen] = useState(false);
+export default function Profile({ className, onClick }: Props) {
+  const path = usePathname();
+
   return (
-    <button
-      onClick={() => setOpen(!open)}
+    <Link
+      href="/profile"
+      onClick={onClick}
       className={classNames([className], [styles.ProfileIcon], {
-        [styles.ProfileIcon__Selected]: open,
+        [styles.ProfileIcon__Selected]: path === '/profile',
       })}
     >
       <ProfileIcon />
-    </button>
+    </Link>
   );
 }

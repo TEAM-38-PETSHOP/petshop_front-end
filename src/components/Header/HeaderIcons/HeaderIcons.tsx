@@ -1,4 +1,5 @@
 'use client';
+import React from 'react';
 import classNames from 'classnames';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
@@ -8,7 +9,11 @@ import Favorites from '@@/images/icons/like.svg';
 import Cart from '@@/images/icons/cart.svg';
 import Profile from '@/components/Header/Profile/Profile';
 
-export default function HeaderIcons() {
+type Props = {
+  setOpenMenu: (isOpen: boolean) => void;
+};
+
+export default React.memo(function HeaderIcons({ setOpenMenu }: Props) {
   const pathname = usePathname();
   return (
     <div className={styles.headerRight}>
@@ -38,7 +43,10 @@ export default function HeaderIcons() {
         <Cart />
       </Link>
 
-      <Profile className={styles.headerRight__iconsBase} />
+      <Profile
+        className={styles.headerRight__iconsBase}
+        onClick={() => setOpenMenu(false)}
+      />
     </div>
   );
-}
+});
