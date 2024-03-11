@@ -25,10 +25,15 @@
   }
 
   &__open {
+    padding: 20px 0;
     height: 85vh;
 
     @include sm {
       height: 70vh;
+    }
+
+    @media (max-height: 580px) {
+      height: max-content;
     }
   }
 
