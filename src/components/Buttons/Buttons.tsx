@@ -10,6 +10,7 @@ type Btn = {
   btnIcon?: React.FC<React.SVGProps<SVGSVGElement>>;
   isDisabled?: boolean;
   target?: string;
+  onClick?: () => void;
 };
 
 type Props = {
@@ -23,6 +24,7 @@ export default function Buttons({ firstBtn, secondBtn, className }: Props) {
     <Link
       target={Btn.target || '_self'}
       href={Btn.btnLink}
+      onClick={Btn.onClick}
       className={classNames([styles.btns__btn], {
         [styles.btns__btnSecond]: Btn === secondBtn,
         [styles.btns__btnDisabled]: Btn.isDisabled,
