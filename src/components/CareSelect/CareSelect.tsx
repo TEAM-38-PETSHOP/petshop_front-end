@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import style from './careSelect.module.scss';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import Dropdown from '../Dropdown/Dropdown';
 
 interface Care {
@@ -27,12 +27,14 @@ export default function CareSelect({ visibleCares, activeCareId, currentCare }: 
 
   return (
     <>
-      <Dropdown 
-        visibleCares={visibleCares}
-        activeCare={activeCareId}
-        changeHandler={changeHandler}
-        currentCare={currentCare}
-      />
+      <Suspense>
+        <Dropdown 
+          visibleCares={visibleCares}
+          activeCare={activeCareId}
+          changeHandler={changeHandler}
+          currentCare={currentCare}
+        />
+      </Suspense>
 
       {activeCareId === currentCare.id && (
         <div className={style.description}>

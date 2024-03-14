@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import style from './groomingForm.module.scss';
 import CaresList from '../CaresList/CaresList';
 import BreedsList from '../BreedsList/BreedsList';
@@ -330,11 +330,13 @@ export default function GroomingForm({ pet }: Props) {
   
   return (
     <section className={style.groomingForm}>
-      <CaresList 
-        visibleCares={visibleCares}
-        activeCareId={activeCareId}
-        setQuery={setQuery}
-      />
+      <Suspense>
+        <CaresList 
+          visibleCares={visibleCares}
+          activeCareId={activeCareId}
+          setQuery={setQuery}
+        />
+      </Suspense>
 
       <CareSelect
         currentCare={currentCare}
