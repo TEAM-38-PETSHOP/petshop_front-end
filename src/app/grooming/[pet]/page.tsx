@@ -1,5 +1,3 @@
-'use client';
-
 import Goal from "@/components/Goal/Goal";
 import GroomingForm from "@/components/GroomingForm/GroomingForm";
 import GroomingHead from "@/components/GroomingHead/GroomingHead";
