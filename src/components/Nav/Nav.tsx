@@ -39,7 +39,10 @@ export default function Nav({ isOpen, setOpenMenu }: Props) {
     (pathname === '/' && href === '/');
 
   return (
-    <nav className={classNames([styles.nav], { [styles.nav__open]: isOpen })}>
+    <nav
+      className={classNames([styles.nav], { [styles.nav__open]: isOpen })}
+      data-testid="nav"
+    >
       {links.map((link) => (
         <Link
           key={link.href}
@@ -57,14 +60,14 @@ export default function Nav({ isOpen, setOpenMenu }: Props) {
         firstBtn={{
           btnText: 'Обране',
           btnLink: '/favorites',
-          btnIcon: like,
+          btnIcon: like.src,
           className: pathname === '/favorites' ? styles.nav__like : '',
           onClick: () => setOpenMenu(false),
         }}
         secondBtn={{
           btnText: 'Корзина',
           btnLink: '/cart',
-          btnIcon: cart,
+          btnIcon: cart.src,
           className: pathname === '/cart' ? styles.nav__cart : '',
           onClick: () => setOpenMenu(false),
         }}

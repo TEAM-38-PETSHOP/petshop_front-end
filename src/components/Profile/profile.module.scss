@@ -1,10 +1,21 @@
-@import '../../../app/styles/mixins.scss';
+@import '../../app/styles/mixins.scss';
 
 .ProfileIcon {
+  position: relative;
+  width: 52px;
+  height: 52px;
   border: 2px solid var(--color-gray-20);
 
-  @include lg {
-    padding: 5.5px 7.5px 0px !important;
+  @include md {
+    width: 40px;
+    height: 40px;
+  }
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 51%;
+    transform: translate(-50%, -50%);
   }
 
   &:hover {

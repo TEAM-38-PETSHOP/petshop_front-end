@@ -1,15 +1,15 @@
 import style from './dropdown.module.scss';
-import dropdownArrow from '@@/images/icons/dropdown-arrow.svg?url';
+import dropdownArrow from '@@/images/icons/dropdown-arrow.svg';
 import Image from 'next/image';
 import cn from 'classnames';
 import { useState } from 'react';
 
 interface Care {
-  id: number, 
-  name: string, 
-  price: string,
-  description: string,
-  other: string[],
+  id: number;
+  name: string;
+  price: string;
+  description: string;
+  other: string[];
 }
 
 interface Props {
@@ -36,12 +36,12 @@ export default function Dropdown({
 
   return (
     <div className={style.dropdown}>
-      <div 
+      <div
         className={style.dropdown__btn}
         onClick={toggleDropdown}
       >
         {activeCare}
-        <Image 
+        <Image
           className={cn({
             [style.dropdown__img]: !isOpen,
             [style.dropdown__imgActive]: isOpen,
@@ -51,7 +51,7 @@ export default function Dropdown({
           priority
         />
       </div>
-      <ul 
+      <ul
         className={cn([style.dropdown__content], {
           [style.dropdown__contentActive]: isOpen,
         })}

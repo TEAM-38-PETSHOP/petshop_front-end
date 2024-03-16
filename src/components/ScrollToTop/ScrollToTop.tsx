@@ -28,6 +28,7 @@ export default function ScrollToTop() {
     <>
       {isVisible && (
         <Arrow
+          data-testid="arrow-button"
           styleName={styles.scrollToTop}
           onClick={scrollToTop}
           isWhite

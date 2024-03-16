@@ -13,7 +13,10 @@ type Props = {
 };
 export default function ProductCard({ product }: Props) {
   return (
-    <div className={styles.productCard}>
+    <div
+      className={styles.productCard}
+      data-testid="product-card"
+    >
       <Link
         href={`/product/${product.id}`}
         className={styles.productCard__image}
