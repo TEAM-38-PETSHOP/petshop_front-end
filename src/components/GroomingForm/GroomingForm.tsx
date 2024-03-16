@@ -323,6 +323,16 @@ export default function GroomingForm({ pet }: Props) {
   const setActiveCare= pet === 'dogs' ? setActiveDogCare : setActiveCatCare;
   const to = pet === 'dogs' ? 'cats' : 'dogs';
 
+  const handleCareChange = (careName: string) => {
+    setQuery('');
+    
+    if (pet === 'dogs') {
+      setActiveDogCare(careName);
+    } else {
+      setActiveCatCare(careName);
+    }
+  }
+
   // Краща назва буде price замість breeds (дивитись макет)
   
   return (
@@ -330,7 +340,7 @@ export default function GroomingForm({ pet }: Props) {
       <CaresList 
         visibleCares={visibleCares}
         activeCare={activeCare}
-        setActiveCare={setActiveCare}
+        setActiveCare={handleCareChange}
       />
 
       <CareSelect
