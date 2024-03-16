@@ -1,13 +1,13 @@
+import SvgWrapper from '../SvgWrapper/SvgWrapper';
 import Link from 'next/link';
 import styles from './buttons.module.scss';
 import classNames from 'classnames';
-import Image from 'next/image';
 
 type Btn = {
   btnText: string;
   btnLink: string;
   className?: string;
-  btnIcon?: React.FC<React.SVGProps<SVGSVGElement>>;
+  btnIcon?: string;
   isDisabled?: boolean;
   target?: string;
   onClick?: () => void;
@@ -20,19 +20,19 @@ type Props = {
 };
 
 export default function Buttons({ firstBtn, secondBtn, className }: Props) {
-  const renderButton = (Btn: Btn) => (
+  const renderButton = (btn: Btn) => (
     <Link
-      target={Btn.target || '_self'}
-      href={Btn.btnLink}
-      onClick={Btn.onClick}
+      target={btn.target || '_self'}
+      href={btn.btnLink}
+      onClick={btn.onClick}
       className={classNames([styles.btns__btn], {
-        [styles.btns__btnSecond]: Btn === secondBtn,
-        [styles.btns__btnDisabled]: Btn.isDisabled,
-        [Btn.className as string]: Btn.className,
+        [styles.btns__btnSecond]: btn === secondBtn,
+        [styles.btns__btnDisabled]: btn.isDisabled,
+        [btn.className as string]: btn.className,
       })}
     >
-      {Btn.btnIcon && <Btn.btnIcon />}
-      {Btn.btnText}
+      {btn.btnIcon && <SvgWrapper src={btn.btnIcon} />}
+      {btn.btnText}
     </Link>
   );
 

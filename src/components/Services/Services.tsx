@@ -4,7 +4,10 @@ import ButtonWithArrow from '../ButtonWithArrow/ButtonWithArrow';
 import classNames from 'classnames';
 export default function Services() {
   return (
-    <section className={styles.services}>
+    <section
+      className={styles.services}
+      data-testid="services-section"
+    >
       <h2 className={styles.services__title}>Кого потрібно причепурити?</h2>
 
       <div className={styles.services__blocks}>
@@ -13,6 +16,7 @@ export default function Services() {
             [styles.services__firstBlock],
             [styles.services__img]
           )}
+          data-testid="service-block"
         >
           <ButtonWithArrow
             classNameBtn={styles.services__buttons}
@@ -26,6 +30,7 @@ export default function Services() {
             [styles.services__description],
             [styles.services__firstBlock_description]
           )}
+          data-testid="service-block"
         >
           <h3>Grooming Spa</h3>
           <p>
@@ -38,6 +43,7 @@ export default function Services() {
             [styles.services__imgBlock],
             [styles.services__img]
           )}
+          data-testid="service-block"
         >
           <ButtonWithArrow
             classNameBtn={styles.services__buttons}
@@ -51,6 +57,7 @@ export default function Services() {
             [styles.services__lastBlock],
             [styles.services__img]
           )}
+          data-testid="service-block"
         >
           <ButtonWithArrow
             classNameBtn={styles.services__buttons}
@@ -63,6 +70,7 @@ export default function Services() {
             [styles.services__description],
             [styles.services__lastBlock_description]
           )}
+          data-testid="service-block"
         >
           <p>Послуги та ціни </p>
         </div>

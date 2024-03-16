@@ -2,13 +2,13 @@
 import { useCallback, useState } from 'react';
 import classNames from 'classnames';
 import Image from 'next/image';
-import Logo from '@@/images/icons/logo.svg?url';
+import Logo from '@@/images/icons/logo.svg';
 
 import styles from './header.module.scss';
 
 import Nav from '../Nav/Nav';
 import Link from 'next/link';
-import HeaderIcons from './HeaderIcons/HeaderIcons';
+import HeaderIcons from '../HeaderIcons/HeaderIcons';
 export default function Header() {
   const [openMenu, setOpenMenu] = useState(false);
   const toggleMenu = useCallback(() => {
@@ -19,12 +19,14 @@ export default function Header() {
     <header
       className={classNames([styles.header], { [styles.headerOpen]: openMenu })}
     >
-      <div
+      <button
         className={classNames([styles.header__menu], {
           [styles.header__menuOpen]: openMenu,
         })}
         onClick={toggleMenu}
-      ></div>
+        data-testid="menu-button"
+        type="button"
+      ></button>
       <Link href="/">
         <Image
           className={styles.header__logo}
