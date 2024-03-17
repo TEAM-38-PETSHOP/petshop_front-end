@@ -57,6 +57,7 @@ export default function OurLocation() {
       </div>
       <iframe
         className={styles.ourLocation__map}
+        data-testid="map-iframe"
         src={GoogleMapLink}
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
