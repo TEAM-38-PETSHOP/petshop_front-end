@@ -1,9 +1,14 @@
+'use client';
+
 import Link from 'next/link';
 import Arrow from '../Arrow/Arrow';
 import style from './groomingHead.module.scss';
 import dog from '@@/images/grooming/small-dog.svg?url';
 import cat from '@@/images/grooming/small-cat.svg?url';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
+import { useCallback } from 'react';
+import { createUrlString } from '@/helpers/createUrlString';
 
 interface Props {
   pet: string;
@@ -12,6 +17,9 @@ interface Props {
 export default function GroomingHead({ pet }: Props) {
   const to = pet === 'dogs' ? 'cats' : 'dogs';
   const currentPet = pet === 'dogs' ? 'песиків' : 'котиків';
+  const searchParams = useSearchParams();
+
+  const createQueryString = useCallback(createUrlString, [searchParams]);
   
   return (
     <section className={style.groomingHead}>
@@ -31,7 +39,10 @@ export default function GroomingHead({ pet }: Props) {
           Грумінг для {currentPet}
         </h2>
       </div>
-      <Link className={style.groomingHead__move} href={`/grooming/${to}`}>
+      <Link 
+        className={style.groomingHead__move} 
+        href={`/grooming/${to}?${createQueryString('careId', '1', searchParams)}`}
+      >
         Грумінг для {pet === 'dogs' ? 'котиків' : 'песиків'}
       </Link>
     </section>
