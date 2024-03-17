@@ -1,8 +1,7 @@
-'use client';
-
 import Goal from "@/components/Goal/Goal";
 import GroomingForm from "@/components/GroomingForm/GroomingForm";
 import GroomingHead from "@/components/GroomingHead/GroomingHead";
+import { Suspense } from "react";
 
 type Props = {
   params: {
@@ -13,8 +12,14 @@ type Props = {
 export default function GroomingPet({ params: { pet } }: Props) {
   return (
     <>
-      <GroomingHead pet={pet} />
-      <GroomingForm pet={pet} />
+      <Suspense>
+        <GroomingHead pet={pet} />
+      </Suspense>
+
+      <Suspense>
+        <GroomingForm pet={pet} />
+      </Suspense>
+      
       <Goal />
     </>
   );
