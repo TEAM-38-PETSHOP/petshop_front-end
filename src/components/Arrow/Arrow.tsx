@@ -21,6 +21,7 @@ export default function Arrow({
   return (
     <button
       type="button"
+      data-testid="arrow"
       onClick={onClick}
       className={classNames([styleName], [styles.arrow], {
         [styles[direction]]: direction,

@@ -64,7 +64,10 @@ export default function ProductSlider() {
   };
 
   return (
-    <section className={styles.productSlider}>
+    <section
+      className={styles.productSlider}
+      data-testid="product-slider"
+    >
       <h2 className={styles.productSlider__title}>
         Ваші улюбленці
         <Image

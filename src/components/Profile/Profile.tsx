@@ -1,9 +1,11 @@
 'use client';
-import classNames from 'classnames';
-import styles from './profile.module.scss';
-import ProfileIcon from '@@/images/icons/profile.svg';
+import SvgWrapper from '@/components/SvgWrapper/SvgWrapper';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import classNames from 'classnames';
+import styles from './profile.module.scss';
+
+import profileIcon from '@@/images/icons/profile.svg';
 
 type Props = {
   className?: string;
@@ -20,7 +22,7 @@ export default function Profile({ className, onClick }: Props) {
         [styles.ProfileIcon__Selected]: path === '/profile',
       })}
     >
-      <ProfileIcon />
+      <SvgWrapper src={profileIcon.src} />
     </Link>
   );
 }
