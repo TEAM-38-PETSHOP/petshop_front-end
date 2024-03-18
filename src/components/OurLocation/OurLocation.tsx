@@ -16,7 +16,10 @@ const mapLinks = {
 };
 export default function OurLocation() {
   return (
-    <section className={styles.ourLocation}>
+    <section
+      className={styles.ourLocation}
+      id="contacts"
+    >
       <div className={styles.ourLocation__info}>
         <div className={styles.ourLocation__text}>
           <h3 className={styles.ourLocation__subtitle}>{locationInfo.title}</h3>

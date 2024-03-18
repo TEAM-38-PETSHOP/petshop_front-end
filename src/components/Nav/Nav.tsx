@@ -23,7 +23,7 @@ const links = [
   },
   {
     title: 'Контакти',
-    href: '/contacts',
+    href: '/#contacts',
   },
 ];
 
