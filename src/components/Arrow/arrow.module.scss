@@ -8,10 +8,13 @@
     var(--color-gray-10);
   border-radius: 50%;
 
-  transition: background-color, var(--transition-duration);
+  transition: background, var(--transition-duration);
 
   &:hover {
     background-color: var(--color-gray-20);
+    background: url('../../../public/images/icons/arrow_white.svg') no-repeat
+        center,
+      var(--color-gray-10);
   }
 
   &:active {
