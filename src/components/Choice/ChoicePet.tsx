@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import Arrow from '../Arrow/Arrow';
 import style from './choicePet.module.scss';
@@ -5,15 +7,23 @@ import Link from 'next/link';
 
 import dog from '@@/images/drawn/dog.svg';
 import cat from '@@/images/drawn/cat.svg';
+import { useSearchParams } from 'next/navigation';
+import { useCallback } from 'react';
+import { createUrlString } from '@/helpers/createUrlString';
 
 type Props = {
   choice: 'dogs' | 'cats';
 };
 
 export default function ChoicePet({ choice }: Props) {
+  const searchParams = useSearchParams();
+  const createQueryString = useCallback(createUrlString, [searchParams]);
+
   return choice === 'dogs' ? (
-    <Link
-      href={`/grooming/${choice}`}
+    <Link 
+      // If first careId will be 1
+      // if not then you should change it in each place
+      href={`/grooming/${choice}?${createQueryString('careId', '1', searchParams)}`} 
       className={style.choice}
     >
       <div className={style.choice__btn}>
@@ -33,8 +43,8 @@ export default function ChoicePet({ choice }: Props) {
       </div>
     </Link>
   ) : (
-    <Link
-      href={`/grooming/${choice}`}
+    <Link 
+      href={`/grooming/${choice}?${createQueryString('careId', '1', searchParams)}`} 
       className={style.choice}
     >
       <div className={style.choice__btn}>

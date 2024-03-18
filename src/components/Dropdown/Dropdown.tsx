@@ -1,8 +1,12 @@
+'use client';
+
 import style from './dropdown.module.scss';
 import dropdownArrow from '@@/images/icons/dropdown-arrow.svg';
 import Image from 'next/image';
 import cn from 'classnames';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { createUrlString } from '@/helpers/createUrlString';
 
 interface Care {
   id: number;
@@ -14,24 +18,36 @@ interface Care {
 
 interface Props {
   visibleCares: Care[];
-  activeCare: string;
-  changeHandler: (care: string) => void;
+  activeCare: number;
+  changeHandler: (careId: number) => void;
+  currentCare: Care;
 }
 
 export default function Dropdown({
   visibleCares,
   activeCare,
   changeHandler,
+  currentCare
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const createQueryString = useCallback(createUrlString, [searchParams]);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
-  const selectCare = (careName: string) => {
-    changeHandler(careName);
+  const selectCare = (careId: number, e: React.MouseEvent<HTMLLIElement>) => {
+    e.preventDefault();
+    changeHandler(careId);
     setIsOpen(false);
+    router.push(
+      pathname + '?' + createQueryString('careId', String(careId), searchParams), 
+      { scroll: false }
+    );
   };
 
   return (
@@ -40,8 +56,8 @@ export default function Dropdown({
         className={style.dropdown__btn}
         onClick={toggleDropdown}
       >
-        {activeCare}
-        <Image
+        {currentCare.name}
+        <Image 
           className={cn({
             [style.dropdown__img]: !isOpen,
             [style.dropdown__imgActive]: isOpen,
@@ -60,9 +76,9 @@ export default function Dropdown({
           <li
             key={care.id}
             className={cn(style.dropdown__item, {
-              [style.dropdown__itemActive]: activeCare === care.name,
+              [style.dropdown__itemActive]: activeCare === care.id,
             })}
-            onClick={() => selectCare(care.name)}
+            onClick={(e) => selectCare(care.id, e)}
           >
             {care.name}
           </li>
