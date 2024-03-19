@@ -22,7 +22,7 @@ export default function ChoicePet({ choice }: Props) {
   return choice === 'dogs' ? (
     <Link 
       // If first careId will be 1
-      // if not then you should change it in each place
+      // If not then you should change it in each place
       href={`/grooming/${choice}?${createQueryString('careId', '1', searchParams)}`} 
       className={style.choice}
     >
