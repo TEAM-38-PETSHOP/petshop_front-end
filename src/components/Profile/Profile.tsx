@@ -23,7 +23,6 @@ export default function Profile({ className, onClick }: Props) {
       })}
     >
       <SvgWrapper src={profileIcon.src} />
-      <span>Профіль</span>
     </Link>
   );
 }
