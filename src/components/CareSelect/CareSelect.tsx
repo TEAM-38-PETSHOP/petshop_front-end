@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import style from './careSelect.module.scss';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import Dropdown from '../Dropdown/Dropdown';
 
 interface Care {
@@ -15,27 +15,28 @@ interface Care {
 interface Props {
   currentCare: Care;
   visibleCares: Care[];
-  activeCare: string;
-  setActiveCare: (care: string) => void;
+  activeCareId: number;
 }
 
-export default function CareSelect({ visibleCares, activeCare, setActiveCare, currentCare }: Props) {
+export default function CareSelect({ visibleCares, activeCareId, currentCare }: Props) {
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
 
-  const changeHandler = (careName: string) => {
+  const changeHandler = () => {
     setIsDescriptionOpen(false);
-    setActiveCare(careName);
   };
 
   return (
     <>
-      <Dropdown 
-        visibleCares={visibleCares}
-        activeCare={activeCare}
-        changeHandler={changeHandler}
-      />
+      <Suspense>
+        <Dropdown 
+          visibleCares={visibleCares}
+          activeCare={activeCareId}
+          changeHandler={changeHandler}
+          currentCare={currentCare}
+        />
+      </Suspense>
 
-      {activeCare === currentCare.name && (
+      {activeCareId === currentCare.id && (
         <div className={style.description}>
           <div 
             className={cn(style.description__btn, {
