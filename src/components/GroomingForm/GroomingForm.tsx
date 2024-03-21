@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import style from './groomingForm.module.scss';
 import CaresList from '../CaresList/CaresList';
 import BreedsList from '../BreedsList/BreedsList';
@@ -9,6 +9,8 @@ import Link from 'next/link';
 import CareSelect from '../CareSelect/CareSelect';
 import { getAllTypeOfPetServices } from '@/helpers/fetchData';
 import { TypeOfService } from '@/types/TypeOfService';
+import { useSearchParams } from 'next/navigation';
+import { createUrlString } from '@/helpers/createUrlString';
 
 interface Props {
   pet: string;
@@ -289,8 +291,10 @@ const caresForCats = [
 
 export default function GroomingForm({ pet }: Props) {
   const [query, setQuery] = useState('');
-  const [activeDogCare, setActiveDogCare] = useState('01 Комплексний догляд');
-  const [activeCatCare, setActiveCatCare] = useState('01 Комплексний догляд');
+  const searchParams = useSearchParams();
+  const careId = Number(searchParams.get('careId'));
+
+  const activeCareId = useMemo(() => careId || 1, [careId]);
 
   // useEffect(() => {
   //   getAllTypeOfPetServices()
@@ -308,46 +312,36 @@ export default function GroomingForm({ pet }: Props) {
     let result: CatCare | DogCare;
     
     if (pet === 'dogs') {
-      result = visibleCares.find((care: CatCare | DogCare) => care.name === activeDogCare) as DogCare;
+      result = visibleCares.find((care: CatCare | DogCare) => care.id === activeCareId) as DogCare;
     } else {
-      result = visibleCares.find((care: CatCare | DogCare) => care.name === activeCatCare) as CatCare;
+      result = visibleCares.find((care: CatCare | DogCare) => care.id === activeCareId) as CatCare;
     }
 
     return result || (visibleCares[0] as CatCare | DogCare);
-  }, [activeDogCare, activeCatCare, pet, visibleCares]);
+  }, [activeCareId, pet, visibleCares]);
 
   /// const breeds = pet === 'dogs' ? currentCare.dogBreeds : currentCare.catBreeds;
   const breeds = pet === 'dogs' ? (currentCare as DogCare).dogBreeds : (currentCare as CatCare).catBreeds;
   const filteredBreeds = breeds.filter((breed) => breed.name.toLowerCase().includes(query.toLowerCase()));
-  const activeCare= pet === 'dogs' ? activeDogCare : activeCatCare;
-  const setActiveCare= pet === 'dogs' ? setActiveDogCare : setActiveCatCare;
   const to = pet === 'dogs' ? 'cats' : 'dogs';
 
-  const handleCareChange = (careName: string) => {
-    setQuery('');
-    
-    if (pet === 'dogs') {
-      setActiveDogCare(careName);
-    } else {
-      setActiveCatCare(careName);
-    }
-  }
-
   // Краща назва буде price замість breeds (дивитись макет)
+  const createQueryString = useCallback(createUrlString, [searchParams]);
   
   return (
     <section className={style.groomingForm}>
-      <CaresList 
-        visibleCares={visibleCares}
-        activeCare={activeCare}
-        setActiveCare={handleCareChange}
-      />
+      <Suspense>
+        <CaresList 
+          visibleCares={visibleCares}
+          activeCareId={activeCareId}
+          setQuery={setQuery}
+        />
+      </Suspense>
 
       <CareSelect
         currentCare={currentCare}
         visibleCares={visibleCares}
-        activeCare={activeCare}
-        setActiveCare={setActiveCare}
+        activeCareId={activeCareId}
       />
 
       <div className={style.groomingForm__line}></div>
@@ -369,7 +363,7 @@ export default function GroomingForm({ pet }: Props) {
 
         <GroomDescription careInfo={currentCare}/>
       </div>
-      <Link className={style.groomingForm__move} href={`/grooming/${to}`}>
+      <Link className={style.groomingForm__move} href={`/grooming/${to}?${createQueryString('careId', '1', searchParams)}`}>
         Грумінг для {pet === 'dogs' ? 'котиків' : 'песиків'}
       </Link>
     </section>
