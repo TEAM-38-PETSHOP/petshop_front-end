@@ -25,14 +25,12 @@ export default function ProductCard({ product }: Props) {
           src={product.image}
           width={215}
           height={215}
-          alt="product"
+          alt={product.name}
         />
       </Link>
       <h3 className={styles.productCard__title}>{product.name}</h3>
       <p className={styles.productCard__description}>{product.description}</p>
-      <p className={styles.productCard__price}>
-        {product.carPrice} грн {product.price && <s>{product.price} грн</s>}
-      </p>
+      <p className={styles.productCard__price}>{product.price} грн</p>
     </div>
   );
 }
