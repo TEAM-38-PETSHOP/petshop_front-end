@@ -3,10 +3,6 @@ import { client } from '../utils/fetchClient';
 import { Service } from '@/types/Service';
 import { Breed } from '@/types/Breed';
 
-export const getProducts = () => {
-  return client.get<any>(`/api/products`);
-};
-
 export const getAllTypeOfPetServices = () => {
   // Отримуємо усі типи послуг breeds (174)
   return client.get<TypeOfService[]>(`/api/grooms/typeOfServices`);
