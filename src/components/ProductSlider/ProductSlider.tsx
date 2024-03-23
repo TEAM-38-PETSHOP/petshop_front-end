@@ -1,29 +1,24 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import classNames from 'classnames';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import styles from './productSlider.module.scss';
-import Image from 'next/image';
 import catDog from '@@/images/drawn/catAndDog.png';
 import ProductCard from '../ProductCard/ProductCard';
 import Arrow from '../Arrow/Arrow';
-import classNames from 'classnames';
 
-const products = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const product = {
-  id: 1,
-  name: 'Іграшка',
-  description:
-    'Сухий корм для собак мініатюрних порід з чутливим травленням Brit Care Mini GF Sensitive (оленина)',
-  carPrice: 1200,
-  price: 1000,
-  image:
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4-9_UxIYQW9PjA64fKI20glb0H2MxFFV3hQ&usqp=CAU',
+import { Product } from '@/types/Product';
+
+type Props = {
+  products: Product[];
 };
-export default function ProductSlider() {
+
+export default function ProductSlider({ products }: Props) {
   const [windowWidth, setWindowWidth] = useState<null | number>(null);
 
   useEffect(() => {
@@ -83,8 +78,8 @@ export default function ProductSlider() {
       >
         {products.map((prod) => (
           <ProductCard
-            key={prod}
-            product={product}
+            key={prod.id}
+            product={prod}
           />
         ))}
       </Slider>
