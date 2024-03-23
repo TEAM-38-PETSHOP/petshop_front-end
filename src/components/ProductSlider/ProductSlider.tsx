@@ -24,7 +24,7 @@ const product = {
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4-9_UxIYQW9PjA64fKI20glb0H2MxFFV3hQ&usqp=CAU',
 };
 export default function ProductSlider() {
-  const [windowWidth, setWindowWidth] = useState<null | number>(null);
+  const [windowWidth, setWindowWidth] = useState<number>(320);
 
   useEffect(() => {
     const handleResize = () => {
@@ -40,11 +40,12 @@ export default function ProductSlider() {
     };
   }, []);
 
+  const widthCards = windowWidth > 425 ? 265 : 165;
   const sliderSettings = {
     infinite: false,
     speed: 300,
     swipe: (windowWidth || 0) < 768,
-    slidesToShow: Math.floor((windowWidth || 275) / 265),
+    slidesToShow: Math.floor((windowWidth || 275) / widthCards),
     slidesToScroll: 1,
     dots: true,
     nextArrow: (
