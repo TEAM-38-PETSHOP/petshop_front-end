@@ -5,7 +5,9 @@ export interface FavoriteState {
   favoriteProducts: Product[];
 }
 
-const favoriteStorage = JSON.parse(localStorage.getItem('favorite') || '[]');
+const favoriteStorage =
+  typeof window !== 'undefined' &&
+  JSON.parse(localStorage.getItem('favorite') || '[]');
 
 const initialState: FavoriteState = {
   favoriteProducts: favoriteStorage,
