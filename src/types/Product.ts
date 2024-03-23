@@ -5,16 +5,21 @@ export interface Product {
   description: string;
   price: number;
   image: string;
+  countryProduct: string;
+  group: string;
+  breedSize: string;
+  type: string;
+  packaging: string;
   animals: Animal[];
   categories: Category[];
 }
 
-interface Animal {
+export interface Animal {
   id: number;
   name: string;
 }
 
-interface Category {
+export interface Category {
   id: number;
   name: string;
   description: string;

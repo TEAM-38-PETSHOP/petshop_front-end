@@ -1,15 +1,10 @@
 import Link from 'next/link';
-import styles from './productCard.module.scss';
 import Image from 'next/image';
+import styles from './productCard.module.scss';
+
+import { Product } from '@/types/Product';
 type Props = {
-  product: {
-    id: number;
-    name: string;
-    description: string;
-    carPrice: number;
-    price?: number;
-    image: string;
-  };
+  product: Product;
 };
 export default function ProductCard({ product }: Props) {
   return (
