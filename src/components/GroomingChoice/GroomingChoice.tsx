@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import Choice from '../Choice/ChoicePet';
 import style from './groomingChoice.module.scss';
 
@@ -6,8 +7,13 @@ export default function GroomingChoice() {
     <section className={style.groomingChoice}>
       <h3 className={style.groomingChoice__title}>Кого потрібно причепурити ?</h3>
       <div className={style.groomingChoice__choice}>
-        <Choice choice='dogs' />
-        <Choice choice='cats' />
+        <Suspense>
+          <Choice choice='dogs' />
+        </Suspense>
+        
+        <Suspense>
+          <Choice choice='cats' />
+        </Suspense>
       </div>
     </section>
   );

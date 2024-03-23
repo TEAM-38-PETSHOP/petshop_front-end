@@ -6,11 +6,15 @@ import RoadToUs from '@/components/RoadToUs/RoadToUs';
 import OurLocation from '@/components/OurLocation/OurLocation';
 import SocialNetworks from '@/components/SocialNetworks/SocialNetworks';
 
-export default function Home() {
+import { getProductsForSlider } from '@/helpers/fetchProducts';
+
+export default async function Home() {
+  const productsForSlider = await getProductsForSlider();
+
   return (
     <>
       <About />
-      <ProductSlider />
+      <ProductSlider products={productsForSlider} />
       <MainBenefits />
       <Services />
       <RoadToUs />
