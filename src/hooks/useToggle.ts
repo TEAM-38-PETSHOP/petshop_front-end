@@ -17,7 +17,9 @@ export const useToggle = (
       : [...products, carrProduct];
 
     dispatch(setProducts(updatedProducts));
-    localStorage.setItem(nameProd, JSON.stringify(updatedProducts));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(nameProd, JSON.stringify(updatedProducts));
+    }
   };
 
   return [isSelected, toggler];

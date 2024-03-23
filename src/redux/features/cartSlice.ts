@@ -5,7 +5,9 @@ export interface CartState {
   cartProducts: Product[];
 }
 
-const cartStorage = JSON.parse(localStorage.getItem('cart') || '[]');
+const cartStorage =
+  typeof window !== 'undefined' &&
+  JSON.parse(localStorage.getItem('cart') || '[]');
 
 const initialState: CartState = {
   cartProducts: cartStorage,
