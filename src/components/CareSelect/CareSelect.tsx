@@ -3,26 +3,21 @@ import style from './careSelect.module.scss';
 
 import { Suspense, useState } from 'react';
 import Dropdown from '../Dropdown/Dropdown';
-
-interface Care {
-  id: number, 
-  name: string, 
-  price: string,
-  description: string,
-  other: string[],
-}
+import { Service } from '@/types/Service';
 
 interface Props {
-  currentCare: Care;
-  visibleCares: Care[];
+  currentCare: Service;
+  visibleCares: Service[];
   activeCareId: number;
+  setQuery: (query: string) => void;
 }
 
-export default function CareSelect({ visibleCares, activeCareId, currentCare }: Props) {
+export default function CareSelect({ visibleCares, activeCareId, currentCare, setQuery }: Props) {
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
 
   const changeHandler = () => {
     setIsDescriptionOpen(false);
+    setQuery('');
   };
 
   return (
@@ -36,9 +31,10 @@ export default function CareSelect({ visibleCares, activeCareId, currentCare }: 
         />
       </Suspense>
 
-      {activeCareId === currentCare.id && (
-        <div className={style.description}>
+      {currentCare && activeCareId === currentCare.id && (
+        <div className={style.description} data-testid="description">
           <div 
+            data-testid="description-btn"
             className={cn(style.description__btn, {
               [style.description__btnActive]: isDescriptionOpen,
             })}
@@ -46,7 +42,8 @@ export default function CareSelect({ visibleCares, activeCareId, currentCare }: 
           >
             Опис процедури
             
-            <span 
+            <span
+              data-testid="description-arrow"
               className={cn(style.description__arrow, {
                 [style.description__arrowActive]: isDescriptionOpen,
               })}
@@ -63,12 +60,6 @@ export default function CareSelect({ visibleCares, activeCareId, currentCare }: 
               {currentCare.description}
             </p>
 
-            <ul>
-              {currentCare.other.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
-            
             <p className={style.description__additional}>
               *за агресію хвостика + 50% до прайсу чи майстер має право відмовити в проведенні послуги
             </p>

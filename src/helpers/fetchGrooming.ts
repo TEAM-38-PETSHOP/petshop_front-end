@@ -1,7 +1,6 @@
 import { TypeOfService } from '@/types/TypeOfService';
 import { client } from '../utils/fetchClient';
 import { Service } from '@/types/Service';
-import { Breed } from '@/types/Breed';
 
 export const getAllTypeOfPetServices = () => {
   // Отримуємо усі типи послуг breeds (174)
@@ -12,6 +11,11 @@ export const getTypeOfPetService = (serviceId: number) => {
   // Отримуємо конкретний breed для конкретного типу послуг
   // Тобто породи для конкретного типу послуг
   return client.get<TypeOfService>(`/api/grooms/typeOfServices/${serviceId}`);
+};
+
+export const getTypeOfServiceById = (id: number) => {
+  // Отримуємо конкретний breed за його id
+  return client.get<TypeOfService>(`/api/grooms/typeOfService/${id}`);
 };
 
 export const getAllServices = () => {
@@ -28,9 +32,4 @@ export const getServicesById = (animalId: number) => {
 export const getPetServiceById = (id: number) => {
   // Отримуємо конкретну категорію через id
   return client.get<Service>(`/api/grooms/service/${id}`);
-};
-
-export const getTypeOfServiceById = (id: number) => {
-  // Отримуємо конкретний breed за його id
-  return client.get<Breed>(`/api/grooms/typeOfService/${id}`);
 };
