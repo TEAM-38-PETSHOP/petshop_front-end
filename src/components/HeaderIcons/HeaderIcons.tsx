@@ -19,7 +19,7 @@ export default React.memo(function HeaderIcons({ setOpenMenu }: Props) {
   return (
     <div className={styles.headerRight}>
       <Link
-        href="favorites"
+        href="/favorites"
         className={classNames(
           [styles.headerRight__iconsBase],
           [styles.headerRight__iconCartAndFavorite],
@@ -32,7 +32,7 @@ export default React.memo(function HeaderIcons({ setOpenMenu }: Props) {
       </Link>
 
       <Link
-        href="cart"
+        href="/cart"
         className={classNames(
           [styles.headerRight__iconsBase],
           [styles.headerRight__iconCartAndFavorite],

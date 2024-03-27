@@ -8,7 +8,7 @@ export default function Goal() {
   return (
     <section className={style.goal}>
       <div className={style.goal__descriptionContainer}>
-        <p className={style.goal__firstDescription}>
+        <p className={style.goal__firstDescription} data-testid="first-description">
           Ми гарантуємо безпеку та комфорт вашим улюбленцям. Інструменти та
           поверхні ретельно дезинфікуються, використовуються безпечні засоби для
           гігієни та догляду.
@@ -35,7 +35,7 @@ export default function Goal() {
         />
       </div>
       <div className={style.goal__descriptionContainer}>
-        <p className={style.goal__secondDescription}>
+        <p className={style.goal__secondDescription} data-testid="second-description">
           <span>Наша мета</span> - забезпечити ваших улюбленців гарним виглядом
           та почуттям захищеності. Довірте нам турботу про ваших пухнастих
           друзів.
