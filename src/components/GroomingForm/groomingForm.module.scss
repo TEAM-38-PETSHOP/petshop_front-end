@@ -6,7 +6,6 @@
   display: flex;
 
   margin-bottom: 210px;
-  max-height: 645px;
   padding: 40px;
 
   background-color: var(--color-additional-beige);
@@ -77,10 +76,6 @@
       line-height: 1.5;
       font-weight: 500;
       color: var(--color-gray-20);
-
-      @include md {
-        display: none;
-      }
     }
   }
 

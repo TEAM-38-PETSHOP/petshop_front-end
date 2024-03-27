@@ -1,21 +1,11 @@
-import { useState } from 'react';
+import { Service } from '@/types/Service';
 import style from './groomDescription.module.scss';
-import cn from 'classnames';
 
-interface CurrentCare {
-  id: number;
-  name: string;
-  price: string;
-  description: string;
-  other: string[];
-}
 interface Props {
-  careInfo: CurrentCare;
+  careInfo: Service;
 }
 
 export default function GroomDescription({ careInfo }: Props) {
-  const { description, other } = careInfo;
-
   return (
     <>
       <div className={style.description}>
@@ -24,15 +14,9 @@ export default function GroomDescription({ careInfo }: Props) {
         </h2>
 
         <p className={style.description__text}>
-          {description}
+          {careInfo?.description}
         </p>
 
-        <ul>
-          {other.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </ul>
-        
         <p className={style.description__additional}>
           *за агресію хвостика + 50% до прайсу чи майстер має право відмовити в проведенні послуги
         </p>

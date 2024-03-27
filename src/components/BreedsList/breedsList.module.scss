@@ -27,6 +27,7 @@
       }
 
       &Price {
+        text-align: right;
         font-weight: 500;
 
         @include lg {
@@ -35,10 +36,10 @@
       }
     }
 
-    &__additional {
-      max-width: 90%;
-      @extend %small-text;
-    }
+    // &__additional {
+    //   max-width: 80%;
+    //   @extend %small-text;
+    // }
 
     &__decor {
       height: 1px;
