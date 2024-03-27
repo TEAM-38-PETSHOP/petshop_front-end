@@ -7,20 +7,13 @@ import cn from 'classnames';
 import { useCallback, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { createUrlString } from '@/helpers/createUrlString';
-
-interface Care {
-  id: number;
-  name: string;
-  price: string;
-  description: string;
-  other: string[];
-}
+import { Service } from '@/types/Service';
 
 interface Props {
-  visibleCares: Care[];
+  visibleCares: Service[];
   activeCare: number;
   changeHandler: (careId: number) => void;
-  currentCare: Care;
+  currentCare: Service;
 }
 
 export default function Dropdown({
@@ -51,12 +44,12 @@ export default function Dropdown({
   };
 
   return (
-    <div className={style.dropdown}>
+    <div className={style.dropdown} data-testid="dropdown">
       <div
         className={style.dropdown__btn}
         onClick={toggleDropdown}
       >
-        {currentCare.name}
+        {currentCare?.name}
         <Image 
           className={cn({
             [style.dropdown__img]: !isOpen,
@@ -80,7 +73,7 @@ export default function Dropdown({
             })}
             onClick={(e) => selectCare(care.id, e)}
           >
-            {care.name}
+            {care?.name}
           </li>
         ))}
       </ul>

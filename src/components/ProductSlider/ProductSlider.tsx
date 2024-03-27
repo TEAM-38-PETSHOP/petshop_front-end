@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
-import classNames from 'classnames';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import classNames from "classnames";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-import styles from './productSlider.module.scss';
-import catDog from '@@/images/drawn/catAndDog.png';
-import ProductCard from '../ProductCard/ProductCard';
-import Arrow from '../Arrow/Arrow';
+import styles from "./productSlider.module.scss";
+import catDog from "@@/images/drawn/catAndDog.png";
+import ProductCard from "../ProductCard/ProductCard";
+import Arrow from "../Arrow/Arrow";
 
-import { Product } from '@/types/Product';
+import { Product } from "@/types/Product";
 
 type Props = {
   products: Product[];
@@ -28,10 +28,10 @@ export default function ProductSlider({ products }: Props) {
 
     setWindowWidth(window.innerWidth);
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -42,13 +42,7 @@ export default function ProductSlider({ products }: Props) {
     slidesToShow: Math.floor((windowWidth || 275) / 265),
     slidesToScroll: 1,
     dots: true,
-    nextArrow: (
-      <Arrow
-        styleName={styles.arrow}
-        direction="right"
-        isCarousel
-      />
-    ),
+    nextArrow: <Arrow styleName={styles.arrow} direction="right" isCarousel />,
     prevArrow: (
       <Arrow
         styleName={classNames(styles.arrow, styles.arrow__prev)}
@@ -59,10 +53,7 @@ export default function ProductSlider({ products }: Props) {
   };
 
   return (
-    <section
-      className={styles.productSlider}
-      data-testid="product-slider"
-    >
+    <section className={styles.productSlider} data-testid="product-slider">
       <h2 className={styles.productSlider__title}>
         Ваші улюбленці
         <Image
@@ -72,15 +63,9 @@ export default function ProductSlider({ products }: Props) {
         />
         вподобають
       </h2>
-      <Slider
-        {...sliderSettings}
-        className={styles.productSlider__slider}
-      >
+      <Slider {...sliderSettings} className={styles.productSlider__slider}>
         {products.map((prod) => (
-          <ProductCard
-            key={prod.id}
-            product={prod}
-          />
+          <ProductCard key={prod.id} product={prod} />
         ))}
       </Slider>
     </section>
