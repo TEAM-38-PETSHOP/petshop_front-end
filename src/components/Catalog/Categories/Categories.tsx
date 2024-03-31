@@ -1,6 +1,7 @@
 import style from "./categories.module.scss";
 import Category from "../Category/Category";
 import { BreedType } from "@/types/enums/BreedType";
+import { Suspense } from "react";
 
 export function filterCategories(array: any[], BreedType: BreedType) {
   switch (BreedType) {
@@ -64,13 +65,16 @@ export default function Categories() {
   return (
     <div className={style.categories}>
       {filteredCategories.map(({ id, text, href, variant }) => (
-        <Category
+        <Suspense
           key={id}
-          text={text}
-          href={href}
-          imgId={id}
-          variant={variant}
-        />
+        >
+          <Category
+            text={text}
+            href={href}
+            imgId={id}
+            variant={variant}
+          />
+        </Suspense>
       ))}
     </div>
   );
