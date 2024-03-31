@@ -17,7 +17,6 @@ type Props = {
 
 export default function ChoicePet({ choice }: Props) {
   const searchParams = useSearchParams();
-  console.log(searchParams);
   const createQueryString = useCallback(createUrlString, [searchParams]);
 
   return choice === 'dogs' ? (
