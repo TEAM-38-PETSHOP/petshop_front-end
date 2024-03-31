@@ -1,4 +1,5 @@
-const BASE_URL = 'http://ec2-54-163-56-10.compute-1.amazonaws.com';
+// http://ec2-34-224-28-64.compute-1.amazonaws.com/swagger-ui/index.html#/
+const BASE_URL = 'http://ec2-34-224-28-64.compute-1.amazonaws.com';
 
 type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
