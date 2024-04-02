@@ -4,6 +4,7 @@ import styles from './nav.module.scss';
 import { usePathname } from 'next/navigation';
 import classNames from 'classnames';
 import Buttons from '../Buttons/Buttons';
+import { useAppSelector } from '@/hooks/reduxHooks';
 
 import cart from '@@/images/icons/cart.svg';
 import like from '@@/images/icons/like.svg';
@@ -33,6 +34,7 @@ type Props = {
 };
 
 export default function Nav({ isOpen, setOpenMenu }: Props) {
+  const cartCount = useAppSelector((state) => state.cart.cartProducts.length);
   const pathname = usePathname();
   const isActiveLink = (href: string) =>
     (pathname.includes(href) && href.length !== 1) ||
@@ -61,15 +63,26 @@ export default function Nav({ isOpen, setOpenMenu }: Props) {
           btnText: 'Обране',
           btnLink: '/favorites',
           btnIcon: like.src,
-          className: pathname === '/favorites' ? styles.nav__like : '',
+          className: classNames({
+            [styles.nav__likeActive]: pathname === '/favorites',
+          }),
           onClick: () => setOpenMenu(false),
         }}
         secondBtn={{
           btnText: 'Корзина',
           btnLink: '/cart',
           btnIcon: cart.src,
-          className: pathname === '/cart' ? styles.nav__cart : '',
+          className: classNames([styles.nav__btn], {
+            [styles.nav__cartActive]: pathname === '/cart',
+          }),
           onClick: () => setOpenMenu(false),
+          children: (
+            <>
+              {!!cartCount && (
+                <span className={styles.nav__btnCount}>{cartCount}</span>
+              )}
+            </>
+          ),
         }}
         className={styles.nav__btns}
       />

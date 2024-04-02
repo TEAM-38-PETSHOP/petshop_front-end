@@ -9,13 +9,19 @@ import styles from './headerIcons.module.scss';
 import favorites from '@@/images/icons/like.svg';
 import cart from '@@/images/icons/cart.svg';
 import Profile from '@/components/Profile/Profile';
+import { useAppSelector } from '@/hooks/reduxHooks';
 
 type Props = {
   setOpenMenu: (isOpen: boolean) => void;
 };
 
 export default React.memo(function HeaderIcons({ setOpenMenu }: Props) {
+  const favoritesCount = useAppSelector(
+    (state) => state.favorite.favoriteProducts.length
+  );
+  const cartCount = useAppSelector((state) => state.cart.cartProducts.length);
   const pathname = usePathname();
+
   return (
     <div className={styles.headerRight}>
       <Link
@@ -42,6 +48,9 @@ export default React.memo(function HeaderIcons({ setOpenMenu }: Props) {
         )}
       >
         <SvgWrapper src={cart.src} />
+        {!!cartCount && (
+          <span className={styles.headerRight__count}>{cartCount}</span>
+        )}
       </Link>
 
       <Profile
