@@ -6,17 +6,10 @@ import cn from 'classnames';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { createUrlString } from '@/helpers/createUrlString';
-
-interface Care {
-  id: number, 
-  name: string, 
-  price: string,
-  description: string,
-  other: string[],
-}
+import { Service } from '@/types/Service';
 
 interface Props {
-  visibleCares: Care[];
+  visibleCares: Service[];
   activeCareId: number;
   setQuery: (query: string) => void;
 }
@@ -24,20 +17,19 @@ interface Props {
 export default function CaresList({ visibleCares, activeCareId, setQuery }: Props) {
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
   const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams() || {};
 
   const createQueryString = useCallback(createUrlString, [searchParams]);
-
+  
   return (
     <ul className={style.caresList}>
-      {visibleCares.map((care, index) => (
+      {visibleCares.map((care) => (
         <Link 
           key={care.id} 
           href={pathname + '?' + createQueryString('careId', String(care.id), searchParams)}
           scroll={false}
         >
           <li
-            key={index}
             onClick={() => setQuery('')}
           >
             <p className={cn(style.caresList__Item, {
@@ -72,12 +64,6 @@ export default function CaresList({ visibleCares, activeCareId, setQuery }: Prop
                       {care.description}
                     </p>
 
-                    <ul>
-                      {care.other.map((item, index) => (
-                        <li key={index}>{item}</li>
-                      ))}
-                    </ul>
-                    
                     <p className={style.caresList__descriptionAdditional}>
                       *за агресію хвостика + 50% до прайсу чи майстер має право відмовити в проведенні послуги
                     </p>

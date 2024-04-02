@@ -1,0 +1,74 @@
+@import '../../app//styles/extends.scss';
+@import '../../app/styles/mixins.scss';
+
+.radio {
+  display: flex;
+
+  &__item {
+    padding: 0.3rem;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    cursor: pointer;
+
+    position: relative;
+    padding-left: 30px;
+
+    input {
+      display: none;
+
+      &:checked ~ .checkmark {
+        background-origin: content-box;
+        background-repeat: no-repeat;
+        background-image: radial-gradient(
+          circle at center, 
+          #FD7B19, 
+            calc((20px - (2px * 2) - (2px * 2)) / 2), 
+          rgba(255, 255, 255, 0) 0);
+      }
+    }
+
+    .checkmark {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: inline-block;
+      transition: opacity 0.3s ease;
+
+      border: 2px solid #DCDEE3;
+      padding: 2px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    
+  }
+}
+
+.catalog {
+  flex-direction: column;
+
+  &__item {
+    justify-content: flex-start;
+    align-items: center;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.categories {
+  flex-direction: row;
+
+  &__item {
+    justify-content: center;
+    align-items: center;
+
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+}

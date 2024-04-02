@@ -18,8 +18,9 @@ export default function GroomingHead({ pet }: Props) {
   const to = pet === 'dogs' ? 'cats' : 'dogs';
   const currentPet = pet === 'dogs' ? 'песиків' : 'котиків';
   const searchParams = useSearchParams();
-
   const createQueryString = useCallback(createUrlString, [searchParams]);
+  
+  const firstCareId = pet === 'dogs' ? '5' : '6';
   
   return (
     <section className={style.groomingHead}>
@@ -33,21 +34,21 @@ export default function GroomingHead({ pet }: Props) {
         />
       </Link>
       <div className={style.groomingHead__centerContainer}>
-        <Image
-          className={style.groomingHead__centerContainer__img}
-          src={pet === 'dogs' ? dog : cat}
-          alt="dog"
-        />
-        <h2 className={style.groomingHead__centerContainer__title}>
-          Грумінг для {currentPet}
-        </h2>
-      </div>
-      <Link 
-        className={style.groomingHead__move} 
-        href={`/grooming/${to}?${createQueryString('careId', '1', searchParams)}`}
-      >
-        Грумінг для {pet === 'dogs' ? 'котиків' : 'песиків'}
-      </Link>
+          <Image
+            className={style.groomingHead__centerContainer__img}
+            src={pet === 'dogs' ? dog : cat}
+            alt="dog"
+          />
+          <h2 className={style.groomingHead__centerContainer__title}>
+            Грумінг для {currentPet}
+          </h2>
+        </div>
+        <Link 
+          className={style.groomingHead__move} 
+          href={`/grooming/${to}?${createQueryString('careId', firstCareId, searchParams)}`}
+        >
+          Грумінг для {pet === 'dogs' ? 'котиків' : 'песиків'}
+        </Link>
     </section>
   );
 }
