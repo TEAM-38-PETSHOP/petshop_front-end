@@ -23,7 +23,7 @@ export default function ChoicePet({ choice }: Props) {
     <Link 
       // If first careId will be 1
       // If not then you should change it in each place
-      href={`/grooming/${choice}?${createQueryString('careId', '1', searchParams)}`} 
+      href={`/grooming/${choice}?${createQueryString('careId', '6', searchParams)}`} 
       className={style.choice}
     >
       <div className={style.choice__btn}>
@@ -44,7 +44,7 @@ export default function ChoicePet({ choice }: Props) {
     </Link>
   ) : (
     <Link 
-      href={`/grooming/${choice}?${createQueryString('careId', '1', searchParams)}`} 
+      href={`/grooming/${choice}?${createQueryString('careId', '5', searchParams)}`} 
       className={style.choice}
     >
       <div className={style.choice__btn}>

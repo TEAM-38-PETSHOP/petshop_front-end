@@ -6,7 +6,7 @@ export default function GroomingChoice() {
   return (
     <section className={style.groomingChoice}>
       <h3 className={style.groomingChoice__title}>Кого потрібно причепурити ?</h3>
-      <div className={style.groomingChoice__choice}>
+      <div className={style.groomingChoice__choice} data-testid="choice">
         <Suspense>
           <Choice choice='dogs' />
         </Suspense>

@@ -1,10 +1,10 @@
 export const createUrlString = (
-  name: string, 
-  value: string, 
+  name: string,
+  value: string,
   searchParams: URLSearchParams
 ) => {
-  const params = new URLSearchParams(searchParams.toString())
-  params.set(name, value)
+  const params = new URLSearchParams(searchParams.toString());
+  params.set(name, value);
 
   return params.toString();
-}
+};
