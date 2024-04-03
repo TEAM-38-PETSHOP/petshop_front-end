@@ -28,10 +28,6 @@
     padding: 20px 0;
     height: 85vh;
 
-    @include sm {
-      height: 70vh;
-    }
-
     @media (max-height: 580px) {
       height: max-content;
     }
@@ -92,7 +88,34 @@
     }
   }
 
-  .nav__cart {
+  &__btn {
+    position: relative;
+
+    &Count {
+      position: absolute;
+      top: 7px;
+      right: 57%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 17px;
+      width: 17px;
+      font-size: 0.625rem;
+
+      background-color: var(--color-primary-100);
+      border-radius: 50%;
+      color: var(--color-gray-100);
+
+      @include sm {
+        top: 1px;
+        right: 64%;
+      }
+    }
+  }
+
+  .nav__cartActive {
+    position: relative;
     background-color: var(--color-gray-100);
     border: var(--color-gray-100);
     color: var(--color-gray-10);
@@ -101,8 +124,14 @@
     * {
       fill: var(--color-gray-10);
     }
+
+    &:hover {
+      color: var(--color-gray-10);
+    }
   }
-  .nav__like {
+
+  .nav__likeActive {
+    position: relative;
     background-color: var(--color-gray-100);
     border: var(--color-gray-100);
     font-weight: 500;

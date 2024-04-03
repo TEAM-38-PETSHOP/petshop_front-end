@@ -1,29 +1,65 @@
-import { render } from "@testing-library/react";
-import ProductCard from "./ProductCard";
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect'; // for expect().toBeInTheDocument()
+import ProductCard from './ProductCard';
 
-const mockProduct = {
-  id: 1,
-  name: "Test Product",
-  description: "This is a test product",
-  carPrice: 100,
-  price: 90,
-  image:
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4-9_UxIYQW9PjA64fKI20glb0H2MxFFV3hQ&usqp=CAU",
-};
+describe('ProductCard', () => {
+  const product = {
+    id: 1,
+    name: 'test',
+    brand: 'test',
+    description: 'test',
+    price: 1,
+    image: 'test',
+    countryProduct: 'test',
+    group: 'test',
+    breedSize: 'test',
+    type: 'test',
+    packaging: 'test',
+    animals: [
+      {
+        id: 1,
+        name: 'test',
+      },
+    ],
+    categories: [
+      {
+        id: 1,
+        name: 'test',
+        description: 'test',
+      },
+    ],
+  };
 
-describe("ProductCard component", () => {
-  it("renders without crashing", () => {
-    render(<ProductCard product={mockProduct} />);
+  it('renders product card correctly', () => {
+    const { getByTestId, getByText } = render(
+      <ProductCard product={product} />
+    );
+    expect(getByTestId('product-card')).toBeInTheDocument();
+    expect(getByText('Category')).toBeInTheDocument();
+    expect(getByText('Product Name, Packaging')).toBeInTheDocument();
+    expect(getByText('$10.99')).toBeInTheDocument();
   });
 
-  it("renders product information correctly", () => {
-    const { getByText, getByAltText } = render(
-      <ProductCard product={mockProduct} />
-    );
-    expect(getByText("Test Product")).toBeInTheDocument();
-    expect(getByText("This is a test product")).toBeInTheDocument();
-    expect(getByText("100 грн")).toBeInTheDocument();
-    expect(getByText("90 грн")).toBeInTheDocument();
-    expect(getByAltText("product")).toBeInTheDocument();
+  it('toggles favorite on button click', () => {
+    const { getByTestId } = render(<ProductCard product={product} />);
+    const favoriteButton = getByTestId('favorite-button');
+
+    fireEvent.click(favoriteButton);
+    expect(favoriteButton).toHaveClass('productCard__favoriteActive');
+
+    fireEvent.click(favoriteButton);
+    expect(favoriteButton).not.toHaveClass('productCard__favoriteActive');
+  });
+
+  it('toggles cart on button click', () => {
+    const { getByTestId } = render(<ProductCard product={product} />);
+    const cartButton = getByTestId('cart-button');
+
+    fireEvent.click(cartButton);
+    expect(cartButton).toHaveTextContent('В кошику');
+
+    fireEvent.click(cartButton);
+    expect(cartButton).toHaveTextContent('Купити');
   });
 });

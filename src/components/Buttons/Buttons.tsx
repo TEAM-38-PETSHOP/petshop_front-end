@@ -5,36 +5,65 @@ import classNames from 'classnames';
 
 type Btn = {
   btnText: string;
-  btnLink: string;
+  btnLink?: string;
   className?: string;
   btnIcon?: string;
   isDisabled?: boolean;
   target?: string;
   onClick?: () => void;
+  isBuy?: boolean;
+  children?: React.ReactNode;
 };
 
 type Props = {
   firstBtn: Btn;
   secondBtn?: Btn;
   className?: string;
+  type?: 'button' | 'link';
 };
 
-export default function Buttons({ firstBtn, secondBtn, className }: Props) {
-  const renderButton = (btn: Btn) => (
-    <Link
-      target={btn.target || '_self'}
-      href={btn.btnLink}
-      onClick={btn.onClick}
-      className={classNames([styles.btns__btn], {
-        [styles.btns__btnSecond]: btn === secondBtn,
-        [styles.btns__btnDisabled]: btn.isDisabled,
-        [btn.className as string]: btn.className,
-      })}
-    >
-      {btn.btnIcon && <SvgWrapper src={btn.btnIcon} />}
-      {btn.btnText}
-    </Link>
-  );
+export default function Buttons({
+  firstBtn,
+  secondBtn,
+  className,
+  type,
+}: Props) {
+  const renderButton = (btn: Btn) => {
+    if (type === 'button')
+      return (
+        <button
+          onClick={btn.onClick}
+          className={classNames([styles.btns__btn], {
+            [styles.btns__btnBuy]: btn.isBuy,
+            [styles.btns__btnSecond]: btn === secondBtn,
+            [styles.btns__btnDisabled]: btn.isDisabled,
+            [btn.className as string]: btn.className,
+          })}
+        >
+          {btn.btnIcon && <SvgWrapper src={btn.btnIcon} />}
+          {btn.btnText}
+          {btn.children}
+        </button>
+      );
+
+    return (
+      <Link
+        target={btn.target || '_self'}
+        onClick={btn.onClick}
+        href={btn.btnLink || ''}
+        className={classNames([styles.btns__btn], {
+          [styles.btns__btnBuy]: btn.isBuy,
+          [styles.btns__btnSecond]: btn === secondBtn,
+          [styles.btns__btnDisabled]: btn.isDisabled,
+          [btn.className as string]: btn.className,
+        })}
+      >
+        {btn.btnIcon && <SvgWrapper src={btn.btnIcon} />}
+        {btn.btnText}
+        {btn.children}
+      </Link>
+    );
+  };
 
   return (
     <>

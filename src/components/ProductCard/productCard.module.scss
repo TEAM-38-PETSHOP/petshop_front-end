@@ -2,28 +2,76 @@
 @import '../../app/styles/extends.scss';
 
 .productCard {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 5px;
 
   padding: 15px;
   width: min-content;
-  background-color: var(--color-gray-80);
-  border-radius: var(--radius-30);
+  height: 400px;
 
+  @include lg {
+    padding: 0;
+    height: 450px;
+  }
   @include sm {
-    gap: 10px;
+    height: 370px;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 111.3%;
+    opacity: 0;
+
+    background-color: var(--color-gray-80);
+    border-radius: var(--radius-30);
+    box-shadow: 2px 3px 25px 0px rgba(0, 0, 0, 0.2);
+
+    transition: opacity var(--transition-duration);
+
+    @include lg {
+      height: 0;
+    }
+  }
+
+  &:hover {
+    &::before {
+      opacity: 1;
+    }
+
+    .productCard__image {
+      scale: 1.14;
+
+      @include lg {
+        scale: none;
+      }
+    }
+
+    .productCard__cart {
+      opacity: 1;
+    }
   }
 
   &__image {
     align-self: center;
+    transition: scale var(--transition-duration);
+    margin-bottom: 15px;
 
     img {
       border-radius: var(--radius-30);
       transition: transform var(--transition-duration);
+      background-color: var(--color-gray-100);
+      object-fit: contain;
 
-      &:hover {
-        transform: scale(1.1);
+      @include sm {
+        width: 160px;
+        height: 160px;
       }
     }
   }
@@ -36,16 +84,79 @@
 
   &__description {
     @extend %secondary-text;
+    flex-grow: 1;
   }
 
   &__price {
     @extend %main-text;
     font-weight: 600;
+  }
 
-    s {
-      @extend %small-text;
-      color: var(--color-gray-40);
-      text-decoration: none;
+  &__favorite {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 5;
+
+    height: 45px;
+    width: 45px;
+
+    background-color: var(--color-gray-70);
+    border-radius: 50%;
+
+    @include sm {
+      height: 30px;
+      width: 30px;
+
+      svg {
+        width: 17px;
+        height: 17px;
+      }
+    }
+
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &:hover {
+      * {
+        fill: var(--color-secondary-red);
+      }
+    }
+
+    &Active {
+      * {
+        fill: var(--color-secondary-red);
+        stroke: none;
+      }
+    }
+  }
+
+  &__cart {
+    position: absolute;
+    left: 50%;
+    bottom: -35px;
+    transform: translateX(-50%);
+
+    opacity: 0;
+    width: 90%;
+
+    &Active {
+      background-color: var(--color-primary-100);
+      border-color: var(--color-primary-100);
+    }
+
+    @include lg {
+      position: static;
+      opacity: 1;
+      transform: none;
+      width: 100%;
+    }
+    @include lg {
+      width: 90%;
     }
   }
 }
