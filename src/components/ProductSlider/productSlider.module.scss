@@ -3,7 +3,7 @@
 
 .productSlider {
   overflow: hidden;
-  padding: 0 20px 60px;
+  padding: 0 20px 70px;
   margin-bottom: 273px;
 
   @include lg {
@@ -49,10 +49,52 @@
   }
 
   &__slider {
-    // margin-left: 1vw;
-
     div > div:first-child {
       margin: auto;
+    }
+  }
+
+  &__cardToShop {
+    display: flex !important;
+    flex-direction: column;
+    gap: 30px;
+
+    padding: 30px;
+    width: 245px !important;
+    height: 385px;
+
+    color: var(--color-gray-100);
+    background-color: var(--color-additional-green);
+    border-radius: var(--radius-30);
+
+    @include lg {
+      height: 450px;
+    }
+    @include sm {
+      padding: 15px;
+      height: 370px;
+      width: 180px !important;
+      gap: 10px;
+    }
+
+    &_title {
+      @extend %secondary-text;
+      font-weight: 600;
+    }
+    &_description {
+      flex-grow: 1;
+
+      @extend %main-text;
+      font-weight: 500;
+
+      @include sm {
+        font-size: 0.8rem;
+        line-height: 1.2;
+      }
+    }
+
+    &_button {
+      background: rgb(255, 255, 255, 0.2);
     }
   }
 }

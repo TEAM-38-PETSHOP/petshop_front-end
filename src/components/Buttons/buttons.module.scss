@@ -21,25 +21,16 @@
     cursor: pointer;
     transition: background-color, border-color, var(--transition-duration);
 
+    svg {
+      display: flex;
+    }
+
     * {
       transition: stroke, fill, var(--transition-duration);
     }
 
-    &Disabled {
-      z-index: 1;
-      background-color: var(--color-gray-40) !important;
-      border-color: var(--color-gray-40) !important;
-    }
-
     @include lg {
       padding: 2.5% 2.6%;
-    }
-
-    &Second {
-      margin-left: -3.5%;
-      @include md {
-        margin: 0;
-      }
     }
 
     &:first-child:hover {
@@ -54,13 +45,41 @@
       border-color: var(--color-secondary-green);
     }
 
-    &:first-child:active {
-      background-color: var(--color-primary-40);
-      border-color: var(--color-primary-40);
+    &:active {
+      filter: opacity(0.7);
     }
-    &:last-child:active {
-      background-color: var(--color-additional-green);
-      border-color: var(--color-additional-green);
+
+    &Buy {
+      color: var(--color-gray-100);
+      background-color: var(--color-gray-10);
+      border-color: var(--color-gray-10);
+
+      * {
+        stroke: var(--color-gray-100);
+      }
+
+      &:hover {
+        background-color: var(--color-primary-100);
+        border-color: var(--color-primary-100);
+
+        @include lg {
+          background-color: var(--color-gray-10);
+          border-color: var(--color-gray-10);
+        }
+      }
+    }
+
+    &Disabled {
+      z-index: 1;
+      background-color: var(--color-gray-40) !important;
+      border-color: var(--color-gray-40) !important;
+    }
+
+    &Second {
+      margin-left: -3.5%;
+      @include md {
+        margin: 0;
+      }
     }
   }
 }

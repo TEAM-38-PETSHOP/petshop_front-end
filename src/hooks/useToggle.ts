@@ -9,16 +9,20 @@ export const useToggle = (
   carrProduct: Product
 ): [boolean, () => void] => {
   const dispatch = useAppDispatch();
-  const isSelected = products.some((prod) => prod.id === carrProduct.id);
+  const isSelected = products
+    ? products.some((prod) => prod.id === carrProduct.id)
+    : false;
 
   const toggler = () => {
-    const updatedProducts = isSelected
-      ? products.filter((prod) => prod.id !== carrProduct.id)
-      : [...products, carrProduct];
+    if (products) {
+      const updatedProducts = isSelected
+        ? products.filter((prod) => prod.id !== carrProduct.id)
+        : [...products, carrProduct];
 
-    dispatch(setProducts(updatedProducts));
-    if (typeof window !== 'undefined') {
-      localStorage.setItem(nameProd, JSON.stringify(updatedProducts));
+      dispatch(setProducts(updatedProducts));
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(nameProd, JSON.stringify(updatedProducts));
+      }
     }
   };
 

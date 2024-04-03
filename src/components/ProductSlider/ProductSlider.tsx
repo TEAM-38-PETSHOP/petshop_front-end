@@ -12,14 +12,14 @@ import catDog from "@@/images/drawn/catAndDog.png";
 import ProductCard from "../ProductCard/ProductCard";
 import Arrow from "../Arrow/Arrow";
 
-import { Product } from "@/types/Product";
+import { Product } from '@/types/Product';
+import ButtonWithArrow from '../ButtonWithArrow/ButtonWithArrow';
 
 type Props = {
   products: Product[];
 };
-
 export default function ProductSlider({ products }: Props) {
-  const [windowWidth, setWindowWidth] = useState<null | number>(null);
+  const [windowWidth, setWindowWidth] = useState<number>(320);
 
   useEffect(() => {
     const handleResize = () => {
@@ -35,11 +35,12 @@ export default function ProductSlider({ products }: Props) {
     };
   }, []);
 
+  const widthCards = windowWidth > 425 ? 265 : 195;
   const sliderSettings = {
     infinite: false,
     speed: 300,
-    swipe: (windowWidth || 0) < 768,
-    slidesToShow: Math.floor((windowWidth || 275) / 265),
+    swipe: windowWidth < 768,
+    slidesToShow: Math.floor((windowWidth || 265) / widthCards),
     slidesToScroll: 1,
     dots: true,
     nextArrow: <Arrow styleName={styles.arrow} direction="right" isCarousel />,
@@ -63,9 +64,28 @@ export default function ProductSlider({ products }: Props) {
         />
         вподобають
       </h2>
-      <Slider {...sliderSettings} className={styles.productSlider__slider}>
-        {products.map((prod) => (
-          <ProductCard key={prod.id} product={prod} />
+      <Slider
+        {...sliderSettings}
+        className={styles.productSlider__slider}
+      >
+        <ProductCard product={products[0]} />
+        <div className={styles.productSlider__cardToShop}>
+          <h3 className={styles.productSlider__cardToShop_title}>Pet Store</h3>
+          <p className={styles.productSlider__cardToShop_description}>
+            Наш асортимент включає преміальну їжу, якісні іграшки, трендові
+            аксесуари і доглядові засоби
+          </p>
+          <ButtonWithArrow
+            text="Магазин"
+            href="/catalog"
+            classNameBtn={styles.productSlider__cardToShop_button}
+          />
+        </div>
+        {products.slice(1).map((prod) => (
+          <ProductCard
+            key={prod.id}
+            product={prod}
+          />
         ))}
       </Slider>
     </section>
