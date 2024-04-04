@@ -1,4 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
+import { renderWithProviders } from '@/utils/testRedux';
 import Nav from './Nav';
 
 jest.mock('next/navigation', () => ({
@@ -7,7 +8,7 @@ jest.mock('next/navigation', () => ({
 
 describe('Nav component', () => {
   test('renders without crashing', () => {
-    render(
+    renderWithProviders(
       <Nav
         isOpen={false}
         setOpenMenu={() => {}}
@@ -18,7 +19,7 @@ describe('Nav component', () => {
   });
 
   test('renders navigation links', () => {
-    render(
+    renderWithProviders(
       <Nav
         isOpen={false}
         setOpenMenu={() => {}}
@@ -30,7 +31,7 @@ describe('Nav component', () => {
 
   test('closes menu on link click', () => {
     const setOpenMenu = jest.fn();
-    render(
+    renderWithProviders(
       <Nav
         isOpen={false}
         setOpenMenu={setOpenMenu}
