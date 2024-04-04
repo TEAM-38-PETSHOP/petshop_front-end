@@ -21,6 +21,7 @@ type Props = {
 };
 export default function ProductCard({ product }: Props) {
   const [isCartState, setCartState] = useState(false);
+  const [isFavoriteState, setFavoriteState] = useState(false);
   const favoriteProducts = useAppSelector(
     (state) => state.favorite.favoriteProducts
   );
@@ -40,7 +41,8 @@ export default function ProductCard({ product }: Props) {
 
   useEffect(() => {
     setCartState(isCart);
-  }, [isCart]);
+    setFavoriteState(isFavorite);
+  }, [isCart, isFavorite]);
 
   const productInfo =
     (product.name + product.packaging).length > 90
@@ -85,7 +87,7 @@ export default function ProductCard({ product }: Props) {
         type="button"
         data-testid="favorite-button"
         className={classNames([styles.productCard__favorite], {
-          [styles.productCard__favoriteActive]: isFavorite,
+          [styles.productCard__favoriteActive]: isFavoriteState,
         })}
         onClick={toggleFavorite}
       >
