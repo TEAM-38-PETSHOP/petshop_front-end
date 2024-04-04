@@ -51,17 +51,16 @@
   &__img {
     position: relative;
     z-index: 5;
-    filter: grayscale(100%);
     color: var(--color-gray-100);
 
     transition: filter var(--transition-duration);
 
-    @include lg {
-      filter: grayscale(0);
-    }
+    @media (hover: hover) {
+      filter: grayscale(100%);
 
-    &:hover {
-      filter: grayscale(0);
+      &:hover {
+        filter: grayscale(0);
+      }
     }
   }
 

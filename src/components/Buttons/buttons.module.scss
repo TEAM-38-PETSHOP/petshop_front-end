@@ -58,13 +58,10 @@
         stroke: var(--color-gray-100);
       }
 
-      &:hover {
-        background-color: var(--color-primary-100);
-        border-color: var(--color-primary-100);
-
-        @include lg {
-          background-color: var(--color-gray-10);
-          border-color: var(--color-gray-10);
+      @media (hover: hover) {
+        &:hover {
+          background-color: var(--color-primary-100);
+          border-color: var(--color-primary-100);
         }
       }
     }

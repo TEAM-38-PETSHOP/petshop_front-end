@@ -1,4 +1,5 @@
 'use client';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import styles from './nav.module.scss';
 import { usePathname } from 'next/navigation';
@@ -35,10 +36,15 @@ type Props = {
 
 export default function Nav({ isOpen, setOpenMenu }: Props) {
   const cartCount = useAppSelector((state) => state.cart.cartProducts.length);
+  const [cartCountState, setCartCountState] = useState(0);
   const pathname = usePathname();
   const isActiveLink = (href: string) =>
     (pathname.includes(href) && href.length !== 1) ||
     (pathname === '/' && href === '/');
+
+  useEffect(() => {
+    setCartCountState(cartCount);
+  }, [cartCount]);
 
   return (
     <nav
@@ -78,8 +84,8 @@ export default function Nav({ isOpen, setOpenMenu }: Props) {
           onClick: () => setOpenMenu(false),
           children: (
             <>
-              {!!cartCount && (
-                <span className={styles.nav__btnCount}>{cartCount}</span>
+              {!!cartCountState && (
+                <span className={styles.nav__btnCount}>{cartCountState}</span>
               )}
             </>
           ),
