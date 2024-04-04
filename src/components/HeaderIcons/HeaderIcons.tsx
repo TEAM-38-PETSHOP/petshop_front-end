@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import { useState, memo, useEffect } from 'react';
 import SvgWrapper from '@/components/SvgWrapper/SvgWrapper';
 import classNames from 'classnames';
 import { usePathname } from 'next/navigation';
@@ -15,16 +15,19 @@ type Props = {
   setOpenMenu: (isOpen: boolean) => void;
 };
 
-export default React.memo(function HeaderIcons({ setOpenMenu }: Props) {
-  const favoritesCount = useAppSelector(
-    (state) => state.favorite.favoriteProducts.length
-  );
+export default memo(function HeaderIcons({ setOpenMenu }: Props) {
   const cartCount = useAppSelector((state) => state.cart.cartProducts.length);
+  const [cartCountState, setCartCountState] = useState(0);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setCartCountState(cartCount);
+  }, [cartCount]);
 
   return (
     <div className={styles.headerRight}>
       <Link
+        data-testid="favorites"
         href="/favorites"
         className={classNames(
           [styles.headerRight__iconsBase],
@@ -38,6 +41,7 @@ export default React.memo(function HeaderIcons({ setOpenMenu }: Props) {
       </Link>
 
       <Link
+        data-testid="cart"
         href="/cart"
         className={classNames(
           [styles.headerRight__iconsBase],
@@ -48,8 +52,8 @@ export default React.memo(function HeaderIcons({ setOpenMenu }: Props) {
         )}
       >
         <SvgWrapper src={cart.src} />
-        {!!cartCount && (
-          <span className={styles.headerRight__count}>{cartCount}</span>
+        {!!cartCountState && (
+          <span className={styles.headerRight__count}>{cartCountState}</span>
         )}
       </Link>
 
