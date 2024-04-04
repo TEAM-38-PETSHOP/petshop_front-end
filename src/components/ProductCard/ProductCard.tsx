@@ -1,4 +1,5 @@
 'use client';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import classNames from 'classnames';
@@ -15,12 +16,11 @@ import cart from '@@/images/icons/cart.svg';
 
 import { Product } from '@/types/Product';
 import Buttons from '../Buttons/Buttons';
-import useMediaQuery from 'react-use-media-query-ts';
 type Props = {
   product: Product;
 };
 export default function ProductCard({ product }: Props) {
-  const isTablet = useMediaQuery('(max-width: 950px)');
+  const [isCartState, setCartState] = useState(false);
   const favoriteProducts = useAppSelector(
     (state) => state.favorite.favoriteProducts
   );
@@ -38,10 +38,13 @@ export default function ProductCard({ product }: Props) {
     product
   );
 
+  useEffect(() => {
+    setCartState(isCart);
+  }, [isCart]);
+
   const productInfo =
-    (product.name + product.packaging).length > (isTablet ? 60 : 90)
-      ? `${product.name}, ${product.packaging}`.slice(0, isTablet ? 60 : 90) +
-        '...'
+    (product.name + product.packaging).length > 90
+      ? `${product.name}, ${product.packaging}`.slice(0, 90) + '...'
       : `${product.name}, ${product.packaging}`;
   return (
     <div
@@ -70,7 +73,7 @@ export default function ProductCard({ product }: Props) {
       <Buttons
         type="button"
         firstBtn={{
-          btnText: isCart ? 'В кошику' : 'Купити',
+          btnText: isCartState ? 'В кошику' : 'Купити',
           btnIcon: cart.src,
           isBuy: true,
           onClick: toggleCart,
@@ -80,6 +83,7 @@ export default function ProductCard({ product }: Props) {
 
       <button
         type="button"
+        data-testid="favorite-button"
         className={classNames([styles.productCard__favorite], {
           [styles.productCard__favoriteActive]: isFavorite,
         })}

@@ -1,6 +1,3 @@
 export const numberToCurrency = (num: number) => {
-  return num.toLocaleString('uk-UA', {
-    style: 'currency',
-    currency: 'UAH',
-  });
+  return num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ' грн';
 };
