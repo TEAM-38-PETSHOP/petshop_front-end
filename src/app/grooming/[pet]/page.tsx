@@ -1,11 +1,11 @@
-import Goal from "@/components/Goal/Goal";
-import GroomingForm from "@/components/GroomingForm/GroomingForm";
-import GroomingHead from "@/components/GroomingHead/GroomingHead";
+import Goal from '@/components/ForGrooming/Goal/Goal';
+import GroomingForm from '@/components/ForGrooming/GroomingForm/GroomingForm';
+import GroomingHead from '@/components/ForGrooming/GroomingHead/GroomingHead';
 import {
   getAllServices,
   getAllTypeOfPetServices,
-} from "@/helpers/fetchGrooming";
-import { Suspense } from "react";
+} from '@/helpers/fetchGrooming';
+import { Suspense } from 'react';
 
 type Props = {
   params: {

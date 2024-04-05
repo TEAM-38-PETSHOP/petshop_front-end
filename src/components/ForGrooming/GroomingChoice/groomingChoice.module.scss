@@ -1,0 +1,40 @@
+@import '../../../app//styles/extends.scss';
+@import '../../../app/styles/mixins.scss';
+
+.groomingChoice {
+  @extend %container;
+
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+
+  &__title {
+    @extend %h3-primary;
+    margin-bottom: 45px;
+
+    @include md {
+      font-size: 1.25rem;
+      line-height: 1.2;
+      margin-bottom: 30px;
+    }
+
+    @include sm {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+  }
+
+  &__choice {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: fit-content;
+    margin-bottom: 60px;
+
+    @include md {
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+    }
+  }
+}
