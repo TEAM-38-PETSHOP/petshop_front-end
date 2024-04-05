@@ -4,14 +4,14 @@
 .productSlider {
   overflow: hidden;
   padding: 0 20px 70px;
-  margin-bottom: 273px;
+  margin-bottom: 200px;
 
   @include lg {
-    margin-bottom: 180px;
+    margin-bottom: 130px;
   }
 
   @include sm {
-    margin-bottom: 120px;
+    margin-bottom: 100px;
   }
 
   &__title {
