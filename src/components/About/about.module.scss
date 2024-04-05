@@ -26,23 +26,29 @@
 
   &__img {
     border-radius: var(--radius-40);
-    width: 40vw;
+    width: 40%;
     object-fit: cover;
 
     @include md {
       width: 100%;
+      height: 245px;
     }
   }
 
   &__info {
     display: flex;
     flex-direction: column;
+    width: 60%;
 
     @extend %secondary-text;
 
     padding: 4%;
     background-color: var(--color-additional-beige);
     border-radius: var(--radius-40);
+
+    @include md {
+      width: 100%;
+    }
 
     @include sm {
       padding: 8%;
@@ -70,7 +76,15 @@
 
     span {
       font-family: var(--secondary-font);
-      font-size: 2.5rem;
+      font-size: 1.6rem;
+
+      @include lg {
+        font-size: 1.2rem;
+      }
+    }
+
+    @include lg {
+      font-size: 1.5rem;
     }
 
     @include md {
