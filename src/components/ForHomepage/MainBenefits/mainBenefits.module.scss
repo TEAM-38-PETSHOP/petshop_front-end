@@ -7,10 +7,11 @@
   align-items: center;
   overflow: hidden;
 
-  margin: 250px 0;
-  padding: 70px 0 70px 5%;
+  margin-bottom: 120px;
+  padding: 70px 0 100px 5%;
 
   @include lg {
+    margin-bottom: 60px;
     padding: 70px 0 70px 10%;
   }
 
@@ -44,74 +45,118 @@
 
   &__message {
     position: relative;
+    right: -500%;
+
     border-radius: var(--radius-40);
     padding: 44px;
-    max-width: Min(75%, 41vw);
+    width: Min(75%, 41vw);
 
     @include lg {
-      padding: 22px;
+      padding: 20px;
+      border-radius: var(--radius-30);
     }
 
     @include md {
-      padding: 16px;
+      padding: 15px;
+      border-radius: var(--radius-20);
     }
 
     &Triangle {
       position: absolute;
       top: 40%;
       right: -30px;
-    }
-
-    &:first-child {
-      background-color: var(--color-gray-50);
-      transform: rotate(-5deg) translate(-50px, 50px);
 
       @include md {
-        transform: rotate(-5deg) translate(0, 0);
-      }
-
-      svg path {
-        fill: var(--color-gray-50);
-      }
-    }
-    &:nth-child(2) {
-      z-index: 5;
-      background-color: var(--color-gray-70);
-      transform: rotate(8deg) translateX(50%);
-      padding-right: 20%;
-
-      @include md {
-        transform: rotate(8deg) translateX(20%);
-        padding-right: 0;
-      }
-
-      svg path {
-        fill: var(--color-gray-70);
+        &_second {
+          transform: scaleY(-1) translateY(5px);
+        }
+        &_last {
+          transform: scaleY(-1);
+        }
       }
     }
-    &:last-child {
-      padding: 40px;
-      background-color: var(--color-secondary-yellow);
+
+    &Active {
+      right: 0;
+      &:first-child {
+        transition: right var(--transition-duration) ease-in 0.3s;
+        background-color: var(--color-gray-50);
+        transform: rotate(-5deg) translate(-50px, 50px);
+
+        @include lg {
+          width: 49vw;
+          transform: rotate(-5deg) translate(-50px, 20px);
+        }
+        @include md {
+          width: 58vw;
+          transform: rotate(-5deg) translate(0, 10px);
+        }
+
+        svg path {
+          fill: var(--color-gray-50);
+        }
+      }
+
+      &:nth-child(2) {
+        transition: right var(--transition-duration) ease-in-out 0.4s;
+
+        z-index: 5;
+        background-color: var(--color-gray-70);
+        transform: rotate(8deg) translateX(50%);
+        padding-right: 20%;
+
+        @include lg {
+          transform: rotate(6deg) translateX(40%);
+          padding-right: 20px;
+        }
+
+        @include lg {
+          transform: rotate(6deg) translateX(40%);
+          padding-right: 15px;
+        }
+
+        svg path {
+          fill: var(--color-gray-70);
+        }
+      }
+
+      &:last-child {
+        transition: right var(--transition-duration) ease-out 0.5s;
+
+        padding: 40px;
+        background-color: var(--color-secondary-yellow);
+
+        @include lg {
+          width: 46vw;
+          padding: 20px;
+        }
+
+        @include md {
+          width: 60vw;
+          padding: 15px;
+        }
+      }
     }
   }
 
   &__img {
     position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translate(20%, -50%) rotate(-40deg);
+    top: 70%;
+    right: -40%;
+    transform: translate(10%, -50%) rotate(0deg);
 
     width: Min(30vw, 100%);
     height: Min(30vw, 100%);
 
-    @include md {
-      width: 45vw;
-      height: 45vw;
-    }
+    transition: right, transform, var(--transition-duration) linear 0.5s;
 
     @include md {
-      width: 65vw;
-      height: 65vw;
+      top: 50%;
+    }
+
+    &Active {
+      right: 0;
+      transform: translate(20%, -50%) rotate(-40deg);
     }
   }
 }
