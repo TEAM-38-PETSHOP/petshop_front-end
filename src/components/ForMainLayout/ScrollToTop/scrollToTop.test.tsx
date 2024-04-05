@@ -2,7 +2,7 @@ import { render, fireEvent } from '@testing-library/react';
 import ScrollToTop from './ScrollToTop';
 import Arrow from '../../Arrow/Arrow';
 
-jest.mock('../Arrow/Arrow', () => {
+jest.mock('../../Arrow/Arrow.tsx', () => {
   return jest.fn(() => null);
 });
 

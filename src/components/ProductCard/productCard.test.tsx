@@ -40,7 +40,7 @@ describe('ProductCard', () => {
     expect(getByTestId('product-card')).toBeInTheDocument();
     expect(getByText('Category test')).toBeInTheDocument();
     expect(getByText('Name test, Packaging test')).toBeInTheDocument();
-    expect(getByText('10,00 ₴')).toBeInTheDocument();
+    expect(getByText('10.00 грн')).toBeInTheDocument();
   });
 
   it('toggles favorite on button click', () => {
