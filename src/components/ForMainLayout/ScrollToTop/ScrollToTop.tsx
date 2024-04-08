@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import Arrow from '../../Arrow/Arrow';
+import Arrow from '@/components/Arrow/Arrow';
 import styles from './scrollToTop.module.scss';
 
 const scrollToTop = () => {
