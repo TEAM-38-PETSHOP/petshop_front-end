@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
 import './styles/main.scss';
 import style from './layout.module.scss';
-import Header from '@/components/Header/Header';
-import Footer from '@/components/Footer/Footer';
-import ScrollToTop from '@/components/ScrollToTop/ScrollToTop';
-import Providers from '@/components/Providers/Providers';
+import Header from '@/components/ForMainLayout/Header/Header';
+import Footer from '@/components/ForMainLayout/Footer/Footer';
+import ScrollToTop from '@/components/ForMainLayout/ScrollToTop/ScrollToTop';
+import Providers from '@/components/ForMainLayout/Providers/Providers';
 
 const font = Montserrat({
   subsets: ['cyrillic'],
