@@ -1,6 +1,10 @@
 @font-face {
-  font-family: "JimmyScript";
-  src: url(../../fonts/JimmyScript-Rg.otf);
+  font-family: 'Photoshoot';
+  font-display: swap;
+  src: url('../../fonts/Photoshoot-regular.woff2') format('woff2'),
+    url('../../fonts/Photoshoot-regular.woff') format('woff'),
+    url('../../fonts/Photoshoot-regular.ttf') format('truetype'),
+    url('../../fonts/Photoshoot-regular.svg') format('svg');
   font-weight: normal;
   font-style: normal;
 }
