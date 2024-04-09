@@ -1,7 +1,7 @@
 import { Product } from '@/types/Product';
 import { client } from '../utils/fetchClient';
 
-const slidesCount = 15;
+const slidesCount = 13;
 
 export const getProducts = () => {
   return client.get<Product[]>(`/api/products`);

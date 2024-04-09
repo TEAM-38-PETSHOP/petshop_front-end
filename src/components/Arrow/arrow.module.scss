@@ -45,6 +45,10 @@
           no-repeat center,
         var(--color-gray-100);
     }
+
+    &:active {
+      background-color: var(--color-gray-100);
+    }
   }
 }
 

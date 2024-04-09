@@ -42,7 +42,9 @@ export default function Footer() {
                   href="https://maps.app.goo.gl/1gwjf3axpxft4zR18"
                   target="_blank"
                 >
-                  Київський шлях 127б/6, Boryspil
+                  Київський шлях
+                  <br />
+                  127б/6, Boryspil
                 </Link>
               </li>
               <li>

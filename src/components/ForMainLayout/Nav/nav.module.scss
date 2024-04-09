@@ -4,6 +4,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 5px;
 
   @include lg {
     position: absolute;
@@ -34,14 +35,10 @@
   }
 
   &__link {
-    padding: 0;
-    margin: 15px 30px;
+    padding: 15px 30px;
     border-radius: var(--radius-100);
-    transition: background-color, padding, margin, var(--transition-duration);
-
-    @include lg {
-      margin: 7.5px 15px;
-    }
+    border: 1px solid transparent;
+    transition: background-color, border-color, var(--transition-duration);
 
     @include lg {
       margin: 0;
@@ -51,13 +48,18 @@
       border: 1px solid var(--color-gray-20);
       text-align: center;
     }
+
+    @media (hover: hover) {
+      &:hover {
+        border-color: var(--color-gray-10);
+      }
+    }
   }
 
   &__linkActive {
     background-color: var(--color-gray-100);
-    border: 1px solid var(--color-gray-100);
     font-weight: 500;
-    padding: 15px 30px;
+    border-color: var(--color-gray-100);
     margin: 0;
   }
 
