@@ -9,12 +9,15 @@
     font-weight: 500;
     margin-bottom: 60px;
 
-    @include md {
+    @include lg {
       margin-bottom: 30px;
+      font-size: 1.25rem;
     }
 
     @include sm {
       margin-bottom: 16px;
+      font-size: 1rem;
+      line-height: 1.5;
     }
   }
 
@@ -91,6 +94,18 @@
       font-weight: 600;
       color: var(--color-gray-40);
       margin-bottom: 30px;
+    }
+
+    p {
+      @include lg {
+        font-size: 0.875rem;
+        line-height: 1.2;
+      }
+
+      @include md {
+        font-size: 0.75rem;
+        line-height: 1.5;
+      }
     }
   }
 

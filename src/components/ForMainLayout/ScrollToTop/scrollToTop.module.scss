@@ -8,10 +8,6 @@
 
   box-shadow: 2px 3px 22px 0px rgba(0, 0, 0, 0.1);
 
-  @media (min-width: 1920px) {
-    right: 88.88vw;
-  }
-
   @include lg {
     right: 3%;
   }

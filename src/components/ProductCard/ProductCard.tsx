@@ -45,8 +45,8 @@ export default function ProductCard({ product }: Props) {
   }, [isCart, isFavorite]);
 
   const productInfo =
-    (product.name + product.packaging).length > 90
-      ? `${product.name}, ${product.packaging}`.slice(0, 90) + '...'
+    (product.name + product.packaging).length > 80
+      ? `${product.name}, ${product.packaging}`.slice(0, 80) + '...'
       : `${product.name}, ${product.packaging}`;
   return (
     <div

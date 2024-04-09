@@ -26,6 +26,7 @@ export default function About() {
           та вам тільки найкраще.
         </p>
         <Buttons
+          className={style.about__btns}
           firstBtn={{
             btnText: 'СПА для пухнастиків',
             btnLink: '/grooming',

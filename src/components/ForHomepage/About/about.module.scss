@@ -51,7 +51,7 @@
     }
 
     @include sm {
-      padding: 8%;
+      padding: 16px;
     }
   }
 
@@ -72,7 +72,17 @@
 
   &__slogan {
     @extend %h1-primary;
+    font-weight: 500;
     margin-bottom: 15px;
+
+    @include lg {
+      font-size: 1.5rem;
+    }
+
+    @include md {
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
 
     span {
       font-family: var(--secondary-font);
@@ -81,14 +91,10 @@
       @include lg {
         font-size: 1.2rem;
       }
-    }
 
-    @include lg {
-      font-size: 1.5rem;
-    }
-
-    @include md {
-      margin-bottom: 10px;
+      @include md {
+        font-size: 0.8rem;
+      }
     }
   }
 
@@ -98,6 +104,17 @@
 
     @include md {
       margin-bottom: 30px;
+    }
+  }
+
+  &__btns {
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 5px;
+
+      a {
+        margin: 0;
+      }
     }
   }
 }
