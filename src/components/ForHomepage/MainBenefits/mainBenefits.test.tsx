@@ -1,5 +1,8 @@
 import { render } from '@testing-library/react';
+import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils';
 import MainBenefits from './MainBenefits';
+
+mockAllIsIntersecting(true);
 
 describe('MainBenefits component', () => {
   it('renders without crashing', () => {

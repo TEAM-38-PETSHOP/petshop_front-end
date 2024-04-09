@@ -39,6 +39,7 @@ export default function Footer() {
             <ul className={styles.footerContent__infoList}>
               <li>
                 <Link
+                  data-testid="Boryspil"
                   href="https://maps.app.goo.gl/1gwjf3axpxft4zR18"
                   target="_blank"
                 >
