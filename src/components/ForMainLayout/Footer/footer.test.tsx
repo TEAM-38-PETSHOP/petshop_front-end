@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { getByTestId, render } from '@testing-library/react';
 import Footer from './Footer';
 
 describe('Footer component', () => {
@@ -25,8 +25,8 @@ describe('Footer component', () => {
   });
 
   it('displays the correct contact information', () => {
-    const { getByText } = render(<Footer />);
-    const addressLink = getByText('Київський шлях 127б/6, Boryspil');
+    const { getByText, getByTestId } = render(<Footer />);
+    const addressLink = getByTestId('Boryspil');
     const phone1Link = getByText('+380 97 237 30 86');
     const phone2Link = getByText('+380 97 271 52 39');
     expect(addressLink).toHaveAttribute(
