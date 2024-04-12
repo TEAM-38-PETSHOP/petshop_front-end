@@ -6,7 +6,7 @@ import cat from '@@/images/grooming/small-cat.svg';
 import { useSearchParams } from 'next/navigation';
 import { useCallback } from 'react';
 import { createUrlString } from '@/helpers/createUrlString';
-import HeaderForPages from '../HeaderForPages/HeaderForPages';
+import HeaderForPages from '@/components/HeaderForPages/HeaderForPages';
 
 interface Props {
   pet: string;
@@ -23,7 +23,6 @@ export default function GroomingHead({ pet }: Props) {
   return (
     <HeaderForPages
       className={style.groomingHead}
-      goBackLink="/grooming"
       centralBlock={{
         text: `Грумінг для ${currentPet}`,
         img: pet === 'dogs' ? dog : cat,
