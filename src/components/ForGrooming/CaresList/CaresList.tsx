@@ -28,6 +28,7 @@ export default function CaresList({
     <ul className={style.caresList}>
       {visibleCares.map((care) => (
         <Link
+          replace
           key={care.id}
           href={
             pathname +

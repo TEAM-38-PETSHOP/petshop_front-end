@@ -7,7 +7,6 @@ import classNames from 'classnames';
 
 type Props = {
   className?: string;
-  goBackLink?: string;
   centralBlock: {
     text?: string;
     img?: string;
@@ -19,22 +18,16 @@ type Props = {
 };
 export default function HeaderForPages({
   className,
-  goBackLink,
   centralBlock = { text: '', img: '' },
   additionalLink = { text: '', href: '' },
 }: Props) {
   return (
     <section className={classNames([styles.headerForPages], className)}>
-      <Link
-        className={styles.headerForPages__goBack}
-        href={goBackLink || '/'}
-      >
-        <Arrow
-          styleName={styles.headerForPages__goBack__arrow}
-          // isWhite
-          direction="left"
-        />
-      </Link>
+      <Arrow
+        isBack
+        isWhite
+        direction="left"
+      />
       <div className={styles.headerForPages__centerContainer}>
         {centralBlock.img && (
           <Image
