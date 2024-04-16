@@ -3,6 +3,8 @@ import HeaderForPages from '@/components/HeaderForPages/HeaderForPages';
 import FavoritesFilter from '@/components/ForFavorites/FavoritesFilter/FavoritesFilter';
 import FavoriteProducts from '@/components/ForFavorites/FavoriteProducts/FavoriteProducts';
 import { getAllCategories } from '@/helpers/fetchCategories';
+import { Suspense } from 'react';
+import Loader from '@/components/Loader/Loader';
 
 export default async function Favorites() {
   const categories = await getAllCategories();
@@ -12,8 +14,10 @@ export default async function Favorites() {
       <HeaderForPages centralBlock={{ text: 'Список бажань' }} />
 
       <section className={styles.favorites}>
-        <FavoritesFilter categories={categories} />
-        <FavoriteProducts />
+        <Suspense>
+          <FavoritesFilter categories={categories} />
+          <FavoriteProducts />
+        </Suspense>
       </section>
     </>
   );
