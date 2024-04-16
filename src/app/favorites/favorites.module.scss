@@ -1,0 +1,38 @@
+@import '../../app/styles/extends.scss';
+@import '../../app/styles/mixins.scss';
+
+.favorites {
+  position: relative;
+  @extend %container;
+
+  border-radius: var(--radius-40);
+  padding: 40px;
+  margin: 30px auto 25px;
+
+  @include lg {
+    padding: 30px;
+  }
+
+  @include sm {
+    border-radius: var(--radius-30);
+    padding: 15px;
+    margin: 15px auto 10px;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -2;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color: var(--color-additional-beige);
+    border-radius: var(--radius-40);
+
+    @include sm {
+      border-radius: var(--radius-30);
+    }
+  }
+}

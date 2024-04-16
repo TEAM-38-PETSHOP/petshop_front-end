@@ -18,8 +18,10 @@ import { Product } from '@/types/Product';
 import Buttons from '../Buttons/Buttons';
 type Props = {
   product: Product;
+  className?: string;
 };
-export default function ProductCard({ product }: Props) {
+export default function ProductCard({ product, className }: Props) {
+  const [isMobile, setIsMobile] = useState(false);
   const [isCartState, setCartState] = useState(false);
   const [isFavoriteState, setFavoriteState] = useState(false);
   const favoriteProducts = useAppSelector(
@@ -42,19 +44,21 @@ export default function ProductCard({ product }: Props) {
   useEffect(() => {
     setCartState(isCart);
     setFavoriteState(isFavorite);
+    setIsMobile(window.matchMedia('(max-width: 425px)').matches);
   }, [isCart, isFavorite]);
 
   const productInfo =
-    (product.name + product.packaging).length > 80
-      ? `${product.name}, ${product.packaging}`.slice(0, 80) + '...'
+    (product.name + product.packaging).length > (isMobile ? 35 : 80)
+      ? `${product.name}, ${product.packaging}`.slice(0, isMobile ? 35 : 80) +
+        '...'
       : `${product.name}, ${product.packaging}`;
   return (
     <div
-      className={styles.productCard}
+      className={classNames([styles.productCard, className])}
       data-testid="product-card"
     >
       <Link
-        href={`/product/${product.id}`}
+        href={`/product/${product.productId}`}
         className={styles.productCard__image}
       >
         <Image
@@ -64,24 +68,25 @@ export default function ProductCard({ product }: Props) {
           alt={product.name}
         />
       </Link>
-      <h3 className={styles.productCard__title}>
-        {product.categories[0].name}
-      </h3>
-      <p className={styles.productCard__description}>{productInfo}</p>
-      <p className={styles.productCard__price}>
-        {numberToCurrency(product.price)}
-      </p>
-
-      <Buttons
-        type="button"
-        firstBtn={{
-          btnText: isCartState ? 'В кошику' : 'Купити',
-          btnIcon: cart.src,
-          isBuy: true,
-          onClick: toggleCart,
-          className: styles.productCard__cart,
-        }}
-      />
+      <div className={styles.productCard__info}>
+        <h3 className={styles.productCard__title}>
+          {product.categories[0].name}
+        </h3>
+        <p className={styles.productCard__description}>{productInfo}</p>
+        <p className={styles.productCard__price}>
+          {numberToCurrency(product.price)}
+        </p>
+        <Buttons
+          type="button"
+          firstBtn={{
+            btnText: isCartState ? 'В кошику' : 'Купити',
+            btnIcon: cart.src,
+            isBuy: true,
+            onClick: toggleCart,
+            className: styles.productCard__cart,
+          }}
+        />
+      </div>
 
       <button
         type="button"
@@ -89,7 +94,7 @@ export default function ProductCard({ product }: Props) {
         className={classNames([styles.productCard__favorite], {
           [styles.productCard__favoriteActive]: isFavoriteState,
         })}
-        onClick={toggleFavorite}
+        onClick={() => toggleFavorite()}
       >
         <SvgWrapper src={favorite.src} />
       </button>
