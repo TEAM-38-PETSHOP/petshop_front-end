@@ -35,7 +35,7 @@ export default function ProductSlider({ products }: Props) {
     };
   }, []);
 
-  const widthCards = windowWidth > 425 ? 265 : 195;
+  const widthCards = windowWidth > 425 ? 265 : 205;
   const sliderSettings = {
     infinite: false,
     speed: 300,
@@ -92,7 +92,7 @@ export default function ProductSlider({ products }: Props) {
         </div>
         {products.slice(1).map((prod) => (
           <ProductCard
-            key={prod.id}
+            key={prod.productId}
             product={prod}
           />
         ))}

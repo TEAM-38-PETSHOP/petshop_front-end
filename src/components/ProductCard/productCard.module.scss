@@ -8,15 +8,16 @@
   gap: 5px;
 
   padding: 15px;
+  border-radius: var(--radius-30);
   width: min-content;
   height: 400px;
 
   @include lg {
-    padding: 0;
     height: 450px;
   }
   @include sm {
     height: 370px;
+    border-radius: var(--radius-20);
   }
 
   &::before {
@@ -43,7 +44,9 @@
       }
 
       .productCard__image {
-        scale: 1.14;
+        img {
+          scale: 1.14;
+        }
       }
 
       .productCard__cart {
@@ -52,14 +55,20 @@
     }
   }
 
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    height: 100%;
+  }
+
   &__image {
     align-self: center;
-    transition: scale var(--transition-duration);
     margin-bottom: 15px;
 
     img {
       border-radius: var(--radius-30);
-      transition: transform var(--transition-duration);
+      transition: scale var(--transition-duration);
       background-color: var(--color-gray-100);
       object-fit: contain;
 
@@ -101,6 +110,8 @@
     @include sm {
       height: 30px;
       width: 30px;
+      top: 5px;
+      right: 5px;
 
       svg {
         width: 17px;
@@ -140,16 +151,11 @@
     opacity: 0;
     width: 90%;
 
-    &Active {
-      background-color: var(--color-primary-100);
-      border-color: var(--color-primary-100);
-    }
-
     @include lg {
       position: static;
       opacity: 1;
       transform: none;
-      width: 90%;
+      width: 100%;
     }
   }
 }
