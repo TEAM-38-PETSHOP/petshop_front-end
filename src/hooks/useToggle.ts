@@ -10,13 +10,13 @@ export const useToggle = (
 ): [boolean, () => void] => {
   const dispatch = useAppDispatch();
   const isSelected = products
-    ? products.some((prod) => prod.id === carrProduct.id)
+    ? products.some((prod) => prod.productId === carrProduct.productId)
     : false;
 
   const toggler = () => {
     if (products) {
       const updatedProducts = isSelected
-        ? products.filter((prod) => prod.id !== carrProduct.id)
+        ? products.filter((prod) => prod.productId !== carrProduct.productId)
         : [...products, carrProduct];
 
       dispatch(setProducts(updatedProducts));

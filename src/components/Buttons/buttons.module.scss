@@ -34,16 +34,18 @@
       padding: 0 2.6%;
     }
 
-    &:first-child:hover {
-      z-index: 1;
-      background-color: var(--color-secondary-yellow);
-      border-color: var(--color-secondary-yellow);
-    }
-    &:last-child:hover {
-      z-index: 1;
-      color: var(--color-gray-100);
-      background-color: var(--color-secondary-green);
-      border-color: var(--color-secondary-green);
+    @media (hover: hover) {
+      &:first-child:hover {
+        z-index: 1;
+        background-color: var(--color-secondary-yellow);
+        border-color: var(--color-secondary-yellow);
+      }
+      &:last-child:hover {
+        z-index: 1;
+        color: var(--color-gray-100);
+        background-color: var(--color-secondary-green);
+        border-color: var(--color-secondary-green);
+      }
     }
 
     &:active {
@@ -55,14 +57,18 @@
       background-color: var(--color-gray-10);
       border-color: var(--color-gray-10);
 
+      @include sm {
+        min-height: 40px;
+      }
+
       * {
         stroke: var(--color-gray-100);
       }
 
       @media (hover: hover) {
         &:hover {
-          background-color: var(--color-primary-100);
-          border-color: var(--color-primary-100);
+          background-color: var(--color-primary-100) !important;
+          border-color: var(--color-primary-100) !important;
         }
       }
     }

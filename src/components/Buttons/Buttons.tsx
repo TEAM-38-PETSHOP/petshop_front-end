@@ -34,9 +34,9 @@ export default function Buttons({
         <button
           onClick={btn.onClick}
           className={classNames([styles.btns__btn], {
-            [styles.btns__btnBuy]: btn.isBuy,
             [styles.btns__btnSecond]: btn === secondBtn,
             [styles.btns__btnDisabled]: btn.isDisabled,
+            [styles.btns__btnBuy]: btn.isBuy,
             [btn.className as string]: btn.className,
           })}
         >
