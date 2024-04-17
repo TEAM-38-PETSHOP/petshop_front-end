@@ -22,5 +22,9 @@
     background-image: url('../../../../public/images/icons/arrow_gray.svg');
     background-position: right;
     background-repeat: no-repeat;
+
+    @include md {
+      display: none;
+    }
   }
 }
