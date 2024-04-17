@@ -4,6 +4,7 @@
 .favorites {
   position: relative;
   @extend %container;
+  flex-grow: 1;
 
   border-radius: var(--radius-40);
   padding: 40px;
