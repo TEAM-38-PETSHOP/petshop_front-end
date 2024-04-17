@@ -1,0 +1,23 @@
+@import '../../app/styles/extends.scss';
+@import '../../app/styles/mixins.scss';
+
+.cart {
+  position: relative;
+  @extend %container;
+
+  background-color: var(--color-additional-beige);
+  border-radius: var(--radius-40);
+  padding: 40px;
+  margin: 30px auto 25px;
+
+  @include lg {
+    padding: 30px;
+    margin: 30px auto 0;
+  }
+
+  @include sm {
+    border-radius: var(--radius-30);
+    padding: 15px;
+    margin: 15px auto 0;
+  }
+}

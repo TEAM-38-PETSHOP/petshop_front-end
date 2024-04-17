@@ -1,3 +1,12 @@
+import styles from './cart.module.scss';
+
+import HeaderForPages from '@/components/HeaderForPages/HeaderForPages';
+
 export default function Cart() {
-  return <div>Cart</div>;
+  return (
+    <>
+      <HeaderForPages centralBlock={{ text: 'Корзина' }} />
+      <section className={styles.cart}></section>
+    </>
+  );
 }
