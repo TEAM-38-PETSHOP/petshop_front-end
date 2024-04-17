@@ -1,4 +1,4 @@
-const BASE_URL = 'http://ec2-54-226-14-81.compute-1.amazonaws.com';
+const BASE_URL = 'http://ec2-3-89-100-248.compute-1.amazonaws.com';
 
 type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
