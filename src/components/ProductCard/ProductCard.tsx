@@ -22,8 +22,6 @@ type Props = {
 };
 export default function ProductCard({ product, className }: Props) {
   const [isMobile, setIsMobile] = useState(false);
-  const [isCartState, setCartState] = useState(false);
-  const [isFavoriteState, setFavoriteState] = useState(false);
   const favoriteProducts = useAppSelector(
     (state) => state.favorite.favoriteProducts
   );
@@ -42,8 +40,6 @@ export default function ProductCard({ product, className }: Props) {
   );
 
   useEffect(() => {
-    setCartState(isCart);
-    setFavoriteState(isFavorite);
     setIsMobile(window.matchMedia('(max-width: 425px)').matches);
   }, [isCart, isFavorite]);
 
@@ -79,7 +75,7 @@ export default function ProductCard({ product, className }: Props) {
         <Buttons
           type="button"
           firstBtn={{
-            btnText: isCartState ? 'В кошику' : 'Купити',
+            btnText: isCart ? 'В кошику' : 'Купити',
             btnIcon: cart.src,
             isBuy: true,
             onClick: toggleCart,
@@ -92,7 +88,7 @@ export default function ProductCard({ product, className }: Props) {
         type="button"
         data-testid="favorite-button"
         className={classNames([styles.productCard__favorite], {
-          [styles.productCard__favoriteActive]: isFavoriteState,
+          [styles.productCard__favoriteActive]: isFavorite,
         })}
         onClick={() => toggleFavorite()}
       >
