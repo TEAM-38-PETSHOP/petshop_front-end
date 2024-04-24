@@ -16,6 +16,7 @@ import cart from '@@/images/icons/cart.svg';
 
 import { Product } from '@/types/Product';
 import Buttons from '../Buttons/Buttons';
+import IconForCards from '../IconForCards/IconForCards';
 type Props = {
   product: Product;
   className?: string;
@@ -73,27 +74,23 @@ export default function ProductCard({ product, className }: Props) {
           {numberToCurrency(product.price)}
         </p>
         <Buttons
-          type="button"
           firstBtn={{
             btnText: isCart ? 'В кошику' : 'Купити',
             btnIcon: cart.src,
             isBuy: true,
             onClick: toggleCart,
+            type: 'button',
             className: styles.productCard__cart,
           }}
         />
       </div>
 
-      <button
-        type="button"
-        data-testid="favorite-button"
-        className={classNames([styles.productCard__favorite], {
-          [styles.productCard__favoriteActive]: isFavorite,
-        })}
-        onClick={() => toggleFavorite()}
-      >
-        <SvgWrapper src={favorite.src} />
-      </button>
+      <IconForCards
+        isFavorite
+        icon={favorite.src}
+        handler={toggleFavorite}
+        isActive={isFavorite}
+      />
     </div>
   );
 }
