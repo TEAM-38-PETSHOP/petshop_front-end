@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './cart.module.scss';
 
 import HeaderForPages from '@/components/HeaderForPages/HeaderForPages';
@@ -9,15 +9,22 @@ import { useAppSelector } from '@/hooks/reduxHooks';
 
 export default function Cart() {
   const cartProducts = useAppSelector((state) => state.cart.cartProducts);
-  const calculatePrice = cartProducts.reduce((acc, item) => {
-    const sum =
-      item.price *
-      (typeof window !== 'undefined'
-        ? +(localStorage.getItem(item.productId.toString()) || 1)
-        : 1);
-    return acc + sum;
-  }, 0);
-  const [totalPrice, setTotalPrice] = useState(calculatePrice);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    const newTotalPrice = cartProducts.reduce((acc, item) => {
+      const quantity =
+        typeof window !== 'undefined'
+          ? +(localStorage.getItem(item.productId.toString()) || 1)
+          : 1;
+
+      const sum = item.price * quantity;
+
+      return acc + sum;
+    }, 0);
+
+    setTotalPrice(newTotalPrice);
+  }, [cartProducts]);
 
   return (
     <>
