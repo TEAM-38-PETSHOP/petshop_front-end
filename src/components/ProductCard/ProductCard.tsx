@@ -59,7 +59,7 @@ export default function ProductCard({ product, className }: Props) {
         className={styles.productCard__image}
       >
         <Image
-          src={product.image}
+          src={product.imageUrls[0]}
           width={215}
           height={215}
           alt={product.name}

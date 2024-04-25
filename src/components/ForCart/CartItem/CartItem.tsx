@@ -82,7 +82,7 @@ export default function CartItem({ product, setTotalPrice }: Props) {
         <Image
           width={215}
           height={215}
-          src={product.image}
+          src={product.imageUrls[0]}
           alt="Product cart"
         />
         <IconForCards
