@@ -2,10 +2,6 @@ import { screen, fireEvent } from '@testing-library/react';
 import Header from './Header';
 import { renderWithProviders } from '@/utils/testRedux';
 
-jest.mock('next/navigation', () => ({
-  usePathname: () => '/',
-}));
-
 describe('Header component', () => {
   test('renders without crashing', () => {
     renderWithProviders(<Header />);
