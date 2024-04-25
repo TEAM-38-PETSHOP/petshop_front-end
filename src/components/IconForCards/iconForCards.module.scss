@@ -44,12 +44,12 @@
       top: 5px;
       right: 5px;
     }
-  }
 
-  &__active {
-    * {
-      fill: var(--color-secondary-red);
-      stroke: none;
+    &Active {
+      * {
+        fill: var(--color-secondary-red);
+        stroke: none;
+      }
     }
   }
 }
