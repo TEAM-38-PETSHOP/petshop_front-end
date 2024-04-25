@@ -1,11 +1,20 @@
+'use client';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import styles from './footer.module.scss';
 
 import logo2 from '@@/images/icons/logo2.svg';
 import Link from 'next/link';
+
 export default function Footer() {
+  const pathname = usePathname();
+  const isHidden = pathname === '/favorites' || pathname === '/cart';
+
   return (
-    <div className={styles.footer}>
+    <div
+      className={styles.footer}
+      hidden={isHidden}
+    >
       <div className={styles.footerContent}>
         <Image
           className={styles.footerContent__logo}

@@ -16,14 +16,13 @@ import cart from '@@/images/icons/cart.svg';
 
 import { Product } from '@/types/Product';
 import Buttons from '../Buttons/Buttons';
+import IconForCards from '../IconForCards/IconForCards';
 type Props = {
   product: Product;
   className?: string;
 };
 export default function ProductCard({ product, className }: Props) {
   const [isMobile, setIsMobile] = useState(false);
-  const [isCartState, setCartState] = useState(false);
-  const [isFavoriteState, setFavoriteState] = useState(false);
   const favoriteProducts = useAppSelector(
     (state) => state.favorite.favoriteProducts
   );
@@ -42,8 +41,6 @@ export default function ProductCard({ product, className }: Props) {
   );
 
   useEffect(() => {
-    setCartState(isCart);
-    setFavoriteState(isFavorite);
     setIsMobile(window.matchMedia('(max-width: 425px)').matches);
   }, [isCart, isFavorite]);
 
@@ -62,7 +59,7 @@ export default function ProductCard({ product, className }: Props) {
         className={styles.productCard__image}
       >
         <Image
-          src={product.image}
+          src={product.imageUrls[0]}
           width={215}
           height={215}
           alt={product.name}
@@ -77,27 +74,23 @@ export default function ProductCard({ product, className }: Props) {
           {numberToCurrency(product.price)}
         </p>
         <Buttons
-          type="button"
           firstBtn={{
-            btnText: isCartState ? 'В кошику' : 'Купити',
+            btnText: isCart ? 'В кошику' : 'Купити',
             btnIcon: cart.src,
             isBuy: true,
             onClick: toggleCart,
+            type: 'button',
             className: styles.productCard__cart,
           }}
         />
       </div>
 
-      <button
-        type="button"
-        data-testid="favorite-button"
-        className={classNames([styles.productCard__favorite], {
-          [styles.productCard__favoriteActive]: isFavoriteState,
-        })}
-        onClick={() => toggleFavorite()}
-      >
-        <SvgWrapper src={favorite.src} />
-      </button>
+      <IconForCards
+        isFavorite
+        icon={favorite.src}
+        handler={toggleFavorite}
+        isActive={isFavorite}
+      />
     </div>
   );
 }

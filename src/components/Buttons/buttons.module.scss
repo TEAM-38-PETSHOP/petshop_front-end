@@ -57,10 +57,6 @@
       background-color: var(--color-gray-10);
       border-color: var(--color-gray-10);
 
-      @include sm {
-        min-height: 40px;
-      }
-
       * {
         stroke: var(--color-gray-100);
       }

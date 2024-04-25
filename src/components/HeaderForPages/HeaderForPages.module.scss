@@ -42,17 +42,15 @@
     }
   }
 
-  &__move {
+  &__additional {
     @extend %main-text;
     font-weight: 400;
+    min-width: 60px;
 
     @include lg {
       font-size: 0.875rem;
       line-height: 1.2;
-    }
-
-    @include md {
-      display: none;
+      min-width: 45px;
     }
   }
 }
