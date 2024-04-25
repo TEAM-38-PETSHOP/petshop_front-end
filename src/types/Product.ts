@@ -4,7 +4,7 @@ export interface Product {
   brand: string;
   description: string;
   price: number;
-  image: string;
+  imageUrls: string[];
   countryProduct: string;
   groupProduct: string;
   breedSize: string;

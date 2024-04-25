@@ -41,7 +41,7 @@ export default function HeaderForPages({
         </h2>
       </div>
       <Link
-        className={styles.headerForPages__move}
+        className={styles.headerForPages__additional}
         href={additionalLink.href}
       >
         {additionalLink.text}

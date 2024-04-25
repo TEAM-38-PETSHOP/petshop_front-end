@@ -13,23 +13,18 @@ type Btn = {
   onClick?: () => void;
   isBuy?: boolean;
   children?: React.ReactNode;
+  type?: 'button' | 'link';
 };
 
 type Props = {
   firstBtn: Btn;
   secondBtn?: Btn;
   className?: string;
-  type?: 'button' | 'link';
 };
 
-export default function Buttons({
-  firstBtn,
-  secondBtn,
-  className,
-  type,
-}: Props) {
+export default function Buttons({ firstBtn, secondBtn, className }: Props) {
   const renderButton = (btn: Btn) => {
-    if (type === 'button')
+    if (btn.type === 'button')
       return (
         <button
           onClick={btn.onClick}

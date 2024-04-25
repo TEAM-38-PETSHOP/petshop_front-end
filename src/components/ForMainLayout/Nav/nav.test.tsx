@@ -2,10 +2,6 @@ import { screen, fireEvent } from '@testing-library/react';
 import { renderWithProviders } from '@/utils/testRedux';
 import Nav from './Nav';
 
-jest.mock('next/navigation', () => ({
-  usePathname: () => '/',
-}));
-
 describe('Nav component', () => {
   test('renders without crashing', () => {
     renderWithProviders(
