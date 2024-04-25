@@ -23,7 +23,7 @@ export default function IconForCards({
       data-testid="icon-for-cards"
       className={classNames([styles.iconForCards], className, {
         [styles.iconForCards__favorite]: isFavorite,
-        [styles.iconForCards__active]: isActive,
+        [styles.iconForCards__favoriteActive]: isFavorite && isActive,
       })}
       onClick={handler}
     >
