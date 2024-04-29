@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Product } from '@/types/Product';
+import { checkWindow } from '@/helpers/checkWindow';
 
 export interface FavoriteState {
   favoriteProducts: Product[];
 }
 
 const favoriteStorage =
-  typeof window !== 'undefined' &&
-  JSON.parse(localStorage.getItem('favorite') || '[]');
+  checkWindow() && JSON.parse(localStorage.getItem('favorite') || '[]');
 
 const initialState: FavoriteState = {
   favoriteProducts: favoriteStorage,
