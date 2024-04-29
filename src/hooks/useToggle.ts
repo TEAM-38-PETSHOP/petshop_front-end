@@ -2,6 +2,7 @@ import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import { Product } from '../types/Product';
 import { useAppDispatch } from './reduxHooks';
 import { useEffect, useState } from 'react';
+import { checkWindow } from '@/helpers/checkWindow';
 
 export const useToggle = (
   nameProd: string,
@@ -25,7 +26,7 @@ export const useToggle = (
         : [...products, carrProduct];
 
       dispatch(setProducts(updatedProducts));
-      if (typeof window !== 'undefined') {
+      if (checkWindow()) {
         localStorage.setItem(nameProd, JSON.stringify(updatedProducts));
       }
     }
