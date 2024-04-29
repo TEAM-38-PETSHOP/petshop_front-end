@@ -1,0 +1,41 @@
+@import '../../app/styles/mixins.scss';
+@import '../../app/styles/extends.scss';
+
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+
+  padding: 17px 15px;
+  height: 50px;
+  width: 120px;
+
+  border: 1px solid var(--color-gray-50);
+  border-radius: var(--radius-100);
+
+  @extend %secondary-text;
+  font-weight: 500;
+
+  @include sm {
+    padding: 7px 10px;
+    height: 40px;
+    width: 80px;
+  }
+
+  button {
+    color: var(--color-gray-40);
+    width: 16px;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 0.8;
+
+    &:first-child {
+      margin-top: -2px;
+
+      @include sm {
+        margin-top: -3px;
+      }
+    }
+  }
+}
