@@ -28,6 +28,7 @@ export const useToggle = (
       dispatch(setProducts(updatedProducts));
       if (checkWindow()) {
         localStorage.setItem(nameProd, JSON.stringify(updatedProducts));
+        isSelected && localStorage.removeItem(carrProduct.productId.toString());
       }
     }
   };
