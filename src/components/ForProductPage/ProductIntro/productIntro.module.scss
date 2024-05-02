@@ -60,10 +60,23 @@
   }
 
   .productIntro__counter {
-    margin-bottom: 15px;
+    transition: width, height, padding, var(--transition-duration);
 
+    &Disabled {
+      padding: 0;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+      visibility: hidden;
+    }
     @include sm {
-      width: 120px;
+      height: 50px;
+      width: 100px;
+
+      &Disabled {
+        width: 0;
+        height: 0;
+      }
     }
   }
 
@@ -86,6 +99,7 @@
 
   .productIntro__btns {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 5px;
   }
@@ -94,7 +108,7 @@
     width: 220px;
 
     @include sm {
-      width: 183px;
+      flex: 1 1 150px;
     }
   }
 

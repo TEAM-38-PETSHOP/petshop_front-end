@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+import classNames from 'classnames';
 import { Product } from '@/types/Product';
 import styles from './productIntro.module.scss';
 import cart from '@@/images/icons/cart.svg';
@@ -15,7 +17,6 @@ import { setFavoriteProducts } from '@/redux/features/favoriteSlice';
 import { setCartProducts } from '@/redux/features/cartSlice';
 import IconForCards from '@/components/IconForCards/IconForCards';
 import { normalizeStr } from '@/helpers/normalizeStr';
-import Link from 'next/link';
 
 type Props = {
   product: Product;
@@ -70,11 +71,6 @@ export default function ProductIntro({ product }: Props) {
           </li>
         ))}
       </ul>
-      <Counter
-        className={styles.productIntro__counter}
-        productId={product.productId}
-        price={product.price}
-      />
       <strong className={styles.productIntro__price}>
         {numberToCurrency(product.price)}
       </strong>
@@ -88,6 +84,14 @@ export default function ProductIntro({ product }: Props) {
             type: 'button',
             className: styles.productIntro__cart,
           }}
+        />
+        <Counter
+          className={classNames([styles.productIntro__counter], {
+            [styles.productIntro__counterDisabled]: !isCart,
+          })}
+          productId={product.productId}
+          price={product.price}
+          forceUpdate={isCart}
         />
         <IconForCards
           className={styles.productIntro__favorite}

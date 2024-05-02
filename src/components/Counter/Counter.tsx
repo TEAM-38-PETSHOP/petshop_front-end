@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import styles from './counter.module.scss';
 import { checkWindow } from '@/helpers/checkWindow';
@@ -9,6 +9,7 @@ type Props = {
   price: number;
   setTotalPrice?: React.Dispatch<React.SetStateAction<number>>;
   className?: string;
+  forceUpdate?: any;
 };
 
 export default function Counter({
@@ -16,10 +17,9 @@ export default function Counter({
   price,
   setTotalPrice,
   className,
+  forceUpdate,
 }: Props) {
-  const [productCount, setProductCount] = useState(
-    checkWindow() ? +(localStorage.getItem(productId.toString()) || 1) : 1
-  );
+  const [productCount, setProductCount] = useState(1);
   const handlePlus = () => {
     if (checkWindow()) {
       setProductCount((prev) => prev + 1);
@@ -34,6 +34,12 @@ export default function Counter({
       localStorage.setItem(productId.toString(), (productCount - 1).toString());
     }
   };
+
+  useEffect(() => {
+    if (checkWindow()) {
+      setProductCount(+(localStorage.getItem(productId.toString()) || 1));
+    }
+  }, [forceUpdate, productId]);
 
   return (
     <div className={classNames([styles.counter, className])}>
