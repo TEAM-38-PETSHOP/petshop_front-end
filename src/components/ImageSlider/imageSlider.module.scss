@@ -41,6 +41,11 @@
       width: 285px;
       height: 285px;
     }
+
+    @include sm {
+      width: 275px;
+      height: 275px;
+    }
   }
 
   &__list {
@@ -58,6 +63,12 @@
     @include md {
       height: 75px;
       width: 75px;
+    }
+
+    @include sm {
+      border-width: 3px;
+      height: 70px;
+      width: 70px;
     }
 
     @media (hover: hover) {

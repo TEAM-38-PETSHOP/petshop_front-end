@@ -23,10 +23,6 @@ type Props = {
 };
 
 export default function ProductIntro({ product }: Props) {
-  const checkBreed = (breedId: number) => {
-    return breedId === 1 ? 'dogs' : 'cats';
-  };
-
   const favoriteProducts = useAppSelector(
     (state) => state.favorite.favoriteProducts
   );
@@ -53,7 +49,7 @@ export default function ProductIntro({ product }: Props) {
       <ul className={styles.productIntro__categories}>
         {product.categories.map((category, index) => (
           <li key={index}>
-            <Link href={`/catalog/${category.categoryId}`}>
+            <Link href={`/catalog/${category.categoryNameId}`}>
               {normalizeStr(category.name)}
             </Link>
           </li>
@@ -63,7 +59,7 @@ export default function ProductIntro({ product }: Props) {
             <Link
               href={{
                 pathname: '/catalog/all',
-                query: { breed: checkBreed(animal.animalId) },
+                query: { breed: animal.animalNameId },
               }}
             >
               {normalizeStr(animal.name)}

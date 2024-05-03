@@ -2,6 +2,7 @@
 @import '../../../app/styles/mixins.scss';
 
 .productIntro {
+  flex-basis: 400px;
   max-width: 578px;
 
   @include lg {
