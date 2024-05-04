@@ -1,13 +1,18 @@
-import Categories from "@/components/Catalog/Categories/Categories";
-import StoreHeader from "@/components/Catalog/StoreHeader/StoreHeader";
+import Categories from "@/components/ForCatalog/Categories/Categories";
+import StoreHeader from "@/components/ForCatalog/StoreHeader/StoreHeader";
+import { BreedType } from "@/types/enums/BreedType";
 
-export default function Store() {
+type Props = {
+  searchParams: {
+    [key: string]: BreedType | undefined;
+  };
+};
+
+export default async function Store({ searchParams: { breed } }: Props) {
   return (
     <>
-      {/* ShopHeader */}
       <StoreHeader />
-      {/* Categories */}
-      <Categories />
+      <Categories breed={breed} />
     </>
   );
 }

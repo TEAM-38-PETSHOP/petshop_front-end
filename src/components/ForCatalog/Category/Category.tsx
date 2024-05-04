@@ -1,6 +1,5 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import ButtonWithArrow from "../../ButtonWithArrow/ButtonWithArrow";
 import style from "./category.module.scss";
 import cn from "classnames";
@@ -34,13 +33,11 @@ export default function Category({ text, imgId, variant, href }: Props) {
   }, []);
   // lg - 950px / md - 690px / sm - 425px
   const isMobile = windowWidth && windowWidth <= 425;
-  const searchParams = useSearchParams();
-  const endpoint = searchParams.get("breed");
   const type = isMobile ? "button" : "link";
 
   return isMobile ? (
     <Link
-      href={`${href}?breed=${endpoint}`}
+      href={`${href}`}
       className={cn(style.category, {
         [style.category__one]: imgId === 1,
         [style.category__two]: imgId === 2,
@@ -52,7 +49,7 @@ export default function Category({ text, imgId, variant, href }: Props) {
     >
       <ButtonWithArrow
         text={text}
-        href={`${href}?breed=${endpoint}`}
+        href={`${href}`}
         variant={variant}
         type={type}
       />
@@ -70,7 +67,7 @@ export default function Category({ text, imgId, variant, href }: Props) {
     >
       <ButtonWithArrow
         text={text}
-        href={`${href}?breed=${endpoint}`}
+        href={`${href}`}
         variant={variant}
         type={type}
       />
