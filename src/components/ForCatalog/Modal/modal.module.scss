@@ -1,0 +1,44 @@
+@import '../../../app/styles/extends.scss';
+@import '../../../app/styles/mixins.scss';
+
+.modal {
+	position: fixed;
+	display: flex;
+  align-items: center;
+	justify-content: center;
+  z-index: 8;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: 0;
+	background: rgba(0, 0, 0, 0.7);
+
+  &__body {
+    position: relative;
+    min-width: 276px;
+    max-width: 500px;
+    padding: 20px;
+    background-color: var(--color-gray-100);
+    border-radius: var(--radius-30);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 40px 0;
+  }
+
+  &__title {
+    @extend %h3-primary;
+    font-weight: 500;
+    margin: 0 20px 0 0;
+  }
+
+  &__close {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    background: url('../../../../public/images/catalog/icons/cross.svg') no-repeat center;
+  }
+}

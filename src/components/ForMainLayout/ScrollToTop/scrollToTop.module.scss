@@ -1,0 +1,17 @@
+@import '../../../app/styles/mixins.scss';
+
+.scrollToTop {
+  position: fixed;
+  bottom: 80px;
+  right: 4%;
+  z-index: 100;
+
+  @include lg {
+    right: 3%;
+  }
+
+  @include sm {
+    bottom: 65px;
+    right: 10%;
+  }
+}

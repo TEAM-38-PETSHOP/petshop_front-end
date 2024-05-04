@@ -1,0 +1,155 @@
+@import '../../../app/styles/extends.scss';
+@import '../../../app/styles/mixins.scss';
+
+.header {
+  @extend %container;
+  padding: 0;
+  max-height: 50px;
+  max-width: 100%;
+  margin-bottom: 75px;
+
+  &__wrapper {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 10px 0;
+  }
+
+  &__select {
+    z-index: 6;
+    width: 18%;
+    margin-right: 3%;
+
+    @include lg {
+      width: 25%;
+    }
+
+    @include md {
+      margin-right: 0;
+      width: 33%;
+    }
+
+    &Green {
+      @include sm {
+        background-color: var(--color-secondary-green);
+        color: var( --color-gray-100);
+        
+        div {
+          border-color: transparent;
+        }
+      }
+    }
+
+    &Active {
+      background-color: transparent;
+      color: #000;
+
+      @include md {
+        width: 100%;
+      }
+    }
+  }
+
+  &__input {
+    margin-right: 1%;
+    width: 35%;
+
+    @include lg {
+      display: none;
+    }
+
+    &__mobile {
+      display: none;
+      margin: 0;
+
+      @include lg {
+        display: block;
+      }
+    }
+  }
+
+  &__group {
+    z-index: 6;
+    margin-right: 1%;
+    width: 22%;
+
+    @include lg {
+      width: 41%;
+    }
+
+    @include md {
+      display: none;
+    }
+  }
+
+  &__filter {
+    display: none;
+    @extend %secondary-text;
+
+    @include md {
+      display: flex;
+      width: 33%;
+      max-height: 50px;
+
+      font-weight: 500;
+      border-color: var(--color-gray-40);
+    }
+
+    &Green {
+      @include sm {
+        background-color: var(--color-secondary-green);
+        color: var( --color-gray-100);
+        border-color: transparent;
+      }
+    }
+  }
+
+  &__radio {
+    width: 100%;
+    margin-bottom: 45px;
+  }
+
+  &__save {
+    background-color: var(--color-gray-20);
+    color: var(--color-gray-100);
+    margin-bottom: 5px;
+  }
+
+  &__sort {
+    z-index: 6;
+    width: 20%;
+
+    @include lg {
+      width: 29%;
+    }
+
+    @include md {
+      width: 33%;
+    }
+
+    &Green {
+      @include sm {
+        background-color: var(--color-secondary-green);
+        color: var( --color-gray-100);
+
+        div {
+          border-color: transparent;
+        }
+      }
+    }
+
+    &Active {
+      @include md {
+        background-color: transparent;
+        color: #000;
+        width: 100%;
+      }
+    }
+  }
+
+  &__hide {
+    @include md {
+      display: none;
+    }
+  }
+}
