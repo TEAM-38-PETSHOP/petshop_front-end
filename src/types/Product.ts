@@ -1,26 +1,27 @@
 export interface Product {
-  id: number;
+  productId: number;
   name: string;
   brand: string;
   description: string;
   price: number;
-  image: string;
+  imageUrls: string[];
   countryProduct: string;
-  group: string;
+  groupProduct: string;
   breedSize: string;
   type: string;
   packaging: string;
+  entryDate: string;
   animals: Animal[];
   categories: Category[];
 }
 
 export interface Animal {
-  id: number;
+  animalId: number;
   name: string;
 }
 
 export interface Category {
-  id: number;
+  categoryId: number;
   name: string;
   description: string;
 }

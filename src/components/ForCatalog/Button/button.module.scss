@@ -1,0 +1,22 @@
+@import '../../../app/styles/extends.scss';
+@import '../../../app/styles/mixins.scss';
+
+.button {
+  @extend %container;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16.5px 0;
+  max-width: 100%;
+
+  border: 1px solid var(--color-gray-10);
+  border-radius: var(--radius-100);
+
+  @extend %secondary-text;
+  color: var(--color-gray-10);
+
+  &:active {
+    box-shadow: -4px -4px 4px 0px #0000001A inset, 
+      4px 4px 4px 0px #0000001A inset;
+  }
+}

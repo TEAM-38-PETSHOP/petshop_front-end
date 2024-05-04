@@ -1,0 +1,133 @@
+@import '../../../app/styles/extends.scss';
+@import '../../../app/styles/mixins.scss';
+
+.socialNetworks {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 650px;
+
+  @include lg {
+    height: 390px;
+  }
+  @include md {
+    height: 630px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__title {
+    @extend %h1-primary;
+    font-weight: 500;
+    margin-bottom: 30px;
+
+    @include lg {
+      font-size: 1.25rem;
+      line-height: 1.2;
+      margin-bottom: 15px;
+    }
+
+    @include md {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+  }
+
+  &__btns {
+    display: flex;
+    gap: 10px;
+
+    transform: translateX(-12%);
+
+    @include lg {
+      transform: translateX(-5%);
+    }
+
+    @include md {
+      flex-direction: column;
+      transform: none;
+      width: 100%;
+    }
+  }
+
+  .socialNetworks__inst {
+    &:hover {
+      color: white;
+      background-color: var(--color-primary-100);
+      border-color: var(--color-primary-100);
+
+      * {
+        stroke: var(--color-gray-100);
+      }
+    }
+
+    &:active {
+      background-color: var(--color-primary-40);
+      border-color: var(--color-primary-40);
+    }
+  }
+
+  &__phone {
+    &:hover {
+      * {
+        fill: var(--color-gray-100);
+      }
+    }
+  }
+
+  &__svg {
+    position: absolute;
+    z-index: -1;
+
+    height: min-content;
+    object-fit: cover;
+  }
+
+  &__cat {
+    bottom: 0;
+    right: 12vw;
+    transform: translateY(24%);
+    width: 203px;
+
+    @media (min-width: 1630px) {
+      right: 28vw;
+    }
+
+    @include lg {
+      width: 136px;
+    }
+  }
+
+  &__dog1 {
+    top: 0;
+    left: 12vw;
+    transform: translateY(-26%);
+    width: 276px;
+
+    @media (min-width: 1630px) {
+      left: 28vw;
+    }
+
+    @include lg {
+      width: 170px;
+    }
+  }
+
+  &__dog2 {
+    bottom: 0;
+    left: 0vw;
+    transform: translate(-30%, -15%);
+    width: 247px;
+
+    @include lg {
+      width: 175px;
+    }
+  }
+}
