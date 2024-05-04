@@ -1,0 +1,23 @@
+@import '../../../styles/extends.scss';
+@import '../../../styles/mixins.scss';
+
+.productPage {
+  @extend %container;
+
+  &__intro {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 60px;
+
+    @include lg {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    @include sm {
+      gap: 45px;
+    }
+  }
+}
