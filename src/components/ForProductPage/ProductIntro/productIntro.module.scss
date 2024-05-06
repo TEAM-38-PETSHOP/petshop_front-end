@@ -7,7 +7,9 @@
 
   @include lg {
     max-width: 100%;
+    flex-basis: auto;
   }
+
   &__id {
     @extend %small-text;
     font-weight: 600;
