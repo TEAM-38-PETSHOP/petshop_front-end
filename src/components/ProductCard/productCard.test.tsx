@@ -7,6 +7,7 @@ import styles from './productCard.module.scss';
 describe('ProductCard', () => {
   const product = {
     productId: 1,
+    productNameId: 'test',
     name: 'Name test',
     brand: 'test',
     description: 'test',
@@ -20,9 +21,17 @@ describe('ProductCard', () => {
     type: 'test',
     packaging: 'Packaging test',
     entryDate: 'test',
+    productSize: '',
+    composition: '',
+    compositionAnalysis: '',
+    compositionEnergyValue: '',
+    compositionExpiration: '',
+    instruction: '',
+    instructionWhyBuy: '',
     animals: [
       {
         animalId: 1,
+        animalNameId: 'test',
         name: 'test',
       },
     ],
@@ -30,6 +39,7 @@ describe('ProductCard', () => {
       {
         categoryId: 1,
         name: 'Category test',
+        categoryNameId: 'test',
         description: 'test',
       },
     ],
