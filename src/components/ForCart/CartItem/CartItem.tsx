@@ -59,7 +59,7 @@ export default function CartItem({ product, setTotalPrice }: Props) {
   return (
     <div className={styles.cartItem}>
       <Link
-        href={`/catalog/product/${product.productId}`}
+        href={`/catalog/product/${product.productId}?${product.productNameId}`}
         className={styles.cartItem__image}
       >
         <Image
