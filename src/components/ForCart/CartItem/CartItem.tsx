@@ -13,6 +13,8 @@ import { setCartProducts } from '@/redux/features/cartSlice';
 import { useToggle } from '@/hooks/useToggle';
 import IconForCards from '@/components/IconForCards/IconForCards';
 import { numberToCurrency } from '@/helpers/numberToCurrency';
+import Counter from '@/components/Counter/Counter';
+import { checkWindow } from '@/helpers/checkWindow';
 
 type Props = {
   product: Product;
@@ -35,35 +37,16 @@ export default function CartItem({ product, setTotalPrice }: Props) {
     setCartProducts,
     product
   );
-  const [productCount, setProductCount] = useState(
-    +(localStorage.getItem(product.productId.toString()) || 1)
-  );
-
-  const handlePlus = () => {
-    if (typeof window !== undefined) {
-      setProductCount((prev) => prev + 1);
-      setTotalPrice((prev) => prev + product.price);
-      localStorage.setItem(
-        product.productId.toString(),
-        (productCount + 1).toString()
-      );
-    }
-  };
-  const handleMinus = () => {
-    if (typeof window !== undefined && productCount > 1) {
-      setProductCount((prev) => prev - 1);
-      setTotalPrice((prev) => prev - product.price);
-      localStorage.setItem(
-        product.productId.toString(),
-        (productCount - 1).toString()
-      );
-    }
-  };
 
   const handleDeleteItem = () => {
     toggleCart();
-    setTotalPrice((prev) => prev - product.price * productCount);
-    if (typeof window !== undefined) {
+    setTotalPrice(
+      (prev) =>
+        prev -
+        product.price *
+          +(localStorage.getItem(product.productId.toString()) || 1)
+    );
+    if (checkWindow()) {
       localStorage.removeItem(product.productId.toString());
     }
   };
@@ -76,7 +59,7 @@ export default function CartItem({ product, setTotalPrice }: Props) {
   return (
     <div className={styles.cartItem}>
       <Link
-        href={`/product/${product.productId}`}
+        href={`/catalog/product/${product.productId}?${product.productNameId}`}
         className={styles.cartItem__image}
       >
         <Image
@@ -104,11 +87,12 @@ export default function CartItem({ product, setTotalPrice }: Props) {
           {numberToCurrency(product.price)}
         </p>
         <div className={styles.cartItem__choice}>
-          <div className={styles.cartItem__counter}>
-            <button onClick={handleMinus}>-</button>
-            <span>{productCount}</span>
-            <button onClick={handlePlus}>+</button>
-          </div>
+          <Counter
+            className={styles.cartItem__counter}
+            productId={product.productId}
+            price={product.price}
+            setTotalPrice={setTotalPrice}
+          />
           <IconForCards
             className={styles.cartItem__delete}
             icon={deleteIcon.src}
