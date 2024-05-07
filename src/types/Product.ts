@@ -1,8 +1,8 @@
 export interface Product {
   productId: number;
   name: string;
+  productNameId: string;
   brand: string;
-  description: string;
   price: number;
   imageUrls: string[];
   countryProduct: string;
@@ -10,6 +10,14 @@ export interface Product {
   breedSize: string;
   type: string;
   packaging: string;
+  productSize: string;
+  description: string;
+  composition: string;
+  compositionAnalysis: string;
+  compositionEnergyValue: string;
+  compositionExpiration: string;
+  instruction: string;
+  instructionWhyBuy: string;
   entryDate: string;
   animals: Animal[];
   categories: Category[];
@@ -18,10 +26,12 @@ export interface Product {
 export interface Animal {
   animalId: number;
   name: string;
+  animalNameId: string;
 }
 
 export interface Category {
   categoryId: number;
   name: string;
+  categoryNameId: string;
   description: string;
 }

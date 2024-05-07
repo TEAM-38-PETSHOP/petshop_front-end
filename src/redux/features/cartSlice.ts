@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Product } from '@/types/Product';
+import { checkWindow } from '@/helpers/checkWindow';
 
 export interface CartState {
   cartProducts: Product[];
 }
 
 const cartStorage =
-  typeof window !== 'undefined' &&
-  JSON.parse(localStorage.getItem('cart') || '[]');
+  checkWindow() && JSON.parse(localStorage.getItem('cart') || '[]');
 
 const initialState: CartState = {
   cartProducts: cartStorage,
