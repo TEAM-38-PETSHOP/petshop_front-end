@@ -33,6 +33,7 @@ export default function ImageSlider({ images }: Props) {
     <div className={styles.imageSlider}>
       <div className={styles.imageSlider__mainBlock}>
         <button
+          data-testid="button-prev"
           type="button"
           onClick={() => toggleImg('prev')}
         ></button>
@@ -44,6 +45,7 @@ export default function ImageSlider({ images }: Props) {
           alt="large"
         />
         <button
+          data-testid="button-next"
           type="button"
           onClick={() => toggleImg('next')}
         ></button>
