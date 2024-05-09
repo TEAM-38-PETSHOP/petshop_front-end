@@ -4,7 +4,6 @@ import { Product } from '@/types/Product';
 import { Fragment } from 'react';
 import classNames from 'classnames';
 import { DescriptionListForProductPage } from '@/types/DescriptionListForProductPage';
-import { retry } from '@reduxjs/toolkit/query';
 
 const descriptionList: DescriptionListForProductPage[] = [
   {
@@ -83,6 +82,7 @@ export default function ToggleList({ searchParams, product }: Props) {
                   })}
                   replace
                   scroll={false}
+                  data-testid={`btn-${item.id}`}
                   href={`?activeTab=${item.id}`}
                 >
                   <span>0{item.id}</span> <span>{item.listName}</span>
