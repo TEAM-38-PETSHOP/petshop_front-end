@@ -10,15 +10,21 @@
   background-color: var(--color-additional-beige);
   border-radius: var(--radius-40);
 
-  @include sm {
+  @include lg {
+    padding: 30px;
+    gap: 15px;
+  }
+
+  @include md {
     padding: 20px;
+    flex-direction: column;
   }
 
   &__hr {
-    width: 1px;
+    min-width: 1px;
     background-color: var(--color-gray-50);
 
-    @include sm {
+    @include md {
       display: none;
     }
   }
@@ -29,10 +35,15 @@
   flex-direction: column;
   gap: 10px;
 
-  min-width: max-content;
+  min-width: 360px;
 
   @include lg {
-    min-width: 220px;
+    min-width: 240px;
+    max-width: 240px;
+  }
+
+  @include md {
+    max-width: 100%;
   }
 
   &__btn {
@@ -49,16 +60,22 @@
 
     transition: background-color, color, var(--transition-duration);
 
-    @include sm {
+    @include md {
       font-size: 0.875rem;
       line-height: 1.2;
+
+      border: 1px solid var(--color-gray-20);
     }
   }
 
   &__btnActive {
-    // font-weight: 600;
+    font-weight: 600;
     color: var(--color-gray-100);
     background-color: var(--color-gray-20);
+
+    @include md {
+      border: 1px solid var(--color-gray-20);
+    }
   }
 }
 
@@ -78,6 +95,11 @@
 
     @extend %main-text;
 
+    @include lg {
+      flex-direction: column;
+      gap: 5px;
+    }
+
     @include sm {
       font-size: 0.875rem;
       line-height: 1.2;
@@ -91,7 +113,5 @@
     min-width: 30%;
 
     font-weight: 500;
-  }
-  &__itemValue {
   }
 }

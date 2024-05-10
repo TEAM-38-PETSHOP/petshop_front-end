@@ -54,7 +54,7 @@ export default function ProductCard({ product, className }: Props) {
       data-testid="product-card"
     >
       <Link
-        href={`/catalog/product/${product.productId}`}
+        href={`catalog/product/${product.productId}?${product.productNameId}`}
         className={styles.productCard__image}
       >
         <Image
