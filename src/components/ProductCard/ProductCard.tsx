@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import classNames from 'classnames';
-import SvgWrapper from '../SvgWrapper/SvgWrapper';
 import { useToggle } from '@/hooks/useToggle';
 import { useAppSelector } from '@/hooks/reduxHooks';
 import { setFavoriteProducts } from '@/redux/features/favoriteSlice';
@@ -55,7 +54,7 @@ export default function ProductCard({ product, className }: Props) {
       data-testid="product-card"
     >
       <Link
-        href={`/product/${product.productId}`}
+        href={`/catalog/product/${product.productId}`}
         className={styles.productCard__image}
       >
         <Image

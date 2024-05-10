@@ -1,10 +1,10 @@
-const BASE_URL = 'http://ec2-54-242-88-35.compute-1.amazonaws.com';
+const BASE_URL = "http://ec2-54-160-224-145.compute-1.amazonaws.com";
 
-type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
+type RequestMethod = "GET" | "POST" | "PATCH" | "DELETE";
 
 function request<T>(
   url: string,
-  method: RequestMethod = 'GET',
+  method: RequestMethod = "GET",
   data: any = null
 ): Promise<T> {
   const options: RequestInit = { method };
@@ -12,7 +12,7 @@ function request<T>(
   if (data) {
     options.body = JSON.stringify(data);
     options.headers = {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     };
   }
 
@@ -27,7 +27,7 @@ function request<T>(
 
 export const client = {
   get: <T>(url: string) => request<T>(url),
-  post: <T>(url: string, data: any) => request<T>(url, 'POST', data),
-  patch: <T>(url: string, data: any) => request<T>(url, 'PATCH', data),
-  delete: (url: string) => request(url, 'DELETE'),
+  post: <T>(url: string, data: any) => request<T>(url, "POST", data),
+  patch: <T>(url: string, data: any) => request<T>(url, "PATCH", data),
+  delete: (url: string) => request(url, "DELETE"),
 };

@@ -1,0 +1,97 @@
+@import '../../../app/styles/extends.scss';
+@import '../../../app/styles/mixins.scss';
+
+.toggleList {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+
+  padding: 40px;
+  background-color: var(--color-additional-beige);
+  border-radius: var(--radius-40);
+
+  @include sm {
+    padding: 20px;
+  }
+
+  &__hr {
+    width: 1px;
+    background-color: var(--color-gray-50);
+
+    @include sm {
+      display: none;
+    }
+  }
+}
+
+.btnsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  min-width: max-content;
+
+  @include lg {
+    min-width: 220px;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    @extend %main-text;
+    height: 50px;
+    width: 100%;
+    padding: 0 30px;
+
+    border-radius: var(--radius-100);
+
+    transition: background-color, color, var(--transition-duration);
+
+    @include sm {
+      font-size: 0.875rem;
+      line-height: 1.2;
+    }
+  }
+
+  &__btnActive {
+    // font-weight: 600;
+    color: var(--color-gray-100);
+    background-color: var(--color-gray-20);
+  }
+}
+
+.infoList {
+  flex-grow: 1;
+  padding: 15px 30px;
+
+  background-color: var(--color-gray-100);
+  border-radius: var(--radius-30);
+
+  &__item {
+    display: flex;
+    gap: 30px;
+
+    padding: 15px 0;
+    border-bottom: 1px solid var(--color-gray-50);
+
+    @extend %main-text;
+
+    @include sm {
+      font-size: 0.875rem;
+      line-height: 1.2;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  &__itemName {
+    min-width: 30%;
+
+    font-weight: 500;
+  }
+  &__itemValue {
+  }
+}

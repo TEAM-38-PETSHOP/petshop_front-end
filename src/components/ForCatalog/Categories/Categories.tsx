@@ -19,18 +19,18 @@ export default async function Categories({ breed }: Props) {
         <Category
           text={'Всі товари'}
           href={`/catalog/all${searchParams}`}
-          imgId={4}
-          variant={checkVariant(4)}
+          imgId={7}
+          variant={checkVariant(7)}
         />
       </Suspense>
 
-      {categories.map(({ categoryId, name }) => (
+      {categories.map(({ categoryId, name, categoryNameId }) => (
         <Suspense
           key={categoryId}
         >
           <Category
             text={name}
-            href={`/catalog/${categoryId}${searchParams}`}
+            href={`/catalog/${categoryNameId}${searchParams}`}
             imgId={categoryId}
             variant={checkVariant(categoryId)}
           />

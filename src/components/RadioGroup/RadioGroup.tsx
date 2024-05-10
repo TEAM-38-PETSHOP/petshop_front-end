@@ -6,6 +6,7 @@ import style from "./radioGroup.module.scss";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { createUrlString } from "@/helpers/createUrlString";
 import cn from "classnames";
+import { RadioAmountType } from "@/types/RadioAmountType";
 
 interface Props {
   place?: "categories" | "catalog";
@@ -13,6 +14,8 @@ interface Props {
   styleName?: string;
   breed?: BreedType;
   setBreed?: (breed: BreedType) => void;
+  title?: string;
+  radioAmount?: RadioAmountType;
 }
 
 export default React.memo(function RadioGroup({
@@ -20,6 +23,8 @@ export default React.memo(function RadioGroup({
   styleName,
   setBreed = () => {},
   breed,
+  title,
+  radioAmount
 }: Props) {
   const router = useRouter();
   const pathname = usePathname();
@@ -39,8 +44,6 @@ export default React.memo(function RadioGroup({
     const url = `${pathname}?${urlString}`;
     router.push(url);
   };
-
-  console.log(place);
 
   return place === "categories" ? (
     <form
@@ -65,7 +68,6 @@ export default React.memo(function RadioGroup({
         </span>
         <span className={style.checkmark}></span>
       </label>
-
       <label
         htmlFor="radio-cats"
         className={cn(style.radio__item, style.categories__item)}
@@ -84,7 +86,6 @@ export default React.memo(function RadioGroup({
         </span>
         <span className={style.checkmark}></span>
       </label>
-
       <label
         htmlFor="radio-dogs"
         className={cn(style.radio__item, style.categories__item)}
@@ -109,61 +110,73 @@ export default React.memo(function RadioGroup({
       data-testid="radio-group"
       className={cn([styleName], style.radio, style.catalog)}
     >
+      {title && <h1 className={style.catalog__title}>{title}</h1>}
+
       <label
         htmlFor="radio-all"
         className={cn(style.radio__item, style.catalog__item)}
       >
-        <input
-          type="radio"
-          id="radio-all"
-          name="breed"
-          value={BreedType.ALL}
-          checked={breed === BreedType.ALL}
-          onChange={() => setBreed(BreedType.ALL)}
-        />
+        <div>
+          <input
+            type="radio"
+            id="radio-all"
+            name="breed"
+            value={BreedType.ALL}
+            checked={breed === BreedType.ALL}
+            onChange={() => setBreed(BreedType.ALL)}
+          />
 
-        <span className={cn(style.radio__text, style.catalog__text)}>Всі</span>
-        <span className={style.checkmark}></span>
+          <span className={cn(style.radio__text, style.catalog__text)}>Всі</span>
+          <span className={style.checkmark}></span>
+        </div>
+        <span className={style.catalog__amount}>{radioAmount?.all}</span>
       </label>
 
       <label
         htmlFor="radio-cats"
         className={cn(style.radio__item, style.catalog__item)}
       >
-        <input
-          type="radio"
-          id="radio-cats"
-          name="breed"
-          value={BreedType.CATS}
-          checked={breed === BreedType.CATS}
-          onChange={() => setBreed(BreedType.CATS)}
-        />
+        <div>
+          <input
+            type="radio"
+            id="radio-cats"
+            name="breed"
+            value={BreedType.CATS}
+            checked={breed === BreedType.CATS}
+            onChange={() => setBreed(BreedType.CATS)}
+          />
 
-        <span className={cn(style.radio__text, style.catalog__text)}>
-          Котики
-        </span>
-        <span className={style.checkmark}></span>
+          <span className={cn(style.radio__text, style.catalog__text)}>
+            Котики
+          </span>
+          <span className={style.checkmark}></span>
+        </div>
+
+        <span className={style.catalog__amount}>{radioAmount?.cats}</span>
       </label>
 
       <label
         htmlFor="radio-dogs"
         className={cn(style.radio__item, style.catalog__item)}
       >
-        <input
-          type="radio"
-          id="radio-dogs"
-          name="breed"
-          value={BreedType.DOGS}
-          checked={breed === BreedType.DOGS}
-          onChange={() => setBreed(BreedType.DOGS)}
-        />
+        <div>
+          <input
+            type="radio"
+            id="radio-dogs"
+            name="breed"
+            value={BreedType.DOGS}
+            checked={breed === BreedType.DOGS}
+            onChange={() => setBreed(BreedType.DOGS)}
+          />
 
-        <span className={cn(style.radio__text, style.catalog__text)}>
-          Песики
-        </span>
-        <span className={style.checkmark}></span>
+          <span className={cn(style.radio__text, style.catalog__text)}>
+            Песики
+          </span>
+          <span className={style.checkmark}></span>
+        </div>
+        
+        <span className={style.catalog__amount}>{radioAmount?.dogs}</span>
       </label>
     </form>
   );
-}
-)
+});

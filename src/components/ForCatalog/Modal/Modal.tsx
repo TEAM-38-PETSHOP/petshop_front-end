@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import style from "./modal.module.scss";
 import useClickOutside from "@/hooks/useClickOutside";
+import cn from "classnames";
 
 type Props = {
   children: React.ReactNode;
@@ -20,7 +21,7 @@ export default function Modal({ children, title, onClose }: Props) {
   };
 
   return (
-    <div className={style.modal}>
+    <div className={cn(style.modal, "modal")}>
       <div className={style.modal__body} ref={modalRef}>
         <div className={style.modal__header}>
           <h2 className={style.modal__title}>{title}</h2>

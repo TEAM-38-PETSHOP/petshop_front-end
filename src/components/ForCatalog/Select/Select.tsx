@@ -9,7 +9,7 @@ import useClickOutside from "@/hooks/useClickOutside";
 import { Category } from "@/types/Product";
 import Link from "next/link";
 import { useSearchParams, usePathname } from "next/navigation";
-import { createUrlString } from "@/helpers/createUrlString";
+import { createUrl, createUrlString } from "@/helpers/createUrlString";
 import { truncateText } from "@/helpers/truncateText";
 
 const sortList = [
@@ -40,7 +40,7 @@ interface Props {
   styleName?: string;
   action: SelectAction;
   content?: Category[];
-  currentItemId: number | string;
+  currentItemId: string | string[];
   onClick: () => void;
   isMobile?: boolean;
 }
@@ -62,7 +62,7 @@ export default React.memo(function Select({
 
   const currentCategory = useMemo(() => {
     if (action === "category") {
-      const category = content?.find((item) => item.categoryId === currentItemId);
+      const category = content?.find((item) => item.categoryNameId === currentItemId);
 
       return category?.name || "Всі товари";
     }
@@ -78,7 +78,7 @@ export default React.memo(function Select({
   });
 
   return (
-    <div className={cn([styleName], style.select)} ref={selectRef}>
+    <div className={cn([styleName], style.select, 'green')} ref={selectRef}>
       <div
         className={cn(style.select__btn, {
           [style.select__btnActive]: isOpen,
@@ -109,9 +109,9 @@ export default React.memo(function Select({
               <Link
                 href={{
                   pathname: `/catalog/all`,
-                  query: searchParams.toString(),
+                  query: createUrl([{name: 'pageIndex', value: '1'}], searchParams),
                 }}
-                className={cn(style.select__item, {
+                className={cn(style.select__item, 'green', {
                   [style.select__itemActive]: currentItemId === 'all',
                 })}
                 onClick={onClick}
@@ -121,12 +121,12 @@ export default React.memo(function Select({
               {content.map((item) => (
                 <Link
                   href={{
-                    pathname: `/catalog/${item.categoryId}`,
-                    query: searchParams.toString(),
+                    pathname: `/catalog/${item.categoryNameId}`,
+                    query: createUrl([{name: 'pageIndex', value: '1'}], searchParams),
                   }}
                   key={item.categoryId}
                   className={cn(style.select__item, {
-                    [style.select__itemActive]: currentItemId === item.categoryId,
+                    [style.select__itemActive]: currentItemId === item.categoryNameId,
                   })}
                   onClick={onClick}
                 >

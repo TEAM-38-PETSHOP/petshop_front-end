@@ -6,6 +6,7 @@ import HeaderForPages from '@/components/HeaderForPages/HeaderForPages';
 import CartProducts from '@/components/ForCart/CartProducts/CartProducts';
 import TotalCart from '@/components/ForCart/TotalCart/TotalCart';
 import { useAppSelector } from '@/hooks/reduxHooks';
+import { checkWindow } from '@/helpers/checkWindow';
 
 export default function Cart() {
   const cartProducts = useAppSelector((state) => state.cart.cartProducts);
@@ -13,10 +14,9 @@ export default function Cart() {
 
   useEffect(() => {
     const newTotalPrice = cartProducts.reduce((acc, item) => {
-      const quantity =
-        typeof window !== 'undefined'
-          ? +(localStorage.getItem(item.productId.toString()) || 1)
-          : 1;
+      const quantity = checkWindow()
+        ? +(localStorage.getItem(item.productId.toString()) || 1)
+        : 1;
 
       const sum = item.price * quantity;
 
