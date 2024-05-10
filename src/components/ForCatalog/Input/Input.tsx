@@ -5,7 +5,6 @@ import cn from "classnames";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
 import Image from "next/image";
-// import hardcodedProduct from "@@/images/prod.jpg";
 import { truncateText } from "@/helpers/truncateText";
 import { useDebounce } from "@/hooks/useDebounce";
 import useClickOutside from "@/hooks/useClickOutside";
