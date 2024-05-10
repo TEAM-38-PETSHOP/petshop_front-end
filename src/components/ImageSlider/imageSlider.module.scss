@@ -1,0 +1,84 @@
+@import '../../app/styles/mixins.scss';
+@import '../../app/styles/extends.scss';
+
+.imageSlider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+
+  margin-top: 15px;
+
+  &__mainBlock {
+    display: flex;
+    align-items: center;
+
+    button {
+      padding: 30px;
+      background: url('../../../public/images/icons/arrow_black.svg') no-repeat
+        center;
+
+      @include md {
+        background: url('../../../public/images/icons/arrowMobile_black.svg')
+          no-repeat center;
+        padding: 15px;
+      }
+
+      &:first-child {
+        transform: rotate(-90deg);
+      }
+
+      &:last-child {
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  &__currentImg {
+    object-fit: contain;
+
+    @include md {
+      width: 285px;
+      height: 285px;
+    }
+
+    @include sm {
+      width: 275px;
+      height: 275px;
+    }
+  }
+
+  &__list {
+    display: flex;
+    gap: 15px;
+  }
+
+  &__item {
+    object-fit: contain;
+    border: 4px solid transparent;
+    border-radius: var(--radius-20);
+
+    transition: border-color, scale, var(--transition-duration);
+
+    @include md {
+      height: 75px;
+      width: 75px;
+    }
+
+    @include sm {
+      border-width: 3px;
+      height: 70px;
+      width: 70px;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        scale: 1.1;
+      }
+    }
+  }
+
+  &__active {
+    border-color: var(--color-gray-50);
+  }
+}

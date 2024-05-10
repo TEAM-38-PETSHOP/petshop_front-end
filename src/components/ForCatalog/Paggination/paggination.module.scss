@@ -9,11 +9,12 @@
   justify-content: space-between;
   align-items: center;
   max-width: fit-content;
-  // max-width: 50%;
 
-  &__arrow {
-    background-image: url("../../../../public/images/icons/arrow_white.svg");
+  .paggination__arrow {
+    padding: 15px;
+    background-image: url("'../../../../../../public/images/icons/arrowMobile_white.svg") no-repeat center;
     background-color: var(--color-secondary-green);
+    background-size: 15px;
 
     box-shadow: 2px 3px 22px 0px #0000001a;
 
@@ -21,6 +22,14 @@
 
     &:active {
       background-color: var(--color-gray-10);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background-image: url("'../../../../../../public/images/icons/arrowMobile_white.svg") no-repeat center;
+        background-color: var(--color-secondary-green);
+        background-size: 15px;
+      }
     }
 
     &:not(:last-child) {
@@ -48,5 +57,10 @@
       color: var(--color-gray-10);
       border-bottom-color: var(--color-gray-10);
     }
+  }
+
+  &__dots {
+    display: flex;
+    margin-right: 10px;
   }
 }

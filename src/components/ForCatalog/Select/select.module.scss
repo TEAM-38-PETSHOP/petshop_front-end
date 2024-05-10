@@ -7,18 +7,19 @@
   height: 50px;
   margin-bottom: 5px;
   border-radius: var(--radius-30);
+  color: var(--color-gray-20);
   
   @extend %secondary-text;
 
   &__btn {
     position: relative;
-    z-index: 5;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     padding: 15.5px 13px;
     border: 1px solid transparent;
+    @extend %secondary-text;
     font-weight: 500;
     cursor: pointer;
     white-space: nowrap;
@@ -43,6 +44,12 @@
       justify-content: center;
       border-radius: var(--radius-30);
       border-color: var(--color-gray-40);
+    }
+
+    @include sm {
+      font-weight: 400;
+      font-size: 0.75rem;
+      line-height: 1.5;
     }
 
     &Active {

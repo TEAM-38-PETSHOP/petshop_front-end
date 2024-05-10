@@ -3,45 +3,64 @@ import { Product } from "@/types/Product";
 import style from "./input.module.scss";
 import cn from "classnames";
 import Link from "next/link";
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import hardcodedProduct from "@@/images/prod.jpg";
 import { truncateText } from "@/helpers/truncateText";
+import { useDebounce } from "@/hooks/useDebounce";
+import useClickOutside from "@/hooks/useClickOutside";
+import Loader from "@/components/Loader/Loader";
 
 const wordLength = 33;
 
 interface Props {
   query: string;
   setQuery: (value: string) => void;
+  setQueryToRequest: (value: string) => void;
   placeholder?: string;
   styleName?: string;
   products?: Product[];
+  isLoading: boolean;
 }
 
-export default function Input({
+export default React.memo(function Input({
   query,
   setQuery,
+  setQueryToRequest,
   placeholder = "Пошук",
   styleName,
   products = [],
+  isLoading = false,
 }: Props) {
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
+  const resultsRef = useRef(null);
+  const inputRef = useRef(null);
+
+  const applyQueryString = useDebounce((query: string) => {
+    setQueryToRequest(query);
+  }, 500);
 
   const clearQuery = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     setQuery("");
     setShowDropdown(false);
   };
-  
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
     setShowDropdown(event.target.value.length > 0);
+
+    applyQueryString(event.target.value);
   };
 
-  const handleOnBLur = () => {
-    setShowDropdown(false);
-    setQuery("");
-  };
+  useClickOutside(
+    resultsRef,
+    () => {
+      setShowDropdown(false);
+      setQuery("");
+    },
+    inputRef
+  );
 
   return (
     <div className={cn([styleName], style.input)}>
@@ -52,9 +71,9 @@ export default function Input({
         type="text"
         name="query"
         placeholder={placeholder}
+        ref={inputRef}
         value={query}
         onChange={handleChange}
-        onBlur={handleOnBLur}
       />
 
       {query && (
@@ -62,20 +81,20 @@ export default function Input({
           <button
             type="button"
             className={style.input__btn}
-            onClick={clearQuery}
+            onMouseDown={clearQuery}
           ></button>
           <div className={style.input__separator}></div>
         </>
       )}
 
       {showDropdown && query.length > 0 && products.length > 0 && (
-        <ul className={style.input__results}>
+        <ul ref={resultsRef} className={style.input__results}>
           {products.map((product) => (
-            <Link
-              href={`/catalog/${product.productId}`}
-              key={product.productId}
-            >
-              <li className={style.input__result}>
+            <li key={product.productId}>
+              <Link
+                href={`/catalog/product/${product.productId}`}
+                className={style.input__result}
+              >
                 <Image
                   src={hardcodedProduct}
                   alt="Product Image"
@@ -88,17 +107,26 @@ export default function Input({
                   </p>
                   <p className={style.input__resultPrice}>{product.price}</p>
                 </div>
-              </li>
-            </Link>
+              </Link>
+            </li>
           ))}
         </ul>
       )}
 
-      {showDropdown && products.length === 0 && (
-        <ul className={style.input__results}>
+      {isLoading && query && products.length === 0 && (
+        <ul ref={resultsRef} className={style.input__results}>
+          <li className={style.input__loader}>
+            <Loader />
+          </li>
+        </ul>
+      )}
+
+      {showDropdown && !isLoading && products.length === 0 && (
+        <ul ref={resultsRef} className={style.input__results}>
           <li className={style.input__noResults}>Нічого не знайдено</li>
         </ul>
       )}
     </div>
   );
 }
+)

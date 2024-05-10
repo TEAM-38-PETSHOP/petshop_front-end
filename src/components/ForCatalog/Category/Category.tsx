@@ -1,10 +1,10 @@
 "use client";
 
+import useIsCurrentScreenSize from "@/hooks/useIsCurrentScreenSize";
 import ButtonWithArrow from "../../ButtonWithArrow/ButtonWithArrow";
 import style from "./category.module.scss";
 import cn from "classnames";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 type variants = "white" | "green" | "orange";
 
@@ -16,23 +16,7 @@ interface Props {
 }
 
 export default function Category({ text, imgId, variant, href }: Props) {
-  const [windowWidth, setWindowWidth] = useState<null | number>(null);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    setWindowWidth(window.innerWidth);
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-  // lg - 950px / md - 690px / sm - 425px
-  const isMobile = windowWidth && windowWidth <= 425;
+  const isMobile = useIsCurrentScreenSize(435);
   const type = isMobile ? "button" : "link";
 
   return isMobile ? (
@@ -45,6 +29,7 @@ export default function Category({ text, imgId, variant, href }: Props) {
         [style.category__four]: imgId === 4,
         [style.category__five]: imgId === 5,
         [style.category__six]: imgId === 6,
+        [style.category__seven]: imgId === 7,
       })}
     >
       <ButtonWithArrow
@@ -63,6 +48,7 @@ export default function Category({ text, imgId, variant, href }: Props) {
         [style.category__four]: imgId === 4,
         [style.category__five]: imgId === 5,
         [style.category__six]: imgId === 6,
+        [style.category__seven]: imgId === 7,
       })}
     >
       <ButtonWithArrow

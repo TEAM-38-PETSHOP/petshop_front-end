@@ -12,13 +12,15 @@
     justify-content: space-between;
     align-items: center;
 
-    padding: 16.5px 18px;
+    padding: 15.5px 13px;
+
     border: 1px solid transparent;
     background: var(--color-gray-100);
     box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
     border-radius: var(--radius-100);
     color: var(--color-gray-20);
     font-weight: 500;
+    @extend %secondary-text;
     cursor: pointer;
   }
 

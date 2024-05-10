@@ -36,6 +36,7 @@
 
   &__input {
     position: relative;
+    background-color: red;
 
     input {
       position: absolute;
@@ -45,6 +46,7 @@
       background: none;
       pointer-events: none;
       appearance: none;
+      cursor: pointer;
     }
   }
 

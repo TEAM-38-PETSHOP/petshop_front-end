@@ -11,10 +11,18 @@ type Props = {
   title?: string;
   children: React.ReactNode;
   styleName?: string;
+  isOpen: boolean;
+  setIsOpen: (value: boolean) => void;
 };
 
-export default function FiltersGroup({ title = "Фільтри", children, styleName }: Props) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+export default function FiltersGroup({
+  title = "Фільтри",
+  children,
+  styleName,
+  isOpen,
+  setIsOpen,
+}: Props) {
+  // const [isOpen, setIsOpen] = useState<boolean>(false);
   const selectRef = useRef<HTMLDivElement | null>(null);
 
   useClickOutside(selectRef, () => {

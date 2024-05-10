@@ -19,100 +19,18 @@ import {
 import { createUrl } from "@/helpers/createUrlString";
 import { BreedType } from "@/types/enums/BreedType";
 import cn from "classnames";
-import { useDebounce } from "@/hooks/useDebounce";
-
-const hardcodedProducts = [
-  {
-    productId: 1,
-    name: 'Сухий корм для собак мініатюрних і шось там дуже багато іншого тексту',
-    brand: "Тут має бути Бренд",
-    description: "Тут має бути Опис",
-    price: 721.65,
-    imageUrls: [
-      "../../../public/products/1.jpg",
-    ],
-    countryProduct: 'Country',
-    groupProduct: 'groupProduct',
-    breedSize: 'breedSize',
-    type: 'type',
-    packaging: 'packaging',
-    entryDate: 'entryDate',
-    animals: [
-      {
-        animalId: 1,
-        name: 'test',
-      }
-    ],
-    categories: [
-      {
-        categoryId: 1,
-        name: 'test name',
-        description: 'test description',
-      }
-    ],
-  },
-  {
-    productId: 2,
-    name: 'Сухий корм для собак мініатюрних і шось там дуже багато іншого тексту',
-    brand: "Тут має бути Бренд",
-    description: "Тут має бути Опис",
-    price: 721.65,
-    imageUrls: [
-      "../../../public/products/1.jpg",
-    ],
-    countryProduct: 'Country',
-    groupProduct: 'groupProduct',
-    breedSize: 'breedSize',
-    type: 'type',
-    packaging: 'packaging',
-    entryDate: 'entryDate',
-    animals: [
-      {
-        animalId: 1,
-        name: 'test',
-      }
-    ],
-    categories: [
-      {
-        categoryId: 1,
-        name: 'test name',
-        description: 'test description',
-      }
-    ],
-  },
-  {
-    productId: 3,
-    name: 'Сухий корм для собак мініатюрних і шось там дуже багато іншого тексту',
-    brand: "Тут має бути Бренд",
-    description: "Тут має бути Опис",
-    price: 721.65,
-    imageUrls: [
-      "../../../public/products/1.jpg",
-    ],
-    countryProduct: 'Country',
-    groupProduct: 'groupProduct',
-    breedSize: 'breedSize',
-    type: 'type',
-    packaging: 'packaging',
-    entryDate: 'entryDate',
-    animals: [
-      {
-        animalId: 1,
-        name: 'test',
-      }
-    ],
-    categories: [
-      {
-        categoryId: 1,
-        name: 'test name',
-        description: 'test description',
-      }
-    ],
-  }
-]
+import {
+  getProductsByAnimalIdCount,
+  getProductsByName,
+  getProductsCount,
+} from "@/helpers/fetchProducts";
+import { createPortal } from "react-dom";
+import useIsCurrentScreenSize from "@/hooks/useIsCurrentScreenSize";
+import { RadioAmountType } from "@/types/RadioAmountType";
 
 const min = 0;
-const max = 1000;
+const max = 10000;
+const step = 10;
 
 interface Props {
   category: string;
@@ -133,14 +51,20 @@ export default function CatalogHeader({ category, categories }: Props) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isCategoryOpen, setIsCategoryOpen] = useState<boolean>(false);
   const [isSortOpen, setIsSortOpen] = useState<boolean>(false);
-  // робити запит на сервер з використанням debounce
-  const [products, setProducts] = useState<Product[]>(hardcodedProducts);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isFilterGroupOpen, setIsFilterGroupOpen] = useState<boolean>(false);
+  const [products, setProducts] = useState<Product[]>([]);
   const [query, setQuery] = useState<string>("");
+  const [queryToRequest, setQueryToRequest] = useState<string>("");
   const [breed, setBreed] = useState<BreedType>(BreedType.ALL);
-  const [isMobile, setIsMobile] = useState<boolean>(false);
   // Отримуємо ці дані перевіриивши продукти які приходять зі сервера
-  const [minValue, setMinValue] = useState<number>(min);
-  const [maxValue, setMaxValue] = useState<number>(max);
+  const [minValue, setMinValue] = useState<number>(Number(appliedFrom) | min);
+  const [maxValue, setMaxValue] = useState<number>(Number(appliedTo) || max);
+  const [radioAmount, setRadioAmount] = useState<RadioAmountType>({
+    all: 0,
+    cats: 0,
+    dogs: 0,
+  });
 
   const amountOfFilters = useMemo(() => {
     const array = [appliedBreed, appliedFrom, appliedTo];
@@ -150,15 +74,50 @@ export default function CatalogHeader({ category, categories }: Props) {
   }, [appliedBreed, appliedFrom, appliedTo]);
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 435);
-    };
+    getProductsCount().then((data) => {
+      setRadioAmount((prev) => ({
+        ...prev,
+        all: data.count,
+      }));
+    });
 
-    handleResize();
-    window.addEventListener("resize", handleResize);
+    getProductsByAnimalIdCount(1).then((data) => {
+      setRadioAmount((prev) => ({
+        ...prev,
+        dogs: data.count,
+      }));
+    });
 
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    getProductsByAnimalIdCount(2).then((data) => {
+      setRadioAmount((prev) => ({
+        ...prev,
+        cats: data.count,
+      }));
+    });
+
+    // It removes scroll when modal is open
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isModalOpen, searchParams]);
+
+  const isMobile = useIsCurrentScreenSize(435);
+
+  useEffect(() => {
+    setIsLoading(true);
+    getProductsByName({ name: queryToRequest, page: 0, size: 8 })
+      .then((data) => {
+        setProducts(data);
+      })
+      .catch((error) => {
+        throw new Error(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [queryToRequest]);
 
   const closeClickHandler = () => {
     setIsModalOpen(false);
@@ -178,12 +137,14 @@ export default function CatalogHeader({ category, categories }: Props) {
         { name: "breed", value: breed },
         { name: "from", value: minValue.toString() },
         { name: "to", value: maxValue.toString() },
+        { name: "pageIndex", value: "1" },
       ],
       searchParams
     );
     const url = `${pathname}?${urlString}`;
     router.push(url);
 
+    setIsFilterGroupOpen(false);
     setIsModalOpen(false);
   };
 
@@ -203,13 +164,9 @@ export default function CatalogHeader({ category, categories }: Props) {
     setBreed(BreedType.ALL);
     setMinValue(min);
     setMaxValue(max);
+    setIsFilterGroupOpen(false);
+    setIsModalOpen(false);
   };
-
-  const makeRequest = useDebounce((query: string) => {
-    console.log(query);
-  }, 500);
-
-  makeRequest(query);
 
   return (
     <div className={style.header}>
@@ -222,34 +179,43 @@ export default function CatalogHeader({ category, categories }: Props) {
             [style.header__selectGreen]: category !== "all",
             [style.header__selectActive]: isCategoryOpen,
           })}
-          currentItemId={Number(params.category) || "all"}
+          currentItemId={params.category || "all"}
           onClick={selectCategoryHandler}
           content={categories}
           type="noBorder"
           action="category"
           isMobile={isMobile}
         />
-        {/* Передавати сюди продукти які потрібно відображати в дропдауні */}
         <Input
           styleName={style.header__input}
           query={query}
           setQuery={setQuery}
+          setQueryToRequest={setQueryToRequest}
           placeholder="Пошук"
           products={products}
+          isLoading={isLoading}
         />
-        <FiltersGroup styleName={style.header__group}>
+        <FiltersGroup
+          isOpen={isFilterGroupOpen}
+          setIsOpen={setIsFilterGroupOpen}
+          styleName={style.header__group}
+        >
           <RadioGroup
             setBreed={setBreed}
             breed={breed}
             place="catalog"
             styleName={style.header__radio}
+            title="Тваринки"
+            radioAmount={radioAmount}
           />
           <Range
             setMinValue={setMinValue}
             setMaxValue={setMaxValue}
             minValue={minValue}
             maxValue={maxValue}
-            step={1}
+            step={step}
+            min={min}
+            max={max}
           />
           <Button
             styleName={style.header__save}
@@ -290,42 +256,49 @@ export default function CatalogHeader({ category, categories }: Props) {
         />
       </div>
 
-      {/* Передавати сюди продукти які потрібно відображати в дропдауні */}
       <Input
         styleName={style.header__input__mobile}
         query={query}
         setQuery={setQuery}
+        setQueryToRequest={setQueryToRequest}
         placeholder="Пошук"
         products={products}
+        isLoading={isLoading}
       />
 
-      {isModalOpen && (
-        <Modal title="Фільтри" onClose={closeClickHandler}>
-          <RadioGroup
-            setBreed={setBreed}
-            breed={breed}
-            place="catalog"
-            styleName={style.header__radio}
-          />
-          <Range
-            setMinValue={setMinValue}
-            setMaxValue={setMaxValue}
-            minValue={minValue}
-            maxValue={maxValue}
-            step={1}
-          />
-          <Button
-            styleName={style.header__save}
-            title="Зберегти"
-            onClick={saveClickHandler}
-          />
-          <Button
-            styleName={style.header__clear}
-            title="Очистити"
-            onClick={clearClickHandler}
-          />
-        </Modal>
-      )}
+      {isModalOpen &&
+        createPortal(
+          <Modal title="Фільтри" onClose={closeClickHandler}>
+            <RadioGroup
+              setBreed={setBreed}
+              breed={breed}
+              place="catalog"
+              styleName={style.header__radio}
+              title="Тваринки"
+              radioAmount={radioAmount}
+            />
+            <Range
+              setMinValue={setMinValue}
+              setMaxValue={setMaxValue}
+              minValue={minValue}
+              maxValue={maxValue}
+              step={step}
+              min={min}
+              max={max}
+            />
+            <Button
+              styleName={style.header__save}
+              title="Зберегти"
+              onClick={saveClickHandler}
+            />
+            <Button
+              styleName={style.header__clear}
+              title="Очистити"
+              onClick={clearClickHandler}
+            />
+          </Modal>,
+          document.body
+        )}
     </div>
   );
 }

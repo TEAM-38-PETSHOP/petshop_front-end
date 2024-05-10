@@ -17,24 +17,23 @@
 
   &__select {
     z-index: 6;
-    width: 18%;
-    margin-right: 3%;
+    width: 19%;
+    margin-right: 2%;
 
     @include lg {
-      width: 25%;
+      width: 27%;
     }
 
     @include md {
-      margin-right: 0;
-      width: 33%;
+      margin-right: 5px;
+      width: 39%;
     }
 
     &Green {
       @include sm {
         background-color: var(--color-secondary-green);
         color: var( --color-gray-100);
-        
-        div {
+        & + div {
           border-color: transparent;
         }
       }
@@ -74,7 +73,7 @@
     width: 22%;
 
     @include lg {
-      width: 41%;
+      width: 39%;
     }
 
     @include md {
@@ -88,11 +87,17 @@
 
     @include md {
       display: flex;
-      width: 33%;
+      width: 30%;
+      margin-right: 5px;
       max-height: 50px;
-
       font-weight: 500;
       border-color: var(--color-gray-40);
+    }
+
+    @include sm {
+      font-weight: 400;
+      font-size: 0.75rem;
+      line-height: 1.5;
     }
 
     &Green {
@@ -113,6 +118,28 @@
     background-color: var(--color-gray-20);
     color: var(--color-gray-100);
     margin-bottom: 5px;
+    transition: background-color, border-color, var(--transition-duration);
+
+    &:hover {
+      background-color: var(--color-primary-100);
+      border-color: var(--color-primary-100);
+    }
+
+    &:active {
+      filter: opacity(0.7);
+    }
+  }
+
+  &__clear {
+    transition: background-color, border-color, var(--transition-duration);
+    &:hover {
+      color: var(--color-gray-100);
+      background-color: var(--color-secondary-green);
+      border-color: var(--color-secondary-green);
+    }
+    &:active {
+      filter: opacity(0.7);
+    }
   }
 
   &__sort {
@@ -124,13 +151,13 @@
     }
 
     @include md {
-      width: 33%;
+      width: 30%;
     }
 
     &Green {
       @include sm {
         background-color: var(--color-secondary-green);
-        color: var( --color-gray-100);
+        color: var(--color-gray-100);
 
         div {
           border-color: transparent;

@@ -8,21 +8,20 @@ interface Props {
   setMinValue: React.Dispatch<React.SetStateAction<number>>;
   maxValue: number;
   setMaxValue: React.Dispatch<React.SetStateAction<number>>;
-  step?: number;
-  min?: number;
-  max?: number;
+  step: number;
+  min: number;
+  max: number;
 }
 
 export default function Range({
-  step = 1,
+  step,
   minValue,
   maxValue,
   setMinValue,
   setMaxValue,
-  min = 0,
-  max = 1000,
+  min,
+  max,
 }: Props) {
-  // amount for catalog
   const rangeInputMinRef = useRef<HTMLInputElement>(null);
   const rangeInputMaxRef = useRef<HTMLInputElement>(null);
   const rangeRef = useRef<HTMLDivElement>(null);
