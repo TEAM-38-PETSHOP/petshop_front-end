@@ -5,7 +5,7 @@ import cn from "classnames";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
 import Image from "next/image";
-import hardcodedProduct from "@@/images/prod.jpg";
+// import hardcodedProduct from "@@/images/prod.jpg";
 import { truncateText } from "@/helpers/truncateText";
 import { useDebounce } from "@/hooks/useDebounce";
 import useClickOutside from "@/hooks/useClickOutside";
@@ -96,7 +96,7 @@ export default React.memo(function Input({
                 className={style.input__result}
               >
                 <Image
-                  src={hardcodedProduct}
+                  src={product.imageUrls[0]}
                   alt="Product Image"
                   width={40}
                   height={40}
@@ -105,7 +105,7 @@ export default React.memo(function Input({
                   <p className={style.input__resultName}>
                     {truncateText(product.name, wordLength)}
                   </p>
-                  <p className={style.input__resultPrice}>{product.price}</p>
+                  <p className={style.input__resultPrice}>{product.price} грн</p>
                 </div>
               </Link>
             </li>

@@ -3,7 +3,6 @@ export interface Product {
   name: string;
   productNameId: string;
   brand: string;
-  description: string;
   price: number;
   imageUrls: string[];
   countryProduct: string;
@@ -11,13 +10,15 @@ export interface Product {
   breedSize: string;
   type: string;
   packaging: string;
-  entryDate: string;
+  productSize: string;
+  description: string;
   composition: string;
   compositionAnalysis: string;
   compositionEnergyValue: string;
   compositionExpiration: string;
   instruction: string;
   instructionWhyBuy: string;
+  entryDate: string;
   animals: Animal[];
   categories: Category[];
 }
