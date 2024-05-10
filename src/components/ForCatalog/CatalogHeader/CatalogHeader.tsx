@@ -107,12 +107,12 @@ export default function CatalogHeader({ category, categories }: Props) {
 
   useEffect(() => {
     setIsLoading(true);
-    getProductsByName({ name: queryToRequest, page: 0, size: 8 })
+    getProductsByName({ name: queryToRequest, page: '0', size: '8' }, false)
       .then((data) => {
         setProducts(data);
       })
       .catch((error) => {
-        throw new Error(error);
+        throw new Error("Current error:" + error.message);
       })
       .finally(() => {
         setIsLoading(false);

@@ -54,6 +54,7 @@ export const getProductsByName = (
   desc: boolean = false
 ) => {
   const searchParams = defineSearchParamsForRequest(filters, desc);
+  console.log(`/api/products/search/name${searchParams}`);
   
   return client.get<Product[]>(
     `/api/products/search/name${searchParams}`
