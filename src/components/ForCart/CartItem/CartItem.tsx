@@ -15,6 +15,7 @@ import IconForCards from '@/components/IconForCards/IconForCards';
 import { numberToCurrency } from '@/helpers/numberToCurrency';
 import Counter from '@/components/Counter/Counter';
 import { checkWindow } from '@/helpers/checkWindow';
+import LimitedText from '@/components/LimitedText/LimitedText';
 
 type Props = {
   product: Product;
@@ -80,9 +81,12 @@ export default function CartItem({ product, setTotalPrice }: Props) {
         <h3 className={styles.cartItem__category}>
           {product.categories[0].name}
         </h3>
-        <h2
+        <LimitedText
           className={styles.cartItem__description}
-        >{`${product.name} | ${product.packaging}`}</h2>
+          text={`${product.name} | ${product.packaging}`}
+          maxLength={195}
+          maxLengthMobile={40}
+        />
         <p className={styles.cartItem__price}>
           {numberToCurrency(product.price)}
         </p>
