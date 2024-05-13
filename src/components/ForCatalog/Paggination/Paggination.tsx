@@ -51,6 +51,7 @@ export default function Paggination({
         styleName={cn(style.paggination__arrow)}
         direction="left"
         disabled={isFirstPage}
+        datatestid="prev-arrow"
       />
       <div className={style.paggination__pages}>
         {pages.slice(startPage - 1, endPage).map((el) => (
@@ -59,6 +60,7 @@ export default function Paggination({
               <>
                 <button
                   type="button"
+                  data-testid="page"
                   className={cn(style.paggination__page, {
                     [style.paggination__pageActive]: pageIndex === 0,
                   })}
@@ -79,6 +81,7 @@ export default function Paggination({
 
             <button
               type="button"
+              data-testid="page"
               className={cn(style.paggination__page, {
                 [style.paggination__pageActive]: pageIndex + 1 === el,
               })}
@@ -99,6 +102,7 @@ export default function Paggination({
 
                 <button
                   type="button"
+                  data-testid="page"
                   className={cn(style.paggination__page, {
                     [style.paggination__pageActive]: pageIndex + 1 === amount,
                   })}
@@ -116,6 +120,7 @@ export default function Paggination({
         styleName={cn(style.paggination__arrow)}
         direction="right"
         disabled={isLastPage}
+        datatestid="next-arrow"
       />
     </div>
   );
