@@ -1,5 +1,4 @@
 'use client';
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import classNames from 'classnames';
@@ -16,12 +15,12 @@ import cart from '@@/images/icons/cart.svg';
 import { Product } from '@/types/Product';
 import Buttons from '../Buttons/Buttons';
 import IconForCards from '../IconForCards/IconForCards';
+import LimitedText from '../LimitedText/LimitedText';
 type Props = {
   product: Product;
   className?: string;
 };
 export default function ProductCard({ product, className }: Props) {
-  const [isMobile, setIsMobile] = useState(false);
   const favoriteProducts = useAppSelector(
     (state) => state.favorite.favoriteProducts
   );
@@ -39,15 +38,6 @@ export default function ProductCard({ product, className }: Props) {
     product
   );
 
-  useEffect(() => {
-    setIsMobile(window.matchMedia('(max-width: 425px)').matches);
-  }, [isCart, isFavorite]);
-
-  const productInfo =
-    (product.name + product.packaging).length > (isMobile ? 35 : 80)
-      ? `${product.name}, ${product.packaging}`.slice(0, isMobile ? 35 : 80) +
-        '...'
-      : `${product.name}, ${product.packaging}`;
   return (
     <div
       className={classNames([styles.productCard, className])}
@@ -68,7 +58,13 @@ export default function ProductCard({ product, className }: Props) {
         <h3 className={styles.productCard__title}>
           {product.categories[0].name}
         </h3>
-        <p className={styles.productCard__description}>{productInfo}</p>
+        <LimitedText
+          text={`${product.name}, ${product.packaging}`}
+          maxLength={80}
+          maxLengthMobile={35}
+          isShowButton={false}
+        />
+        {/* <p className={styles.productCard__description}>{productInfo}</p> */}
         <p className={styles.productCard__price}>
           {numberToCurrency(product.price)}
         </p>
