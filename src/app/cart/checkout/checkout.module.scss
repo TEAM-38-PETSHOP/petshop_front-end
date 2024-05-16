@@ -1,0 +1,14 @@
+@import '../../../app/styles/extends.scss';
+@import '../../../app/styles/mixins.scss';
+
+.checkout {
+  &__wrapper {
+    @extend %container;
+
+    margin-top: 40px;
+
+    @include lg {
+      margin-top: 30px;
+    }
+  }
+}
