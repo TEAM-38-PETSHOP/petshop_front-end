@@ -42,21 +42,30 @@
       top: 0;
       left: 0;
     }
-
-    
   }
 }
 
 .catalog {
   flex-direction: column;
 
+  &__title {
+    @extend %main-text;
+    font-weight: 500;
+    margin-bottom: 15px;
+  }
+
   &__item {
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
 
     &:not(:last-child) {
       margin-bottom: 10px;
     }
+  }
+
+  &__amount {
+    color: var(--color-gray-40);
+    @extend %small-text;
   }
 }
 
