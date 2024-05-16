@@ -1,0 +1,64 @@
+@import "../../../app/styles/extends.scss";
+@import "../../../app/styles/mixins.scss";
+
+.filters {
+  position: relative;
+  width: 276px;
+
+  &__button {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15.5px 13px;
+
+    border: 1px solid transparent;
+    background: var(--color-gray-100);
+    box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+    border-radius: var(--radius-100);
+    color: var(--color-gray-20);
+    font-weight: 500;
+    @extend %secondary-text;
+    cursor: pointer;
+  }
+
+  &__img {
+    &Active {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__content {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    @extend %secondary-text;
+
+    width: 100%;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    max-height: 0;
+    padding: 0;
+    background-color: var(--color-gray-100);
+    border: 1px solid transparent;
+    border-radius: var(--radius-40);
+    overflow: hidden;
+
+    &Active {
+      z-index: 4;
+      padding: 4.6em 0 15px 0;
+      height: fit-content;
+      max-height: none;
+      box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+      transition: padding var(--transition-duration) ease-in-out 0s,
+        max-height var(--transition-duration) ease-in-out 0s;
+    }
+  }
+}
