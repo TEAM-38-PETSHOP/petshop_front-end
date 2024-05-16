@@ -15,7 +15,11 @@ export default function TotalCart({ totalPrice }: Props) {
       <hr className={styles.totalCart__hr} />
       <Buttons
         className={styles.totalCart__btns}
-        firstBtn={{ btnText: 'Оформити замовлення', isBuy: true }}
+        firstBtn={{
+          btnText: 'Оформити замовлення',
+          btnLink: '/cart/checkout',
+          isBuy: true,
+        }}
         secondBtn={{ btnText: 'Продовжити покупки', btnLink: '/catalog' }}
       />
     </div>
