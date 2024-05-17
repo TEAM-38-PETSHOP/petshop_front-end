@@ -80,6 +80,7 @@ export default React.memo(function Input({
           <button
             type="button"
             className={style.input__btn}
+            data-testid="clear-button"
             onMouseDown={clearQuery}
           ></button>
           <div className={style.input__separator}></div>
@@ -101,10 +102,12 @@ export default React.memo(function Input({
                   height={40}
                 />
                 <div className={style.input__resultInfo}>
-                  <p className={style.input__resultName}>
+                  <p className={style.input__resultName} data-testid={`product-${product.productId}`}>
                     {truncateText(product.name, wordLength)}
                   </p>
-                  <p className={style.input__resultPrice}>{product.price} грн</p>
+                  <p className={style.input__resultPrice} data-testid={`product-${product.productId}-price`}>
+                    {product.price} грн
+                  </p>
                 </div>
               </Link>
             </li>
@@ -114,7 +117,7 @@ export default React.memo(function Input({
 
       {isLoading && query && products.length === 0 && (
         <ul ref={resultsRef} className={style.input__results}>
-          <li className={style.input__loader}>
+          <li data-testid="loader" className={style.input__loader}>
             <Loader />
           </li>
         </ul>
@@ -127,5 +130,4 @@ export default React.memo(function Input({
       )}
     </div>
   );
-}
-)
+});
