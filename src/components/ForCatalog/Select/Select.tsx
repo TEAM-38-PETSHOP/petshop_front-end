@@ -6,7 +6,7 @@ import Image from "next/image";
 import arrow from "@@/images/icons/smallArrowDown.svg";
 import cn from "classnames";
 import useClickOutside from "@/hooks/useClickOutside";
-import { Category } from "@/types/Product";
+import { Category } from "@/types/Product"; //
 import Link from "next/link";
 import { useSearchParams, usePathname } from "next/navigation";
 import { createUrl, createUrlString } from "@/helpers/createUrlString";
@@ -80,6 +80,7 @@ export default React.memo(function Select({
   return (
     <div className={cn([styleName], style.select, 'green')} ref={selectRef}>
       <div
+        data-testid="select-button"
         className={cn(style.select__btn, {
           [style.select__btnActive]: isOpen,
           [style.select__btnBorder]: type === "border",
@@ -99,6 +100,7 @@ export default React.memo(function Select({
         />
       </div>
       <div
+        data-testid="select-content"
         className={cn([style.select__content], {
           [style.select__contentActive]: isOpen,
         })}

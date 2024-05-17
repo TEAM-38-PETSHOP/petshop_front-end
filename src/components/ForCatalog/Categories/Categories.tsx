@@ -2,15 +2,15 @@ import style from "./categories.module.scss";
 import Category from "../Category/Category";
 import { BreedType } from "@/types/enums/BreedType";
 import { Suspense } from "react";
-import { getAllCategories } from "@/helpers/fetchCategories";
 import { checkVariant } from "@/helpers/checkVariant";
+import { Category as CategoryType } from "@/types/Product";
 
 interface Props {
   breed?: BreedType | undefined;
+  categories: CategoryType[];
 }
 
-export default async function Categories({ breed }: Props) {
-  const categories = await getAllCategories();
+export default function Categories({ breed, categories }: Props) {
   const searchParams = breed ? `?breed=${breed}` : "";
   
   return (

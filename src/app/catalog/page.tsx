@@ -1,5 +1,7 @@
 import Categories from "@/components/ForCatalog/Categories/Categories";
 import StoreHeader from "@/components/ForCatalog/StoreHeader/StoreHeader";
+import { getAllCategories } from "@/helpers/fetchCategories";
+import { Category } from "@/types/Product";
 import { BreedType } from "@/types/enums/BreedType";
 
 type Props = {
@@ -9,10 +11,12 @@ type Props = {
 };
 
 export default async function Store({ searchParams: { breed } }: Props) {
+  const categories: Category[] = await getAllCategories();
+
   return (
     <>
       <StoreHeader />
-      <Categories breed={breed} />
+      <Categories categories={categories} breed={breed} />
     </>
   );
 }

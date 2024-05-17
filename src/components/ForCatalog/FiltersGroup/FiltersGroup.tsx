@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import style from "./filtersGroup.module.scss";
 import Image from "next/image";
 import arrow from "@@/images/icons/smallArrowDown.svg";
@@ -22,7 +22,6 @@ export default function FiltersGroup({
   isOpen,
   setIsOpen,
 }: Props) {
-  // const [isOpen, setIsOpen] = useState<boolean>(false);
   const selectRef = useRef<HTMLDivElement | null>(null);
 
   useClickOutside(selectRef, () => {

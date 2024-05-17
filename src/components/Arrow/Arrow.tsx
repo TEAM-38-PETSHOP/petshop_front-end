@@ -14,6 +14,7 @@ type Props = {
   isWhite?: boolean;
   isBack?: boolean;
   disabled?: boolean;
+  datatestid?: string;
 };
 
 export default function Arrow({
@@ -24,13 +25,14 @@ export default function Arrow({
   isWhite,
   isBack,
   disabled = false,
+  datatestid = 'arrow',
 }: Props) {
   const router = useRouter();
   
   return (
     <button
       type="button"
-      data-testid="arrow"
+      data-testid={datatestid}
       onClick={isBack ? () => router.back() : onClick}
       disabled={(isCarousel && !onClick) || disabled}
       className={classNames([styleName], [styles.arrow], {
