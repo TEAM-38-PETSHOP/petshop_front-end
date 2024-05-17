@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import ChoicePet from './ChoicePet';
 
-describe('ChoicePet component', () => {
+describe("ChoicePet component", () => {
   test('renders correctly when choice prop is "dogs" and contains alt value "dog"', () => {
     render(<ChoicePet choice="dogs" />);
 
@@ -16,11 +16,11 @@ describe('ChoicePet component', () => {
 
   test('renders correctly when choice prop is "cats" and contains alt value "cat"', () => {
     render(<ChoicePet choice="cats" />);
-
+    
     const catImageAltText = 'cat'; // Alt value to check for
-
+    
     expect(screen.getByText('Котика')).toBeInTheDocument();
-
+    
     // Check if the alt value "cat" is present in the Image component
     const catImage = screen.getByAltText(catImageAltText);
     expect(catImage).toBeInTheDocument();
