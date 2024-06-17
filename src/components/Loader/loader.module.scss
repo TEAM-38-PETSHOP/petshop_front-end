@@ -2,129 +2,129 @@
 @import '../../app/styles/mixins.scss';
 
 .loader {
-	width: 90%;
-	margin: 0 auto;
-	padding: 50px 0;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  padding: 50px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-	&__paws {
-		position: relative;
-		width: 150px;
-		height: 150px;
-		border-radius: 50%;
-		animation: circleAnimation 4s linear infinite;
-		display: flex;
-		justify-content: center;
-		align-items: center;
+  &__paws {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    animation: circleAnimation 4s linear infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-		@include lg {
-			width: 100px;
-			height: 100px;
-		}
+    @include lg {
+      width: 100px;
+      height: 100px;
+    }
 
-		@include md {
-			width: 80px;
-			height: 80px;
-		}
+    @include md {
+      width: 80px;
+      height: 80px;
+    }
 
-		@include sm {
-			width: 60px;
-			height: 60px;
-		}
+    @include sm {
+      width: 60px;
+      height: 60px;
+    }
 
-		&__paw {
-			position: absolute;
-			fill: currentColor;
-			max-width: 20px;
-			max-height: 20px;
-			opacity: 0.1;
+    &__paw {
+      position: absolute;
+      fill: currentColor;
+      max-width: 20px;
+      max-height: 20px;
+      opacity: 0.1;
 
-			@include lg {
-				max-width: 15px;
-				max-height: 15px;
-			}
+      @include lg {
+        max-width: 15px;
+        max-height: 15px;
+      }
 
-			@include md {
-				max-width: 10px;
-				max-height: 10px;
-			}
-		
-			&:nth-child(1) {
-				top: 0;
-				left: 15%;
-				transform: rotate(-120deg);
-				animation: pawOpacity1 2s linear infinite;
-			}
-			&:nth-child(2) {
-				top: -7%;
-				left: 40%;
-				transform: rotate(-100deg);
-				animation: pawOpacity2 2s linear infinite;
-			}
-			&:nth-child(3) {
-				top: -3%;
-				right: 22%;
-				transform: rotate(-70deg);
-				animation: pawOpacity3 2s linear infinite;
-			}
-			&:nth-child(4) {
-				top: 15%;
-				right: 3%;
-				transform: rotate(-50deg);
-				animation: pawOpacity4 2s linear infinite;
-			}
-			&:nth-child(5) {
-				top: 40%;
-				right: -6%;
-				transform: rotate(-10deg);
-				animation: pawOpacity5 2s linear infinite;
-			}
-			&:nth-child(6) {
-				top: 65%;
-				right: -1%;
-				transform: rotate(20deg);
-				animation: pawOpacity6 2s linear infinite;
-			}
-			&:nth-child(7) {
-				bottom: 3%;
-				right: 15%;
-				transform: rotate(40deg);
-				animation: pawOpacity7 2s linear infinite;
-			}
-			&:nth-child(8) {
-				bottom: -5%;
-				right: 45%;
-				transform: rotate(90deg);
-				animation: pawOpacity8 2s linear infinite;
-			}
-			&:nth-child(9) {
-				bottom: 2%;
-				left: 15%;
-				transform: rotate(110deg);
-				animation: pawOpacity9 2s linear infinite;
-			}
-			&:nth-child(10) {
-				bottom: 20%;
-				left: -2%;
-				transform: rotate(140deg);
-				animation: pawOpacity10 2s linear infinite;
-			}
-			&:nth-child(11) {
-				bottom: 45%;
-				left: -7%;
-				transform: rotate(180deg);
-				animation: pawOpacity11 2s linear infinite;
-			}
-			&:nth-child(12) {
-				top: 20%;
-				left: -1%;
-				transform: rotate(200deg);
-				animation: pawOpacity12 2s linear infinite;
-			}
-		}
-	}
+      @include md {
+        max-width: 10px;
+        max-height: 10px;
+      }
+
+      &:nth-child(1) {
+        top: 0;
+        left: 15%;
+        transform: rotate(-120deg);
+        animation: pawOpacity1 2s linear infinite;
+      }
+      &:nth-child(2) {
+        top: -7%;
+        left: 40%;
+        transform: rotate(-100deg);
+        animation: pawOpacity2 2s linear infinite;
+      }
+      &:nth-child(3) {
+        top: -3%;
+        right: 22%;
+        transform: rotate(-70deg);
+        animation: pawOpacity3 2s linear infinite;
+      }
+      &:nth-child(4) {
+        top: 15%;
+        right: 3%;
+        transform: rotate(-50deg);
+        animation: pawOpacity4 2s linear infinite;
+      }
+      &:nth-child(5) {
+        top: 40%;
+        right: -6%;
+        transform: rotate(-10deg);
+        animation: pawOpacity5 2s linear infinite;
+      }
+      &:nth-child(6) {
+        top: 65%;
+        right: -1%;
+        transform: rotate(20deg);
+        animation: pawOpacity6 2s linear infinite;
+      }
+      &:nth-child(7) {
+        bottom: 3%;
+        right: 15%;
+        transform: rotate(40deg);
+        animation: pawOpacity7 2s linear infinite;
+      }
+      &:nth-child(8) {
+        bottom: -5%;
+        right: 45%;
+        transform: rotate(90deg);
+        animation: pawOpacity8 2s linear infinite;
+      }
+      &:nth-child(9) {
+        bottom: 2%;
+        left: 15%;
+        transform: rotate(110deg);
+        animation: pawOpacity9 2s linear infinite;
+      }
+      &:nth-child(10) {
+        bottom: 20%;
+        left: -2%;
+        transform: rotate(140deg);
+        animation: pawOpacity10 2s linear infinite;
+      }
+      &:nth-child(11) {
+        bottom: 45%;
+        left: -7%;
+        transform: rotate(180deg);
+        animation: pawOpacity11 2s linear infinite;
+      }
+      &:nth-child(12) {
+        top: 20%;
+        left: -1%;
+        transform: rotate(200deg);
+        animation: pawOpacity12 2s linear infinite;
+      }
+    }
+  }
 }
 
 // @keyframes circleAnimation {
@@ -137,205 +137,217 @@
 // }
 
 @keyframes pawOpacity12 {
-	0%, 100% {
-		opacity: 0.1;
-	}
-	8% {
-		opacity: 1;
-	}
-	16% {
-		opacity: 0.5;
-	}
-	24% {
-		opacity: 0;
-	}
+  0%,
+  100% {
+    opacity: 0.1;
+  }
+  8% {
+    opacity: 1;
+  }
+  16% {
+    opacity: 0.5;
+  }
+  24% {
+    opacity: 0;
+  }
 }
 
 @keyframes pawOpacity11 {
-	0%, 100% {
-		opacity: 0.1;
-	}
-	16% {
-		opacity: 0.1;
-	}
-	24% {
-		opacity: 0.5;
-	}
-	32% {
-		opacity: 1;
-	}
-	41% {
-		opacity: 0;
-	}
+  0%,
+  100% {
+    opacity: 0.1;
+  }
+  16% {
+    opacity: 0.1;
+  }
+  24% {
+    opacity: 0.5;
+  }
+  32% {
+    opacity: 1;
+  }
+  41% {
+    opacity: 0;
+  }
 }
 
 @keyframes pawOpacity10 {
-	0%, 100% {
-		opacity: 0.1;
-	}
-	24% {
-		opacity: 0.1;
-	}
-	32% {
-		opacity: 0.5;
-	}
-	40% {
-		opacity: 1;
-	}
-	49% {
-		opacity: 0;
-	}
+  0%,
+  100% {
+    opacity: 0.1;
+  }
+  24% {
+    opacity: 0.1;
+  }
+  32% {
+    opacity: 0.5;
+  }
+  40% {
+    opacity: 1;
+  }
+  49% {
+    opacity: 0;
+  }
 }
 
 @keyframes pawOpacity9 {
-	0%, 100% {
-		opacity: 0.1;
-	}
-	32% {
-		opacity: 0.1;
-	}
-	40% {
-		opacity: 0.5;
-	}
-	48% {
-		opacity: 1;
-	}
-	57% {
-		opacity: 0;
-	}
+  0%,
+  100% {
+    opacity: 0.1;
+  }
+  32% {
+    opacity: 0.1;
+  }
+  40% {
+    opacity: 0.5;
+  }
+  48% {
+    opacity: 1;
+  }
+  57% {
+    opacity: 0;
+  }
 }
 
 @keyframes pawOpacity8 {
-	0%, 100% {
-		opacity: 0.1;
-	}
-	40% {
-		opacity: 0.1;
-	}
-	48% {
-		opacity: 0.5;
-	}
-	56% {
-		opacity: 1;
-	}
-	65% {
-		opacity: 0;
-	}
+  0%,
+  100% {
+    opacity: 0.1;
+  }
+  40% {
+    opacity: 0.1;
+  }
+  48% {
+    opacity: 0.5;
+  }
+  56% {
+    opacity: 1;
+  }
+  65% {
+    opacity: 0;
+  }
 }
 
 @keyframes pawOpacity7 {
-	0%, 100% {
-		opacity: 0.1;
-	}
-	48% {
-		opacity: 0.1;
-	}
-	56% {
-		opacity: 0.5;
-	}
-	64% {
-		opacity: 1;
-	}
-	73% {
-		opacity: 0;
-	}
+  0%,
+  100% {
+    opacity: 0.1;
+  }
+  48% {
+    opacity: 0.1;
+  }
+  56% {
+    opacity: 0.5;
+  }
+  64% {
+    opacity: 1;
+  }
+  73% {
+    opacity: 0;
+  }
 }
 
 @keyframes pawOpacity6 {
-	0%, 100% {
-		opacity: 0.1;
-	}
-	56% {
-		opacity: 0.1;
-	}
-	64% {
-		opacity: 0.5;
-	}
-	72% {
-		opacity: 1;
-	}
-	81% {
-		opacity: 0;
-	}
+  0%,
+  100% {
+    opacity: 0.1;
+  }
+  56% {
+    opacity: 0.1;
+  }
+  64% {
+    opacity: 0.5;
+  }
+  72% {
+    opacity: 1;
+  }
+  81% {
+    opacity: 0;
+  }
 }
 
 @keyframes pawOpacity5 {
-	0%, 100% {
-		opacity: 0.1;
-	}
-	64% {
-		opacity: 0.1;
-	}
-	72% {
-		opacity: 0.5;
-	}
-	80% {
-		opacity: 1;
-	}
-	89% {
-		opacity: 0;
-	}
+  0%,
+  100% {
+    opacity: 0.1;
+  }
+  64% {
+    opacity: 0.1;
+  }
+  72% {
+    opacity: 0.5;
+  }
+  80% {
+    opacity: 1;
+  }
+  89% {
+    opacity: 0;
+  }
 }
 
 @keyframes pawOpacity4 {
-	0%, 100% {
-		opacity: 0.1;
-	}
-	72% {
-		opacity: 0.1;
-	}
-	80% {
-		opacity: 0.5;
-	}
-	88% {
-		opacity: 1;
-	}
-	97% {
-		opacity: 0;
-	}
+  0%,
+  100% {
+    opacity: 0.1;
+  }
+  72% {
+    opacity: 0.1;
+  }
+  80% {
+    opacity: 0.5;
+  }
+  88% {
+    opacity: 1;
+  }
+  97% {
+    opacity: 0;
+  }
 }
 
 @keyframes pawOpacity3 {
-	0%, 100% {
-		opacity: 0.1;
-	}
-	80% {
-		opacity: 0.1;
-	}
-	88% {
-		opacity: 0.5;
-	}
-	96% {
-		opacity: 1;
-	}
-	100% {
-		opacity: 0;
-	}
+  0%,
+  100% {
+    opacity: 0.1;
+  }
+  80% {
+    opacity: 0.1;
+  }
+  88% {
+    opacity: 0.5;
+  }
+  96% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 @keyframes pawOpacity2 {
-	0%, 100% {
-		opacity: 0.1;
-	}
-	88% {
-		opacity: 0.1;
-	}
-	96% {
-		opacity: 0.5;
-	}
-	100% {
-		opacity: 0;
-	}
+  0%,
+  100% {
+    opacity: 0.1;
+  }
+  88% {
+    opacity: 0.1;
+  }
+  96% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 @keyframes pawOpacity1 {
-	0%, 100% {
-		opacity: 0.1;
-	}
-	96% {
-		opacity: 0.1;
-	}
-	100% {
-		opacity: 0.5;
-	}
+  0%,
+  100% {
+    opacity: 0.1;
+  }
+  96% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 0.5;
+  }
 }
