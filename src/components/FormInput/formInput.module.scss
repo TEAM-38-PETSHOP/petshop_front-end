@@ -1,0 +1,56 @@
+@import '../../app/styles/extends.scss';
+
+.input {
+  width: 100%;
+  height: 50px;
+  padding: 0 15px;
+  background-color: var(--color-gray-80);
+  border-radius: var(--radius-15);
+
+  @extend %main-text;
+
+  &::placeholder {
+    color: var(--color-gray-40);
+  }
+
+  &__activeList {
+    border-radius: var(--radius-15) var(--radius-15) 0 0;
+  }
+
+  &__error {
+    @extend %small-text;
+    color: var(--color-system-error);
+    margin-top: -15px;
+  }
+}
+
+.autocomplete {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  background-color: var(--color-gray-80);
+  border-top: 1px solid var(--color-gray-40);
+  border-radius: 0 0 var(--radius-15) var(--radius-15);
+  padding: 15px;
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .autocomplete__loader {
+    width: 60px;
+    height: 60px;
+
+    svg {
+      max-width: 10px;
+      max-height: 10px;
+    }
+  }
+  li {
+    cursor: pointer;
+    padding: 5px;
+  }
+}
