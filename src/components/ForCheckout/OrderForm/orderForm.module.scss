@@ -31,19 +31,6 @@
     font-weight: 500;
   }
 
-  &__input {
-    height: 50px;
-    padding: 0 15px;
-    background-color: var(--color-gray-80);
-    border-radius: 15px;
-
-    @extend %main-text;
-
-    &::placeholder {
-      color: var(--color-gray-40);
-    }
-  }
-
   &__select {
     height: 50px;
     padding: 0 10px;
@@ -56,11 +43,5 @@
 
     @extend %main-text;
     color: var(--color-gray-40);
-  }
-
-  &__error {
-    @extend %small-text;
-    color: var(--color-system-error);
-    margin-top: -15px;
   }
 }

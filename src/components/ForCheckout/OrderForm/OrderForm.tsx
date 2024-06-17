@@ -1,29 +1,50 @@
 'use client';
+import React, { useMemo } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import styles from './orderForm.module.scss';
 import Link from 'next/link';
-
-type FormInputs = {
-  firstName: string;
-  lastName: string;
-  phone: string;
-  city: string;
-  deliveryMethod: string;
-  deliveryPoint: string;
-  paymentMethod: string;
-  comment?: string;
-};
+import { getCities } from '@/helpers/fetchNovaposhta';
+import { IOrderForm } from '@/types/OrderForm';
+import FormInput from '@/components/FormInput/FormInput';
+import debounce from 'lodash.debounce';
 
 export default function OrderForm() {
+  const [cityList, setCityList] = React.useState<[] | string[]>([]);
+  const [isLoadingCity, setIsLoadingCity] = React.useState(false);
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
     formState: { errors },
-  } = useForm<FormInputs>();
+  } = useForm<IOrderForm>();
 
-  const onSubmit: SubmitHandler<FormInputs> = (data) => {
+  const onSubmit: SubmitHandler<IOrderForm> = (data) => {
     console.log(data);
   };
+
+  const handleCityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
+    if (value.length >= 3) {
+      setIsLoadingCity(true);
+      setCityList([]);
+      getCities(value)
+        .then((data) => {
+          setCityList(data.Addresses.map((item) => item.Present));
+        })
+        .catch(() => {
+          setCityList([]);
+        })
+        .finally(() => {
+          setIsLoadingCity(false);
+        });
+    }
+  };
+
+  const debouncedCityChange = useMemo(
+    () => debounce(handleCityChange, 400),
+    []
+  );
 
   return (
     <form
@@ -38,49 +59,45 @@ export default function OrderForm() {
             <Link href="#">Увійти тут</Link>
           </p>
         </div>
-        <input
-          className={styles.orderForm__input}
+        <FormInput
+          register={register('firstName', {
+            required: "Це поле є обов'язковим",
+          })}
           placeholder="Ім'я одержувача"
-          {...register('firstName', { required: "Це поле є обов'язковим" })}
+          errors={errors.firstName?.message}
         />
-        {errors.firstName && (
-          <span className={styles.orderForm__error}>
-            {errors.firstName.message}
-          </span>
-        )}
-        <input
-          className={styles.orderForm__input}
+        <FormInput
+          register={register('lastName', {
+            required: "Це поле є обов'язковим",
+          })}
           placeholder="Прізвище одержувача"
-          {...register('lastName', { required: "Це поле є обов'язковим" })}
+          errors={errors.lastName?.message}
         />
-        {errors.lastName && (
-          <span className={styles.orderForm__error}>
-            {errors.lastName.message}
-          </span>
-        )}
-        <input
-          className={styles.orderForm__input}
+        <FormInput
           placeholder="Телефон"
           type="tel"
-          {...register('phone', { required: "Це поле є обов'язковим" })}
+          register={register('phone', { required: "Це поле є обов'язковим" })}
+          errors={errors.phone?.message}
         />
-        {errors.phone && (
-          <span className={styles.orderForm__error}>
-            {errors.phone.message}
-          </span>
-        )}
       </div>
 
       <div className={styles.orderForm__block}>
         <h3 className={styles.orderForm__title}>Доставка</h3>
-        <input
+        <FormInput
           className={styles.orderForm__input}
           placeholder="Місто"
-          {...register('city', { required: "Це поле є обов'язковим" })}
+          register={register('city', {
+            required: "Це поле є обов'язковим",
+            onChange: debouncedCityChange,
+          })}
+          errors={errors.city?.message}
+          autocomplete={{
+            value: watch('city') || '',
+            autocompleteList: cityList,
+            isLoading: isLoadingCity,
+            setValue: setValue,
+          }}
         />
-        {errors.city && (
-          <span className={styles.orderForm__error}>{errors.city.message}</span>
-        )}
         <select
           className={styles.orderForm__select}
           defaultValue=""
