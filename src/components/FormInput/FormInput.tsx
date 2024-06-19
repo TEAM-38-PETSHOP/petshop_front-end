@@ -15,6 +15,7 @@ type Props = {
   className?: string;
   autocomplete?: {
     setValue: UseFormSetValue<IOrderForm>;
+    name: keyof IOrderForm;
     value: string;
     autocompleteList: string[];
     isLoading: boolean;
@@ -54,7 +55,7 @@ export default React.memo(function FormInput({
               {autocomplete.autocompleteList.map((item) => (
                 <li
                   key={item}
-                  onClick={() => autocomplete.setValue('city', item)}
+                  onClick={() => autocomplete.setValue(autocomplete.name, item)}
                 >
                   {item}
                 </li>
