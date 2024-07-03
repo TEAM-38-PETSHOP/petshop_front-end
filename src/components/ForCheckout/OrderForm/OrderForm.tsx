@@ -1,5 +1,6 @@
 'use client';
 import React, { useCallback, useMemo, useState } from 'react';
+import classNames from 'classnames';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import styles from './orderForm.module.scss';
 import Link from 'next/link';
@@ -14,7 +15,11 @@ import { Warehouse } from '@/types/novaposhta/ResponseWarehouses';
 import FormComment from '@/components/FormComment/FormComment';
 import Buttons from '@/components/Buttons/Buttons';
 
-export default function OrderForm() {
+type Props = {
+  className?: string;
+};
+
+export default function OrderForm({ className }: Props) {
   const [cityList, setCityList] = useState<[] | string[]>([]);
   const [warehouseList, setWarehouseList] = useState<[] | string[]>([]);
   const [isLoadingCity, setIsLoadingCity] = useState(false);
@@ -84,7 +89,7 @@ export default function OrderForm() {
 
   return (
     <form
-      className={styles.orderForm}
+      className={classNames([styles.orderForm], [className])}
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className={styles.orderForm__block}>
