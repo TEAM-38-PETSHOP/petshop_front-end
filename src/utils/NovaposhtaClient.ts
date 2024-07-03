@@ -5,8 +5,9 @@ const BASE_URL = 'https://api.novaposhta.ua/v2.0/json/';
 export function novaposhtaRequest<T>(
   modelName: string,
   calledMethod: string,
-  methodProperties: any
-): Promise<T> {
+  methodProperties: any,
+  returnByIndex?: boolean
+): Promise<T | T[]> {
   const options: RequestInit = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -24,6 +25,6 @@ export function novaposhtaRequest<T>(
       if (!res.success) {
         throw new Error(res.errorCodes[0]);
       }
-      return res.data[0];
+      return returnByIndex ? res.data[0] : res.data;
     });
 }
