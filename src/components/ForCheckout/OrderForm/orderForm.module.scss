@@ -2,6 +2,12 @@
 @import '../../../app/styles/mixins.scss';
 
 .orderForm {
+  margin-bottom: 70px;
+
+  @include lg {
+    margin-bottom: 30px;
+  }
+
   &__block {
     display: flex;
     flex-direction: column;
@@ -31,17 +37,8 @@
     font-weight: 500;
   }
 
-  &__select {
-    height: 50px;
-    padding: 0 10px;
-    border: 1px solid var(--color-gray-50);
-    border-radius: var(--radius-100);
-    appearance: none;
-
-    cursor: pointer;
-    outline: none;
-
-    @extend %main-text;
-    color: var(--color-gray-40);
+  &__btnSubmit {
+    margin-top: 20px;
+    width: 100%;
   }
 }
