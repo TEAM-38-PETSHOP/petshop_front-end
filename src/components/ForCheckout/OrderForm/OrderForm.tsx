@@ -1,20 +1,30 @@
 'use client';
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import styles from './orderForm.module.scss';
 import Link from 'next/link';
-import { getCities } from '@/helpers/fetchNovaposhta';
+import { getCities, getWarehouses } from '@/helpers/fetchNovaposhta';
 import { IOrderForm } from '@/types/OrderForm';
 import FormInput from '@/components/FormInput/FormInput';
 import debounce from 'lodash.debounce';
+import FormSelect from '@/components/FormSelect/FormSelect';
+import { checkWindow } from '@/helpers/checkWindow';
+import { ResponseCities } from '@/types/novaposhta/ResponseCities';
+import { Warehouse } from '@/types/novaposhta/ResponseWarehouses';
+import FormComment from '@/components/FormComment/FormComment';
+import Buttons from '@/components/Buttons/Buttons';
 
 export default function OrderForm() {
-  const [cityList, setCityList] = React.useState<[] | string[]>([]);
-  const [isLoadingCity, setIsLoadingCity] = React.useState(false);
+  const [cityList, setCityList] = useState<[] | string[]>([]);
+  const [warehouseList, setWarehouseList] = useState<[] | string[]>([]);
+  const [isLoadingCity, setIsLoadingCity] = useState(false);
+  const [isLoadingWarehouse, setIsLoadingWarehouse] = useState(false);
+  const sessionCity = (checkWindow() && sessionStorage.getItem('city')) || '';
   const {
     register,
     handleSubmit,
     setValue,
+    clearErrors,
     watch,
     formState: { errors },
   } = useForm<IOrderForm>();
@@ -23,14 +33,18 @@ export default function OrderForm() {
     console.log(data);
   };
 
-  const handleCityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleCityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     if (value.length >= 3) {
       setIsLoadingCity(true);
       setCityList([]);
       getCities(value)
         .then((data) => {
-          setCityList(data.Addresses.map((item) => item.Present));
+          setCityList(
+            (data as ResponseCities).Addresses.map(
+              (item) => `${item.Present} | ${item.DeliveryCity}`
+            )
+          );
         })
         .catch(() => {
           setCityList([]);
@@ -40,10 +54,32 @@ export default function OrderForm() {
         });
     }
   };
+  const handleWarehouseChange = useCallback(
+    (event?: React.ChangeEvent<HTMLInputElement>) => {
+      const value = event?.target.value || '';
+      setIsLoadingWarehouse(true);
+      getWarehouses(sessionCity, value)
+        .then((data) => {
+          setWarehouseList(data.map((item) => (item as Warehouse).Description));
+        })
+        .catch(() => {
+          setWarehouseList([]);
+        })
+        .finally(() => {
+          setIsLoadingWarehouse(false);
+        });
+    },
+    [sessionCity]
+  );
 
   const debouncedCityChange = useMemo(
     () => debounce(handleCityChange, 400),
     []
+  );
+
+  const debouncedWarehouseChange = useMemo(
+    () => debounce(handleWarehouseChange, 400),
+    [handleWarehouseChange]
   );
 
   return (
@@ -76,7 +112,17 @@ export default function OrderForm() {
         <FormInput
           placeholder="Телефон"
           type="tel"
-          register={register('phone', { required: "Це поле є обов'язковим" })}
+          register={register('phone', {
+            required: "Це поле є обов'язковим",
+            maxLength: {
+              value: 13,
+              message: 'Невірно введенний номер, прикдад: +380XXXXXXXXX',
+            },
+            minLength: {
+              value: 13,
+              message: 'Невірно введенний номер прикдад: +380XXXXXXXXX',
+            },
+          })}
           errors={errors.phone?.message}
         />
       </div>
@@ -91,87 +137,67 @@ export default function OrderForm() {
             onChange: debouncedCityChange,
           })}
           errors={errors.city?.message}
+          isSave
           autocomplete={{
             value: watch('city') || '',
+            name: 'city',
+            minLength: 3,
             autocompleteList: cityList,
             isLoading: isLoadingCity,
             setValue: setValue,
           }}
         />
-        <select
-          className={styles.orderForm__select}
-          defaultValue=""
-          {...register('deliveryMethod', {
+        <FormInput
+          className={styles.orderForm__input}
+          placeholder="Відділення"
+          register={register('deliveryPoint', {
             required: "Це поле є обов'язковим",
+            onChange: debouncedWarehouseChange,
           })}
-        >
-          <option
-            value=""
-            disabled
-          >
-            Cпосіб доставки
-          </option>
-          <option value="courier">Кур&apos;єр</option>
-          <option value="pickup">Самовивіз</option>
-        </select>
-        {errors.deliveryMethod && (
-          <span className={styles.orderForm__error}>
-            {errors.deliveryMethod.message}
-          </span>
-        )}
-        <select
-          className={styles.orderForm__select}
-          defaultValue=""
-          {...register('deliveryPoint', {
-            required: "Це поле є обов'язковим",
-          })}
-        >
-          <option
-            value=""
-            disabled
-          >
-            Відділення
-          </option>
-          <option value="courier">Кур&apos;єр</option>
-          <option value="pickup">Самовивіз</option>
-        </select>
-        {errors.deliveryPoint && (
-          <span className={styles.orderForm__error}>
-            {errors.deliveryPoint.message}
-          </span>
-        )}
+          onClickInput={handleWarehouseChange}
+          errors={errors.deliveryPoint?.message}
+          autocomplete={{
+            value: watch('deliveryPoint') || '',
+            name: 'deliveryPoint',
+            minLength: 0,
+            autocompleteList: warehouseList,
+            isLoading: isLoadingWarehouse,
+            setValue: setValue,
+          }}
+        />
       </div>
 
       <div className={styles.orderForm__block}>
         <h3 className={styles.orderForm__title}>Оплата</h3>
-        <select
-          defaultValue=""
-          className={styles.orderForm__select}
-          {...register('paymentMethod', { required: "Це поле є обов'язковим" })}
-        >
-          <option
-            value=""
-            disabled
-          >
-            Варіант оплати
-          </option>
-          <option value="creditCard">Кредитна картка</option>
-          <option value="creditCard">Кредитна картка</option>
-          <option value="cash">Готівка</option>
-        </select>
-        {errors.paymentMethod && (
-          <span className={styles.orderForm__error}>
-            {errors.paymentMethod.message}
-          </span>
-        )}
+        <FormSelect
+          defaultText="Варіант оплати"
+          register={register('paymentMethod', {
+            required: "Це поле є обов'язковим",
+          })}
+          setValue={setValue}
+          itemName="paymentMethod"
+          options={{ cash: 'Оплата при отриманні', card: 'Оплата картою' }}
+          disabled={['card']}
+          errors={errors.paymentMethod?.message}
+          clearErrors={clearErrors}
+        />
       </div>
 
-      <textarea
-        placeholder="Додати коментар до замовлення"
-        {...register('comment')}
+      <FormComment
+        register={register('comment')}
+        buttonText={[
+          '+ Додати коментар до замовлення',
+          '- Видалити коментар до замовлення',
+        ]}
       />
-
-      <button type="submit">Оформити</button>
+      <Buttons
+        firstBtn={{
+          className: styles.orderForm__btnSubmit,
+          isBuy: true,
+          type: 'button',
+          btnText: 'Оформити',
+        }}
+      />
     </form>
   );
 }
