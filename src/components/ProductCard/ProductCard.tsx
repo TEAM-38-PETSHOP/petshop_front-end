@@ -64,7 +64,6 @@ export default function ProductCard({ product, className }: Props) {
           maxLengthMobile={35}
           isShowButton={false}
         />
-        {/* <p className={styles.productCard__description}>{productInfo}</p> */}
         <p className={styles.productCard__price}>
           {numberToCurrency(product.price)}
         </p>
