@@ -4,10 +4,11 @@ import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import styles from './counter.module.scss';
 import { checkWindow } from '@/helpers/checkWindow';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
+import { setTotalPrice } from '@/redux/features/totalPriceSlice';
 type Props = {
   productId: number;
   price: number;
-  setTotalPrice?: React.Dispatch<React.SetStateAction<number>>;
   className?: string;
   forceUpdate?: any;
 };
@@ -15,22 +16,23 @@ type Props = {
 export default function Counter({
   productId,
   price,
-  setTotalPrice,
   className,
   forceUpdate,
 }: Props) {
+  const totalPrice = useAppSelector((state) => state.totalPrice.totalPrice);
+  const dispatch = useAppDispatch();
   const [productCount, setProductCount] = useState(1);
   const handlePlus = () => {
     if (checkWindow()) {
       setProductCount((prev) => prev + 1);
-      setTotalPrice && setTotalPrice((prev) => prev + price);
+      dispatch(setTotalPrice(totalPrice + price));
       localStorage.setItem(productId.toString(), (productCount + 1).toString());
     }
   };
   const handleMinus = () => {
     if (checkWindow() && productCount > 1) {
       setProductCount((prev) => prev - 1);
-      setTotalPrice && setTotalPrice((prev) => prev - price);
+      dispatch(setTotalPrice(totalPrice - price));
       localStorage.setItem(productId.toString(), (productCount - 1).toString());
     }
   };

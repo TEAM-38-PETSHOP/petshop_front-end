@@ -7,7 +7,7 @@ import styles from './cartItem.module.scss';
 import favorite from '@@/images/icons/like.svg';
 import deleteIcon from '@@/images/icons/delete.svg';
 
-import { useAppSelector } from '@/hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { setFavoriteProducts } from '@/redux/features/favoriteSlice';
 import { setCartProducts } from '@/redux/features/cartSlice';
 import { useToggle } from '@/hooks/useToggle';
@@ -16,12 +16,15 @@ import { numberToCurrency } from '@/helpers/numberToCurrency';
 import Counter from '@/components/Counter/Counter';
 import { checkWindow } from '@/helpers/checkWindow';
 import LimitedText from '@/components/LimitedText/LimitedText';
+import { setTotalPrice } from '@/redux/features/totalPriceSlice';
 
 type Props = {
   product: Product;
-  setTotalPrice: React.Dispatch<React.SetStateAction<number>>;
 };
-export default function CartItem({ product, setTotalPrice }: Props) {
+export default function CartItem({ product }: Props) {
+  const totalPrice = useAppSelector((state) => state.totalPrice.totalPrice);
+  const dispatch = useAppDispatch();
+
   const favoriteProducts = useAppSelector(
     (state) => state.favorite.favoriteProducts
   );
@@ -40,13 +43,16 @@ export default function CartItem({ product, setTotalPrice }: Props) {
   );
 
   const handleDeleteItem = () => {
-    toggleCart();
-    setTotalPrice(
-      (prev) =>
-        prev -
-        product.price *
-          +(localStorage.getItem(product.productId.toString()) || 1)
+    dispatch(
+      setTotalPrice(
+        totalPrice -
+          product.price *
+            +(localStorage.getItem(product.productId.toString()) || 1)
+      )
     );
+
+    toggleCart();
+
     if (checkWindow()) {
       localStorage.removeItem(product.productId.toString());
     }
@@ -95,7 +101,6 @@ export default function CartItem({ product, setTotalPrice }: Props) {
             className={styles.cartItem__counter}
             productId={product.productId}
             price={product.price}
-            setTotalPrice={setTotalPrice}
           />
           <IconForCards
             className={styles.cartItem__delete}
