@@ -1,0 +1,44 @@
+@import '../../../app/styles/extends.scss';
+@import '../../../app/styles/mixins.scss';
+
+.orderForm {
+  margin-bottom: 70px;
+
+  @include lg {
+    margin-bottom: 30px;
+  }
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    margin-bottom: 40px;
+
+    &:nth-child(3) {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__titleWrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    @extend %secondary-text;
+
+    a {
+      color: var(--color-primary-100);
+    }
+  }
+
+  &__title {
+    @extend %main-text;
+    font-weight: 500;
+  }
+
+  &__btnSubmit {
+    margin-top: 20px;
+    width: 100%;
+  }
+}
