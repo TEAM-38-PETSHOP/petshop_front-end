@@ -1,0 +1,25 @@
+.limitedText {
+  height: 100%;
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+    margin-top: 3px;
+
+    color: var(--color-primary-100);
+    font-size: clamp(0.625rem, 0.5447rem + 0.367vw, 0.875rem);
+
+    svg {
+      transform: translateY(-1px);
+    }
+
+    &Active {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}

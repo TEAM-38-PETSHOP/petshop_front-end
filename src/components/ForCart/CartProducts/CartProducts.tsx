@@ -6,11 +6,7 @@ import { useAppSelector } from '@/hooks/reduxHooks';
 import { Product } from '@/types/Product';
 import CartItem from '../CartItem/CartItem';
 
-type Props = {
-  setTotalPrice: React.Dispatch<React.SetStateAction<number>>;
-};
-
-export default function CartProducts({ setTotalPrice }: Props) {
+export default function CartProducts() {
   const [cartProducts, setCartProducts] = useState<Product[]>([]);
   const products = useAppSelector((state) => state.cart.cartProducts);
 
@@ -25,7 +21,6 @@ export default function CartProducts({ setTotalPrice }: Props) {
           <CartItem
             key={product.productId}
             product={product}
-            setTotalPrice={setTotalPrice}
           />
         ))
       ) : (
