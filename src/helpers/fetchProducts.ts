@@ -1,8 +1,8 @@
-import { Product } from "@/types/Product";
-import { client } from "../utils/fetchClient";
-import { defineSearchParamsForRequest } from "./defineSearchParamsForRequest";
-import { FilterByForRequest } from "@/types/FilterByForRequest";
-import { TotalAmountForRequest } from "@/types/TotalAmountForRequest";
+import { Product } from '@/types/Product';
+import { client } from '../utils/fetchClient';
+import { defineSearchParamsForRequest } from './defineSearchParamsForRequest';
+import { FilterByForRequest } from '@/types/FilterByForRequest';
+import { TotalAmountForRequest } from '@/types/TotalAmountForRequest';
 
 const slidesCount = 13;
 
@@ -12,9 +12,7 @@ export const getProducts = (
 ) => {
   const searchParams = defineSearchParamsForRequest(filters, desc);
 
-  return client.get<Product[]>(
-    `/api/products${searchParams}`
-  );
+  return client.get<Product[]>(`/api/products${searchParams}`);
 };
 
 export const getProductsCount = () => {
@@ -34,7 +32,7 @@ export const getFilteredProducts = (
   desc: boolean = false
 ) => {
   const searchParams = defineSearchParamsForRequest(filters, desc);
-  
+
   return client.get<Product[]>(`/api/products/search${searchParams}`);
 };
 
@@ -46,31 +44,22 @@ export const getFilteredProductsPages = (filters: FilterByForRequest) => {
   );
 };
 
-// /api/products/search?brand=Dog Muzzle,Liker
-// /api/products/search/name?parameter=Мячик
-// Можна виконувати пошук по неповній назві
 export const getProductsByName = (
   filters: FilterByForRequest,
   desc: boolean = false
 ) => {
   const searchParams = defineSearchParamsForRequest(filters, desc);
-  console.log(`/api/products/search/name${searchParams}`);
-  
-  return client.get<Product[]>(
-    `/api/products/search/name${searchParams}`
-  );
+
+  return client.get<Product[]>(`/api/products/search/name${searchParams}`);
 };
 
-// Можна виконувати пошук по неповній назві
 export const getProductsByBrand = (
   filters: FilterByForRequest,
   desc: boolean = false
 ) => {
   const searchParams = defineSearchParamsForRequest(filters, desc);
 
-  return client.get<Product[]>(
-    `/api/products/search/brand${searchParams}`
-  );
+  return client.get<Product[]>(`/api/products/search/brand${searchParams}`);
 };
 
 export const getProductsByCategoryId = (

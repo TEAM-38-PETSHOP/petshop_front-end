@@ -2,34 +2,40 @@ const BASE_URL = 'http://ec2-3-92-23-57.compute-1.amazonaws.com';
 
 type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
-function request<T>(
+async function request<T>(
   url: string,
   method: RequestMethod = 'GET',
-  data: any = null
+  data: any = null,
+  token: string | null = null
 ): Promise<T> {
   const options: RequestInit = { method };
 
   if (data) {
     options.body = JSON.stringify(data);
-    options.headers = {
-      'Content-Type': 'application/json',
-      // Authorization:
-      //   'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrb3ppYXR5bnNreWkyMDEzQGdtYWlsLmNvbSIsImlhdCI6MTcyMDQ2ODg0OCwiZXhwIjoxNzIwNDY5MTQ4fQ.Pwqk_m4rXugE2hH1L0T5xmY9yqfeGGaUmEwYTSR4EA8', // 'Bearer ' + localStorage.getItem('token'),
-    };
   }
 
-  return fetch(BASE_URL + url, options).then((response) => {
-    if (!response.ok) {
-      throw new Error();
-    }
+  options.headers = {
+    'Content-Type': 'application/json',
+    ...(token && { Authorization: `Bearer ${token}` }),
+  };
 
-    return response.json();
-  });
+  const response = await fetch(BASE_URL + url, options);
+  if (!response.ok) {
+    const errorResponse = await response.json();
+    console.error('Error response:', errorResponse);
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+
+  return response.json();
 }
 
 export const client = {
-  get: <T>(url: string) => request<T>(url),
-  post: <T>(url: string, data: any) => request<T>(url, 'POST', data),
-  patch: <T>(url: string, data: any) => request<T>(url, 'PATCH', data),
-  delete: (url: string) => request(url, 'DELETE'),
+  get: <T>(url: string, token: string | null = null) =>
+    request<T>(url, 'GET', null, token),
+  post: <T>(url: string, data: any, token: string | null = null) =>
+    request<T>(url, 'POST', data, token),
+  patch: <T>(url: string, data: any, token: string | null = null) =>
+    request<T>(url, 'PATCH', data, token),
+  delete: (url: string, token: string | null = null) =>
+    request(url, 'DELETE', null, token),
 };
