@@ -1,29 +1,77 @@
-import { render } from '@testing-library/react';
+import React from 'react';
+import { fireEvent } from '@testing-library/react';
+import { renderWithProviders } from '@/utils/testRedux';
 import ProductCard from './ProductCard';
+import styles from './productCard.module.scss';
 
-const mockProduct = {
-  id: 1,
-  name: 'Test Product',
-  description: 'This is a test product',
-  carPrice: 100,
-  price: 90,
-  image:
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4-9_UxIYQW9PjA64fKI20glb0H2MxFFV3hQ&usqp=CAU',
-};
+describe('ProductCard', () => {
+  const product = {
+    productId: 1,
+    productNameId: 'test',
+    name: 'Name test',
+    brand: 'test',
+    description: 'test',
+    price: 10,
+    imageUrls: [
+      'https://petshops3.s3.amazonaws.com/Flexi_New%20Classic%20L%20%E2%80%94%20%D0%BF%D0%BE%D0%B2%D1%96%D0%B4%D0%B5%D1%86%D1%8C-%D1%80%D1%83%D0%BB%D0%B5%D1%82%D0%BA%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D1%81%D0%BE%D0%B1%D0%B0%D0%BA_9605074.jpg',
+    ],
+    countryProduct: 'test',
+    groupProduct: 'test',
+    breedSize: 'test',
+    type: 'test',
+    packaging: 'Packaging test',
+    entryDate: 'test',
+    productSize: '',
+    composition: '',
+    compositionAnalysis: '',
+    compositionEnergyValue: '',
+    compositionExpiration: '',
+    instruction: '',
+    instructionWhyBuy: '',
+    animals: [
+      {
+        animalId: 1,
+        animalNameId: 'test',
+        name: 'test',
+      },
+    ],
+    categories: [
+      {
+        categoryId: 1,
+        name: 'Category test',
+        categoryNameId: 'test',
+        description: 'test',
+      },
+    ],
+  };
 
-describe('ProductCard component', () => {
-  it('renders without crashing', () => {
-    render(<ProductCard product={mockProduct} />);
+  it('renders product card correctly', () => {
+    const { getByTestId, getByText } = renderWithProviders(
+      <ProductCard product={product} />
+    );
+    expect(getByTestId('product-card')).toBeInTheDocument();
+    expect(getByText('Category test')).toBeInTheDocument();
+    expect(getByText('Name test, Packaging test')).toBeInTheDocument();
+    expect(getByText('10.00 грн')).toBeInTheDocument();
   });
 
-  it('renders product information correctly', () => {
-    const { getByText, getByAltText } = render(
-      <ProductCard product={mockProduct} />
+  it('renders favorite button correctly', () => {
+    const { getByTestId } = renderWithProviders(
+      <ProductCard product={product} />
     );
-    expect(getByText('Test Product')).toBeInTheDocument();
-    expect(getByText('This is a test product')).toBeInTheDocument();
-    expect(getByText('100 грн')).toBeInTheDocument();
-    expect(getByText('90 грн')).toBeInTheDocument();
-    expect(getByAltText('product')).toBeInTheDocument();
+    expect(getByTestId('icon-for-cards')).toBeInTheDocument();
+  });
+
+  it('toggles cart on button click', () => {
+    const { getByText } = renderWithProviders(
+      <ProductCard product={product} />
+    );
+    const cartButton = getByText('Купити');
+
+    fireEvent.click(cartButton);
+    expect(cartButton).toHaveTextContent('В кошику');
+
+    fireEvent.click(cartButton);
+    expect(cartButton).toHaveTextContent('Купити');
   });
 });

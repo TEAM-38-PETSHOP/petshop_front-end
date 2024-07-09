@@ -1,0 +1,149 @@
+@import '../../../app/styles/extends.scss';
+@import '../../../app/styles/mixins.scss';
+
+.previewOrder {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  width: 40%;
+  max-height: 700px;
+
+  background-color: var(--color-additional-beige);
+  border-radius: var(--radius-40);
+  padding: 40px;
+
+  @media (max-width: 1240px) {
+    width: 60%;
+  }
+
+  @include lg {
+    padding: 30px;
+    border-radius: var(--radius-30);
+
+    width: 100%;
+    max-height: 85px;
+
+    transition: max-height var(--transition-duration);
+
+    &Opened {
+      max-height: 700px;
+    }
+  }
+
+  @include md {
+    padding: 20px;
+    border-radius: var(--radius-20);
+  }
+
+  &__arrow {
+    display: none;
+
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    width: 30px;
+    height: 30px;
+    padding: 7px;
+    transform: rotate(90deg);
+
+    transition: transform var(--transition-duration);
+
+    @include lg {
+      display: block;
+    }
+
+    &Opened {
+      transform: rotate(-90deg);
+    }
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    @extend %h4-primary;
+    font-weight: 500;
+
+    @include sm {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    & span:last-child {
+      @extend %main-text;
+
+      @include lg {
+        margin-right: 75px;
+      }
+
+      @include sm {
+        font-weight: 400;
+      }
+    }
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-right: 10px;
+
+    max-height: 505px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 15px;
+      background: var(--color-gray-100);
+      border-radius: var(--radius-100);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--color-gray-40);
+      border-radius: var(--radius-100);
+      border: 4px solid var(--color-gray-100);
+    }
+
+    @include lg {
+      transition: max-height var(--transition-duration);
+
+      max-height: 0px;
+
+      &Opened {
+        max-height: 505px;
+      }
+    }
+
+    @include sm {
+      img {
+        margin-top: 50%;
+
+        width: 70px;
+        height: 70px;
+      }
+    }
+  }
+}
+
+.previewOrder .previewOrder__items {
+  @include sm {
+    img {
+      margin-top: 50%;
+
+      width: 70px;
+      height: 70px;
+    }
+  }
+}
+
+.previewOrder .previewOrder__btn {
+  @include lg {
+    display: none;
+
+    &Opened {
+      display: flex;
+    }
+  }
+}

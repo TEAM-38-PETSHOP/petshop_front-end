@@ -1,0 +1,25 @@
+@import "../../../app/styles/extends.scss";
+@import "../../../app/styles/mixins.scss";
+
+.categories {
+  @extend %container;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+
+  padding: 0;
+  margin-bottom: 90px;
+
+  @include lg {
+    gap: 15px;
+  }
+
+  @include md {
+    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 60px;
+  }
+
+  @include sm {
+    grid-template-columns: 1fr;
+  }
+}

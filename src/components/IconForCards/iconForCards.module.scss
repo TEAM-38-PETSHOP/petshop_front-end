@@ -1,0 +1,55 @@
+@import '../../app/styles/extends.scss';
+@import '../../app/styles/mixins.scss';
+
+.iconForCards {
+  position: relative;
+  height: 45px;
+  width: 45px;
+
+  background-color: var(--color-gray-70);
+  border-radius: 50%;
+
+  @include sm {
+    height: 30px;
+    width: 30px;
+
+    svg {
+      width: 17px;
+      height: 17px;
+    }
+  }
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__favorite {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 5;
+
+    @media (hover: hover) {
+      &:hover {
+        * {
+          fill: var(--color-secondary-red);
+        }
+      }
+    }
+
+    @include sm {
+      top: 5px;
+      right: 5px;
+    }
+
+    &Active {
+      * {
+        fill: var(--color-secondary-red);
+        stroke: none;
+      }
+    }
+  }
+}

@@ -1,3 +1,6 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
 import styles from './arrow.module.scss';
 import classNames from 'classnames';
 
@@ -9,6 +12,9 @@ type Props = {
   onClick?: () => void;
   isCarousel?: boolean;
   isWhite?: boolean;
+  isBack?: boolean;
+  disabled?: boolean;
+  datatestid?: string;
 };
 
 export default function Arrow({
@@ -17,16 +23,22 @@ export default function Arrow({
   onClick,
   isCarousel,
   isWhite,
+  isBack,
+  disabled = false,
+  datatestid = 'arrow',
 }: Props) {
+  const router = useRouter();
+  
   return (
     <button
       type="button"
-      data-testid="arrow"
-      onClick={onClick}
+      data-testid={datatestid}
+      onClick={isBack ? () => router.back() : onClick}
+      disabled={(isCarousel && !onClick) || disabled}
       className={classNames([styleName], [styles.arrow], {
         [styles[direction]]: direction,
         [styles.arrow__white]: isWhite,
-        [styles.arrow__disabled]: isCarousel && !onClick,
+        [styles.arrow__disabled]: (isCarousel && !onClick) || disabled,
       })}
     ></button>
   );
