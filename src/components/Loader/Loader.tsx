@@ -54,10 +54,7 @@ export default function Loader({ className }: Props) {
       <section className={style.loader}>
         <div className={classNames(style.loader__paws, className)}>
           {Array.from({ length: 12 }).map((_, index) => (
-            <svg
-              key={index}
-              className={style.loader__paws__paw}
-            >
+            <svg key={index} data-testid="paw-svg" className={style.loader__paws__paw}>
               <use xlinkHref="#paw" />
             </svg>
           ))}

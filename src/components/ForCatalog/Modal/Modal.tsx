@@ -29,6 +29,7 @@ export default function Modal({ children, title, onClose }: Props) {
             type="button"
             className={style.modal__close}
             onClick={handleCloseClick}
+            data-testid="modal-close"
           ></button>
         </div>
         {children}
