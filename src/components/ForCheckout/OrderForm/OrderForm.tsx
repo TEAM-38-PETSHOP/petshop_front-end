@@ -14,6 +14,8 @@ import { ResponseCities } from '@/types/novaposhta/ResponseCities';
 import { Warehouse } from '@/types/novaposhta/ResponseWarehouses';
 import FormComment from '@/components/FormComment/FormComment';
 import Buttons from '@/components/Buttons/Buttons';
+import { createOrder } from '@/helpers/fetchOrder';
+import { useAppSelector } from '@/hooks/reduxHooks';
 
 type Props = {
   className?: string;
@@ -24,6 +26,7 @@ export default function OrderForm({ className }: Props) {
   const [warehouseList, setWarehouseList] = useState<[] | string[]>([]);
   const [isLoadingCity, setIsLoadingCity] = useState(false);
   const [isLoadingWarehouse, setIsLoadingWarehouse] = useState(false);
+  const cartProducts = useAppSelector((state) => state.cart.cartProducts);
   const sessionCity = (checkWindow() && sessionStorage.getItem('city')) || '';
   const {
     register,
@@ -31,11 +34,44 @@ export default function OrderForm({ className }: Props) {
     setValue,
     clearErrors,
     watch,
+    reset,
     formState: { errors },
   } = useForm<IOrderForm>();
 
   const onSubmit: SubmitHandler<IOrderForm> = (data) => {
-    console.log(data);
+    const cartItems = cartProducts.map((item) => {
+      const quantity = checkWindow()
+        ? +(localStorage.getItem(item.productId.toString()) || 1)
+        : 1;
+      return {
+        productId: item.productId,
+        quantity: quantity,
+      };
+    });
+
+    const orderData = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      phone: data.phone,
+      email: data.email,
+      address: {
+        city: data.city,
+        officeNovaPost: data.deliveryPoint,
+        comment: data.comment,
+      },
+      cartItems: cartItems,
+    };
+
+    createOrder(orderData)
+      .then(() => {
+        reset();
+        alert('Ваше замовлення прийнято!');
+      })
+      .catch(() => {
+        alert(
+          'Виникла якась помилка, спробуйте ще раз пізніше або зверніться до служби підтримки'
+        );
+      });
   };
 
   const handleCityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,7 +101,14 @@ export default function OrderForm({ className }: Props) {
       setIsLoadingWarehouse(true);
       getWarehouses(sessionCity, value)
         .then((data) => {
-          setWarehouseList(data.map((item) => (item as Warehouse).Description));
+          setWarehouseList(
+            data.map(
+              (item) =>
+                `${(item as Warehouse).Description}, ${
+                  (item as Warehouse).CityDescription
+                }`
+            )
+          );
         })
         .catch(() => {
           setWarehouseList([]);
@@ -129,6 +172,18 @@ export default function OrderForm({ className }: Props) {
             },
           })}
           errors={errors.phone?.message}
+        />
+        <FormInput
+          register={register('email', {
+            required: "Це поле є обов'язковим",
+            pattern: {
+              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+              message: 'Невірно введена пошта',
+            },
+          })}
+          type="email"
+          placeholder="Електронна пошта"
+          errors={errors.email?.message}
         />
       </div>
 

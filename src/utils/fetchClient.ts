@@ -1,4 +1,4 @@
-const BASE_URL = 'http://ec2-34-230-30-154.compute-1.amazonaws.com';
+const BASE_URL = 'http://ec2-3-92-23-57.compute-1.amazonaws.com';
 
 type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
@@ -13,6 +13,8 @@ function request<T>(
     options.body = JSON.stringify(data);
     options.headers = {
       'Content-Type': 'application/json',
+      // Authorization:
+      //   'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrb3ppYXR5bnNreWkyMDEzQGdtYWlsLmNvbSIsImlhdCI6MTcyMDQ2ODg0OCwiZXhwIjoxNzIwNDY5MTQ4fQ.Pwqk_m4rXugE2hH1L0T5xmY9yqfeGGaUmEwYTSR4EA8', // 'Bearer ' + localStorage.getItem('token'),
     };
   }
 
