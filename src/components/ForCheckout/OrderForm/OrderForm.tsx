@@ -198,6 +198,7 @@ export default function OrderForm({ className }: Props) {
           })}
           errors={errors.city?.message}
           isSave
+          offBrowserAutocomplete
           autocomplete={{
             value: watch('city') || '',
             name: 'city',
@@ -216,6 +217,7 @@ export default function OrderForm({ className }: Props) {
           })}
           onClickInput={handleWarehouseChange}
           errors={errors.deliveryPoint?.message}
+          offBrowserAutocomplete
           autocomplete={{
             value: watch('deliveryPoint') || '',
             name: 'deliveryPoint',

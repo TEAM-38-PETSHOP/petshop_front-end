@@ -16,6 +16,7 @@ type Props = {
   className?: string;
   isSave?: boolean;
   onClickInput?: () => void;
+  offBrowserAutocomplete?: boolean;
   autocomplete?: {
     setValue: UseFormSetValue<IOrderForm>;
     minLength: number;
@@ -33,6 +34,7 @@ export default memo(function FormInput({
   onClickInput,
   type = 'text',
   className,
+  offBrowserAutocomplete,
   autocomplete,
 }: Props) {
   const [isFocus, setIsFocus] = useState(false);
@@ -73,7 +75,7 @@ export default memo(function FormInput({
           [styles.input__activeList]: isShowList,
         })}
         onClick={onClickInput}
-        // onBlur={() => setIsFocus(false)}
+        autoComplete={offBrowserAutocomplete ? 'off' : ''}
         placeholder={placeholder}
         type={type}
       />
