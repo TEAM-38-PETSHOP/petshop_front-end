@@ -62,7 +62,7 @@ export default function Range({
       <h3 className={style.range__title}>{defaultText}</h3>
 
       <div className={style.range__slider}>
-        <div className={style.range__progress} ref={rangeRef}></div>
+        <div data-testid="range-progress" className={style.range__progress} ref={rangeRef}></div>
       </div>
 
       <div className={style.range__input}>
@@ -76,6 +76,7 @@ export default function Range({
           step={step}
           ref={rangeInputMinRef}
           onChange={handleInputChange}
+          data-testid="minPrice"
         />
         <input
           type="range"
@@ -87,6 +88,7 @@ export default function Range({
           step={step}
           ref={rangeInputMaxRef}
           onChange={handleInputChange}
+          data-testid="maxPrice"
         />
       </div>
 
