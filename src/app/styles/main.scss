@@ -8,6 +8,14 @@ html {
   color: var(--color-gray-10);
 }
 
+.slick-slider .slick-list {
+  overflow: visible;
+
+  @include lg {
+    overflow: hidden;
+  }
+}
+
 .slick-dots {
   bottom: -60px !important;
   right: 0 !important;

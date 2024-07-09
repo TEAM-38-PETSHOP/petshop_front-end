@@ -1,0 +1,30 @@
+@import '../../../app//styles/extends.scss';
+@import '../../../app/styles/mixins.scss';
+
+.groomingHead {
+  div {
+    position: relative;
+    top: 15px;
+    z-index: -1;
+
+    @include md {
+      top: 0;
+    }
+  }
+
+  a:last-child {
+    position: relative;
+    top: 15px;
+
+    min-width: fit-content;
+    padding-right: 20px;
+    color: var(--color-gray-30);
+    background-image: url('../../../../public/images/icons/arrow_gray.svg');
+    background-position: right;
+    background-repeat: no-repeat;
+
+    @include md {
+      display: none;
+    }
+  }
+}

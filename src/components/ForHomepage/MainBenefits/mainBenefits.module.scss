@@ -1,0 +1,162 @@
+@import '../../../app/styles/extends.scss';
+@import '../../../app/styles/mixins.scss';
+
+.mainBenefits {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
+  margin-bottom: 120px;
+  padding: 70px 0 100px 5%;
+
+  @include lg {
+    margin-bottom: 60px;
+    padding: 70px 0 70px 10%;
+  }
+
+  @include md {
+    padding: 70px 0 70px 5%;
+  }
+
+  &__messages {
+    @extend %h3-primary;
+
+    @include lg {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    @include md {
+      font-size: 0.875rem;
+      line-height: 1.2;
+    }
+
+    small {
+      @extend %secondary-text;
+      font-weight: 600;
+      color: var(--color-gray-30);
+
+      @include lg {
+        font-size: 0.75rem;
+      }
+    }
+  }
+
+  &__message {
+    position: relative;
+    right: -500%;
+
+    border-radius: var(--radius-40);
+    padding: 44px;
+    width: Min(75%, 41vw);
+
+    @include lg {
+      padding: 20px;
+      border-radius: var(--radius-30);
+    }
+
+    @include md {
+      padding: 15px;
+      border-radius: var(--radius-20);
+    }
+
+    &Triangle {
+      position: absolute;
+      top: 40%;
+      right: -30px;
+
+      @include md {
+        &_second {
+          transform: scaleY(-1) translateY(5px);
+        }
+        &_last {
+          transform: scaleY(-1);
+        }
+      }
+    }
+
+    &Active {
+      right: 0;
+      &:first-child {
+        transition: right var(--transition-duration) ease-in 0.3s;
+        background-color: var(--color-gray-50);
+        transform: rotate(-5deg) translate(-50px, 50px);
+
+        @include lg {
+          width: 49vw;
+          transform: rotate(-5deg) translate(-50px, 20px);
+        }
+        @include md {
+          width: 58vw;
+          transform: rotate(-5deg) translate(0, 10px);
+        }
+
+        svg path {
+          fill: var(--color-gray-50);
+        }
+      }
+
+      &:nth-child(2) {
+        transition: right var(--transition-duration) ease-in-out 0.4s;
+
+        z-index: 5;
+        background-color: var(--color-gray-70);
+        transform: rotate(8deg) translateX(50%);
+        padding-right: 20%;
+
+        @include lg {
+          transform: rotate(6deg) translateX(40%);
+          padding-right: 20px;
+        }
+
+        @include lg {
+          transform: rotate(6deg) translateX(40%);
+          padding-right: 15px;
+        }
+
+        svg path {
+          fill: var(--color-gray-70);
+        }
+      }
+
+      &:last-child {
+        transition: right var(--transition-duration) ease-out 0.5s;
+
+        padding: 40px;
+        background-color: var(--color-secondary-yellow);
+
+        @include lg {
+          width: 46vw;
+          padding: 20px;
+        }
+
+        @include md {
+          width: 60vw;
+          padding: 15px;
+        }
+      }
+    }
+  }
+
+  &__img {
+    position: absolute;
+    top: 70%;
+    right: -40%;
+    transform: translate(10%, -50%) rotate(0deg);
+
+    width: Min(30vw, 100%);
+    height: Min(30vw, 100%);
+
+    transition: right, transform, var(--transition-duration) linear 0.5s;
+
+    @include md {
+      top: 50%;
+    }
+
+    &Active {
+      right: 0;
+      transform: translate(20%, -50%) rotate(-40deg);
+    }
+  }
+}

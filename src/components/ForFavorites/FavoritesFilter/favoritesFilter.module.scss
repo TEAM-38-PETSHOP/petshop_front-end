@@ -1,0 +1,42 @@
+@import '../../../app/styles/extends.scss';
+@import '../../../app/styles/mixins.scss';
+
+.favoritesFilter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+
+  @include lg {
+    li {
+      flex-grow: 1;
+    }
+  }
+
+  &__item {
+    @extend %main-text;
+    display: inline-block;
+    padding: 13px 30px;
+
+    border-radius: var(--radius-100);
+    background-color: var(--color-gray-100);
+    color: var(--color-gray-20);
+
+    @include lg {
+      padding: 13px 20px;
+      width: 100%;
+    }
+
+    @include sm {
+      padding: 11px 15px;
+
+      font-size: 0.75rem;
+      line-height: 1.5;
+    }
+  }
+
+  &__active {
+    background-color: var(--color-primary-100);
+    color: var(--color-gray-100);
+    font-weight: 500;
+  }
+}

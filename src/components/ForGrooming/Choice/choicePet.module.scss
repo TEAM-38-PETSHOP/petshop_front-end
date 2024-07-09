@@ -1,0 +1,122 @@
+@import '../../../app//styles/extends.scss';
+@import '../../../app/styles/mixins.scss';
+
+.choice {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 49%;
+
+  background-color: var(--color-additional-beige);
+  border: 1px solid var(--color-gray-100);
+  border-radius: var(--radius-40);
+  padding: 40px;
+
+  transition: border-color var(--transition-duration) linear 0s;
+
+  @include md {
+    flex-direction: row-reverse;
+    width: 100%;
+    padding: 30px;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+
+  @include sm {
+    padding: 15px;
+  }
+
+  &:hover {
+    border-color: var(--color-gray-10);
+    transition: border-color var(--transition-duration) linear 0s;
+  }
+
+  &:hover &__img {
+    transition: transform var(--transition-duration) linear 0s;
+    transform: rotate(-20deg);
+  }
+
+  &__title {
+    @extend %h4-primary;
+
+    @include md {
+      font-size: 1rem;
+      line-height: 1.5;
+
+      margin-right: 15px;
+    }
+  }
+
+  &__btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__dogs {
+      @include md {
+        padding: 16px !important;
+        background-size: 16px 16px !important;
+      }
+
+      background-color: var(--color-primary-100) !important;
+
+      transition: background-color, var(--transition-duration);
+
+      &:hover {
+        transition: background-color, var(--transition-duration);
+        background-color: var(--color-gray-20) !important;
+      }
+
+      &:active {
+        background-color: var(--color-gray-10) !important;
+      }
+    }
+
+    &__cats {
+      @include md {
+        padding: 16px !important;
+        background-size: 16px 16px !important;
+      }
+
+      background-color: var(--color-secondary-green) !important;
+
+      transition: background-color, var(--transition-duration);
+
+      &:hover {
+        transition: background-color, var(--transition-duration);
+        background-color: var(--color-gray-20) !important;
+      }
+
+      &:active {
+        background-color: var(--color-gray-10) !important;
+      }
+    }
+  }
+
+  &__wrapper {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    padding-left: 90px;
+
+    @include md {
+      padding-left: 0px;
+    }
+  }
+
+  &__img {
+    max-width: 100%;
+    height: auto;
+    transition: transform var(--transition-duration) linear 0s;
+
+    align-self: flex-end;
+    background: none;
+
+    @include md {
+      max-height: 178px;
+      max-width: 151px;
+    }
+  }
+}

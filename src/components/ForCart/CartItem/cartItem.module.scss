@@ -1,0 +1,88 @@
+@import '../../../app/styles/extends.scss';
+@import '../../../app/styles/mixins.scss';
+
+.cartItem {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 15px;
+
+  border-radius: var(--radius-30);
+  background: var(--color-gray-100);
+
+  @include sm {
+    gap: 15px;
+  }
+
+  &__image {
+    position: relative;
+
+    img {
+      object-fit: contain;
+
+      @include md {
+        width: 160px;
+        height: 160px;
+      }
+    }
+  }
+
+  .cartItem__favorite {
+    top: 5px;
+    right: 5px;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-grow: 1;
+  }
+
+  &__category {
+    @extend %small-text;
+    font-weight: 600;
+    color: var(--color-gray-40);
+  }
+
+  &__description {
+    @extend %secondary-text;
+    flex-grow: 1;
+  }
+
+  &__price {
+    @extend %main-text;
+    font-weight: 600;
+  }
+
+  &__choice {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    height: 50px;
+
+    @include sm {
+      height: 30px;
+    }
+  }
+
+  .cartItem__counter {
+    @include sm {
+      height: 30px;
+    }
+  }
+
+  &__delete {
+    transition: background-color, stroke, var(--transition-duration);
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--color-gray-20);
+        * {
+          stroke: var(--color-gray-100);
+        }
+      }
+    }
+  }
+}
