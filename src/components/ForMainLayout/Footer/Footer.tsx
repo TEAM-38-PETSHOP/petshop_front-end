@@ -82,7 +82,7 @@ export default function Footer() {
                 <Link href="/catalog">Магазин</Link>
               </li>
               <li>
-                <Link href="/contacts">Контакти</Link>
+                <Link href="/#contacts">Контакти</Link>
               </li>
             </ul>
           </div>
