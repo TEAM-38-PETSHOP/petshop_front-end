@@ -22,6 +22,10 @@
   }
 
   &__error {
+    position: absolute;
+    bottom: -15px;
+    left: 0px;
+
     @extend %small-text;
     color: var(--color-system-error);
     margin-top: -15px;
