@@ -13,6 +13,10 @@
     color: var(--color-gray-40);
   }
 
+  &__wrapper {
+    position: relative;
+  }
+
   &__activeList {
     border-radius: var(--radius-15) var(--radius-15) 0 0;
   }
@@ -21,6 +25,13 @@
     @extend %small-text;
     color: var(--color-system-error);
     margin-top: -15px;
+  }
+
+  &__btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
 
