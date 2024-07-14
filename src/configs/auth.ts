@@ -49,8 +49,8 @@ export const authConfig: NextAuthOptions = {
             ...user,
             token: dataToken.token,
           } as unknown as CustomUser;
-        } catch (error) {
-          return null;
+        } catch (error: any) {
+          throw new Error(error.message as string);
         }
       },
     }),
@@ -75,5 +75,8 @@ export const authConfig: NextAuthOptions = {
       customSession.expires = session.expires;
       return customSession;
     },
+  },
+  pages: {
+    signIn: '/auth',
   },
 };

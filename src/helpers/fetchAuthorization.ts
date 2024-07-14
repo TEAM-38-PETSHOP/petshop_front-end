@@ -12,6 +12,24 @@ export const login = (email: string, password: string) => {
   });
 };
 
+export const registerUser = (
+  email: string,
+  phone: string,
+  password: string,
+  repeatPassword: string,
+  firstName: string,
+  lastName: string
+) => {
+  return client.post<IUser>('/api/auth/registration', {
+    email,
+    phone,
+    password,
+    repeatPassword,
+    firstName,
+    lastName,
+  });
+};
+
 export const getUser = (token: string) => {
   return client.get<IUser>('/api/users/info', token);
 };

@@ -1,0 +1,19 @@
+@import '../../../app/styles/mixins.scss';
+@import '../../../app/styles/extends.scss';
+
+.authBar {
+  @extend %container;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 40px;
+
+  @include lg {
+    flex-direction: column;
+  }
+
+  &__form {
+    position: relative;
+    width: 100%;
+  }
+}
