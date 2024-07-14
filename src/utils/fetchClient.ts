@@ -1,4 +1,6 @@
-const BASE_URL = 'http://ec2-3-92-23-57.compute-1.amazonaws.com';
+import { IErrorResponse } from '@/types/IErrorResponse ';
+
+const BASE_URL = 'http://ec2-54-87-54-253.compute-1.amazonaws.com';
 
 type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
@@ -20,13 +22,14 @@ async function request<T>(
   };
 
   const response = await fetch(BASE_URL + url, options);
+  const jsonResponse = await response.json();
+
   if (!response.ok) {
-    const errorResponse = await response.json();
-    console.error('Error response:', errorResponse);
-    throw new Error(`HTTP error! Status: ${response.status}`);
+    const error: IErrorResponse = jsonResponse;
+    throw new Error(error.message || 'An error occurred');
   }
 
-  return response.json();
+  return jsonResponse;
 }
 
 export const client = {
