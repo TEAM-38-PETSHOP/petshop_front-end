@@ -1,0 +1,97 @@
+@import '../../../app/styles/extends.scss';
+@import '../../../app/styles/mixins.scss';
+
+.leftBar {
+  position: relative;
+  background-color: var(--color-additional-beige);
+  border-radius: var(--radius-40);
+  padding: 40px;
+
+  min-height: 340px;
+  width: 100%;
+  overflow: hidden;
+
+  @include sm {
+    display: none;
+  }
+
+  &__title {
+    @extend %h4-primary;
+  }
+
+  &__image {
+    position: absolute;
+    object-fit: cover;
+    overflow: visible;
+
+    transition: top, right, width, transform, var(--transition-duration);
+
+    &Cat {
+      bottom: 0px;
+      right: 30%;
+      width: 203px;
+
+      transform: translateX(50%);
+    }
+
+    &Dog {
+      top: 0px;
+      right: 0;
+      width: 276px;
+
+      transform: rotate(15deg);
+    }
+
+    &Dog2 {
+      top: 60%;
+      left: -70px;
+      transform: translateY(-50%) rotate(15deg);
+      width: 247px;
+    }
+
+    @media (hover: hover) {
+      &Cat {
+        bottom: -70px;
+        right: 30%;
+        width: 203px;
+
+        transform: translateX(50%);
+      }
+
+      &Dog {
+        top: -70px;
+        right: 0;
+        width: 276px;
+
+        transform: rotate(15deg);
+      }
+
+      &Dog2 {
+        top: 60%;
+        left: -150px;
+
+        transform: translateY(-50%) rotate(15deg);
+        width: 247px;
+      }
+    }
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      .leftBar__imageCat {
+        bottom: 0px;
+        transform: translateX(50%) rotate(15deg);
+      }
+
+      .leftBar__imageDog {
+        top: 0px;
+        transform: rotate(25deg);
+      }
+
+      .leftBar__imageDog2 {
+        left: -60px;
+        transform: translateY(-50%) rotate(25deg);
+      }
+    }
+  }
+}
