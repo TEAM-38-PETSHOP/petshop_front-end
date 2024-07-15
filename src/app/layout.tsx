@@ -2,10 +2,12 @@ import type { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
 import './styles/main.scss';
 import style from './layout.module.scss';
+import 'react-toastify/dist/ReactToastify.css';
 import Header from '@/components/ForMainLayout/Header/Header';
 import Footer from '@/components/ForMainLayout/Footer/Footer';
 import ScrollToTop from '@/components/ForMainLayout/ScrollToTop/ScrollToTop';
 import Providers from '@/components/ForMainLayout/Providers/Providers';
+import { ToastContainer } from 'react-toastify';
 
 const font = Montserrat({
   subsets: ['cyrillic'],
@@ -42,7 +44,20 @@ export default function RootLayout({
 
           <Footer />
         </Providers>
+
         <ScrollToTop />
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       </body>
     </html>
   );

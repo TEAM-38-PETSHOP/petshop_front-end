@@ -1,12 +1,14 @@
 'use client';
 import React, { HTMLInputTypeAttribute, memo, useState } from 'react';
 import classNames from 'classnames';
+import Image from 'next/image';
 import { UseFormRegisterReturn, UseFormSetValue } from 'react-hook-form';
+import { checkWindow } from '@/helpers/checkWindow';
 
 import styles from './formInput.module.scss';
 import { IOrderForm } from '@/types/OrderForm';
 import Loader from '../Loader/Loader';
-import { checkWindow } from '@/helpers/checkWindow';
+import eyeIcon from '@@/images/icons/eye.svg';
 
 type Props = {
   register: UseFormRegisterReturn;
@@ -38,6 +40,7 @@ export default memo(function FormInput({
   autocomplete,
 }: Props) {
   const [isFocus, setIsFocus] = useState(false);
+  const [isShowPassword, setIsShowPassword] = useState(false);
   const isShowList =
     isFocus &&
     autocomplete &&
@@ -66,6 +69,7 @@ export default memo(function FormInput({
   };
   return (
     <div
+      className={classNames(styles.input__wrapper)}
       onClick={() => setIsFocus(true)}
       onBlur={handleBlur}
     >
@@ -77,8 +81,25 @@ export default memo(function FormInput({
         onClick={onClickInput}
         autoComplete={offBrowserAutocomplete ? 'off' : ''}
         placeholder={placeholder}
-        type={type}
+        type={
+          type === 'password' ? (isShowPassword ? 'text' : 'password') : type
+        }
       />
+
+      {type === 'password' && (
+        <button
+          type="button"
+          className={styles.input__btn}
+          onClick={() => setIsShowPassword(!isShowPassword)}
+        >
+          <Image
+            src={eyeIcon}
+            alt="eye"
+            width={20}
+            height={20}
+          />
+        </button>
+      )}
       {errors && <span className={styles.input__error}>{errors}</span>}
       {isShowList && (
         <div className={styles.autocomplete}>
