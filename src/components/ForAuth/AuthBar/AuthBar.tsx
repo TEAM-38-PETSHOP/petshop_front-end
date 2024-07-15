@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import LeftBar from '../LeftBar/LeftBar';
 import SignIn from '../SignIn/SignIn';
 import SignUp from '../SignUp/SignUp';
@@ -11,25 +11,16 @@ export default function AuthBar() {
     <div className={styles.authBar}>
       <LeftBar />
       <div className={styles.authBar__form}>
-        <SignIn
-          setIsSignIn={setIsSignIn}
-          isSignIn={isSignIn}
-        />
-        <SignUp
-          setIsSignIn={setIsSignIn}
-          isSignIn={isSignIn}
-        />
-        {/* {isSignIn ? (
+        <Suspense>
           <SignIn
             setIsSignIn={setIsSignIn}
             isSignIn={isSignIn}
           />
-        ) : (
-          <SignUp
-            setIsSignIn={setIsSignIn}
-            isSignIn={isSignIn}
-          />
-        )} */}
+        </Suspense>
+        <SignUp
+          setIsSignIn={setIsSignIn}
+          isSignIn={isSignIn}
+        />
       </div>
     </div>
   );
