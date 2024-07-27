@@ -8,7 +8,7 @@ import styles from './previewOrder.module.scss';
 import { Product } from '@/types/Product';
 import { useAppSelector } from '@/hooks/reduxHooks';
 import CartItem from '@/components/ForCart/CartItem/CartItem';
-import { CheckTotalPrice } from '@/helpers/CheckTotalPrice';
+import { CheckTotalPrice } from '@/helpers/checkTotalPrice';
 import { useDispatch } from 'react-redux';
 import { setTotalPrice } from '@/redux/features/totalPriceSlice';
 import Buttons from '@/components/Buttons/Buttons';
