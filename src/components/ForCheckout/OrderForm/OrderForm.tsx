@@ -26,7 +26,9 @@ export default function OrderForm({ className }: Props) {
   const [warehouseList, setWarehouseList] = useState<[] | string[]>([]);
   const [isLoadingCity, setIsLoadingCity] = useState(false);
   const [isLoadingWarehouse, setIsLoadingWarehouse] = useState(false);
-  const cartProducts = useAppSelector((state) => state.cart.cartProducts);
+  const cartProducts = useAppSelector((state) => state.cart.cartProducts).map(
+    (item) => item.product
+  );
   const sessionCity = (checkWindow() && sessionStorage.getItem('city')) || '';
   const {
     register,

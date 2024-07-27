@@ -30,7 +30,7 @@ export default function PreviewOrder({ className }: Props) {
   }
 
   useEffect(() => {
-    setCartProducts(products);
+    setCartProducts(products.map((product) => product.product));
 
     const newTotalPrice = CheckTotalPrice();
     dispatch(setTotalPrice(newTotalPrice));
@@ -69,7 +69,6 @@ export default function PreviewOrder({ className }: Props) {
       >
         {cartProducts.map((product) => (
           <CartItem
-            // className={styles.previewOrder__item}
             key={product.productId}
             product={product}
           />

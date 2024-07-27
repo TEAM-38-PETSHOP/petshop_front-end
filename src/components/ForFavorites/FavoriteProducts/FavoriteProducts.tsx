@@ -18,7 +18,7 @@ export default function FavoriteProducts() {
   );
 
   useEffect(() => {
-    setFavoriteProducts(products);
+    setFavoriteProducts(products.map((product) => product.product));
   }, [products]);
 
   const isOneProductStyle = filteredProducts.length === 1;

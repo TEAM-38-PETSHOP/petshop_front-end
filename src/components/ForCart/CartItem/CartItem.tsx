@@ -8,8 +8,11 @@ import favorite from '@@/images/icons/like.svg';
 import deleteIcon from '@@/images/icons/delete.svg';
 
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
-import { setFavoriteProducts } from '@/redux/features/favoriteSlice';
-import { setCartProducts } from '@/redux/features/cartSlice';
+import {
+  addFavoriteProduct,
+  removeFavoriteProduct,
+} from '@/redux/features/favoriteSlice';
+import { addCartProduct, removeCartProduct } from '@/redux/features/cartSlice';
 import { useToggle } from '@/hooks/useToggle';
 import IconForCards from '@/components/IconForCards/IconForCards';
 import { numberToCurrency } from '@/helpers/numberToCurrency';
@@ -32,30 +35,26 @@ export default function CartItem({ product }: Props) {
   const [isFavorite, toggleFavorite] = useToggle(
     'favorite',
     favoriteProducts,
-    setFavoriteProducts,
+    addFavoriteProduct,
+    removeFavoriteProduct,
     product
   );
   const [, toggleCart] = useToggle(
     'cart',
     cartProducts,
-    setCartProducts,
+    addCartProduct,
+    removeCartProduct,
     product
   );
 
   const handleDeleteItem = () => {
-    dispatch(
-      setTotalPrice(
-        totalPrice -
-          product.price *
-            +(localStorage.getItem(product.productId.toString()) || 1)
-      )
-    );
+    const productCount =
+      cartProducts.find((item) => item.product.productId === product.productId)
+        ?.quantity || 1;
+
+    dispatch(setTotalPrice(totalPrice - product.price * productCount));
 
     toggleCart();
-
-    if (checkWindow()) {
-      localStorage.removeItem(product.productId.toString());
-    }
   };
 
   const handleFavorite = (e: React.MouseEvent<HTMLButtonElement>) => {

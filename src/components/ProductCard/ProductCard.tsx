@@ -4,8 +4,14 @@ import Image from 'next/image';
 import classNames from 'classnames';
 import { useToggle } from '@/hooks/useToggle';
 import { useAppSelector } from '@/hooks/reduxHooks';
-import { setFavoriteProducts } from '@/redux/features/favoriteSlice';
-import { setCartProducts } from '@/redux/features/cartSlice';
+import {
+  addFavoriteProduct,
+  removeFavoriteProduct,
+} from '@/redux/features/favoriteSlice';
+import {
+  addCartProduct,
+  removeCartProduct,
+} from '@/redux/features/cartSlice';
 import { numberToCurrency } from '@/helpers/numberToCurrency';
 
 import styles from './productCard.module.scss';
@@ -35,13 +41,15 @@ export default function ProductCard({ product, className }: Props) {
   const [isFavorite, toggleFavorite] = useToggle(
     'favorite',
     favoriteProducts,
-    setFavoriteProducts,
+    addFavoriteProduct,
+    removeFavoriteProduct,
     product
   );
   const [isCart, toggleCart] = useToggle(
     'cart',
     cartProducts,
-    setCartProducts,
+    addCartProduct,
+    removeCartProduct,
     product
   );
 
