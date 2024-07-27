@@ -2,11 +2,15 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { toast } from 'react-toastify';
 import styles from './signIn.module.scss';
-import { signIn, signOut } from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import FormInput from '@/components/FormInput/FormInput';
 import { useForm } from 'react-hook-form';
 import classNames from 'classnames';
 import { checkErrors } from '@/helpers/checkErrors';
+import { CustomSession } from '@/types/CustomSession';
+import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
+import { saveServerCart } from '@/helpers/saveServerCart';
 
 interface ILoginForm {
   email: string;
@@ -18,13 +22,33 @@ type Props = {
   setIsSignIn: (value: boolean) => void;
 };
 export default function SignIn({ isSignIn, setIsSignIn }: Props) {
+  const dispatch = useAppDispatch();
+  const cartProducts = useAppSelector((state) => state.cart.cartProducts);
+
+  const { data: session, status } = useSession();
+  const customSession = session as CustomSession | null;
+
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [accessToken, setAccessToken] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ILoginForm>();
+
+  useEffect(() => {
+    if (status === 'authenticated' && customSession?.accessToken) {
+      setAccessToken(customSession.accessToken);
+    }
+  }, [status, customSession]);
+
+  useEffect(() => {
+    if (accessToken) {
+      saveServerCart(accessToken, cartProducts, dispatch);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accessToken]);
 
   const handleSubmitForm = async (data: ILoginForm) => {
     const { email, password } = data;

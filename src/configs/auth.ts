@@ -2,20 +2,12 @@ import { NextAuthOptions, User } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { getUser, login } from '@/helpers/fetchAuthorization';
+import { IUser } from '@/types/User';
+import { CustomSession } from '@/types/CustomSession';
 
 interface CustomJWT extends Record<string, unknown> {
   accessToken: string;
   user: User;
-}
-
-interface CustomSession extends Record<string, unknown> {
-  accessToken: string;
-  user: User;
-  expires: string;
-}
-
-interface CustomUser extends User {
-  token: string;
 }
 
 export const authConfig: NextAuthOptions = {
@@ -43,12 +35,11 @@ export const authConfig: NextAuthOptions = {
             credentials.email,
             credentials.password
           );
-
           const user = await getUser(dataToken.token);
           return {
             ...user,
             token: dataToken.token,
-          } as unknown as CustomUser;
+          } as unknown as IUser;
         } catch (error: any) {
           throw new Error(error.message as string);
         }
@@ -59,7 +50,7 @@ export const authConfig: NextAuthOptions = {
     async jwt({ token, user }) {
       const customToken = token as CustomJWT;
       if (user) {
-        const customUser = user as CustomUser;
+        const customUser = user as IUser;
         customToken.accessToken = customUser.token;
         customToken.user = customUser;
       }
@@ -70,7 +61,7 @@ export const authConfig: NextAuthOptions = {
       const customToken = token as CustomJWT;
       if (customToken.accessToken) {
         customSession.accessToken = customToken.accessToken;
-        customSession.user = customToken.user;
+        customSession.user = customToken.user as IUser;
       }
       customSession.expires = session.expires;
       return customSession;

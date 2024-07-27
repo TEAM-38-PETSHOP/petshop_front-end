@@ -16,11 +16,18 @@ import { Product } from '@/types/Product';
 import Buttons from '../Buttons/Buttons';
 import IconForCards from '../IconForCards/IconForCards';
 import LimitedText from '../LimitedText/LimitedText';
+import { sendCartItems } from '@/helpers/fetchCart';
+import { useSession } from 'next-auth/react';
+import { CustomSession } from '@/types/CustomSession';
+
 type Props = {
   product: Product;
   className?: string;
 };
+
 export default function ProductCard({ product, className }: Props) {
+  const { data: session } = useSession();
+  const customSession = session as unknown as CustomSession;
   const favoriteProducts = useAppSelector(
     (state) => state.favorite.favoriteProducts
   );
@@ -37,6 +44,17 @@ export default function ProductCard({ product, className }: Props) {
     setCartProducts,
     product
   );
+
+  const handleAddToCart = () => {
+    toggleCart();
+
+    if (customSession) {
+      sendCartItems(
+        [{ productId: product.productId, quantity: 1 }],
+        customSession.accessToken
+      );
+    }
+  };
 
   return (
     <div
@@ -72,7 +90,7 @@ export default function ProductCard({ product, className }: Props) {
             btnText: isCart ? 'В кошику' : 'Купити',
             btnIcon: cart.src,
             isBuy: true,
-            onClick: toggleCart,
+            onClick: handleAddToCart,
             type: 'button',
             className: styles.productCard__cart,
           }}

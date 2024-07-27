@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { checkWindow } from '@/helpers/checkWindow';
 
 export const useToggle = (
-  nameProd: string,
+  nameProd: 'favorite' | 'cart',
   products: Product[],
   setProducts: ActionCreatorWithPayload<any>,
   carrProduct: Product

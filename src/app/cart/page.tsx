@@ -7,7 +7,7 @@ import CartProducts from '@/components/ForCart/CartProducts/CartProducts';
 import TotalCart from '@/components/ForCart/TotalCart/TotalCart';
 import { useDispatch } from 'react-redux';
 import { setTotalPrice } from '@/redux/features/totalPriceSlice';
-import { CheckTotalPrice } from '@/helpers/CheckTotalPrice';
+import { CheckTotalPrice } from '@/helpers/checkTotalPrice';
 
 export default function Cart() {
   const dispatch = useDispatch();
