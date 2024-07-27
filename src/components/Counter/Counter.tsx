@@ -1,47 +1,38 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import styles from './counter.module.scss';
 import { checkWindow } from '@/helpers/checkWindow';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { setTotalPrice } from '@/redux/features/totalPriceSlice';
+import { updateCartQuantity } from '@/redux/features/cartSlice';
 type Props = {
   productId: number;
   price: number;
   className?: string;
-  forceUpdate?: any;
 };
 
-export default function Counter({
-  productId,
-  price,
-  className,
-  forceUpdate,
-}: Props) {
+export default function Counter({ productId, price, className }: Props) {
   const totalPrice = useAppSelector((state) => state.totalPrice.totalPrice);
+  const productCount = useAppSelector(
+    (state) =>
+      state.cart.cartProducts.find(
+        (item) => item.product.productId === productId
+      )?.quantity || 1
+  );
   const dispatch = useAppDispatch();
-  const [productCount, setProductCount] = useState(1);
   const handlePlus = () => {
     if (checkWindow()) {
-      setProductCount((prev) => prev + 1);
       dispatch(setTotalPrice(totalPrice + price));
-      localStorage.setItem(productId.toString(), (productCount + 1).toString());
+      dispatch(updateCartQuantity({ productId, quantity: productCount + 1 }));
     }
   };
   const handleMinus = () => {
     if (checkWindow() && productCount > 1) {
-      setProductCount((prev) => prev - 1);
       dispatch(setTotalPrice(totalPrice - price));
-      localStorage.setItem(productId.toString(), (productCount - 1).toString());
+      dispatch(updateCartQuantity({ productId, quantity: productCount - 1 }));
     }
   };
-
-  useEffect(() => {
-    if (checkWindow()) {
-      setProductCount(+(localStorage.getItem(productId.toString()) || 1));
-    }
-  }, [forceUpdate, productId]);
 
   return (
     <div className={classNames([styles.counter, className])}>

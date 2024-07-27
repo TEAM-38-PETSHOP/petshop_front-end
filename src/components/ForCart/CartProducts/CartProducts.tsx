@@ -11,7 +11,7 @@ export default function CartProducts() {
   const products = useAppSelector((state) => state.cart.cartProducts);
 
   useEffect(() => {
-    setCartProducts(products);
+    setCartProducts(products.map((product) => product.product));
   }, [products]);
 
   return (
