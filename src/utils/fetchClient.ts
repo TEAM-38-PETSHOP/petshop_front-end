@@ -1,6 +1,6 @@
 import { IErrorResponse } from '@/types/IErrorResponse ';
 
-const BASE_URL = 'http://ec2-44-222-228-76.compute-1.amazonaws.com';
+const BASE_URL = 'http://ec2-3-94-102-119.compute-1.amazonaws.com';
 
 type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
@@ -22,7 +22,7 @@ async function request<T>(
   };
 
   const response = await fetch(BASE_URL + url, options);
-  const jsonResponse = await response.json();
+  const jsonResponse = method === 'DELETE' ? '' : await response.json();
 
   if (!response.ok) {
     const error: IErrorResponse = jsonResponse;
