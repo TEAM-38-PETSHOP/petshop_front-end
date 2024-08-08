@@ -8,10 +8,7 @@ import {
   addFavoriteProduct,
   removeFavoriteProduct,
 } from '@/redux/features/favoriteSlice';
-import {
-  addCartProduct,
-  removeCartProduct,
-} from '@/redux/features/cartSlice';
+import { addCartProduct, removeCartProduct } from '@/redux/features/cartSlice';
 import { numberToCurrency } from '@/helpers/numberToCurrency';
 
 import styles from './productCard.module.scss';
@@ -22,9 +19,6 @@ import { Product } from '@/types/Product';
 import Buttons from '../Buttons/Buttons';
 import IconForCards from '../IconForCards/IconForCards';
 import LimitedText from '../LimitedText/LimitedText';
-import { sendCartItems } from '@/helpers/fetchCart';
-import { useSession } from 'next-auth/react';
-import { CustomSession } from '@/types/CustomSession';
 
 type Props = {
   product: Product;
@@ -32,8 +26,6 @@ type Props = {
 };
 
 export default function ProductCard({ product, className }: Props) {
-  const { data: session } = useSession();
-  const customSession = session as unknown as CustomSession;
   const favoriteProducts = useAppSelector(
     (state) => state.favorite.favoriteProducts
   );
@@ -55,13 +47,6 @@ export default function ProductCard({ product, className }: Props) {
 
   const handleAddToCart = () => {
     toggleCart();
-
-    if (customSession) {
-      sendCartItems(
-        [{ productId: product.productId, quantity: 1 }],
-        customSession.accessToken
-      );
-    }
   };
 
   return (
