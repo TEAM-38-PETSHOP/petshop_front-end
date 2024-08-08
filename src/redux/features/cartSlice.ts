@@ -1,7 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Product } from '@/types/Product';
 import { checkWindow } from '@/helpers/checkWindow';
-import { deleteCartItem, sendCartItems } from '@/helpers/fetchCart';
+import {
+  deleteCartItem,
+  sendCartItems,
+  updateCartItem,
+} from '@/helpers/fetchCart';
 import { toast } from 'react-toastify';
 
 export interface CartState {
@@ -57,6 +61,55 @@ export const addCartProductAsync = createAsyncThunk(
     }
 
     return product;
+  }
+);
+
+export const updateCartQuantityAsync = createAsyncThunk(
+  'cart/updateCartQuantityAsync',
+  async (
+    {
+      productId,
+      quantity,
+      accessToken,
+    }: {
+      productId: number;
+      quantity: number;
+      accessToken: string;
+    },
+    { getState, dispatch }
+  ) => {
+    const state = getState() as { cart: CartState };
+
+    const cartItem = state.cart.cartProducts.find(
+      (product) => product.product.productId === productId
+    );
+
+    if (cartItem && cartItem.cartItemId !== null) {
+      await toast.promise(
+        updateCartItem(
+          cartItem.cartItemId,
+          cartItem.product.productId,
+          quantity,
+          accessToken
+        ),
+        {
+          pending: 'Оновлюємо кількість...',
+          success: 'Кількість товару змінено',
+          error: 'Помилка зміни кількості товару',
+        }
+      );
+
+      dispatch(
+        updateCartQuantity({
+          productId: productId,
+          quantity: quantity,
+        })
+      );
+
+      return 'success';
+    } else {
+      toast.error('Помилка зміни кількості товару');
+    }
   }
 );
 
