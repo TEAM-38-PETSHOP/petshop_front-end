@@ -7,10 +7,7 @@ import FormInput from '@/components/FormInput/FormInput';
 import { useForm } from 'react-hook-form';
 import classNames from 'classnames';
 import { checkErrors } from '@/helpers/checkErrors';
-import { CustomSession } from '@/types/CustomSession';
-import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
-import { saveServerCart } from '@/helpers/saveServerCart';
+import useSynchronizationServer from '@/hooks/useSynchronizationServer';
 
 interface ILoginForm {
   email: string;
@@ -22,33 +19,14 @@ type Props = {
   setIsSignIn: (value: boolean) => void;
 };
 export default function SignIn({ isSignIn, setIsSignIn }: Props) {
-  const dispatch = useAppDispatch();
-  const cartProducts = useAppSelector((state) => state.cart.cartProducts);
-
-  const { data: session, status } = useSession();
-  const customSession = session as CustomSession | null;
-
+  useSynchronizationServer();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [accessToken, setAccessToken] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ILoginForm>();
-
-  useEffect(() => {
-    if (status === 'authenticated' && customSession?.accessToken) {
-      setAccessToken(customSession.accessToken);
-    }
-  }, [status, customSession]);
-
-  useEffect(() => {
-    if (accessToken) {
-      saveServerCart(accessToken, cartProducts, dispatch);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accessToken]);
 
   const handleSubmitForm = async (data: ILoginForm) => {
     const { email, password } = data;

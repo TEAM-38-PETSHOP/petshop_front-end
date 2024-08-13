@@ -14,7 +14,6 @@ export interface CartState {
     quantity: number;
     cartItemId: number | null;
   }[];
-  loading: boolean;
 }
 
 const cartStorage =
@@ -22,7 +21,6 @@ const cartStorage =
 
 const initialState: CartState = {
   cartProducts: cartStorage,
-  loading: false,
 };
 
 export const addCartProductAsync = createAsyncThunk(

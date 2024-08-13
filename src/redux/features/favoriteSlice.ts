@@ -94,7 +94,7 @@ const favoriteSlice = createSlice({
   name: 'favoriteProducts',
   initialState,
   reducers: {
-    setFavoriteProducts: (state, action) => {
+    setFavoriteProducts: (state, action: PayloadAction<FavoriteState['favoriteProducts']>) => {
       state.favoriteProducts = action.payload;
 
       if (checkWindow()) {

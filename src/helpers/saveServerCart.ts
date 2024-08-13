@@ -1,4 +1,4 @@
-import { getCartItems } from './fetchCart';
+import { getCartItems, sendCartItems } from './fetchCart';
 import { checkWindow } from './checkWindow';
 import { CartState, setCartProducts } from '@/redux/features/cartSlice';
 import { AppDispatch } from '@/redux/store';
@@ -8,23 +8,21 @@ export const saveServerCart = async (
   cartProducts: CartState['cartProducts'],
   dispatch: AppDispatch
 ) => {
+  const cartForRequest = cartProducts.map((item) => ({
+    productId: item.product.productId,
+    quantity: item.quantity,
+  }));
+  await sendCartItems(cartForRequest, accessToken);
   const serverCartItems = await getCartItems(accessToken);
-  const cart = [...cartProducts];
 
-  serverCartItems.cartItems.forEach((item) => {
-    if (
-      !cart.some(
-        (cartItem) => cartItem.product.productId === item.productDto.productId
-      )
-    ) {
-      cart.push({
-        product: item.productDto,
-        quantity: item.quantity,
-        cartItemId: item.cartItemId,
-      });
-    }
+  const newCart = serverCartItems.cartItems.map((item) => {
+    return {
+      product: item.productDto,
+      quantity: item.quantity,
+      cartItemId: item.cartItemId,
+    };
   });
 
-  dispatch(setCartProducts(cart));
-  checkWindow() && localStorage.setItem('cart', JSON.stringify(cart));
+  dispatch(setCartProducts(newCart));
+  checkWindow() && localStorage.setItem('cart', JSON.stringify(newCart));
 };
