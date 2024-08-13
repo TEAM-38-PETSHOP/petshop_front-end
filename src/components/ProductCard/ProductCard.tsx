@@ -4,8 +4,11 @@ import Image from 'next/image';
 import classNames from 'classnames';
 import { useToggle } from '@/hooks/useToggle';
 import { useAppSelector } from '@/hooks/reduxHooks';
-import { setFavoriteProducts } from '@/redux/features/favoriteSlice';
-import { setCartProducts } from '@/redux/features/cartSlice';
+import {
+  addFavoriteProduct,
+  removeFavoriteProduct,
+} from '@/redux/features/favoriteSlice';
+import { addCartProduct, removeCartProduct } from '@/redux/features/cartSlice';
 import { numberToCurrency } from '@/helpers/numberToCurrency';
 
 import styles from './productCard.module.scss';
@@ -16,10 +19,12 @@ import { Product } from '@/types/Product';
 import Buttons from '../Buttons/Buttons';
 import IconForCards from '../IconForCards/IconForCards';
 import LimitedText from '../LimitedText/LimitedText';
+
 type Props = {
   product: Product;
   className?: string;
 };
+
 export default function ProductCard({ product, className }: Props) {
   const favoriteProducts = useAppSelector(
     (state) => state.favorite.favoriteProducts
@@ -28,15 +33,21 @@ export default function ProductCard({ product, className }: Props) {
   const [isFavorite, toggleFavorite] = useToggle(
     'favorite',
     favoriteProducts,
-    setFavoriteProducts,
+    addFavoriteProduct,
+    removeFavoriteProduct,
     product
   );
   const [isCart, toggleCart] = useToggle(
     'cart',
     cartProducts,
-    setCartProducts,
+    addCartProduct,
+    removeCartProduct,
     product
   );
+
+  const handleAddToCart = () => {
+    toggleCart();
+  };
 
   return (
     <div
@@ -72,7 +83,7 @@ export default function ProductCard({ product, className }: Props) {
             btnText: isCart ? 'В кошику' : 'Купити',
             btnIcon: cart.src,
             isBuy: true,
-            onClick: toggleCart,
+            onClick: handleAddToCart,
             type: 'button',
             className: styles.productCard__cart,
           }}
