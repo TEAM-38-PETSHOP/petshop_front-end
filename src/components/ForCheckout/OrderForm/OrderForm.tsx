@@ -1,5 +1,5 @@
 'use client';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import styles from './orderForm.module.scss';
@@ -16,6 +16,7 @@ import FormComment from '@/components/FormComment/FormComment';
 import Buttons from '@/components/Buttons/Buttons';
 import { createOrder } from '@/helpers/fetchOrder';
 import { useAppSelector } from '@/hooks/reduxHooks';
+import { Product } from '@/types/Product';
 
 type Props = {
   className?: string;
@@ -26,9 +27,13 @@ export default function OrderForm({ className }: Props) {
   const [warehouseList, setWarehouseList] = useState<[] | string[]>([]);
   const [isLoadingCity, setIsLoadingCity] = useState(false);
   const [isLoadingWarehouse, setIsLoadingWarehouse] = useState(false);
-  const cartProducts = useAppSelector((state) => state.cart.cartProducts).map(
-    (item) => item.product
-  );
+  const cartProductsState = useAppSelector((state) => state.cart.cartProducts);
+  const [cartProducts, setCartProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    setCartProducts(cartProductsState.map((product) => product.product));
+  }, [cartProductsState]);
+
   const sessionCity = (checkWindow() && sessionStorage.getItem('city')) || '';
   const {
     register,
