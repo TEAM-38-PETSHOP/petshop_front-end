@@ -8,7 +8,7 @@ import styles from './previewOrder.module.scss';
 import { Product } from '@/types/Product';
 import { useAppSelector } from '@/hooks/reduxHooks';
 import CartItem from '@/components/ForCart/CartItem/CartItem';
-import { checkTotalPrice } from '@/helpers/checkTotalPrice';
+import { CheckTotalPrice } from '@/helpers/CheckTotalPrice';
 import { useDispatch } from 'react-redux';
 import { setTotalPrice } from '@/redux/features/totalPriceSlice';
 import Buttons from '@/components/Buttons/Buttons';
@@ -32,7 +32,7 @@ export default function PreviewOrder({ className }: Props) {
   useEffect(() => {
     setCartProducts(products.map((product) => product.product));
 
-    const newTotalPrice = checkTotalPrice();
+    const newTotalPrice = CheckTotalPrice();
     dispatch(setTotalPrice(newTotalPrice));
   }, [products, dispatch]);
 
