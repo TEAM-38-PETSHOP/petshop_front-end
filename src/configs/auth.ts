@@ -6,6 +6,8 @@ import { IUser } from '@/types/User';
 import { CustomSession } from '@/types/CustomSession';
 import { CustomJWT } from '@/types/CustomJWT';
 
+const tokenExpires = 36000000;
+
 export const authConfig: NextAuthOptions = {
   providers: [
     GoogleProvider({
@@ -36,7 +38,7 @@ export const authConfig: NextAuthOptions = {
           return {
             ...user,
             token: dataToken.token,
-            tokenExpires: Date.now() + 120000, //36000000
+            tokenExpires: Date.now() + tokenExpires,
           } as unknown as IUser;
         } catch (error: any) {
           throw new Error(error.message as string);
