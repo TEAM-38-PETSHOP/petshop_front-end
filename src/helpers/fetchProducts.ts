@@ -23,7 +23,7 @@ export const getProductsForSlider = () => {
   return client.get<Product[]>(`/api/products/random?count=${slidesCount}`);
 };
 
-export const getProductById = (id: string) => {
+export const getProductById = (id: string | number) => {
   return client.get<Product>(`/api/products/${id}`);
 };
 
