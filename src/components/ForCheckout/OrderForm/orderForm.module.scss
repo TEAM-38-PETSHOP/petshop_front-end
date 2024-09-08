@@ -3,6 +3,7 @@
 
 .orderForm {
   margin-bottom: 70px;
+  min-width: 50%;
 
   @include lg {
     margin-bottom: 30px;
