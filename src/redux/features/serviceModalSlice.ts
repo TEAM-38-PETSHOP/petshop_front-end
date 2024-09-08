@@ -18,8 +18,6 @@ export const serviceModalSlice = createSlice({
       }>
     ) => {
       state[payload.type] = payload.payload || {};
-      console.log('SLICE IS WORKING');
-      
     },
     removeServiceModal: (
       state,
