@@ -2,8 +2,8 @@ const NotificationSuccessIcon = () => {
   return (
     <div style={{ margin: "32px" }}>
       <svg
-        width="24"
-        height="24"
+        width="64"
+        height="64"
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -13,7 +13,7 @@ const NotificationSuccessIcon = () => {
             width="24"
             height="24"
             rx="12"
-            fill="#02C39A"
+            fill="#00c662"
             fillOpacity="0.1"
           />
           <rect
@@ -22,10 +22,10 @@ const NotificationSuccessIcon = () => {
             width="23.625"
             height="23.625"
             rx="11.8125"
-            stroke="#02C39A"
+            stroke="#00c662"
             strokeWidth="0.375"
           />
-          <rect x="3" y="3" width="18" height="18" rx="9" fill="#02C39A" />
+          <rect x="3" y="3" width="18" height="18" rx="9" fill="#00c662" />
           <g clipPath="url(#clip0_17430_1498)">
             <path
               d="M14.25 9.75L10.125 13.875L8.25 12"

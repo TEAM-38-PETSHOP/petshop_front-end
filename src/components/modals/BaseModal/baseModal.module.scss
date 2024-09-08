@@ -1,0 +1,52 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  background-color: "rgba(80, 95, 111, 0.50)";
+  padding: 0px;
+
+  &__container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    padding: 32px;
+    width: 100%;
+    background-color: var(--color-gray-100);
+    border-radius: 12px;
+  }
+
+  &__close {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: var(--color-gray-100);
+  }
+
+  &__title {
+    padding-bottom: "16px";
+    margin: 0;
+  }
+}

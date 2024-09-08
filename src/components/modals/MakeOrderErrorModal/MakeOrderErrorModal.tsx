@@ -3,6 +3,7 @@ import { removeServiceModal } from "@/redux/features/serviceModalSlice";
 import { BaseModalSize, ServiceModalName } from "@/types";
 import BaseModal from "../BaseModal/BaseModal";
 import { NotificationErrorIcon } from "@/assets";
+import styles from "./makeOrderErrorModal.module.scss";
 
 interface MakeOrderErrorModalProps {
   index: number;
@@ -25,64 +26,26 @@ const MakeOrderErrorModal = ({ index }: MakeOrderErrorModalProps) => {
       onClose={handleBackButton}
       index={index}
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          textAlign: "center",
-        }}
-      >
+      <div className={styles.error}>
         <NotificationErrorIcon />
-        <h1
-          style={{ fontSize: "24px", fontWeight: "700", marginBottom: "20px" }}
-        >
+        <h1 className={styles.error__title}>
           Упс! Сталась непередбачувана помилка!
         </h1>
-        <p
-          style={{ fontSize: "14px", fontWeight: "400", marginBottom: "40px" }}
-        >
+        <p className={styles.error__paragraph}>
           Звʼяжіться з менеджером або тех підтримкою!
         </p>
-        <div
-          style={{
-            width: 1,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <div className={styles.error__buttons}>
           <button
             onClick={handleBackButton}
-            // style={{
-            //   color: theme.palette.primary.main,
-            //   backgroundColor: theme.palette.common.white,
-            //   border: `1px solid ${theme.palette.primary.main}`,
-            //   "&:hover": {
-            //     backgroundColor: theme.palette.primary.main,
-            //     color: theme.palette.common.white,
-            //     boxShadow: "none",
-            //   },
-            // }}
+            className={styles.error__buttons__back}
           >
             Назад
           </button>
           <button
             onClick={handleLeaveButton}
-            // style={{
-            //   color: theme.palette.common.white,
-            //   backgroundColor: theme.palette.error.main,
-            //   border: `1px solid ${theme.palette.error.main}`,
-            //   "&:hover": {
-            //     backgroundColor: theme.palette.common.white,
-            //     border: `1px solid ${theme.palette.error.main}`,
-            //     color: theme.palette.error.main,
-            //     boxShadow: "none",
-            //   },
-            // }}
+            className={styles.error__buttons__support}
           >
-            Повернутись до покупок
+            Звʼязатись з тех підтримкою
           </button>
         </div>
       </div>
