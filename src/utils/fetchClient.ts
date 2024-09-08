@@ -1,12 +1,12 @@
-import { IErrorResponse } from '@/types/IErrorResponse ';
+import { IErrorResponse } from "@/types/IErrorResponse ";
 
-const BASE_URL = 'http://ec2-34-234-66-224.compute-1.amazonaws.com';
+const BASE_URL = "http://ec2-52-55-217-94.compute-1.amazonaws.com";
 
-type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
+type RequestMethod = "GET" | "POST" | "PATCH" | "DELETE";
 
 async function request<T>(
   url: string,
-  method: RequestMethod = 'GET',
+  method: RequestMethod = "GET",
   data: any = null,
   token: string | null = null
 ): Promise<T> {
@@ -17,16 +17,16 @@ async function request<T>(
   }
 
   options.headers = {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
     ...(token && { Authorization: `Bearer ${token}` }),
   };
 
   const response = await fetch(BASE_URL + url, options);
-  const jsonResponse = method === 'DELETE' ? '' : await response.json();
+  const jsonResponse = method === "DELETE" ? "" : await response.json();
 
   if (!response.ok) {
     const error: IErrorResponse = jsonResponse;
-    throw new Error(error.message || 'An error occurred');
+    throw new Error(error.message || "An error occurred");
   }
 
   return jsonResponse;
@@ -34,11 +34,11 @@ async function request<T>(
 
 export const client = {
   get: <T>(url: string, token: string | null = null) =>
-    request<T>(url, 'GET', null, token),
+    request<T>(url, "GET", null, token),
   post: <T>(url: string, data: any, token: string | null = null) =>
-    request<T>(url, 'POST', data, token),
+    request<T>(url, "POST", data, token),
   patch: <T>(url: string, data: any, token: string | null = null) =>
-    request<T>(url, 'PATCH', data, token),
+    request<T>(url, "PATCH", data, token),
   delete: (url: string, token: string | null = null) =>
-    request(url, 'DELETE', null, token),
+    request(url, "DELETE", null, token),
 };
