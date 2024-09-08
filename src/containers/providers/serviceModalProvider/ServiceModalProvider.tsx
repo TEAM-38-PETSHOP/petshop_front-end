@@ -1,5 +1,3 @@
-"use client";
-
 import React, { Suspense, useEffect } from "react";
 import { ServiceModalBaseIndex } from "@/constants";
 import { ServiceModalName } from "@/types";
