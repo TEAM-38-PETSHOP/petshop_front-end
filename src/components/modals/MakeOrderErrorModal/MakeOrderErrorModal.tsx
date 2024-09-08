@@ -1,3 +1,5 @@
+"use client";
+
 import { useAppDispatch } from "@/hooks/reduxHooks";
 import { removeServiceModal } from "@/redux/features/serviceModalSlice";
 import { BaseModalSize, ServiceModalName } from "@/types";
