@@ -14,6 +14,7 @@ type Props = {
   register: UseFormRegisterReturn;
   errors: string | undefined;
   type?: HTMLInputTypeAttribute | undefined;
+  disabled?: boolean;
   placeholder?: string;
   className?: string;
   isSave?: boolean;
@@ -32,6 +33,7 @@ export default memo(function FormInput({
   register,
   errors,
   placeholder,
+  disabled,
   isSave,
   onClickInput,
   type = 'text',
@@ -51,16 +53,12 @@ export default memo(function FormInput({
     autocomplete.autocompleteList.length === 0 &&
     !autocomplete.isLoading;
 
-  const handleClick = (item: string) => {
+  const handleClick = (textInfo: string, itemRef?: string) => {
     if (autocomplete) {
-      autocomplete.setValue(autocomplete.name, item);
+      autocomplete.setValue(autocomplete.name, textInfo.trim());
 
-      const regex = /^(.*?)\s*\|\s*(.*?)$/;
-      const match = item.match(regex);
-      const itemRef = match ? match[2] : '';
-
-      if (isSave && checkWindow()) {
-        window.sessionStorage.setItem(autocomplete.name, itemRef);
+      if (isSave && itemRef && checkWindow()) {
+        window.sessionStorage.setItem(autocomplete.name, itemRef.trim());
       }
     }
   };
@@ -78,6 +76,7 @@ export default memo(function FormInput({
         className={classNames(styles.input, className, {
           [styles.input__activeList]: isShowList,
         })}
+        disabled={disabled}
         onClick={onClickInput}
         autoComplete={offBrowserAutocomplete ? 'off' : ''}
         placeholder={placeholder}
@@ -105,14 +104,18 @@ export default memo(function FormInput({
         <div className={styles.autocomplete}>
           {!autocomplete.isLoading && (
             <ul className={styles.autocomplete__list}>
-              {autocomplete.autocompleteList.map((item) => (
-                <li
-                  key={item}
-                  onClick={() => handleClick(item)}
-                >
-                  {item}
-                </li>
-              ))}
+              {autocomplete.autocompleteList.map((item) => {
+                const [textInfo, itemRef] = item.split('|');
+                return (
+                  <li
+                    key={item}
+                    onClick={() => handleClick(textInfo, itemRef)}
+                  >
+                    {textInfo}
+                    <span hidden>{itemRef}</span>
+                  </li>
+                );
+              })}
             </ul>
           )}
           {isShowNoResult && <p>Нічого не знайдено</p>}
