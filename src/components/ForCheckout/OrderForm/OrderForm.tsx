@@ -14,25 +14,31 @@ import { ResponseCities } from '@/types/novaposhta/ResponseCities';
 import { Warehouse } from '@/types/novaposhta/ResponseWarehouses';
 import FormComment from '@/components/FormComment/FormComment';
 import Buttons from '@/components/Buttons/Buttons';
-import { createOrder } from '@/helpers/fetchOrder';
-import { useAppSelector } from '@/hooks/reduxHooks';
+import {
+  createOrderWithAuth,
+  createOrderWithoutAuth,
+} from '@/helpers/fetchOrder';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { Product } from '@/types/Product';
+import { useSession } from 'next-auth/react';
+import { IUser } from '@/types/User';
+import { setCartProducts as setCartProductsRedux } from '@/redux/features/cartSlice';
 
 type Props = {
   className?: string;
 };
 
 export default function OrderForm({ className }: Props) {
+  const { status, data } = useSession();
+  const isAuthenticated = status === 'authenticated';
+  const customUser = data?.user as IUser;
+  const dispatch = useAppDispatch();
   const [cityList, setCityList] = useState<[] | string[]>([]);
   const [warehouseList, setWarehouseList] = useState<[] | string[]>([]);
   const [isLoadingCity, setIsLoadingCity] = useState(false);
   const [isLoadingWarehouse, setIsLoadingWarehouse] = useState(false);
   const cartProductsState = useAppSelector((state) => state.cart.cartProducts);
   const [cartProducts, setCartProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    setCartProducts(cartProductsState.map((product) => product.product));
-  }, [cartProductsState]);
 
   const sessionCity = (checkWindow() && sessionStorage.getItem('city')) || '';
   const {
@@ -45,44 +51,87 @@ export default function OrderForm({ className }: Props) {
     formState: { errors },
   } = useForm<IOrderForm>();
 
-  const onSubmit: SubmitHandler<IOrderForm> = (data) => {
-    const cartItems = cartProducts.map((item) => {
-      const quantity = checkWindow()
-        ? +(localStorage.getItem(item.productId.toString()) || 1)
-        : 1;
-      return {
-        productId: item.productId,
-        quantity: quantity,
-      };
-    });
+  useEffect(() => {
+    setCartProducts(cartProductsState.map((product) => product.product));
+  }, [cartProductsState]);
 
-    const orderData = {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      phone: data.phone,
-      email: data.email,
-      address: {
+  useEffect(() => {
+    setValue('firstName', customUser?.firstName);
+    setValue('lastName', customUser?.lastName);
+    setValue('phone', customUser?.phone);
+    setValue('email', customUser?.email);
+
+    return () => {
+      sessionStorage.removeItem('city');
+    };
+  }, [customUser, setValue]);
+
+  const onSubmit: SubmitHandler<IOrderForm> = (data) => {
+    if (isAuthenticated) {
+      const orderData = {
         city: data.city,
+        street: '',
+        building: '',
+        apartment: '',
         officeNovaPost: data.deliveryPoint,
         comment: data.comment,
-      },
-      cartItems: cartItems,
-    };
+      };
 
-    createOrder(orderData)
-      .then(() => {
-        reset();
-        alert('Ваше замовлення прийнято!');
-      })
-      .catch(() => {
-        alert(
-          'Виникла якась помилка, спробуйте ще раз пізніше або зверніться до служби підтримки'
-        );
+      createOrderWithAuth(orderData, customUser.token)
+        .then(() => {
+          alert('Ваше замовлення прийнято!');
+          reset();
+          dispatch(setCartProductsRedux([]));
+        })
+        .catch(() => {
+          alert(
+            'Виникла якась помилка, спробуйте ще раз пізніше або зверніться до служби підтримки'
+          );
+        });
+    } else {
+      const cartItems = cartProducts.map((item) => {
+        const quantity = checkWindow()
+          ? +(localStorage.getItem(item.productId.toString()) || 1)
+          : 1;
+        return {
+          productId: item.productId,
+          quantity: quantity,
+        };
       });
+
+      const orderData = {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        phone: data.phone,
+        email: data.email,
+        address: {
+          city: data.city,
+          officeNovaPost: data.deliveryPoint,
+          comment: data.comment,
+        },
+        cartItems: cartItems,
+      };
+
+      createOrderWithoutAuth(orderData)
+        .then(() => {
+          alert('Ваше замовлення прийнято!');
+          reset();
+          dispatch(setCartProductsRedux([]));
+        })
+        .catch(() => {
+          alert(
+            'Виникла якась помилка, спробуйте ще раз пізніше або зверніться до служби підтримки'
+          );
+        });
+    }
   };
 
   const handleCityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue('deliveryPoint', '');
+    checkWindow() && sessionStorage.removeItem('city');
+
     const value = event.target.value;
+
     if (value.length >= 3) {
       setIsLoadingCity(true);
       setCityList([]);
@@ -129,6 +178,7 @@ export default function OrderForm({ className }: Props) {
 
   const debouncedCityChange = useMemo(
     () => debounce(handleCityChange, 400),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
@@ -145,15 +195,24 @@ export default function OrderForm({ className }: Props) {
       <div className={styles.orderForm__block}>
         <div className={styles.orderForm__titleWrapper}>
           <h3 className={styles.orderForm__title}>Контакти</h3>
-          <p>
-            Щоб не вводити інформацію власноруч,{' '}
-            <Link href="#">Увійти тут</Link>
-          </p>
+          {!isAuthenticated && (
+            <p>
+              Щоб не вводити інформацію власноруч,{' '}
+              <Link
+                href={`/auth?callbackUrl=${encodeURIComponent(
+                  checkWindow() ? window.location.href : '/'
+                )}`}
+              >
+                Увійти тут
+              </Link>
+            </p>
+          )}
         </div>
         <FormInput
           register={register('firstName', {
             required: "Це поле є обов'язковим",
           })}
+          disabled={isAuthenticated}
           placeholder="Ім'я одержувача"
           errors={errors.firstName?.message}
         />
@@ -161,11 +220,11 @@ export default function OrderForm({ className }: Props) {
           register={register('lastName', {
             required: "Це поле є обов'язковим",
           })}
+          disabled={isAuthenticated}
           placeholder="Прізвище одержувача"
           errors={errors.lastName?.message}
         />
         <FormInput
-          placeholder="Телефон"
           type="tel"
           register={register('phone', {
             required: "Це поле є обов'язковим",
@@ -178,6 +237,8 @@ export default function OrderForm({ className }: Props) {
               message: 'Невірно введенний номер прикдад: +380XXXXXXXXX',
             },
           })}
+          disabled={isAuthenticated}
+          placeholder="Телефон"
           errors={errors.phone?.message}
         />
         <FormInput
@@ -189,6 +250,7 @@ export default function OrderForm({ className }: Props) {
             },
           })}
           type="email"
+          disabled={isAuthenticated}
           placeholder="Електронна пошта"
           errors={errors.email?.message}
         />
@@ -217,7 +279,8 @@ export default function OrderForm({ className }: Props) {
         />
         <FormInput
           className={styles.orderForm__input}
-          placeholder="Відділення"
+          disabled={!sessionCity}
+          placeholder="Відділення Нової пошти"
           register={register('deliveryPoint', {
             required: "Це поле є обов'язковим",
             onChange: debouncedWarehouseChange,
