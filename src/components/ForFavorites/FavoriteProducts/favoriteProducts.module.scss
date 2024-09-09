@@ -1,5 +1,5 @@
-@import '../../../app/styles/extends.scss';
-@import '../../../app/styles/mixins.scss';
+@import "../../../app/styles/extends.scss";
+@import "../../../app/styles/mixins.scss";
 
 .favoriteProducts {
   display: grid;
@@ -54,7 +54,7 @@
   }
 
   &__FewItem {
-    justify-content: start;
+    justify-content: flex-start;
 
     @include sm {
       width: 100%;
@@ -62,7 +62,7 @@
   }
 
   &__OneItem {
-    justify-items: start;
+    justify-items: flex-start;
 
     @include sm {
       width: 100%;

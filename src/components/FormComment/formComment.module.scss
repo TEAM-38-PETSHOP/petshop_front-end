@@ -1,10 +1,10 @@
-@import '../../app/styles/extends.scss';
-@import '../../app/styles/mixins.scss';
+@import "../../app/styles/extends.scss";
+@import "../../app/styles/mixins.scss";
 
 .formComment {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   gap: 10px;
 
   &__btn {
