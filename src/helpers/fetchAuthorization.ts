@@ -44,3 +44,15 @@ export const checkEmail = (email: string) => {
     true
   );
 };
+
+export const resetPassword = (code: string, password: string) => {
+  return client.post<string>(
+    '/api/auth/reset-password',
+    {
+      code,
+      password,
+    },
+    null,
+    true
+  );
+};
