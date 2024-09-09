@@ -1,6 +1,7 @@
 export const checkErrors = (message: string) => {
   switch (true) {
-    case message === "Can't find user by email":
+    case message === "Can't find user by email" ||
+      message.includes('No found user by email'):
       return 'Користувача з таким email не існує.';
     case message === 'CredentialsSignin':
       return 'Помилка входу. Перевірте правильність наданих вами даних.';
