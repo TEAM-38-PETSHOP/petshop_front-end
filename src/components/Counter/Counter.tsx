@@ -11,6 +11,7 @@ import {
 } from '@/redux/features/cartSlice';
 import { useSession } from 'next-auth/react';
 import { CustomSession } from '@/types/CustomSession';
+import { useEffect, useState } from 'react';
 type Props = {
   productId: number;
   price: number;
@@ -21,13 +22,16 @@ export default function Counter({ productId, price, className }: Props) {
   const { data: session } = useSession();
   const customSession = session as unknown as CustomSession;
   const totalPrice = useAppSelector((state) => state.totalPrice.totalPrice);
-  const productCount = useAppSelector(
-    (state) =>
-      state.cart.cartProducts.find(
-        (item) => item.product.productId === productId
-      )?.quantity || 1
-  );
+  const [productCount, setProductCount] = useState(1);
+  const cartProducts = useAppSelector((state) => state.cart.cartProducts);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    setProductCount(
+      cartProducts.find((item) => item.product.productId === productId)
+        ?.quantity || 1
+    );
+  }, [cartProducts, productId]);
   const handlePlus = async () => {
     if (checkWindow()) {
       if (!customSession) {
