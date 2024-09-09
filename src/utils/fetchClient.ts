@@ -1,6 +1,6 @@
 import { IErrorResponse } from '@/types/IErrorResponse ';
 
-const BASE_URL = 'http://ec2-52-55-217-94.compute-1.amazonaws.com';
+const BASE_URL = 'http://ec2-54-221-139-139.compute-1.amazonaws.com';
 
 type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
@@ -8,7 +8,8 @@ async function request<T>(
   url: string,
   method: RequestMethod = 'GET',
   data: any = null,
-  token: string | null = null
+  token: string | null = null,
+  expectString: boolean = false
 ): Promise<T> {
   const options: RequestInit = { method };
 
@@ -22,7 +23,9 @@ async function request<T>(
   };
 
   const response = await fetch(BASE_URL + url, options);
-  const jsonResponse = method === 'DELETE' ? '' : await response.json();
+  const jsonResponse = expectString
+    ? await response.text()
+    : await response.json();
 
   if (!response.ok) {
     const error: IErrorResponse = jsonResponse;
@@ -33,12 +36,26 @@ async function request<T>(
 }
 
 export const client = {
-  get: <T>(url: string, token: string | null = null) =>
-    request<T>(url, 'GET', null, token),
-  post: <T>(url: string, data: any, token: string | null = null) =>
-    request<T>(url, 'POST', data, token),
-  patch: <T>(url: string, data: any, token: string | null = null) =>
-    request<T>(url, 'PATCH', data, token),
-  delete: (url: string, token: string | null = null) =>
-    request(url, 'DELETE', null, token),
+  get: <T>(
+    url: string,
+    token: string | null = null,
+    expectString: boolean = false
+  ) => request<T>(url, 'GET', null, token, expectString),
+  post: <T>(
+    url: string,
+    data: any,
+    token: string | null = null,
+    expectString: boolean = false
+  ) => request<T>(url, 'POST', data, token, expectString),
+  patch: <T>(
+    url: string,
+    data: any,
+    token: string | null = null,
+    expectString: boolean = false
+  ) => request<T>(url, 'PATCH', data, token, expectString),
+  delete: (
+    url: string,
+    token: string | null = null,
+    expectString: boolean = false
+  ) => request(url, 'DELETE', null, token, expectString),
 };
