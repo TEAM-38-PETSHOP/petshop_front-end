@@ -49,11 +49,20 @@
     }
   }
 
+  &__forgot {
+    position: absolute;
+    right: 0;
+    bottom: -25px;
+    padding: 5px;
+    color: var(--color-gray-20);
+  }
+
   &__button {
     display: flex;
     align-items: center;
     justify-content: center;
 
+    margin-top: 25px;
     padding: 0 5.6%;
     min-height: 50px;
     border: 1px solid var(--color-gray-10);

@@ -102,7 +102,15 @@ export default function SignIn({ isSignIn, setIsSignIn }: Props) {
           type="password"
           placeholder="Введіть пароль"
           errors={errors.password?.message}
-        />
+        >
+          <button
+            className={styles.signIn__forgot}
+            type="button"
+          >
+            Забули пароль?
+          </button>
+        </FormInput>
+
         <button
           className={styles.signIn__button}
           type="submit"
