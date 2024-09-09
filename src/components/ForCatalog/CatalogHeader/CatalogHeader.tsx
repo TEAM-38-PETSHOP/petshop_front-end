@@ -27,6 +27,7 @@ import {
 import { createPortal } from "react-dom";
 import useIsCurrentScreenSize from "@/hooks/useIsCurrentScreenSize";
 import { RadioAmountType } from "@/types/RadioAmountType";
+import { checkWindow } from "@/helpers/checkWindow";
 
 const min = 0;
 const max = 10000;
@@ -107,7 +108,7 @@ export default function CatalogHeader({ category, categories }: Props) {
 
   useEffect(() => {
     setIsLoading(true);
-    getProductsByName({ name: queryToRequest, page: '0', size: '8' }, false)
+    getProductsByName({ name: queryToRequest, page: "0", size: "8" }, false)
       .then((data) => {
         setProducts(data);
       })
@@ -150,7 +151,9 @@ export default function CatalogHeader({ category, categories }: Props) {
 
   const clearClickHandler = () => {
     const paramsToDelete = ["breed", "from", "to"];
-    const urlSearchParams = new URLSearchParams(window.location.search);
+    const urlSearchParams = new URLSearchParams(
+      checkWindow() ? window.location.search : "/"
+    );
 
     paramsToDelete.forEach((param) => {
       if (urlSearchParams.has(param)) {
@@ -158,7 +161,9 @@ export default function CatalogHeader({ category, categories }: Props) {
       }
     });
 
-    const newUrl = `${window.location.pathname}?${urlSearchParams.toString()}`;
+    const newUrl = `${
+      checkWindow() && window.location.pathname
+    }?${urlSearchParams.toString()}`;
     window.history.replaceState({}, document.title, newUrl);
 
     setBreed(BreedType.ALL);
