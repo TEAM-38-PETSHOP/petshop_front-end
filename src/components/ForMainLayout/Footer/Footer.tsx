@@ -9,7 +9,7 @@ import Link from 'next/link';
 export default function Footer() {
   const pathname = usePathname();
   const isHidden =
-    pathname === '/favorites' || pathname === '/cart' || pathname === '/auth';
+    pathname === '/favorites' || pathname === '/cart' || pathname === '/auth' || pathname === '/profile';
 
   return (
     <div

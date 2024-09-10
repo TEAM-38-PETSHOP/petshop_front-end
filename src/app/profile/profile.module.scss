@@ -1,0 +1,9 @@
+@import "../../app/styles/extends.scss";
+@import "../../app/styles/mixins.scss";
+
+.profile {
+  @extend %container;
+  flex-grow: 1;
+  overflow: hidden;
+  transform: translateY(-10px);
+}

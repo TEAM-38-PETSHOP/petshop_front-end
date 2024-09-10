@@ -1,0 +1,13 @@
+@import "../../app/styles/extends.scss";
+@import "../../app/styles/mixins.scss";
+
+.accordion {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+
+  @include md {
+    display: flex;
+  }
+}
