@@ -33,6 +33,9 @@ export default function HeaderForPages({
           <Image
             className={styles.headerForPages__centerContainer__img}
             src={centralBlock.img}
+            width={100}
+            height={100}
+            priority
             alt="dog"
           />
         )}

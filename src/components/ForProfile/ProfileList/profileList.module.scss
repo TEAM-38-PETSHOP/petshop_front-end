@@ -1,0 +1,116 @@
+@import "../../../app/styles/extends.scss";
+@import "../../../app/styles/mixins.scss";
+
+.profileList {
+  display: flex;
+  min-height: 100%;
+  gap: 15px;
+
+  padding: 40px;
+  background-color: var(--color-additional-beige);
+  border-radius: var(--radius-40);
+
+  @include lg {
+    padding: 30px;
+    gap: 15px;
+  }
+
+  @include md {
+    padding: 20px;
+    flex-direction: column;
+  }
+
+  &__hr {
+    min-width: 1px;
+    background-color: var(--color-gray-50);
+
+    @include md {
+      display: none;
+    }
+  }
+
+  &__exit {
+    @extend %main-text;
+    font-weight: 600;
+    color: var(--color-gray-40);
+    margin-left: 30px;
+
+    @include md {
+      display: none;
+    }
+  }
+
+  &__exitMobile {
+    display: none;
+    max-width: fit-content;
+    margin: 0 auto;
+    @extend %main-text;
+    font-weight: 600;
+    color: var(--color-gray-40);
+
+    @include md {
+      display: block;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-width: min-content;
+
+    @include md {
+      display: none;
+    }
+  }
+}
+
+.btnsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 45px;
+
+  min-width: 360px;
+
+  @include lg {
+    min-width: 240px;
+    max-width: 240px;
+  }
+
+  @include md {
+    display: none;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    @extend %main-text;
+    height: 50px;
+    width: 100%;
+    padding: 0 30px;
+
+    border-radius: var(--radius-100);
+
+    transition: background-color, color, var(--transition-duration);
+
+    @include md {
+      font-size: 0.875rem;
+      line-height: 1.2;
+
+      border: 1px solid var(--color-gray-20);
+    }
+  }
+
+  &__btnActive {
+    font-weight: 600;
+    color: var(--color-gray-100);
+    background-color: var(--color-gray-20);
+
+    @include md {
+      border: 1px solid var(--color-gray-20);
+    }
+  }
+}
