@@ -1,8 +1,8 @@
 'use client';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { redirect, useSearchParams } from 'next/navigation';
 import { toast } from 'react-toastify';
 import styles from './signIn.module.scss';
-import { signIn, signOut } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import FormInput from '@/components/FormInput/FormInput';
 import { useForm } from 'react-hook-form';
 import classNames from 'classnames';
@@ -11,6 +11,7 @@ import { useAppDispatch } from '@/hooks/reduxHooks';
 import useSynchronizationServer from '@/hooks/useSynchronizationServer';
 import { addServiceModal } from '@/redux/features/serviceModalSlice';
 import { ServiceModalName } from '@/types';
+import { useEffect } from 'react';
 
 interface ILoginForm {
   email: string;
@@ -22,10 +23,18 @@ type Props = {
   setIsSignIn: (value: boolean) => void;
 };
 export default function SignIn({ isSignIn, setIsSignIn }: Props) {
-  useSynchronizationServer();
-  const router = useRouter();
+  const session = useSession();
   const searchParams = useSearchParams();
   const dispatch = useAppDispatch();
+  const callbackUrl = searchParams.get('callbackUrl') || '/';
+
+  useEffect(() => {
+    if (session.status === 'authenticated') {
+      redirect(callbackUrl);
+    }
+  }, [session.status, searchParams]);
+
+  useSynchronizationServer();
   const {
     register,
     handleSubmit,
@@ -41,11 +50,10 @@ export default function SignIn({ isSignIn, setIsSignIn }: Props) {
       email,
       password,
       redirect: false,
-      callbackUrl: searchParams.get('callbackUrl') || '/',
+      callbackUrl: callbackUrl,
     });
 
     if (res && !res.error) {
-      router.push(res.url || '/');
       toast.update(toastId, {
         render: 'Успішний вхід!',
         type: 'success',
@@ -127,12 +135,6 @@ export default function SignIn({ isSignIn, setIsSignIn }: Props) {
           Увійти
         </button>
       </form>
-      <button
-        type="button"
-        onClick={() => signOut()}
-      >
-        Exit
-      </button>
     </div>
   );
 }
