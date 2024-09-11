@@ -19,6 +19,7 @@ type Props = {
   label?: string;
   className?: string;
   isSave?: boolean;
+  children?: React.ReactNode;
   onClickInput?: () => void;
   offBrowserAutocomplete?: boolean;
   autocomplete?: {
@@ -42,6 +43,7 @@ export default memo(function FormInput({
   className,
   offBrowserAutocomplete,
   autocomplete,
+  children,
 }: Props) {
   const [isFocus, setIsFocus] = useState(false);
   const [isShowPassword, setIsShowPassword] = useState(false);
@@ -88,6 +90,8 @@ export default memo(function FormInput({
             type === "password" ? (isShowPassword ? "text" : "password") : type
           }
         />
+
+      {children}
 
         {type === "password" && (
           <button

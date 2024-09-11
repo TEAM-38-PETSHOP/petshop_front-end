@@ -19,7 +19,7 @@ export const sendCartItems = (
 };
 
 export const deleteCartItem = (cartItemId: number, token: string) => {
-  return client.delete(`/api/carts/cart-items/${cartItemId}`, token);
+  return client.delete(`/api/carts/cart-items/${cartItemId}`, token, true);
 };
 
 export const updateCartItem = (

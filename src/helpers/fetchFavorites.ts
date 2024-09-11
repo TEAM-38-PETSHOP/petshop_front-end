@@ -18,6 +18,7 @@ export const sendFavoriteItems = (productId: number, token: string) => {
 export const deleteFavoriteItem = (wishItemId: number, token: string) => {
   return client.delete(
     `/api/profile/wishlists/wish-items/${wishItemId}`,
-    token
+    token,
+    true
   );
 };

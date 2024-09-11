@@ -33,3 +33,26 @@ export const registerUser = (
 export const getUser = (token: string) => {
   return client.get<IUser>('/api/users/info', token);
 };
+
+export const checkEmail = (email: string) => {
+  return client.post<string>(
+    '/api/auth/forgot-password',
+    {
+      email,
+    },
+    null,
+    true
+  );
+};
+
+export const resetPassword = (code: string, password: string) => {
+  return client.post<string>(
+    '/api/auth/reset-password',
+    {
+      code,
+      password,
+    },
+    null,
+    true
+  );
+};
