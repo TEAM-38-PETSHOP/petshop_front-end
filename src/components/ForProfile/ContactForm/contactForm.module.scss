@@ -1,0 +1,27 @@
+.contactForm {
+  &__inputWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  &__forgotPassword {
+    align-self: flex-end;
+    padding-top: 5px;
+    text-decoration: underline;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+
+    &Delete {
+    }
+
+    &Save {
+      color: var(--color-gray-100);
+      background-color: var(--color-gray-20);
+    }
+  }
+}

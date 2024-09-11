@@ -1,3 +1,4 @@
+import { ContactInfo } from "@/components";
 import { ProfileTab } from "@/types";
 
 export const profileTabInfoFactory = (activeTab: ProfileTab) => {
@@ -13,6 +14,6 @@ export const profileTabInfoFactory = (activeTab: ProfileTab) => {
 
     case ProfileTab.ContactInfo:
     default:
-      return "Contact Information Tab";
+      return <ContactInfo />;
   }
 };

@@ -13,7 +13,7 @@ type Btn = {
   onClick?: () => void;
   isBuy?: boolean;
   children?: React.ReactNode;
-  type?: 'button' | 'link';
+  type?: 'button' | 'link' | 'submit';
 };
 
 type Props = {
@@ -28,6 +28,24 @@ export default function Buttons({ firstBtn, secondBtn, className }: Props) {
       return (
         <button
           onClick={btn.onClick}
+          className={classNames([styles.btns__btn], {
+            [styles.btns__btnSecond]: btn === secondBtn,
+            [styles.btns__btnDisabled]: btn.isDisabled,
+            [styles.btns__btnBuy]: btn.isBuy,
+            [btn.className as string]: btn.className,
+          })}
+        >
+          {btn.btnIcon && <SvgWrapper src={btn.btnIcon} />}
+          {btn.btnText}
+          {btn.children}
+        </button>
+      );
+
+      if (btn.type === 'submit')
+      return (
+        <button
+          onClick={btn.onClick}
+          type={btn.type}
           className={classNames([styles.btns__btn], {
             [styles.btns__btnSecond]: btn === secondBtn,
             [styles.btns__btnDisabled]: btn.isDisabled,

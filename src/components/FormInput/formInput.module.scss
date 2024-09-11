@@ -1,4 +1,4 @@
-@import '../../app/styles/extends.scss';
+@import "../../app/styles/extends.scss";
 
 .input {
   width: 100%;
@@ -41,6 +41,15 @@
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
+  }
+
+  &__label {
+    max-width: fit-content;
+    margin: 0 0 5px 10px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #A9A9B0;
   }
 }
 
