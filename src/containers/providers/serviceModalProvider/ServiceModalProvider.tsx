@@ -1,17 +1,26 @@
-"use client";
+'use client';
 
-import React, { Suspense, useEffect } from "react";
-import { ServiceModalBaseIndex } from "@/constants";
-import { ServiceModalName } from "@/types";
-import { useAppSelector } from "@/hooks/reduxHooks";
+import React, { Suspense, useEffect } from 'react';
+import { ServiceModalBaseIndex } from '@/constants';
+import { ServiceModalName } from '@/types';
+import { useAppSelector } from '@/hooks/reduxHooks';
 
 const MakeOrderSuccessModal = React.lazy(
   () =>
-    import("@/components/modals/MakeOrderSuccessModal/MakeOrderSuccessModal")
+    import('@/components/modals/MakeOrderSuccessModal/MakeOrderSuccessModal')
 );
 
 const MakeOrderErrorModal = React.lazy(
-  () => import("@/components/modals/MakeOrderErrorModal/MakeOrderErrorModal")
+  () => import('@/components/modals/MakeOrderErrorModal/MakeOrderErrorModal')
+);
+
+const MakeCheckEmailModal = React.lazy(
+  () => import('@/components/modals/MakeCheckEmailModal/MakeCheckEmailModal')
+);
+
+const MakeResetPasswordModal = React.lazy(
+  () =>
+    import('@/components/modals/MakeResetPasswordModal/MakeResetPasswordModal')
 );
 
 const ServiceModalProvider = ({ children }: { children: React.ReactNode }) => {
@@ -20,7 +29,7 @@ const ServiceModalProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const modalOverflow = document.body.style.overflow;
 
-    document.body.style.overflow = modalKeys?.length ? "hidden" : modalOverflow;
+    document.body.style.overflow = modalKeys?.length ? 'hidden' : modalOverflow;
 
     return () => {
       document.body.style.overflow = modalOverflow;
@@ -40,6 +49,20 @@ const ServiceModalProvider = ({ children }: { children: React.ReactNode }) => {
         return (
           <Suspense fallback={<></>}>
             <MakeOrderErrorModal index={ServiceModalBaseIndex + index} />
+          </Suspense>
+        );
+
+      case ServiceModalName.MakeCheckEmail:
+        return (
+          <Suspense fallback={<></>}>
+            <MakeCheckEmailModal index={ServiceModalBaseIndex + index} />
+          </Suspense>
+        );
+
+      case ServiceModalName.MakeResetPassword:
+        return (
+          <Suspense fallback={<></>}>
+            <MakeResetPasswordModal index={ServiceModalBaseIndex + index} />
           </Suspense>
         );
 
