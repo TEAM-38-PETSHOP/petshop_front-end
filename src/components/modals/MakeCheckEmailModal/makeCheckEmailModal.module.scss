@@ -1,0 +1,31 @@
+@import '../../../app/styles/extends.scss';
+
+.checkEmailModal {
+  width: 100%;
+  margin: 8px;
+
+  &__title {
+    margin-bottom: 40px;
+
+    @extend %h4-primary;
+    font-weight: 500;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    &__btn {
+      margin-top: 30px;
+      color: var(--color-gray-100);
+      background-color: var(--color-gray-20);
+      font-weight: 500;
+      @extend %main-text;
+
+      border-radius: var(--radius-100);
+      height: 50px;
+      width: 100%;
+    }
+  }
+}

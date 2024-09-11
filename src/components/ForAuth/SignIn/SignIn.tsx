@@ -2,12 +2,15 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { toast } from 'react-toastify';
 import styles from './signIn.module.scss';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signIn, signOut } from 'next-auth/react';
 import FormInput from '@/components/FormInput/FormInput';
 import { useForm } from 'react-hook-form';
 import classNames from 'classnames';
 import { checkErrors } from '@/helpers/checkErrors';
+import { useAppDispatch } from '@/hooks/reduxHooks';
 import useSynchronizationServer from '@/hooks/useSynchronizationServer';
+import { addServiceModal } from '@/redux/features/serviceModalSlice';
+import { ServiceModalName } from '@/types';
 
 interface ILoginForm {
   email: string;
@@ -22,6 +25,7 @@ export default function SignIn({ isSignIn, setIsSignIn }: Props) {
   useSynchronizationServer();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
@@ -105,6 +109,11 @@ export default function SignIn({ isSignIn, setIsSignIn }: Props) {
         >
           <button
             className={styles.signIn__forgot}
+            onClick={() =>
+              dispatch(
+                addServiceModal({ type: ServiceModalName.MakeCheckEmail })
+              )
+            }
             type="button"
           >
             Забули пароль?
