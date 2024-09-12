@@ -23,6 +23,8 @@ import { Product } from '@/types/Product';
 import { useSession } from 'next-auth/react';
 import { IUser } from '@/types/User';
 import { setCartProducts as setCartProductsRedux } from '@/redux/features/cartSlice';
+import { addServiceModal } from '@/redux/features/serviceModalSlice';
+import { ServiceModalName } from '@/types';
 
 type Props = {
   className?: string;
@@ -79,14 +81,14 @@ export default function OrderForm({ className }: Props) {
 
       createOrderWithAuth(orderData, customUser.token)
         .then(() => {
-          alert('Ваше замовлення прийнято!');
+          dispatch(
+            addServiceModal({ type: ServiceModalName.MakeOrderSuccess })
+          );
           reset();
           dispatch(setCartProductsRedux([]));
         })
         .catch(() => {
-          alert(
-            'Виникла якась помилка, спробуйте ще раз пізніше або зверніться до служби підтримки'
-          );
+          dispatch(addServiceModal({ type: ServiceModalName.MakeOrderError }));
         });
     } else {
       const cartItems = cartProducts.map((item) => {
@@ -114,14 +116,14 @@ export default function OrderForm({ className }: Props) {
 
       createOrderWithoutAuth(orderData)
         .then(() => {
-          alert('Ваше замовлення прийнято!');
+          dispatch(
+            addServiceModal({ type: ServiceModalName.MakeOrderSuccess })
+          );
           reset();
           dispatch(setCartProductsRedux([]));
         })
         .catch(() => {
-          alert(
-            'Виникла якась помилка, спробуйте ще раз пізніше або зверніться до служби підтримки'
-          );
+          dispatch(addServiceModal({ type: ServiceModalName.MakeOrderError }));
         });
     }
   };

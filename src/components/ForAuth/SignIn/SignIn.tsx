@@ -23,6 +23,7 @@ type Props = {
   setIsSignIn: (value: boolean) => void;
 };
 export default function SignIn({ isSignIn, setIsSignIn }: Props) {
+  useSynchronizationServer();
   const session = useSession();
   const searchParams = useSearchParams();
   const dispatch = useAppDispatch();
@@ -32,9 +33,8 @@ export default function SignIn({ isSignIn, setIsSignIn }: Props) {
     if (session.status === 'authenticated') {
       redirect(callbackUrl);
     }
-  }, [session.status, searchParams]);
+  }, [session.status, searchParams, callbackUrl]);
 
-  useSynchronizationServer();
   const {
     register,
     handleSubmit,
