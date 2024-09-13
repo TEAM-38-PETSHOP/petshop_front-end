@@ -1,9 +1,9 @@
 export interface ContactInfoForm {
   firstName: string;
   lastName: string;
-  phoneNumber: string;
+  phone: string;
   email: string;
   oldPassword: string;
   newPassword: string;
-  confirmPassword: string;
+  newPasswordRepeat: string;
 }

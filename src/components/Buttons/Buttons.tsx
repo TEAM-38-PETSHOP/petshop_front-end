@@ -28,6 +28,7 @@ export default function Buttons({ firstBtn, secondBtn, className }: Props) {
       return (
         <button
           onClick={btn.onClick}
+          disabled={btn.isDisabled}
           className={classNames([styles.btns__btn], {
             [styles.btns__btnSecond]: btn === secondBtn,
             [styles.btns__btnDisabled]: btn.isDisabled,
@@ -46,6 +47,7 @@ export default function Buttons({ firstBtn, secondBtn, className }: Props) {
         <button
           onClick={btn.onClick}
           type={btn.type}
+          disabled={btn.isDisabled}
           className={classNames([styles.btns__btn], {
             [styles.btns__btnSecond]: btn === secondBtn,
             [styles.btns__btnDisabled]: btn.isDisabled,

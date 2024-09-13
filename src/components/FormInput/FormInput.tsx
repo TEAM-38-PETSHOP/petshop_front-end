@@ -17,6 +17,7 @@ type Props = {
   disabled?: boolean;
   placeholder?: string;
   label?: string;
+  tabIndex?: number;
   className?: string;
   isSave?: boolean;
   children?: React.ReactNode;
@@ -37,6 +38,7 @@ export default memo(function FormInput({
   placeholder,
   disabled,
   label,
+  tabIndex,
   isSave,
   onClickInput,
   type = "text",
@@ -83,6 +85,7 @@ export default memo(function FormInput({
             [styles.input__activeList]: isShowList,
           })}
           disabled={disabled}
+          tabIndex={tabIndex}
           onClick={onClickInput}
           autoComplete={offBrowserAutocomplete ? "off" : ""}
           placeholder={placeholder}

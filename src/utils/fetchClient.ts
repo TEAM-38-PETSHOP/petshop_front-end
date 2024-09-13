@@ -1,12 +1,12 @@
-import { IErrorResponse } from '@/types/IErrorResponse ';
+import { IErrorResponse } from "@/types/IErrorResponse ";
 
-const BASE_URL = "http://ec2-98-80-7-226.compute-1.amazonaws.com";
+const BASE_URL = "http://ec2-54-226-19-92.compute-1.amazonaws.com";
 
-type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
+type RequestMethod = "GET" | "POST" | "PATCH" | "DELETE";
 
 async function request<T>(
   url: string,
-  method: RequestMethod = 'GET',
+  method: RequestMethod = "GET",
   data: any = null,
   token: string | null = null,
   expectString: boolean = false
@@ -18,7 +18,7 @@ async function request<T>(
   }
 
   options.headers = {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
     ...(token && { Authorization: `Bearer ${token}` }),
   };
 
@@ -29,7 +29,7 @@ async function request<T>(
 
   if (!response.ok) {
     const error: IErrorResponse = jsonResponse;
-    throw new Error(error.message || 'An error occurred');
+    throw new Error(error.message || "An error occurred");
   }
 
   return jsonResponse;
@@ -40,22 +40,22 @@ export const client = {
     url: string,
     token: string | null = null,
     expectString: boolean = false
-  ) => request<T>(url, 'GET', null, token, expectString),
+  ) => request<T>(url, "GET", null, token, expectString),
   post: <T>(
     url: string,
     data: any,
     token: string | null = null,
     expectString: boolean = false
-  ) => request<T>(url, 'POST', data, token, expectString),
+  ) => request<T>(url, "POST", data, token, expectString),
   patch: <T>(
     url: string,
     data: any,
     token: string | null = null,
     expectString: boolean = false
-  ) => request<T>(url, 'PATCH', data, token, expectString),
+  ) => request<T>(url, "PATCH", data, token, expectString),
   delete: (
     url: string,
     token: string | null = null,
     expectString: boolean = false
-  ) => request(url, 'DELETE', null, token, expectString),
+  ) => request(url, "DELETE", null, token, expectString),
 };
