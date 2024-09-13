@@ -9,11 +9,12 @@ import { useAppDispatch } from "@/hooks/reduxHooks";
 import { addServiceModal } from "@/redux/features/serviceModalSlice";
 import Buttons from "@/components/Buttons/Buttons";
 import { useSession } from "next-auth/react";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { IUser } from "@/types/User";
 import { updateUserInfo } from "@/helpers/fetchAuthorization";
 
 export const ContactForm = () => {
+  const [isEdit, setIsEdit] = useState<boolean>(false);
   const { data, update } = useSession();
   const customUser = data?.user as IUser;
   const initialValuesRef = useRef<ContactInfoForm | null>(null);
@@ -135,6 +136,8 @@ export const ContactForm = () => {
         isLoading: false,
         autoClose: 5000,
       });
+    } finally {
+      setIsEdit(false);
     }
   };
 
@@ -154,6 +157,10 @@ export const ContactForm = () => {
     );
   };
 
+  const handleEditProfile = () => {
+    setIsEdit((prev) => !prev);
+  };
+
   return (
     <>
       <form className={styles.contactForm} onSubmit={handleSubmit(onSubmit)}>
@@ -170,6 +177,7 @@ export const ContactForm = () => {
                 message: "Ім'я повинне містити не більше 30 символів",
               },
             })}
+            disabled={!isEdit}
             placeholder="Введіть ім'я"
             label="Ваше ім'я"
             errors={errors.firstName?.message}
@@ -190,6 +198,7 @@ export const ContactForm = () => {
                 message: "Прізвище повинне містити не більше 30 символів",
               },
             })}
+            disabled={!isEdit}
             placeholder="Введіть прізвище"
             label="Прізвище"
             errors={errors.lastName?.message}
@@ -206,8 +215,9 @@ export const ContactForm = () => {
                 message: "Невірно введена пошта",
               },
             })}
+            disabled={!isEdit}
             placeholder="Введіть електронну пошту"
-            label="E-mail / Логін"
+            label="E-mail"
             errors={errors.email?.message}
             tabIndex={3}
           />
@@ -226,6 +236,7 @@ export const ContactForm = () => {
                 message: "Невірно введенний номер приклад: +380XXXXXXXXX",
               },
             })}
+            disabled={!isEdit}
             placeholder="Введіть номер телефону"
             label="Номер телефону"
             errors={errors.phone?.message}
@@ -245,7 +256,7 @@ export const ContactForm = () => {
                 message: "Пароль має містити не більше 25 символів",
               },
             })}
-            placeholder="Введіть останній створений вами пароль"
+            placeholder="Введіть ваш пароль"
             type="password"
             label="Старий пароль"
             errors={errors.oldPassword?.message}
@@ -273,7 +284,7 @@ export const ContactForm = () => {
                 message: "Пароль має містити не більше 25 символів",
               },
             })}
-            placeholder="Введіть новий пароль (напр. Qwerty12345)"
+            placeholder="Введіть новий пароль"
             type="password"
             label="Новий пароль"
             errors={errors.newPassword?.message}
@@ -295,7 +306,7 @@ export const ContactForm = () => {
               validate: (value) =>
                 value === watch("newPassword") || "Паролі не співпадають",
             })}
-            placeholder="Повторно введіть новий пароль"
+            placeholder="Підтвердіть новий пароль"
             type="password"
             label="Підтвердження пароля"
             errors={errors.newPasswordRepeat?.message}
@@ -311,6 +322,14 @@ export const ContactForm = () => {
             type: "button",
             className: styles.contactForm__buttonsDelete,
             onClick: handleDeleteAccount,
+          }}
+        />
+        <Buttons
+          firstBtn={{
+            btnText: "Редагувати профіль",
+            type: "button",
+            className: styles.contactForm__buttonsEdit,
+            onClick: handleEditProfile,
           }}
         />
         <Buttons
