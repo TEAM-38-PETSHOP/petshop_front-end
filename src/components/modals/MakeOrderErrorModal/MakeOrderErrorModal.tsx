@@ -1,11 +1,12 @@
-"use client";
+'use client';
 
-import { useAppDispatch } from "@/hooks/reduxHooks";
-import { removeServiceModal } from "@/redux/features/serviceModalSlice";
-import { BaseModalSize, ServiceModalName } from "@/types";
-import BaseModal from "../BaseModal/BaseModal";
-import { NotificationErrorIcon } from "@/assets";
-import styles from "./makeOrderErrorModal.module.scss";
+import Link from 'next/link';
+import { useAppDispatch } from '@/hooks/reduxHooks';
+import { removeServiceModal } from '@/redux/features/serviceModalSlice';
+import { BaseModalSize, ServiceModalName } from '@/types';
+import BaseModal from '../BaseModal/BaseModal';
+import { NotificationErrorIcon } from '@/assets';
+import styles from './makeOrderErrorModal.module.scss';
 
 interface MakeOrderErrorModalProps {
   index: number;
@@ -43,12 +44,13 @@ const MakeOrderErrorModal = ({ index }: MakeOrderErrorModalProps) => {
           >
             Назад
           </button>
-          <button
+          <Link
+            href="/#contacts"
             onClick={handleLeaveButton}
             className={styles.error__buttons__support}
           >
             Звʼязатись з тех підтримкою
-          </button>
+          </Link>
         </div>
       </div>
     </BaseModal>

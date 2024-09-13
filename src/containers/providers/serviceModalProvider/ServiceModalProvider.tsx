@@ -5,13 +5,11 @@ import { ServiceModalBaseIndex } from "@/constants";
 import { ServiceModalName } from "@/types";
 import { useAppSelector } from "@/hooks/reduxHooks";
 
+import MakeOrderErrorModal from '@/components/modals/MakeOrderErrorModal/MakeOrderErrorModal';
+
 const MakeOrderSuccessModal = React.lazy(
   () =>
     import("@/components/modals/MakeOrderSuccessModal/MakeOrderSuccessModal")
-);
-
-const MakeOrderErrorModal = React.lazy(
-  () => import("@/components/modals/MakeOrderErrorModal/MakeOrderErrorModal")
 );
 
 const MakeCheckEmailModal = React.lazy(
