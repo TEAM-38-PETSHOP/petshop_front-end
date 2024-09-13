@@ -1,9 +1,10 @@
 import styles from './favorites.module.scss';
 import HeaderForPages from '@/components/HeaderForPages/HeaderForPages';
-import BasicFilter from '@/components/BasicFilter/BasicFilter';
+import FavoritesFilter from '@/components/ForFavorites/FavoritesFilter/FavoritesFilter';
 import FavoriteProducts from '@/components/ForFavorites/FavoriteProducts/FavoriteProducts';
 import { getAllCategories } from '@/helpers/fetchCategories';
 import { Suspense } from 'react';
+import Loader from '@/components/Loader/Loader';
 
 export default async function Favorites() {
   const categories = await getAllCategories();
@@ -14,13 +15,7 @@ export default async function Favorites() {
 
       <section className={styles.favorites}>
         <Suspense>
-          <BasicFilter
-            filterList={categories.map((item) => ({
-              id: item.categoryId,
-              name: item.name,
-            }))}
-            searchParamsName="category"
-          />
+          <FavoritesFilter categories={categories} />
           <FavoriteProducts />
         </Suspense>
       </section>
