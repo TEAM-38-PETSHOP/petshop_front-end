@@ -41,7 +41,6 @@ export default function MakeCheckEmailModal({ index }: Props) {
       )
       .then((res) => {
         if (res) {
-          console.log(res);
           dispatch(
             addServiceModal({
               type: ServiceModalName.MakeResetPassword,

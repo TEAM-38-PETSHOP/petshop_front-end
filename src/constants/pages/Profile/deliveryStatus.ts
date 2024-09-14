@@ -8,13 +8,13 @@ export interface DeliveryStatusType {
 
 export const deliveryStatus: DeliveryStatusType[] = [
   {
-    id: DeliveryStatus.Processing,
+    id: DeliveryStatus.Pending,
     name: 'Активні',
     colorIndicator: 'green',
   },
   {
-    id: DeliveryStatus.Delivered,
-    name: 'Доставлені',
+    id: DeliveryStatus.Completed,
+    name: 'Завершені',
     colorIndicator: 'blue',
   },
   {

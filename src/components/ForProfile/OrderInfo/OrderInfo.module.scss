@@ -1,0 +1,137 @@
+@import '../../../app/styles/extends.scss';
+@import '../../../app/styles/mixins.scss';
+
+.orderInfo {
+  $colors: (
+    'green': var(--color-system-success),
+    'blue': var(--color-system-info),
+    'red': var(--color-system-error),
+  );
+
+  @each $name, $color in $colors {
+    .#{$name} {
+      background-color: $color;
+    }
+  }
+
+  &__header {
+    &_top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 15px;
+
+      @extend %small-text;
+      font-weight: 600;
+      color: var(--color-gray-40);
+
+      margin-bottom: 5px;
+    }
+
+    &_status {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    &_indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    &_body {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      padding: 15px;
+      height: 80px;
+      background-color: var(--color-gray-100);
+      border-radius: var(--radius-15);
+      border-bottom: 1px solid transparent;
+
+      transition: border-radius, border-color,
+        var(--transition-duration) ease-in-out;
+
+      &_open {
+        border-radius: var(--radius-15) var(--radius-15) 0 0;
+        border-color: var(--color-gray-50);
+      }
+
+      h6 {
+        @extend %secondary-text;
+        font-weight: 500;
+        color: var(--color-gray-40);
+      }
+
+      time,
+      span {
+        @include md {
+          font-size: 0.875rem;
+          line-height: 1.2;
+        }
+      }
+    }
+
+    &_orderDate {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    &_totalPrice {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    &_orderPreview {
+    }
+
+    &_arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%) rotate(90deg);
+      right: 15px;
+
+      height: 15px;
+      width: 15px;
+      object-fit: contain;
+
+      transition: transform var(--transition-duration) ease-in-out;
+
+      @include lg {
+        top: 15px;
+        transform: rotate(90deg);
+      }
+
+      &_open {
+        transform: translateY(-50%) rotate(270deg);
+
+        @include lg {
+          transform: rotate(270deg);
+        }
+      }
+    }
+  }
+
+  &__body {
+    padding: 0px;
+    max-height: 0px;
+    opacity: 0;
+    overflow: hidden;
+
+    background-color: var(--color-gray-100);
+    border-radius: 0 0 var(--radius-15) var(--radius-15);
+
+    transition: max-height, opacity, padding, var(--transition-duration) linear;
+
+    &_open {
+      opacity: 1;
+      max-height: 100%;
+      padding: 15px;
+    }
+  }
+}

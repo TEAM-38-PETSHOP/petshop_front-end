@@ -1,8 +1,10 @@
+import { DeliveryStatus } from './enums/DeliveryStatus';
+
 export interface IOrderResponse {
   id: number;
   userId: number;
   userTempId: number;
-  status: string;
+  status: DeliveryStatus;
   total: number;
   orderDate: string;
   address: AddressResponse;

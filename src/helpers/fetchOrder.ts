@@ -10,3 +10,7 @@ export const createOrderWithoutAuth = (data: IOrderWithoutAuth) => {
 export const createOrderWithAuth = (data: IOrderWithAuth, token: string) => {
   return client.post<IOrderResponse>(`/api/orders`, data, token);
 };
+
+export const getOrders = (token: string) => {
+  return client.get<IOrderResponse[]>(`/api/orders`, token);
+};
