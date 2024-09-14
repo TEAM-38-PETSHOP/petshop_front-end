@@ -24,8 +24,16 @@
 
     &Edit {
       &:hover {
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 15px 30px -6px inset,
-          rgba(0, 0, 0, 0.3) 0px 9px 18px -9px inset;
+        background-color: var(--color-secondary-yellow);
+        border-color: var(--color-secondary-yellow);
+      }
+    }
+
+    &Delete {
+      &:hover {
+        background-color: var(--color-secondary-red) !important;
+        border-color: var(--color-secondary-red) !important;
+        color: var(--color-gray-100);
       }
     }
 
