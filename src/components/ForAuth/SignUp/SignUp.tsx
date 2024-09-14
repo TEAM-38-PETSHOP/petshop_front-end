@@ -1,13 +1,12 @@
-'use client';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import classNames from 'classnames';
-import styles from './signUp.module.scss';
-import FormInput from '@/components/FormInput/FormInput';
-import { useRouter } from 'next/navigation';
-import { registerUser } from '@/helpers/fetchAuthorization';
-import { checkErrors } from '@/helpers/checkErrors';
-import { toast } from 'react-toastify';
+"use client";
+import { useForm } from "react-hook-form";
+import classNames from "classnames";
+import styles from "./signUp.module.scss";
+import FormInput from "@/components/FormInput/FormInput";
+import { useRouter } from "next/navigation";
+import { registerUser } from "@/helpers/fetchAuthorization";
+import { checkErrors } from "@/helpers/checkErrors";
+import { toast } from "react-toastify";
 
 interface IRegisterForm {
   email: string;
@@ -37,7 +36,7 @@ export default function SignUp({ isSignIn, setIsSignIn }: Props) {
   const handleRegister = async (data: IRegisterForm) => {
     const { email, phone, password, repeatPassword, firstName, lastName } =
       data;
-    const toastId = toast.loading('Чекаємо...');
+    const toastId = toast.loading("Чекаємо...");
 
     try {
       await registerUser(
@@ -49,18 +48,18 @@ export default function SignUp({ isSignIn, setIsSignIn }: Props) {
         lastName
       );
       toast.update(toastId, {
-        render: 'Успішна реєстрація!',
-        type: 'success',
+        render: "Успішна реєстрація!",
+        type: "success",
         isLoading: false,
         autoClose: 5000,
       });
       reset();
-      router.push('/auth');
+      router.push("/auth");
       setIsSignIn(true);
     } catch (error: any) {
       toast.update(toastId, {
         render: checkErrors(error.message),
-        type: 'error',
+        type: "error",
         isLoading: false,
         autoClose: 5000,
       });
@@ -75,7 +74,7 @@ export default function SignUp({ isSignIn, setIsSignIn }: Props) {
       <div className={styles.signUp__header}>
         <h4>Реєстрація</h4>
         <p>
-          Вже маєте акаунт?{' '}
+          Вже маєте акаунт?{" "}
           <button
             rel="stylesheet"
             type="button"
@@ -91,23 +90,39 @@ export default function SignUp({ isSignIn, setIsSignIn }: Props) {
         onSubmit={handleSubmit(handleRegister)}
       >
         <FormInput
-          register={register('firstName', {
+          register={register("firstName", {
             required: "Це поле є обов'язковим",
+            minLength: {
+              value: 2,
+              message: "Ім'я повинне містити не менше 2 символів",
+            },
+            maxLength: {
+              value: 30,
+              message: "Ім'я повинне містити не більше 30 символів",
+            },
           })}
           placeholder="Введіть ваше ім'я"
           errors={errors.firstName?.message}
         />
 
         <FormInput
-          register={register('lastName', {
+          register={register("lastName", {
             required: "Це поле є обов'язковим",
+            minLength: {
+              value: 2,
+              message: "Прізвище повинне містити не менше 2 символів",
+            },
+            maxLength: {
+              value: 30,
+              message: "Прізвище повинне містити не більше 30 символів",
+            },
           })}
           placeholder="Введіть ваше прізвище"
           errors={errors.lastName?.message}
         />
 
         <FormInput
-          register={register('email', { required: "Це поле є обов'язковим" })}
+          register={register("email", { required: "Це поле є обов'язковим" })}
           placeholder="Введіть вашу електронну пошту"
           type="email"
           errors={errors.email?.message}
@@ -116,30 +131,30 @@ export default function SignUp({ isSignIn, setIsSignIn }: Props) {
         <FormInput
           placeholder="Телефон"
           type="tel"
-          register={register('phone', {
+          register={register("phone", {
             required: "Це поле є обов'язковим",
             maxLength: {
               value: 13,
-              message: 'Невірно введенний номер',
+              message: "Невірно введенний номер, приклад: +380XXXXXXXXX",
             },
             minLength: {
-              value: 10,
-              message: 'Невірно введенний номер',
+              value: 13,
+              message: "Невірно введенний номер приклад: +380XXXXXXXXX",
             },
           })}
           errors={errors.phone?.message}
         />
 
         <FormInput
-          register={register('password', {
+          register={register("password", {
             required: "Це поле є обов'язковим",
             minLength: {
               value: 8,
-              message: 'Пароль має містити не менше 8 символів',
+              message: "Пароль має містити не менше 8 символів",
             },
             maxLength: {
               value: 25,
-              message: 'Пароль має містити не більше 25 символів',
+              message: "Пароль має містити не більше 25 символів",
             },
           })}
           type="password"
@@ -148,20 +163,17 @@ export default function SignUp({ isSignIn, setIsSignIn }: Props) {
         />
 
         <FormInput
-          register={register('repeatPassword', {
+          register={register("repeatPassword", {
             required: "Це поле є обов'язковим",
             validate: (value) =>
-              value === watch('password') || 'Паролі не співпадають',
+              value === watch("password") || "Паролі не співпадають",
           })}
           type="password"
           placeholder="Повторіть пароль"
           errors={errors.repeatPassword?.message}
         />
 
-        <button
-          className={styles.signUp__button}
-          type="submit"
-        >
+        <button className={styles.signUp__button} type="submit">
           Зареєструватись
         </button>
       </form>

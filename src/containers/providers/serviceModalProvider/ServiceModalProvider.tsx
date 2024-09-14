@@ -1,24 +1,28 @@
-'use client';
+"use client";
 
-import React, { Suspense, useEffect } from 'react';
-import { ServiceModalBaseIndex } from '@/constants';
-import { ServiceModalName } from '@/types';
-import { useAppSelector } from '@/hooks/reduxHooks';
+import React, { Suspense, useEffect } from "react";
+import { ServiceModalBaseIndex } from "@/constants";
+import { ServiceModalName } from "@/types";
+import { useAppSelector } from "@/hooks/reduxHooks";
 
 import MakeOrderErrorModal from '@/components/modals/MakeOrderErrorModal/MakeOrderErrorModal';
 
 const MakeOrderSuccessModal = React.lazy(
   () =>
-    import('@/components/modals/MakeOrderSuccessModal/MakeOrderSuccessModal')
+    import("@/components/modals/MakeOrderSuccessModal/MakeOrderSuccessModal")
 );
 
 const MakeCheckEmailModal = React.lazy(
-  () => import('@/components/modals/MakeCheckEmailModal/MakeCheckEmailModal')
+  () => import("@/components/modals/MakeCheckEmailModal/MakeCheckEmailModal")
 );
 
 const MakeResetPasswordModal = React.lazy(
   () =>
-    import('@/components/modals/MakeResetPasswordModal/MakeResetPasswordModal')
+    import("@/components/modals/MakeResetPasswordModal/MakeResetPasswordModal")
+);
+
+const AreYouSureModal = React.lazy(
+  () => import("@/components/modals/AreYouSureModal/AreYouSureModal")
 );
 
 const ServiceModalProvider = ({ children }: { children: React.ReactNode }) => {
@@ -27,7 +31,7 @@ const ServiceModalProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const modalOverflow = document.body.style.overflow;
 
-    document.body.style.overflow = modalKeys?.length ? 'hidden' : modalOverflow;
+    document.body.style.overflow = modalKeys?.length ? "hidden" : modalOverflow;
 
     return () => {
       document.body.style.overflow = modalOverflow;
@@ -61,6 +65,13 @@ const ServiceModalProvider = ({ children }: { children: React.ReactNode }) => {
         return (
           <Suspense fallback={<></>}>
             <MakeResetPasswordModal index={ServiceModalBaseIndex + index} />
+          </Suspense>
+        );
+
+      case ServiceModalName.AreYouSure:
+        return (
+          <Suspense fallback={<></>}>
+            <AreYouSureModal index={ServiceModalBaseIndex + index} />
           </Suspense>
         );
 
