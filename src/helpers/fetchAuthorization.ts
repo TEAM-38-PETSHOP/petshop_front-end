@@ -1,12 +1,13 @@
-import { IUser } from '@/types/User';
-import { client } from '../utils/fetchClient';
+import { IUser } from "@/types/User";
+import { client } from "../utils/fetchClient";
+import { ContactInfoForm } from "@/types";
 
 type token = {
   token: string;
 };
 
 export const login = (email: string, password: string) => {
-  return client.post<token>('/api/auth/login', {
+  return client.post<token>("/api/auth/login", {
     email,
     password,
   });
@@ -20,7 +21,7 @@ export const registerUser = (
   firstName: string,
   lastName: string
 ) => {
-  return client.post<IUser>('/api/auth/registration', {
+  return client.post<IUser>("/api/auth/registration", {
     email,
     phone,
     password,
@@ -31,12 +32,12 @@ export const registerUser = (
 };
 
 export const getUser = (token: string) => {
-  return client.get<IUser>('/api/users/info', token);
+  return client.get<IUser>("/api/users/info", token);
 };
 
 export const checkEmail = (email: string) => {
   return client.post<string>(
-    '/api/auth/forgot-password',
+    "/api/auth/forgot-password",
     {
       email,
     },
@@ -47,7 +48,7 @@ export const checkEmail = (email: string) => {
 
 export const resetPassword = (code: string, password: string) => {
   return client.post<string>(
-    '/api/auth/reset-password',
+    "/api/auth/reset-password",
     {
       code,
       password,
@@ -55,4 +56,12 @@ export const resetPassword = (code: string, password: string) => {
     null,
     true
   );
+};
+
+export const deleteAccount = (userId: number, token: string) => {
+  return client.delete(`/api/users/${userId}`, token, true);
+};
+
+export const updateUserInfo = (data: ContactInfoForm, token: string) => {
+  return client.post(`/api/users/profile-update`, data, token);
 };

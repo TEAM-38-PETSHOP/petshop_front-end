@@ -1,9 +1,10 @@
-@import '../../app/styles/extends.scss';
+@import "../../app/styles/extends.scss";
 
 .input {
   width: 100%;
   height: 50px;
   padding: 0 15px;
+  margin-bottom: 5px;
   background-color: var(--color-gray-80);
   border-radius: var(--radius-15);
 
@@ -29,7 +30,7 @@
   &__error {
     position: absolute;
     bottom: -15px;
-    left: 0px;
+    left: 10px;
 
     @extend %small-text;
     color: var(--color-system-error);
@@ -41,6 +42,15 @@
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
+  }
+
+  &__label {
+    max-width: fit-content;
+    margin: 0 0 5px 10px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #A9A9B0;
   }
 }
 

@@ -1,10 +1,10 @@
-import { NextAuthOptions } from 'next-auth';
-import GoogleProvider from 'next-auth/providers/google';
-import CredentialsProvider from 'next-auth/providers/credentials';
-import { getUser, login } from '@/helpers/fetchAuthorization';
-import { IUser } from '@/types/User';
-import { CustomSession } from '@/types/CustomSession';
-import { CustomJWT } from '@/types/CustomJWT';
+import { NextAuthOptions } from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { getUser, login } from "@/helpers/fetchAuthorization";
+import { IUser } from "@/types/User";
+import { CustomSession } from "@/types/CustomSession";
+import { CustomJWT } from "@/types/CustomJWT";
 
 const tokenExpires = 36000000;
 
@@ -17,11 +17,11 @@ export const authConfig: NextAuthOptions = {
     CredentialsProvider({
       credentials: {
         email: {
-          label: 'Email',
-          type: 'email',
+          label: "Email",
+          type: "email",
           required: true,
         },
-        password: { label: 'Password', type: 'password', required: true },
+        password: { label: "Password", type: "password", required: true },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
@@ -47,13 +47,18 @@ export const authConfig: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
       const customToken = token as CustomJWT;
+
       if (user) {
         const customUser = user as IUser;
         customToken.accessToken = customUser.token;
         customToken.user = customUser;
         customToken.tokenExpires = customUser.tokenExpires;
+      }
+
+      if (trigger === 'update' && session?.user) {
+        customToken.user = session.user;
       }
 
       if (customToken.tokenExpires && Date.now() > customToken.tokenExpires) {
@@ -74,6 +79,6 @@ export const authConfig: NextAuthOptions = {
     },
   },
   pages: {
-    signIn: '/auth',
+    signIn: "/auth",
   },
 };

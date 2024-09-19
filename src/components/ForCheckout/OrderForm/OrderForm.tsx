@@ -1,19 +1,19 @@
-'use client';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import classNames from 'classnames';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import styles from './orderForm.module.scss';
-import Link from 'next/link';
-import { getCities, getWarehouses } from '@/helpers/fetchNovaposhta';
-import { IOrderForm } from '@/types/OrderForm';
-import FormInput from '@/components/FormInput/FormInput';
-import debounce from 'lodash.debounce';
-import FormSelect from '@/components/FormSelect/FormSelect';
-import { checkWindow } from '@/helpers/checkWindow';
-import { ResponseCities } from '@/types/novaposhta/ResponseCities';
-import { Warehouse } from '@/types/novaposhta/ResponseWarehouses';
-import FormComment from '@/components/FormComment/FormComment';
-import Buttons from '@/components/Buttons/Buttons';
+"use client";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import classNames from "classnames";
+import { useForm, SubmitHandler } from "react-hook-form";
+import styles from "./orderForm.module.scss";
+import Link from "next/link";
+import { getCities, getWarehouses } from "@/helpers/fetchNovaposhta";
+import { IOrderForm } from "@/types/OrderForm";
+import FormInput from "@/components/FormInput/FormInput";
+import debounce from "lodash.debounce";
+import FormSelect from "@/components/FormSelect/FormSelect";
+import { checkWindow } from "@/helpers/checkWindow";
+import { ResponseCities } from "@/types/novaposhta/ResponseCities";
+import { Warehouse } from "@/types/novaposhta/ResponseWarehouses";
+import FormComment from "@/components/FormComment/FormComment";
+import Buttons from "@/components/Buttons/Buttons";
 import {
   createOrderWithAuth,
   createOrderWithoutAuth,
@@ -32,7 +32,7 @@ type Props = {
 
 export default function OrderForm({ className }: Props) {
   const { status, data } = useSession();
-  const isAuthenticated = status === 'authenticated';
+  const isAuthenticated = status === "authenticated";
   const customUser = data?.user as IUser;
   const dispatch = useAppDispatch();
   const [cityList, setCityList] = useState<[] | string[]>([]);
@@ -42,7 +42,7 @@ export default function OrderForm({ className }: Props) {
   const cartProductsState = useAppSelector((state) => state.cart.cartProducts);
   const [cartProducts, setCartProducts] = useState<Product[]>([]);
 
-  const sessionCity = (checkWindow() && sessionStorage.getItem('city')) || '';
+  const sessionCity = (checkWindow() && sessionStorage.getItem("city")) || "";
   const {
     register,
     handleSubmit,
@@ -58,13 +58,13 @@ export default function OrderForm({ className }: Props) {
   }, [cartProductsState]);
 
   useEffect(() => {
-    setValue('firstName', customUser?.firstName);
-    setValue('lastName', customUser?.lastName);
-    setValue('phone', customUser?.phone);
-    setValue('email', customUser?.email);
+    setValue("firstName", customUser?.firstName);
+    setValue("lastName", customUser?.lastName);
+    setValue("phone", customUser?.phone);
+    setValue("email", customUser?.email);
 
     return () => {
-      sessionStorage.removeItem('city');
+      sessionStorage.removeItem("city");
     };
   }, [customUser, setValue]);
 
@@ -72,9 +72,9 @@ export default function OrderForm({ className }: Props) {
     if (isAuthenticated) {
       const orderData = {
         city: data.city,
-        street: '',
-        building: '',
-        apartment: '',
+        street: "",
+        building: "",
+        apartment: "",
         officeNovaPost: data.deliveryPoint,
         comment: data.comment,
       };
@@ -129,8 +129,8 @@ export default function OrderForm({ className }: Props) {
   };
 
   const handleCityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue('deliveryPoint', '');
-    checkWindow() && sessionStorage.removeItem('city');
+    setValue("deliveryPoint", "");
+    checkWindow() && sessionStorage.removeItem("city");
 
     const value = event.target.value;
 
@@ -155,7 +155,7 @@ export default function OrderForm({ className }: Props) {
   };
   const handleWarehouseChange = useCallback(
     (event?: React.ChangeEvent<HTMLInputElement>) => {
-      const value = event?.target.value || '';
+      const value = event?.target.value || "";
       setIsLoadingWarehouse(true);
       getWarehouses(sessionCity, value)
         .then((data) => {
@@ -199,10 +199,10 @@ export default function OrderForm({ className }: Props) {
           <h3 className={styles.orderForm__title}>Контакти</h3>
           {!isAuthenticated && (
             <p>
-              Щоб не вводити інформацію власноруч,{' '}
+              Щоб не вводити інформацію власноруч,{" "}
               <Link
                 href={`/auth?callbackUrl=${encodeURIComponent(
-                  checkWindow() ? window.location.href : '/'
+                  checkWindow() ? window.location.href : "/"
                 )}`}
               >
                 Увійти тут
@@ -211,16 +211,32 @@ export default function OrderForm({ className }: Props) {
           )}
         </div>
         <FormInput
-          register={register('firstName', {
+          register={register("firstName", {
             required: "Це поле є обов'язковим",
+            minLength: {
+              value: 2,
+              message: "Ім'я повинне містити не менше 2 символів",
+            },
+            maxLength: {
+              value: 30,
+              message: "Ім'я повинне містити не більше 30 символів",
+            },
           })}
           disabled={isAuthenticated}
           placeholder="Ім'я одержувача"
           errors={errors.firstName?.message}
         />
         <FormInput
-          register={register('lastName', {
+          register={register("lastName", {
             required: "Це поле є обов'язковим",
+            minLength: {
+              value: 2,
+              message: "Прізвище повинне містити не менше 2 символів",
+            },
+            maxLength: {
+              value: 30,
+              message: "Прізвище повинне містити не більше 30 символів",
+            },
           })}
           disabled={isAuthenticated}
           placeholder="Прізвище одержувача"
@@ -228,15 +244,15 @@ export default function OrderForm({ className }: Props) {
         />
         <FormInput
           type="tel"
-          register={register('phone', {
+          register={register("phone", {
             required: "Це поле є обов'язковим",
             maxLength: {
               value: 13,
-              message: 'Невірно введенний номер, прикдад: +380XXXXXXXXX',
+              message: "Невірно введенний номер, приклад: +380XXXXXXXXX",
             },
             minLength: {
               value: 13,
-              message: 'Невірно введенний номер прикдад: +380XXXXXXXXX',
+              message: "Невірно введенний номер приклад: +380XXXXXXXXX",
             },
           })}
           disabled={isAuthenticated}
@@ -244,11 +260,11 @@ export default function OrderForm({ className }: Props) {
           errors={errors.phone?.message}
         />
         <FormInput
-          register={register('email', {
+          register={register("email", {
             required: "Це поле є обов'язковим",
             pattern: {
               value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-              message: 'Невірно введена пошта',
+              message: "Невірно введена пошта",
             },
           })}
           type="email"
@@ -263,7 +279,7 @@ export default function OrderForm({ className }: Props) {
         <FormInput
           className={styles.orderForm__input}
           placeholder="Місто"
-          register={register('city', {
+          register={register("city", {
             required: "Це поле є обов'язковим",
             onChange: debouncedCityChange,
           })}
@@ -271,8 +287,8 @@ export default function OrderForm({ className }: Props) {
           isSave
           offBrowserAutocomplete
           autocomplete={{
-            value: watch('city') || '',
-            name: 'city',
+            value: watch("city") || "",
+            name: "city",
             minLength: 3,
             autocompleteList: cityList,
             isLoading: isLoadingCity,
@@ -283,7 +299,7 @@ export default function OrderForm({ className }: Props) {
           className={styles.orderForm__input}
           disabled={!sessionCity}
           placeholder="Відділення Нової пошти"
-          register={register('deliveryPoint', {
+          register={register("deliveryPoint", {
             required: "Це поле є обов'язковим",
             onChange: debouncedWarehouseChange,
           })}
@@ -291,8 +307,8 @@ export default function OrderForm({ className }: Props) {
           errors={errors.deliveryPoint?.message}
           offBrowserAutocomplete
           autocomplete={{
-            value: watch('deliveryPoint') || '',
-            name: 'deliveryPoint',
+            value: watch("deliveryPoint") || "",
+            name: "deliveryPoint",
             minLength: 0,
             autocompleteList: warehouseList,
             isLoading: isLoadingWarehouse,
@@ -305,31 +321,31 @@ export default function OrderForm({ className }: Props) {
         <h3 className={styles.orderForm__title}>Оплата</h3>
         <FormSelect
           defaultText="Варіант оплати"
-          register={register('paymentMethod', {
+          register={register("paymentMethod", {
             required: "Це поле є обов'язковим",
           })}
           setValue={setValue}
           itemName="paymentMethod"
-          options={{ cash: 'Оплата при отриманні', card: 'Оплата картою' }}
-          disabled={['card']}
+          options={{ cash: "Оплата при отриманні", card: "Оплата картою" }}
+          disabled={["card"]}
           errors={errors.paymentMethod?.message}
           clearErrors={clearErrors}
         />
       </div>
 
       <FormComment
-        register={register('comment')}
+        register={register("comment")}
         buttonText={[
-          '+ Додати коментар до замовлення',
-          '- Видалити коментар до замовлення',
+          "+ Додати коментар до замовлення",
+          "- Видалити коментар до замовлення",
         ]}
       />
       <Buttons
         firstBtn={{
           className: styles.orderForm__btnSubmit,
           isBuy: true,
-          type: 'button',
-          btnText: 'Оформити',
+          type: "button",
+          btnText: "Оформити",
         }}
       />
     </form>

@@ -1,6 +1,7 @@
 import { OrdersHistory } from '@/components/ForProfile';
 import { ProfileTab } from '@/types';
 
+
 export const profileTabInfoFactory = (activeTab: ProfileTab) => {
   switch (activeTab) {
     case ProfileTab.AddressBook:
@@ -14,6 +15,6 @@ export const profileTabInfoFactory = (activeTab: ProfileTab) => {
 
     case ProfileTab.ContactInfo:
     default:
-      return 'Contact Information Tab';
+      return <ContactInfo />;
   }
 };
