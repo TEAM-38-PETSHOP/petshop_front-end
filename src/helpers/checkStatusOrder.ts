@@ -14,7 +14,7 @@ export const checkStatusOrder = (status: string): statusOrder => {
       return { statusName: 'Активне', colorIndicator: 'green' };
     case DeliveryStatus.Completed:
       return { statusName: 'Завершене', colorIndicator: 'blue' };
-    case DeliveryStatus.Cancelled:
+    case DeliveryStatus.Cancelled || DeliveryStatus.Refunded:
       return { statusName: 'Скасоване', colorIndicator: 'red' };
     default:
       return { statusName: 'Невідомо' };
