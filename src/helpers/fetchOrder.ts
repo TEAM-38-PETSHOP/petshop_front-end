@@ -14,3 +14,23 @@ export const createOrderWithAuth = (data: IOrderWithAuth, token: string) => {
 export const getOrders = (token: string) => {
   return client.get<IOrderResponse[]>(`/api/orders`, token);
 };
+
+export const deleteOrder = (orderId: number, token: string) => {
+  return client.delete<string>(`/api/orders/${orderId}`, token, true);
+};
+
+export const cancelOrder = (orderId: number, token: string) => {
+  return client.put<IOrderResponse>(
+    `/api/orders/update-cancel/${orderId}`,
+    null,
+    token
+  );
+};
+
+export const renewOrder = (orderId: number, token: string) => {
+  return client.put<IOrderResponse>(
+    `/api/orders/renew/${orderId}`,
+    null,
+    token
+  );
+};
