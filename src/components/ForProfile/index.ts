@@ -1,3 +1,4 @@
-export * from "./ProfileList";
-export * from "./ContactInfo";
-export * from "./ContactForm";
+export * from './ProfileList';
+export * from './OrdersHistory';
+export * from './OrdersTab';
+export * from './OrderInfo';

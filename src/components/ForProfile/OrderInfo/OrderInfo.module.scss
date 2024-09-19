@@ -1,0 +1,316 @@
+@import '../../../app/styles/extends.scss';
+@import '../../../app/styles/mixins.scss';
+
+.orderInfo {
+  $colors: (
+    'green': var(--color-system-success),
+    'blue': var(--color-system-info),
+    'red': var(--color-system-error),
+  );
+
+  @each $name, $color in $colors {
+    .#{$name} {
+      background-color: $color;
+    }
+  }
+
+  &__header {
+    &_top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 80px;
+      padding: 0 15px;
+
+      @extend %small-text;
+      font-weight: 600;
+      color: var(--color-gray-40);
+
+      margin-bottom: 5px;
+    }
+
+    &_status {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    &_indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    &_body {
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      padding: 15px;
+      height: 80px;
+      background-color: var(--color-gray-100);
+      border-radius: var(--radius-15);
+      border-bottom: 1px solid transparent;
+
+      transition: border-radius, border-color,
+        var(--transition-duration) ease-in-out;
+
+      @include xl {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+
+        height: min-content;
+      }
+
+      &_open {
+        border-radius: var(--radius-15) var(--radius-15) 0 0;
+        border-color: var(--color-gray-50);
+      }
+
+      h6 {
+        @extend %secondary-text;
+        font-weight: 500;
+        color: var(--color-gray-40);
+      }
+
+      time,
+      span {
+        @include md {
+          font-size: 0.875rem;
+          line-height: 1.2;
+        }
+      }
+    }
+
+    &_orderDate {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    &_totalPrice {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      margin: 0 80px;
+
+      @include xl {
+        margin: 0;
+      }
+    }
+
+    &_orderPreview {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      margin-left: auto;
+      margin-right: 45px;
+
+      @include xl {
+        margin: 0;
+      }
+
+      img {
+        object-fit: contain;
+      }
+
+      span {
+        @extend %main-text;
+        font-weight: 500;
+      }
+    }
+
+    &_arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%) rotate(90deg);
+      right: 15px;
+
+      height: 15px;
+      width: 15px;
+      object-fit: contain;
+
+      transition: transform var(--transition-duration) ease-in-out;
+
+      @include xl {
+        top: 15px;
+        transform: rotate(90deg);
+      }
+
+      &_open {
+        transform: translateY(-50%) rotate(270deg);
+
+        @include lg {
+          transform: rotate(270deg);
+        }
+      }
+    }
+  }
+
+  &__body {
+    padding: 0px;
+    max-height: 0px;
+    opacity: 0;
+    overflow: hidden;
+
+    background-color: var(--color-gray-100);
+    border-radius: 0 0 var(--radius-15) var(--radius-15);
+
+    transition: max-height, opacity, padding, var(--transition-duration) linear;
+
+    &_open {
+      opacity: 1;
+      max-height: 100%;
+      padding: 15px;
+    }
+  }
+
+  &__userData {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    @include lg {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    &_address {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      max-width: 40%;
+
+      @extend %secondary-text;
+      font-weight: 500;
+      color: var(--color-gray-40);
+
+      @include lg {
+        max-width: 100%;
+      }
+    }
+
+    &_button {
+      width: Max(200px, 32%);
+
+      @include lg {
+        width: 100%;
+      }
+    }
+
+    &_buttons {
+      flex-direction: column;
+      gap: 5px;
+
+      width: Max(200px, 32%);
+
+      @include lg {
+        width: 100%;
+      }
+
+      button {
+        width: 100%;
+        margin: 0;
+      }
+
+      .orderInfo__userData_buttonDelete {
+        @media (hover: hover) {
+          &:hover {
+            background-color: var(--color-system-error) !important;
+            border-color: var(--color-system-error) !important;
+          }
+        }
+      }
+    }
+  }
+
+  &__orderProducts {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    border-top: 1px solid var(--color-gray-50);
+    margin-top: 15px;
+    padding-top: 15px;
+  }
+
+  &__orderProduct {
+    display: grid;
+    grid-template-columns: 1fr minmax(130px, 52%) 1fr 1fr;
+    align-items: center;
+    place-items: center;
+    grid-gap: 15px;
+
+    @include lg {
+      grid-template-columns: min-content 1fr 1fr;
+      grid-template-rows: 2fr 1fr;
+      place-items: end start;
+    }
+
+    img {
+      object-fit: contain;
+
+      @include lg {
+        grid-column: 1 / 2;
+        grid-row: 1 / 3;
+      }
+    }
+
+    &_description {
+      place-self: center start;
+
+      @include lg {
+        grid-column: 2 / 4;
+        grid-row: 1 / 2;
+      }
+    }
+
+    &_category {
+      @extend %small-text;
+      font-weight: 600;
+      color: var(--color-gray-40);
+
+      margin-bottom: 5px;
+    }
+
+    &_name {
+      @extend %secondary-text;
+
+      @include sm {
+        font-weight: 500;
+      }
+    }
+
+    &_quantity {
+      @extend %secondary-text;
+      font-weight: 600;
+
+      @include sm {
+        font-size: 0.75rem;
+        line-height: 1.5;
+      }
+    }
+
+    &_price {
+      @extend %secondary-text;
+      font-weight: 600;
+      text-wrap: nowrap;
+
+      @include lg {
+        place-self: end;
+      }
+
+      @include sm {
+        font-size: 0.75rem;
+        line-height: 1.5;
+      }
+    }
+  }
+}

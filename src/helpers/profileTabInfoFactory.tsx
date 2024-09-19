@@ -1,16 +1,17 @@
-import { ContactInfo } from "@/components";
-import { ProfileTab } from "@/types";
+import { OrdersHistory } from '@/components/ForProfile';
+import { ProfileTab } from '@/types';
+
 
 export const profileTabInfoFactory = (activeTab: ProfileTab) => {
   switch (activeTab) {
     case ProfileTab.AddressBook:
-      return "Address Book Tab";
+      return 'Address Book Tab';
 
     case ProfileTab.OrdersHistory:
-      return "Orders History Tab";
+      return <OrdersHistory />;
 
     case ProfileTab.Feedback:
-      return "Feedback Tab";
+      return 'Feedback Tab';
 
     case ProfileTab.ContactInfo:
     default:
