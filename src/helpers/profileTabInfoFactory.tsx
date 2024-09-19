@@ -1,6 +1,6 @@
 import { OrdersHistory } from '@/components/ForProfile';
+import { ContactInfo } from '@/components/ForProfile';
 import { ProfileTab } from '@/types';
-
 
 export const profileTabInfoFactory = (activeTab: ProfileTab) => {
   switch (activeTab) {
