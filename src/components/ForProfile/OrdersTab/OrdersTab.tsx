@@ -1,9 +1,11 @@
+'use client';
 import { IOrderResponse } from '@/types/OrderResponse';
 import styles from './ordersTab.module.scss';
 import { useSearchParams } from 'next/navigation';
 import { getFilteredOrders } from '@/helpers/getFilteredOrders';
 import { OrderInfo } from '../OrderInfo';
 import { DeliveryStatus } from '@/types/enums/DeliveryStatus';
+import { useState } from 'react';
 
 type Props = {
   orders: IOrderResponse[];
@@ -12,8 +14,9 @@ type Props = {
 export const OrdersTab = ({ orders }: Props) => {
   const searchParams = useSearchParams();
   const deliveryStatus = searchParams?.get('deliveryStatus') || 'all';
+  const [localOrders, setLocalOrders] = useState(orders);
   const [activeOrders, completedOrders, cancelledOrders] =
-    getFilteredOrders(orders);
+    getFilteredOrders(localOrders);
 
   const isShowActive =
     deliveryStatus === DeliveryStatus.Pending || deliveryStatus === 'all';
@@ -29,6 +32,7 @@ export const OrdersTab = ({ orders }: Props) => {
           <OrderInfo
             key={order.id}
             order={order}
+            setLocalOrders={setLocalOrders}
           />
         ))}
 
@@ -37,6 +41,7 @@ export const OrdersTab = ({ orders }: Props) => {
           <OrderInfo
             key={order.id}
             order={order}
+            setLocalOrders={setLocalOrders}
           />
         ))}
 
@@ -45,6 +50,7 @@ export const OrdersTab = ({ orders }: Props) => {
           <OrderInfo
             key={order.id}
             order={order}
+            setLocalOrders={setLocalOrders}
           />
         ))}
     </div>

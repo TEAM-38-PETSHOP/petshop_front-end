@@ -1,8 +1,8 @@
 import { IErrorResponse } from '@/types/IErrorResponse ';
 
-const BASE_URL = 'http://ec2-54-221-44-58.compute-1.amazonaws.com';
+const BASE_URL = 'http://ec2-54-164-158-222.compute-1.amazonaws.com';
 
-type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
+type RequestMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 async function request<T>(
   url: string,
@@ -53,9 +53,15 @@ export const client = {
     token: string | null = null,
     expectString: boolean = false
   ) => request<T>(url, 'PATCH', data, token, expectString),
-  delete: (
+  put: <T>(
+    url: string,
+    data: any,
+    token: string | null = null,
+    expectString: boolean = false
+  ) => request<T>(url, 'PUT', data, token, expectString),
+  delete: <T>(
     url: string,
     token: string | null = null,
     expectString: boolean = false
-  ) => request(url, 'DELETE', null, token, expectString),
+  ) => request<T>(url, 'DELETE', null, token, expectString),
 };
