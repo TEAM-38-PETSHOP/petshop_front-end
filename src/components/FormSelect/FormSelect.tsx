@@ -62,7 +62,7 @@ export default function FormSelect<T extends IOrderForm | Feedback>({
         </option>
         {options &&
           Object.entries(options).map(([key, value]) => (
-            <option key={key} value={value} disabled={disabled?.includes(value)}>
+            <option key={key} value={value} disabled={disabled?.includes(key)}>
               {value}
             </option>
           ))}
@@ -82,11 +82,11 @@ export default function FormSelect<T extends IOrderForm | Feedback>({
             <li
               className={classNames(styles.formSelect__dropdown__item, {
                 [styles.formSelect__dropdown__itemDisabled]:
-                  disabled?.includes(value),
+                  disabled?.includes(key),
               })}
               key={key}
               onClick={() =>
-                !disabled?.includes(value) &&
+                !disabled?.includes(key) &&
                 setValue(itemName, value as PathValue<T, Path<T>>)
               }
             >
