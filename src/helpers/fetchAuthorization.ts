@@ -65,3 +65,7 @@ export const deleteAccount = (userId: number, token: string) => {
 export const updateUserInfo = (data: ContactInfoForm, token: string) => {
   return client.post(`/api/users/profile-update`, data, token);
 };
+
+export const sendFeedback = (data: FormData, token: string) => {
+  return client.post("/api/users/feedbacks", data, token, true, true);
+};

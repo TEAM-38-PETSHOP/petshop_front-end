@@ -1,0 +1,63 @@
+@import "../../../app/styles/mixins.scss";
+@import "../../../app/styles/extends.scss";
+
+.feedbackForm {
+  margin-bottom: 40px;
+
+  &__experience {
+    margin-bottom: 15px;
+  }
+
+  &__comment {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+
+    &__label {
+      @extend %secondary-text;
+      font-weight: 500;
+      margin: 0px 0px 5px 15px;
+      color: var(--color-gray-40);
+    }
+  }
+
+  &__textarea {
+    @extend %main-text;
+    padding: 10px 15px;
+    border-radius: var(--radius-15);
+    resize: none;
+
+    &::placeholder {
+      color: var(--color-gray-40);
+    }
+
+    &__error {
+      @extend %small-text;
+      color: var(--color-system-error);
+      margin: 5px 0 0 10px;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+
+    @include lg {
+      flex-direction: column;
+    }
+
+    &Clear {
+      &:hover {
+        background-color: var(--color-secondary-red) !important;
+        border-color: var(--color-secondary-red) !important;
+        color: var(--color-gray-100);
+      }
+    }
+
+    &Send {
+      color: var(--color-gray-100);
+      background-color: var(--color-gray-20);
+    }
+  }
+}
