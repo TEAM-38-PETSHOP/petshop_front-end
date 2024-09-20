@@ -1,7 +1,7 @@
-@import '../../../app/styles/extends.scss';
-@import '../../../app/styles/mixins.scss';
+@import '../../app/styles/extends.scss';
+@import '../../app/styles/mixins.scss';
 
-.favoritesFilter {
+.basicFilter {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
@@ -12,14 +12,29 @@
     }
   }
 
+  $colors: (
+    'green': var(--color-system-success),
+    'blue': var(--color-system-info),
+    'red': var(--color-system-error),
+  );
+
+  @each $name, $color in $colors {
+    .#{$name} {
+      background-color: $color;
+    }
+  }
+
   &__item {
-    @extend %main-text;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
     padding: 13px 30px;
 
     border-radius: var(--radius-100);
     background-color: var(--color-gray-100);
     color: var(--color-gray-20);
+    @extend %main-text;
 
     @include lg {
       padding: 13px 20px;
@@ -38,5 +53,11 @@
     background-color: var(--color-primary-100);
     color: var(--color-gray-100);
     font-weight: 500;
+  }
+
+  &__indicator {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
   }
 }

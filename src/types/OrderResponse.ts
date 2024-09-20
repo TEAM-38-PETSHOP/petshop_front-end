@@ -1,10 +1,14 @@
+import { DeliveryStatus } from './enums/DeliveryStatus';
+import { Product } from './Product';
+
 export interface IOrderResponse {
   id: number;
   userId: number;
   userTempId: number;
-  status: string;
+  status: DeliveryStatus;
   total: number;
   orderDate: string;
+  phone: string;
   address: AddressResponse;
   orderItems: OrderItemResponse[];
 }
@@ -16,11 +20,12 @@ export interface AddressResponse {
   building: string;
   apartment: string;
   officeNovaPost: string;
+  comment: string;
 }
 
 export interface OrderItemResponse {
   id: number;
-  productId: number;
+  productDto: Product;
   quantity: number;
   price: number;
 }

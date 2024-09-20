@@ -1,10 +1,11 @@
-import { ContactInfo, Feedback } from "@/components";
-import { ProfileTab } from "@/types";
+import { OrdersHistory } from '@/components/ForProfile';
+import { ContactInfo, Feedback } from '@/components/ForProfile';
+import { ProfileTab } from '@/types';
 
 export const profileTabInfoFactory = (activeTab: ProfileTab) => {
   switch (activeTab) {
     case ProfileTab.OrdersHistory:
-      return "Orders History Tab";
+      return <OrdersHistory />;
 
     case ProfileTab.Feedback:
       return <Feedback />;
