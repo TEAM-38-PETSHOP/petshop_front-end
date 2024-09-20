@@ -14,16 +14,11 @@ export const profileList = [
   },
   {
     id: 2,
-    listName: "Адресна книга",
-    tabId: ProfileTab.AddressBook,
-  },
-  {
-    id: 3,
     listName: "Історія замовлень",
     tabId: ProfileTab.OrdersHistory,
   },
   {
-    id: 4,
+    id: 3,
     listName: "Зворотній звʼязок",
     tabId: ProfileTab.Feedback,
   },

@@ -1,6 +1,6 @@
 import { IErrorResponse } from "@/types/IErrorResponse ";
 
-const BASE_URL = "http://ec2-54-221-44-58.compute-1.amazonaws.com";
+const BASE_URL = "http://ec2-54-163-63-218.compute-1.amazonaws.com";
 
 type RequestMethod = "GET" | "POST" | "PATCH" | "DELETE";
 
@@ -9,16 +9,21 @@ async function request<T>(
   method: RequestMethod = "GET",
   data: any = null,
   token: string | null = null,
-  expectString: boolean = false
+  expectString: boolean = false,
+  multipart: boolean = false
 ): Promise<T> {
   const options: RequestInit = { method };
 
   if (data) {
-    options.body = JSON.stringify(data);
+    if (multipart) {
+      options.body = data;
+    } else {
+      options.body = JSON.stringify(data);
+    }
   }
 
   options.headers = {
-    "Content-Type": "application/json",
+    ...(multipart ? {} : { "Content-Type": "application/json" }),
     ...(token && { Authorization: `Bearer ${token}` }),
   };
 
@@ -45,8 +50,9 @@ export const client = {
     url: string,
     data: any,
     token: string | null = null,
-    expectString: boolean = false
-  ) => request<T>(url, "POST", data, token, expectString),
+    expectString: boolean = false,
+    multipart: boolean = false
+  ) => request<T>(url, "POST", data, token, expectString, multipart),
   patch: <T>(
     url: string,
     data: any,
