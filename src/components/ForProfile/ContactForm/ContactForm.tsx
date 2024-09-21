@@ -339,6 +339,7 @@ export const ContactForm = () => {
             isDisabled: !hasChanges() || !isValid,
             className: styles.contactForm__buttonsSave,
             onClick: handleSubmit(onSubmit),
+            tabIndex: 8
           }}
         />
       </div>

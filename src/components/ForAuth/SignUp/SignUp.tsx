@@ -101,6 +101,7 @@ export default function SignUp({ isSignIn, setIsSignIn }: Props) {
               message: "Ім'я повинне містити не більше 30 символів",
             },
           })}
+          tabIndex={1}
           placeholder="Введіть ваше ім'я"
           errors={errors.firstName?.message}
         />
@@ -117,6 +118,7 @@ export default function SignUp({ isSignIn, setIsSignIn }: Props) {
               message: "Прізвище повинне містити не більше 30 символів",
             },
           })}
+          tabIndex={2}
           placeholder="Введіть ваше прізвище"
           errors={errors.lastName?.message}
         />
@@ -125,12 +127,14 @@ export default function SignUp({ isSignIn, setIsSignIn }: Props) {
           register={register("email", { required: "Це поле є обов'язковим" })}
           placeholder="Введіть вашу електронну пошту"
           type="email"
+          tabIndex={3}
           errors={errors.email?.message}
         />
 
         <FormInput
           placeholder="Телефон"
           type="tel"
+          tabIndex={4}
           register={register("phone", {
             required: "Це поле є обов'язковим",
             maxLength: {
@@ -157,6 +161,7 @@ export default function SignUp({ isSignIn, setIsSignIn }: Props) {
               message: "Пароль має містити не більше 25 символів",
             },
           })}
+          tabIndex={5}
           type="password"
           placeholder="Створіть пароль"
           errors={errors.password?.message}
@@ -168,12 +173,13 @@ export default function SignUp({ isSignIn, setIsSignIn }: Props) {
             validate: (value) =>
               value === watch("password") || "Паролі не співпадають",
           })}
+          tabIndex={6}
           type="password"
           placeholder="Повторіть пароль"
           errors={errors.repeatPassword?.message}
         />
 
-        <button className={styles.signUp__button} type="submit">
+        <button className={styles.signUp__button} type="submit" tabIndex={7}>
           Зареєструватись
         </button>
       </form>

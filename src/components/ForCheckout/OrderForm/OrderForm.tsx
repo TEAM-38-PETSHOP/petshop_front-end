@@ -222,6 +222,7 @@ export default function OrderForm({ className }: Props) {
               message: "Ім'я повинне містити не більше 30 символів",
             },
           })}
+          tabIndex={1}
           disabled={isAuthenticated}
           placeholder="Ім'я одержувача"
           errors={errors.firstName?.message}
@@ -238,6 +239,7 @@ export default function OrderForm({ className }: Props) {
               message: "Прізвище повинне містити не більше 30 символів",
             },
           })}
+          tabIndex={2}
           disabled={isAuthenticated}
           placeholder="Прізвище одержувача"
           errors={errors.lastName?.message}
@@ -255,6 +257,7 @@ export default function OrderForm({ className }: Props) {
               message: "Невірно введенний номер приклад: +380XXXXXXXXX",
             },
           })}
+          tabIndex={3}
           disabled={isAuthenticated}
           placeholder="Телефон"
           errors={errors.phone?.message}
@@ -267,6 +270,7 @@ export default function OrderForm({ className }: Props) {
               message: "Невірно введена пошта",
             },
           })}
+          tabIndex={4}
           type="email"
           disabled={isAuthenticated}
           placeholder="Електронна пошта"
@@ -284,6 +288,7 @@ export default function OrderForm({ className }: Props) {
             onChange: debouncedCityChange,
           })}
           errors={errors.city?.message}
+          tabIndex={5}
           isSave
           offBrowserAutocomplete
           autocomplete={{
@@ -303,6 +308,7 @@ export default function OrderForm({ className }: Props) {
             required: "Це поле є обов'язковим",
             onChange: debouncedWarehouseChange,
           })}
+          tabIndex={6}
           onClickInput={handleWarehouseChange}
           errors={errors.deliveryPoint?.message}
           offBrowserAutocomplete
@@ -325,6 +331,7 @@ export default function OrderForm({ className }: Props) {
             required: "Це поле є обов'язковим",
           })}
           setValue={setValue}
+          tabIndex={7}
           itemName="paymentMethod"
           options={{ cash: "Оплата при отриманні", card: "Оплата картою" }}
           disabled={["card"]}
@@ -346,6 +353,7 @@ export default function OrderForm({ className }: Props) {
           isBuy: true,
           type: "button",
           btnText: "Оформити",
+          tabIndex: 8
         }}
       />
     </form>
