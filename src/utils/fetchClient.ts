@@ -1,6 +1,6 @@
 import { IErrorResponse } from '@/types/IErrorResponse ';
 
-const BASE_URL = "http://ec2-54-163-63-218.compute-1.amazonaws.com";
+const BASE_URL = "http://ec2-23-22-208-166.compute-1.amazonaws.com";
 
 type RequestMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 

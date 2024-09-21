@@ -97,6 +97,7 @@ export default function SignIn({ isSignIn, setIsSignIn }: Props) {
           register={register('email', { required: "Це поле є обов'язковим" })}
           placeholder="Введіть вашу електронну пошту"
           type="email"
+          tabIndex={1}
           errors={errors.email?.message}
         />
         <FormInput
@@ -111,6 +112,7 @@ export default function SignIn({ isSignIn, setIsSignIn }: Props) {
               message: 'Пароль має містити не більше 25 символів',
             },
           })}
+          tabIndex={2}
           type="password"
           placeholder="Введіть пароль"
           errors={errors.password?.message}
@@ -131,6 +133,7 @@ export default function SignIn({ isSignIn, setIsSignIn }: Props) {
         <button
           className={styles.signIn__button}
           type="submit"
+          tabIndex={3}
         >
           Увійти
         </button>

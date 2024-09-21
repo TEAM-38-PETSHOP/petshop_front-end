@@ -14,6 +14,7 @@ type Btn = {
   isBuy?: boolean;
   children?: React.ReactNode;
   type?: 'button' | 'link' | 'submit';
+  tabIndex?: number;
 };
 
 type Props = {
@@ -29,6 +30,7 @@ export default function Buttons({ firstBtn, secondBtn, className }: Props) {
         <button
           onClick={btn.onClick}
           disabled={btn.isDisabled}
+          tabIndex={btn.tabIndex}
           className={classNames([styles.btns__btn], {
             [styles.btns__btnSecond]: btn === secondBtn,
             [styles.btns__btnDisabled]: btn.isDisabled,
@@ -48,6 +50,7 @@ export default function Buttons({ firstBtn, secondBtn, className }: Props) {
           onClick={btn.onClick}
           type={btn.type}
           disabled={btn.isDisabled}
+          tabIndex={btn.tabIndex}
           className={classNames([styles.btns__btn], {
             [styles.btns__btnSecond]: btn === secondBtn,
             [styles.btns__btnDisabled]: btn.isDisabled,
@@ -66,6 +69,7 @@ export default function Buttons({ firstBtn, secondBtn, className }: Props) {
         target={btn.target || '_self'}
         onClick={btn.onClick}
         href={btn.btnLink || ''}
+        tabIndex={btn.tabIndex}
         className={classNames([styles.btns__btn], {
           [styles.btns__btnBuy]: btn.isBuy,
           [styles.btns__btnSecond]: btn === secondBtn,

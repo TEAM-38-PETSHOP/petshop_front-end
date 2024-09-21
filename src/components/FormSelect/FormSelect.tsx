@@ -24,6 +24,7 @@ type Props<T extends IOrderForm | Feedback> = {
   itemName: Path<T>;
   errors: string | undefined;
   className?: string;
+  tabIndex?: number;
 };
 export default function FormSelect<T extends IOrderForm | Feedback>({
   defaultText,
@@ -35,6 +36,7 @@ export default function FormSelect<T extends IOrderForm | Feedback>({
   disabled,
   errors,
   className,
+  tabIndex,
 }: Props<T>) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -56,6 +58,7 @@ export default function FormSelect<T extends IOrderForm | Feedback>({
         {...register}
         onBlur={handleClose}
         onClick={handleToggle}
+        tabIndex={tabIndex}
       >
         <option value="" disabled>
           {defaultText}

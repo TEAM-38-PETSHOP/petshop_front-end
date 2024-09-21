@@ -57,6 +57,9 @@ export const FeedbackForm = () => {
       });
     } else if (data.photo) {
       formData.append("files", data.photo);
+    } else {
+      const emptyFile = new File([""], "empty.txt", { type: "text/plain" });
+      formData.append("files", emptyFile);
     }
 
     try {
@@ -93,6 +96,7 @@ export const FeedbackForm = () => {
             })}
             itemName="experience"
             setValue={setValue}
+            tabIndex={1}
             defaultText="Обери з чим ти мав досвід"
             options={{ grooming: "Грумінг", shop: "Магазин" }}
             errors={errors.experience?.message}
@@ -111,6 +115,7 @@ export const FeedbackForm = () => {
             className={styles.feedbackForm__textarea}
             placeholder="Опиши свої враження"
             id="comment"
+            tabIndex={2}
             rows={5}
             {...register("comment", {
               required: "Це поле є обов'язковим",
