@@ -26,7 +26,7 @@ export default function PreviewOrder({ className }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   if (!products.length) {
-    setTimeout(() => router.push('/cart'), 1500);
+    router.push('/cart');
   }
 
   useEffect(() => {

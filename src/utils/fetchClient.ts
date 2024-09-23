@@ -1,6 +1,6 @@
 import { IErrorResponse } from '@/types/IErrorResponse ';
 
-const BASE_URL = "http://ec2-23-22-208-166.compute-1.amazonaws.com";
+const BASE_URL = 'http://ec2-54-82-10-3.compute-1.amazonaws.com';
 
 type RequestMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
@@ -23,7 +23,7 @@ async function request<T>(
   }
 
   options.headers = {
-    ...(multipart ? {} : { "Content-Type": "application/json" }),
+    ...(multipart ? {} : { 'Content-Type': 'application/json' }),
     ...(token && { Authorization: `Bearer ${token}` }),
   };
 
@@ -52,7 +52,7 @@ export const client = {
     token: string | null = null,
     expectString: boolean = false,
     multipart: boolean = false
-  ) => request<T>(url, "POST", data, token, expectString, multipart),
+  ) => request<T>(url, 'POST', data, token, expectString, multipart),
   patch: <T>(
     url: string,
     data: any,
