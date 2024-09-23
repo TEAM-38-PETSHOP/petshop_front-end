@@ -39,7 +39,12 @@ export default function SignIn({ isSignIn, setIsSignIn }: Props) {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<ILoginForm>();
+
+  useEffect(() => {
+    reset();
+  }, [isSignIn, reset]);
 
   const handleSubmitForm = async (data: ILoginForm) => {
     const { email, password } = data;
