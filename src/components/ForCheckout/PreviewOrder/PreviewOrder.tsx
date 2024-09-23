@@ -9,6 +9,7 @@ import { Product } from '@/types/Product';
 import { useAppSelector } from '@/hooks/reduxHooks';
 import CartItem from '@/components/ForCart/CartItem/CartItem';
 import { CheckTotalPrice } from '@/helpers/CheckTotalPrice';
+import { checkWindow } from '@/helpers/checkWindow';
 import { useDispatch } from 'react-redux';
 import { setTotalPrice } from '@/redux/features/totalPriceSlice';
 import Buttons from '@/components/Buttons/Buttons';
@@ -26,7 +27,7 @@ export default function PreviewOrder({ className }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   if (!products.length) {
-    router.push('/cart');
+    checkWindow() && router.push('/cart');
   }
 
   useEffect(() => {
