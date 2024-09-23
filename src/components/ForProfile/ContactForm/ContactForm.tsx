@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import FormInput from "@/components/FormInput/FormInput";
-import { ContactInfoForm, ServiceModalName } from "@/types";
-import { useForm, useFormState } from "react-hook-form";
-import styles from "./contactForm.module.scss";
-import { toast } from "react-toastify";
-import { useAppDispatch } from "@/hooks/reduxHooks";
-import { addServiceModal } from "@/redux/features/serviceModalSlice";
-import Buttons from "@/components/Buttons/Buttons";
-import { useSession } from "next-auth/react";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { IUser } from "@/types/User";
-import { updateUserInfo } from "@/helpers/fetchAuthorization";
+import FormInput from '@/components/FormInput/FormInput';
+import { ContactInfoForm, ServiceModalName } from '@/types';
+import { useForm, useFormState } from 'react-hook-form';
+import styles from './contactForm.module.scss';
+import { toast } from 'react-toastify';
+import { useAppDispatch } from '@/hooks/reduxHooks';
+import { addServiceModal } from '@/redux/features/serviceModalSlice';
+import Buttons from '@/components/Buttons/Buttons';
+import { useSession } from 'next-auth/react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { IUser } from '@/types/User';
+import { updateUserInfo } from '@/helpers/fetchAuthorization';
 
 export const ContactForm = () => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -21,13 +21,13 @@ export const ContactForm = () => {
   const dispatch = useAppDispatch();
 
   const defaultValues = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    oldPassword: "",
-    newPassword: "",
-    newPasswordRepeat: "",
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    oldPassword: '',
+    newPassword: '',
+    newPasswordRepeat: '',
   };
 
   const {
@@ -42,7 +42,7 @@ export const ContactForm = () => {
     formState: { errors },
   } = useForm<ContactInfoForm>({
     defaultValues: defaultValues,
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   useEffect(() => {
@@ -58,6 +58,7 @@ export const ContactForm = () => {
     }
 
     initialValuesRef.current = getValues();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [customUser, setValue, getValues]);
 
   const [
@@ -69,13 +70,13 @@ export const ContactForm = () => {
     newPassword,
     newPasswordRepeat,
   ] = watch([
-    "firstName",
-    "lastName",
-    "email",
-    "phone",
-    "oldPassword",
-    "newPassword",
-    "newPasswordRepeat",
+    'firstName',
+    'lastName',
+    'email',
+    'phone',
+    'oldPassword',
+    'newPassword',
+    'newPasswordRepeat',
   ]);
 
   const hasChanges = useCallback(() => {
@@ -86,6 +87,7 @@ export const ContactForm = () => {
         initialValuesRef.current?.[key as keyof ContactInfoForm]
       );
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     firstName,
     lastName,
@@ -99,7 +101,7 @@ export const ContactForm = () => {
   const { isValid } = useFormState({ control });
 
   const onSubmit = async (data: ContactInfoForm) => {
-    const toastId = toast.loading("Чекаємо...");
+    const toastId = toast.loading('Чекаємо...');
     try {
       const response = await updateUserInfo(data, customUser?.token);
 
@@ -112,8 +114,8 @@ export const ContactForm = () => {
         });
 
         toast.update(toastId, {
-          render: "Дані успішно оновлено!",
-          type: "success",
+          render: 'Дані успішно оновлено!',
+          type: 'success',
           isLoading: false,
           autoClose: 5000,
         });
@@ -123,16 +125,16 @@ export const ContactForm = () => {
         clearErrors();
       } else {
         toast.update(toastId, {
-          render: "Помилка оновлення!",
-          type: "error",
+          render: 'Помилка оновлення!',
+          type: 'error',
           isLoading: false,
           autoClose: 5000,
         });
       }
     } catch (error) {
       toast.update(toastId, {
-        render: "Сталася помилка!",
-        type: "error",
+        render: 'Сталася помилка!',
+        type: 'error',
         isLoading: false,
         autoClose: 5000,
       });
@@ -163,11 +165,14 @@ export const ContactForm = () => {
 
   return (
     <>
-      <form className={styles.contactForm} onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className={styles.contactForm}
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className={styles.contactForm__inputWrapper}>
           <FormInput
-            register={register("firstName", {
-              required: "Це обовʼязкове поле",
+            register={register('firstName', {
+              required: 'Це обовʼязкове поле',
               minLength: {
                 value: 2,
                 message: "Ім'я повинне містити не менше 2 символів",
@@ -187,15 +192,15 @@ export const ContactForm = () => {
 
         <div className={styles.contactForm__inputWrapper}>
           <FormInput
-            register={register("lastName", {
-              required: "Це обовʼязкове поле",
+            register={register('lastName', {
+              required: 'Це обовʼязкове поле',
               minLength: {
                 value: 2,
-                message: "Прізвище повинне містити не менше 2 символів",
+                message: 'Прізвище повинне містити не менше 2 символів',
               },
               maxLength: {
                 value: 30,
-                message: "Прізвище повинне містити не більше 30 символів",
+                message: 'Прізвище повинне містити не більше 30 символів',
               },
             })}
             disabled={!isEdit}
@@ -208,11 +213,11 @@ export const ContactForm = () => {
 
         <div className={styles.contactForm__inputWrapper}>
           <FormInput
-            register={register("email", {
-              required: "Це обовʼязкове поле",
+            register={register('email', {
+              required: 'Це обовʼязкове поле',
               pattern: {
                 value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                message: "Невірно введена пошта",
+                message: 'Невірно введена пошта',
               },
             })}
             disabled={!isEdit}
@@ -225,15 +230,15 @@ export const ContactForm = () => {
 
         <div className={styles.contactForm__inputWrapper}>
           <FormInput
-            register={register("phone", {
-              required: "Це обовʼязкове поле",
+            register={register('phone', {
+              required: 'Це обовʼязкове поле',
               maxLength: {
                 value: 13,
-                message: "Невірно введенний номер, приклад: +380XXXXXXXXX",
+                message: 'Невірно введенний номер, приклад: +380XXXXXXXXX',
               },
               minLength: {
                 value: 13,
-                message: "Невірно введенний номер приклад: +380XXXXXXXXX",
+                message: 'Невірно введенний номер приклад: +380XXXXXXXXX',
               },
             })}
             disabled={!isEdit}
@@ -246,14 +251,14 @@ export const ContactForm = () => {
 
         <div className={styles.contactForm__inputWrapper}>
           <FormInput
-            register={register("oldPassword", {
+            register={register('oldPassword', {
               minLength: {
                 value: 8,
-                message: "Пароль має містити не менше 8 символів",
+                message: 'Пароль має містити не менше 8 символів',
               },
               maxLength: {
                 value: 25,
-                message: "Пароль має містити не більше 25 символів",
+                message: 'Пароль має містити не більше 25 символів',
               },
             })}
             placeholder="Введіть ваш пароль"
@@ -274,14 +279,14 @@ export const ContactForm = () => {
 
         <div className={styles.contactForm__inputWrapper}>
           <FormInput
-            register={register("newPassword", {
+            register={register('newPassword', {
               minLength: {
                 value: 8,
-                message: "Пароль має містити не менше 8 символів",
+                message: 'Пароль має містити не менше 8 символів',
               },
               maxLength: {
                 value: 25,
-                message: "Пароль має містити не більше 25 символів",
+                message: 'Пароль має містити не більше 25 символів',
               },
             })}
             placeholder="Введіть новий пароль"
@@ -294,17 +299,17 @@ export const ContactForm = () => {
 
         <div className={styles.contactForm__inputWrapper}>
           <FormInput
-            register={register("newPasswordRepeat", {
+            register={register('newPasswordRepeat', {
               minLength: {
                 value: 8,
-                message: "Пароль має містити не менше 8 символів",
+                message: 'Пароль має містити не менше 8 символів',
               },
               maxLength: {
                 value: 25,
-                message: "Пароль має містити не більше 25 символів",
+                message: 'Пароль має містити не більше 25 символів',
               },
               validate: (value) =>
-                value === watch("newPassword") || "Паролі не співпадають",
+                value === watch('newPassword') || 'Паролі не співпадають',
             })}
             placeholder="Підтвердіть новий пароль"
             type="password"
@@ -318,28 +323,28 @@ export const ContactForm = () => {
       <div className={styles.contactForm__buttons}>
         <Buttons
           firstBtn={{
-            btnText: "Видалити акаунт",
-            type: "button",
+            btnText: 'Видалити акаунт',
+            type: 'button',
             className: styles.contactForm__buttonsDelete,
             onClick: handleDeleteAccount,
           }}
         />
         <Buttons
           firstBtn={{
-            btnText: "Редагувати профіль",
-            type: "button",
+            btnText: 'Редагувати профіль',
+            type: 'button',
             className: styles.contactForm__buttonsEdit,
             onClick: handleEditProfile,
           }}
         />
         <Buttons
           firstBtn={{
-            btnText: "Зберегти",
-            type: "submit",
+            btnText: 'Зберегти',
+            type: 'submit',
             isDisabled: !hasChanges() || !isValid,
             className: styles.contactForm__buttonsSave,
             onClick: handleSubmit(onSubmit),
-            tabIndex: 8
+            tabIndex: 8,
           }}
         />
       </div>
