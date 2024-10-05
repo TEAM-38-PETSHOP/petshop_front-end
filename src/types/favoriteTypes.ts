@@ -5,6 +5,11 @@ export interface IFavoriteItemResponse {
   userId: number;
   wishItems: FavoriteItem[];
 }
+export interface IFavoriteItemResponse {
+  id: number;
+  userId: number;
+  wishItems: FavoriteItem[];
+}
 
 export interface FavoriteItem {
   wishItemId: number;

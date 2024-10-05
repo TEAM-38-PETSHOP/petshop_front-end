@@ -5,11 +5,16 @@ export const getFavoriteItems = (token: string) => {
   return client.get<IFavoriteItemResponse>(`/api/profile/wishlists`, token);
 };
 
-export const sendFavoriteItems = (productId: number, token: string) => {
+export const sendFavoriteItems = (
+  FavoriteItems: {
+    productId: number;
+  }[],
+  token: string
+) => {
   return client.post<IFavoriteItemResponse>(
     `/api/profile/wishlists`,
     {
-      productId,
+      wishItemRequestDtos: FavoriteItems,
     },
     token
   );
