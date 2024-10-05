@@ -1,5 +1,5 @@
-@import "../../../app/styles/extends.scss";
-@import "../../../app/styles/mixins.scss";
+@import '../../../app/styles/extends.scss';
+@import '../../../app/styles/mixins.scss';
 
 .profileList {
   display: flex;
@@ -30,6 +30,7 @@
   }
 
   &__exit {
+    display: block;
     @extend %main-text;
     font-weight: 600;
     color: var(--color-gray-40);

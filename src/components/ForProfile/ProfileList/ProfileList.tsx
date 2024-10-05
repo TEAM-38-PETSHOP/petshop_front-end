@@ -1,13 +1,14 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import styles from "./profileList.module.scss";
-import classNames from "classnames";
-import { ProfileTab } from "@/types";
-import { profileTabInfoFactory } from "@/helpers";
-import { Accordion } from "@/components";
-import { profileList } from "@/constants";
-import { signOut } from "next-auth/react";
+import Link from 'next/link';
+import styles from './profileList.module.scss';
+import classNames from 'classnames';
+import { ProfileTab } from '@/types';
+import { profileTabInfoFactory } from '@/factories/profileTabInfoFactory';
+import { Accordion } from '@/components';
+import { profileList } from '@/constants';
+import { signOut, useSession } from 'next-auth/react';
+import { IUser } from '@/types/User';
 
 type Props = {
   searchParams: { activeTab: ProfileTab };
@@ -15,6 +16,8 @@ type Props = {
 
 export default function ProfileList({ searchParams }: Props) {
   const activeTab = searchParams?.activeTab || ProfileTab.ContactInfo;
+  const { data } = useSession();
+  const customUser = data?.user as IUser;
 
   const handleExit = () => {
     signOut();
@@ -41,13 +44,23 @@ export default function ProfileList({ searchParams }: Props) {
           ))}
         </ul>
 
-        <button
-          onClick={handleExit}
-          type="button"
-          className={styles.profileList__exit}
-        >
-          Вийти
-        </button>
+        <div>
+          <button
+            onClick={handleExit}
+            type="button"
+            className={styles.profileList__exit}
+          >
+            Вийти
+          </button>
+          {customUser?.roles.some((role) => role.role === 'ADMIN') && (
+            <Link
+              href="/admin-panel"
+              className={styles.profileList__exit}
+            >
+              Для адміністратора
+            </Link>
+          )}
+        </div>
       </div>
 
       <hr className={styles.profileList__hr} />
@@ -56,15 +69,18 @@ export default function ProfileList({ searchParams }: Props) {
         {profileTabInfoFactory(activeTab)}
       </div>
 
-      <Accordion data={profileList} searchParams={searchParams} />
+      <Accordion
+        data={profileList}
+        searchParams={searchParams}
+      />
 
       <button
-          onClick={handleExit}
-          type="button"
-          className={styles.profileList__exitMobile}
-        >
-          Вийти
-        </button>
+        onClick={handleExit}
+        type="button"
+        className={styles.profileList__exitMobile}
+      >
+        Вийти
+      </button>
     </section>
   );
 }

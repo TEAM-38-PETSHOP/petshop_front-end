@@ -18,7 +18,13 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
+  const isAdminRoute = req.nextUrl.pathname.startsWith('/admin-panel');
+
+  if (isAdminRoute && token.user.roles.some((role) => role.role !== 'ADMIN')) {
+    return NextResponse.redirect(new URL('/profile', req.url));
+  }
+
   return NextResponse.next();
 }
 
-export const config = { matcher: ['/profile'] };
+export const config = { matcher: ['/profile', '/admin-panel'] };
