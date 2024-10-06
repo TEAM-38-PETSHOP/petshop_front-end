@@ -1,6 +1,7 @@
 import { ApiResponse } from '@/types/novaposhta/ApiResponse';
 
-const BASE_URL = 'https://api.novaposhta.ua/v2.0/json/';
+const BASE_URL = process.env.NEXT_PUBLIC_NOVAPOSHTA_API_URL!;
+const API_KEY = process.env.NEXT_PUBLIC_NOVAPOSHTA_API_KEY!;
 
 export function novaposhtaRequest<T>(
   modelName: string,
@@ -12,7 +13,7 @@ export function novaposhtaRequest<T>(
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      apiKey: 'dc1aef7605333b1583c3de0d4a62f8a1',
+      apiKey: API_KEY,
       modelName,
       calledMethod,
       methodProperties,

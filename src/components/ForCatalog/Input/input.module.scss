@@ -51,7 +51,8 @@
     height: 20px;
     right: 70px;
     top: 15px;
-    background: url('../../../../public/images/catalog/icons/cross.svg') no-repeat center;
+    background: url('../../../../public/images/catalog/icons/cross.svg')
+      no-repeat center;
   }
 
   &__separator {
@@ -88,6 +89,7 @@
     }
 
     img {
+      object-fit: contain;
       margin-right: 5px;
     }
 
