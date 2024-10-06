@@ -21,6 +21,7 @@ export interface Product {
   entryDate: string;
   animals: Animal[];
   categories: Category[];
+  available: boolean;
 }
 
 export interface Animal {

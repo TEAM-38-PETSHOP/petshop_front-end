@@ -8,14 +8,16 @@ import Link from 'next/link';
 
 export default function Footer() {
   const pathname = usePathname();
-  const isHidden =
-    pathname === '/favorites' || pathname === '/cart' || pathname === '/auth' || pathname === '/profile';
+  const isHidden = [
+    '/favorites',
+    '/cart',
+    '/auth',
+    '/profile',
+    '/admin-panel',
+  ].includes(pathname);
 
-  return (
-    <div
-      className={styles.footer}
-      hidden={isHidden}
-    >
+  return isHidden ? null : (
+    <div className={styles.footer}>
       <div className={styles.footerContent}>
         <Image
           className={styles.footerContent__logo}

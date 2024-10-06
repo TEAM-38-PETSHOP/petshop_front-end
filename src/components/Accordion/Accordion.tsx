@@ -1,9 +1,9 @@
-import { Fragment } from "react";
-import { AccordionItem } from "@/components";
-import styles from "./accordion.module.scss";
-import { ProfileTab } from "@/types";
-import { profileTabInfoFactory } from "@/helpers";
-import { ProfileListType } from "@/constants";
+import { Fragment } from 'react';
+import { AccordionItem } from '@/components';
+import styles from './accordion.module.scss';
+import { ProfileTab } from '@/types';
+import { profileTabInfoFactory } from '@/factories/profileTabInfoFactory';
+import { ProfileListType } from '@/constants';
 
 type AccorionData = ProfileListType[];
 

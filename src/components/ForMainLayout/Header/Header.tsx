@@ -9,15 +9,19 @@ import styles from './header.module.scss';
 
 import Nav from '../Nav/Nav';
 import HeaderIcons from '../HeaderIcons/HeaderIcons';
+import { usePathname } from 'next/navigation';
 export default function Header() {
   const [openMenu, setOpenMenu] = useState(false);
+  const pathname = usePathname();
+  const isHidden = ['/admin-panel'].includes(pathname);
   const toggleMenu = useCallback(() => {
     setOpenMenu((prevOpenMenu) => !prevOpenMenu);
   }, []);
 
-  return (
+  return isHidden ? null : (
     <header
       className={classNames([styles.header], { [styles.headerOpen]: openMenu })}
+      hidden={isHidden}
     >
       <button
         className={classNames([styles.header__menu], {

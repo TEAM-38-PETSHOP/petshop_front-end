@@ -11,10 +11,10 @@ export const saveServerFavorites = async (
   favoriteProducts: FavoriteState['favoriteProducts'],
   dispatch: AppDispatch
 ) => {
-  favoriteProducts.forEach(async (item) => {
-    await sendFavoriteItems(item.product.productId, accessToken);
-  });
-
+  const favoriteForRequest = favoriteProducts.map((item) => ({
+    productId: item.product.productId,
+  }));
+  await sendFavoriteItems(favoriteForRequest, accessToken);
   const serverFavoriteItems = await getFavoriteItems(accessToken);
 
   const newFavorites = serverFavoriteItems.wishItems.map((item) => {

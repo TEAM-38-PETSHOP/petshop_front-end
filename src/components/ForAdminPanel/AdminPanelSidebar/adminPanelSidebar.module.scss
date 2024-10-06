@@ -1,0 +1,120 @@
+@import '../../../app/styles/extends.scss';
+@import '../../../app/styles/mixins.scss';
+
+.adminPanelSidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+
+  padding: 15px;
+  margin: -15px 0;
+  height: 100vh;
+  width: max-content;
+
+  background-color: var(--color-gray-80);
+
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 15px;
+
+    &Img {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+
+      &Alternate {
+        padding: 10px;
+        background-color: var(--color-gray-50);
+        opacity: 0.7;
+      }
+    }
+
+    &Name {
+      @extend %main-text;
+      font-weight: 500;
+    }
+
+    &Email {
+      @extend %small-text;
+      color: var(--color-gray-30);
+    }
+  }
+
+  &__exit {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 15px 20px;
+
+    @extend %main-text;
+    font-weight: 500;
+    color: var(--color-gray-30);
+
+    @media (hover: hover) {
+      &:hover {
+        color: var(--color-secondary-red);
+
+        * {
+          stroke: var(--color-secondary-red);
+        }
+      }
+    }
+
+    &Icon {
+      margin-top: 5px;
+    }
+  }
+}
+
+.btnsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 45px;
+
+  min-width: 312px;
+
+  a {
+    width: 100%;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    @extend %secondary-text;
+    font-weight: 500;
+    height: 50px;
+    width: 100%;
+    padding: 0 20px;
+
+    border-radius: var(--radius-100);
+
+    transition: background-color, color, var(--transition-duration);
+  }
+
+  &__btnActive {
+    color: var(--color-gray-100);
+    background-color: var(--color-gray-20);
+  }
+
+  &__img {
+    margin-top: 5px;
+    * {
+      stroke: var(--color-gray-30);
+    }
+
+    &Active {
+      * {
+        stroke: var(--color-gray-100);
+      }
+    }
+  }
+}

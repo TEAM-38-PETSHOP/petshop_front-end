@@ -32,7 +32,10 @@ export const addFavoriteProductAsync = createAsyncThunk(
     { dispatch }
   ) => {
     const favoriteItem = await toast.promise(
-      sendFavoriteItems(product.product.productId, accessToken),
+      sendFavoriteItems(
+        [{ productId: product.product.productId }],
+        accessToken
+      ),
       {
         pending: ' ',
         success: 'Додано до улюблених',
@@ -94,7 +97,10 @@ const favoriteSlice = createSlice({
   name: 'favoriteProducts',
   initialState,
   reducers: {
-    setFavoriteProducts: (state, action: PayloadAction<FavoriteState['favoriteProducts']>) => {
+    setFavoriteProducts: (
+      state,
+      action: PayloadAction<FavoriteState['favoriteProducts']>
+    ) => {
       state.favoriteProducts = action.payload;
 
       if (checkWindow()) {
