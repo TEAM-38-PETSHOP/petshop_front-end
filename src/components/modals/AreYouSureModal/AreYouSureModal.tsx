@@ -1,14 +1,15 @@
-"use client";
+'use client';
 
-import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
-import { removeServiceModal } from "@/redux/features/serviceModalSlice";
-import { BaseModalSize, ServiceModalName } from "@/types";
-import BaseModal from "../BaseModal/BaseModal";
-import { NotificationErrorIcon } from "@/assets";
-import { toast } from "react-toastify";
-import styles from "./areYouSureModal.module.scss";
-import { deleteAccount } from "@/helpers/fetchAuthorization";
-import { signOut } from "next-auth/react";
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
+import { removeServiceModal } from '@/redux/features/serviceModalSlice';
+import { BaseModalSize, ServiceModalName } from '@/types';
+import BaseModal from '../BaseModal/BaseModal';
+import { NotificationErrorIcon } from '@/assets';
+import { toast } from 'react-toastify';
+import styles from './areYouSureModal.module.scss';
+import { deleteAccount } from '@/helpers/fetchAuthorization';
+import { signOut } from 'next-auth/react';
+import { checkWindow } from '@/helpers/checkWindow';
 
 interface AreYouSureModalProps {
   index: number;
@@ -26,14 +27,14 @@ const AreYouSureModal = ({ index }: AreYouSureModalProps) => {
   };
 
   const handleDeleteAccount = async () => {
-    const toastId = toast.loading("Чекаємо...");
+    const toastId = toast.loading('Чекаємо...');
     try {
       const response = await deleteAccount(userId, token);
 
       if (response) {
         toast.update(toastId, {
-          render: "Аккаунт успішно видалено!",
-          type: "success",
+          render: 'Аккаунт успішно видалено!',
+          type: 'success',
           isLoading: false,
           autoClose: 5000,
         });
@@ -41,10 +42,11 @@ const AreYouSureModal = ({ index }: AreYouSureModalProps) => {
         dispatch(removeServiceModal(ServiceModalName.AreYouSure));
 
         await signOut();
+        checkWindow() && localStorage.clear();
       } else {
         toast.update(toastId, {
-          render: "Помилка видалення аккаунта!",
-          type: "error",
+          render: 'Помилка видалення аккаунта!',
+          type: 'error',
           isLoading: false,
           autoClose: 5000,
         });
@@ -52,7 +54,7 @@ const AreYouSureModal = ({ index }: AreYouSureModalProps) => {
     } catch (error: any) {
       toast.update(toastId, {
         render: `Сталася помилка: ${error.message}`,
-        type: "error",
+        type: 'error',
         isLoading: false,
         autoClose: 5000,
       });
