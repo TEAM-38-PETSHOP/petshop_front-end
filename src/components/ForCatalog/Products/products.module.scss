@@ -1,10 +1,9 @@
-@import '../../../app/styles/extends.scss';
-@import '../../../app/styles/mixins.scss';
+@import "../../../app/styles/extends.scss";
+@import "../../../app/styles/mixins.scss";
 
 .products {
   min-height: 500px;
   margin-bottom: 100px;
-  // border: 1px solid black;
   display: grid;
   grid-template-columns: repeat(auto-fill, 240px);
   justify-content: space-between;
@@ -20,6 +19,46 @@
     gap: 40px 30px;
     justify-content: space-around;
     grid-template-columns: repeat(2, 170px);
+  }
+
+  &__create {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+
+    padding: 15px;
+    border-radius: var(--radius-30);
+    height: 400px;
+
+    @include lg {
+      height: 450px;
+    }
+    @include sm {
+      height: 370px;
+      border-radius: var(--radius-20);
+    }
+
+    background-color: var(--color-gray-70);
+
+    &Button {
+      padding: 13px 34.5px;
+      border: 1px solid black;
+      border-radius: var(--radius-100);
+
+      background-color: var(--color-gray-100);
+
+      @extend %secondary-text;
+      font-weight: 500;
+      text-align: center;
+      transition: background-color var(--transition-duration) linear 0s;
+
+      &:hover {
+        background-color: var(--color-gray-70);
+        transition: background-color var(--transition-duration) linear 0s;
+      }
+    }
   }
 
   &__item {

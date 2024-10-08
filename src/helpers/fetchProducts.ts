@@ -1,8 +1,8 @@
-import { Product } from '@/types/Product';
-import { client } from '../utils/fetchClient';
-import { defineSearchParamsForRequest } from './defineSearchParamsForRequest';
-import { FilterByForRequest } from '@/types/FilterByForRequest';
-import { TotalAmountForRequest } from '@/types/TotalAmountForRequest';
+import { Product } from "@/types/Product";
+import { client } from "../utils/fetchClient";
+import { defineSearchParamsForRequest } from "./defineSearchParamsForRequest";
+import { FilterByForRequest } from "@/types/FilterByForRequest";
+import { TotalAmountForRequest } from "@/types/TotalAmountForRequest";
 
 const slidesCount = 13;
 
@@ -102,4 +102,8 @@ export const getProductsByAnimalAndCategoryId = (
   return client.get<Product[]>(
     `/api/products/animal/${animalId}/category/${categoryId}${searchParams}`
   );
+};
+
+export const deleteProduct = (productId: number, token: string) => {
+  return client.delete(`/api/products/${productId}`, token, true);
 };

@@ -1,0 +1,29 @@
+@import "../../../app/styles/extends.scss";
+
+.deleteGood {
+  &__title {
+    @extend %h4-primary;
+    font-weight: 500;
+    color: var(--color-gray-10);
+    margin-bottom: 15px;
+  }
+
+  &__paragraph {
+    @extend %main-text;
+    color: var(--color-gray-10);
+    margin-bottom: 40px;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+
+    &__cancel {
+      width: 48%;
+    }
+
+    &__delete {
+      width: 48%;
+    }
+  }
+}

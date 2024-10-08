@@ -1,5 +1,5 @@
 "use client";
-import { Product } from "@/types/Product";
+import { Product, ProductTypes } from "@/types/Product";
 import style from "./input.module.scss";
 import cn from "classnames";
 import Link from "next/link";
@@ -9,6 +9,7 @@ import { truncateText } from "@/helpers/truncateText";
 import { useDebounce } from "@/hooks/useDebounce";
 import useClickOutside from "@/hooks/useClickOutside";
 import Loader from "@/components/Loader/Loader";
+import { useSearchParams } from "next/navigation";
 
 const wordLength = 33;
 
@@ -20,6 +21,7 @@ interface Props {
   styleName?: string;
   products?: Product[];
   isLoading: boolean;
+  type?: ProductTypes;
 }
 
 export default React.memo(function Input({
@@ -30,7 +32,10 @@ export default React.memo(function Input({
   styleName,
   products = [],
   isLoading = false,
+  type = "catalog",
 }: Props) {
+  const searchParams = useSearchParams();
+  const activeTab = searchParams.get("activeTab");
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const resultsRef = useRef(null);
   const inputRef = useRef(null);
@@ -92,7 +97,13 @@ export default React.memo(function Input({
           {products.map((product) => (
             <li key={product.productId}>
               <Link
-                href={`/catalog/product/${product.productId}`}
+                href={{
+                  pathname:
+                    type === "admin-panel"
+                      ? `/admin-panel/edit-good/${product.productId}`
+                      : `/catalog/product/${product.productId}`,
+                  query: activeTab ? { activeTab } : {},
+                }}
                 className={style.input__result}
               >
                 <Image
@@ -102,10 +113,16 @@ export default React.memo(function Input({
                   height={40}
                 />
                 <div className={style.input__resultInfo}>
-                  <p className={style.input__resultName} data-testid={`product-${product.productId}`}>
+                  <p
+                    className={style.input__resultName}
+                    data-testid={`product-${product.productId}`}
+                  >
                     {truncateText(product.name, wordLength)}
                   </p>
-                  <p className={style.input__resultPrice} data-testid={`product-${product.productId}-price`}>
+                  <p
+                    className={style.input__resultPrice}
+                    data-testid={`product-${product.productId}-price`}
+                  >
                     {product.price} грн
                   </p>
                 </div>

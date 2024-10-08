@@ -1,4 +1,4 @@
-@import './mixins.scss';
+@import "./mixins.scss";
 
 %h1-primary {
   font-size: 2rem;
@@ -52,5 +52,10 @@
 
 %container {
   width: Min(88.88vw, 1280px);
+  margin: 0 auto;
+}
+
+%admin-container {
+  width: Min(88.88vw, 1100px);
   margin: 0 auto;
 }

@@ -64,7 +64,7 @@ export default function AdminPanelSidebar({ searchParams }: Props) {
               <Link
                 replace
                 scroll={false}
-                href={`?activeTab=${tabId}`}
+                href={`/admin-panel?activeTab=${tabId}`}
               >
                 <span>{tabName}</span>
               </Link>

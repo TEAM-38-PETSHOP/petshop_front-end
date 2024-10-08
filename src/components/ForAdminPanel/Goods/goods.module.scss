@@ -1,0 +1,7 @@
+@import "../../../app/styles/extends.scss";
+
+.goods {
+  @extend %admin-container;
+  display: flex;
+  flex-direction: column;
+}

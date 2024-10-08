@@ -1,5 +1,5 @@
-@import '../../app/styles/mixins.scss';
-@import '../../app/styles/extends.scss';
+@import "../../app/styles/mixins.scss";
+@import "../../app/styles/extends.scss";
 
 .productCard {
   position: relative;
@@ -21,7 +21,7 @@
   }
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     z-index: -1;
     top: 0;
@@ -38,7 +38,7 @@
   }
 
   @media (hover: hover) {
-    &:hover {
+    &:hover:not(.productCard__admin) {
       &::before {
         opacity: 1;
       }
@@ -113,6 +113,42 @@
 
     @include sm {
       min-height: 40px;
+    }
+  }
+
+  &__edit {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    right: 50px;
+    width: 45px;
+    height: 45px;
+    background-color: var(--color-gray-70);
+    border: 1px solid transparent;
+    border-radius: 50%;
+    transition: all var(--transition-duration);
+
+    &:hover {
+      background-color: var(--color-gray-100);
+      border-color: var(--color-gray-40);
+      transition: all var(--transition-duration);
+    }
+  }
+
+  &__delete {
+    position: absolute;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background-color: var(--color-gray-70);
+    border: 1px solid transparent;
+    border-radius: 50%;
+    transition: all var(--transition-duration);
+
+    &:hover {
+      background-color: var(--color-gray-100);
+      border-color: var(--color-gray-40);
+      transition: all var(--transition-duration);
     }
   }
 }
