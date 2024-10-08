@@ -1,7 +1,9 @@
-@import '../../../app/styles/extends.scss';
-@import '../../../app/styles/mixins.scss';
+@import "../../../app/styles/extends.scss";
 
 .main {
-  @extend %container;
   margin-bottom: 90px;
+
+  &__catalog {
+    @extend %container;
+  }
 }

@@ -36,3 +36,5 @@ export interface Category {
   categoryNameId: string;
   description: string;
 }
+
+export type ProductTypes = "catalog" | "admin-panel";

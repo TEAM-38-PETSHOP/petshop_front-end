@@ -5,7 +5,7 @@ import { ServiceModalBaseIndex } from "@/constants";
 import { ServiceModalName } from "@/types";
 import { useAppSelector } from "@/hooks/reduxHooks";
 
-import MakeOrderErrorModal from '@/components/modals/MakeOrderErrorModal/MakeOrderErrorModal';
+import MakeOrderErrorModal from "@/components/modals/MakeOrderErrorModal/MakeOrderErrorModal";
 
 const MakeOrderSuccessModal = React.lazy(
   () =>
@@ -23,6 +23,10 @@ const MakeResetPasswordModal = React.lazy(
 
 const AreYouSureModal = React.lazy(
   () => import("@/components/modals/AreYouSureModal/AreYouSureModal")
+);
+
+const DeleteGoodModal = React.lazy(
+  () => import("@/components/modals/DeleteGoodModal/DeleteGoodModal")
 );
 
 const ServiceModalProvider = ({ children }: { children: React.ReactNode }) => {
@@ -72,6 +76,13 @@ const ServiceModalProvider = ({ children }: { children: React.ReactNode }) => {
         return (
           <Suspense fallback={<></>}>
             <AreYouSureModal index={ServiceModalBaseIndex + index} />
+          </Suspense>
+        );
+
+      case ServiceModalName.DeleteGood:
+        return (
+          <Suspense fallback={<></>}>
+            <DeleteGoodModal index={ServiceModalBaseIndex + index} />
           </Suspense>
         );
 

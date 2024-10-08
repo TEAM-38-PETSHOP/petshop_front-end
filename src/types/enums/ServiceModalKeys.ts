@@ -4,4 +4,5 @@ export enum ServiceModalName {
   MakeCheckEmail = 'MAKE_CHECK_EMAIL',
   MakeResetPassword = 'MAKE_RESET_PASSWORD',
   AreYouSure = 'ARE_YOU_SURE',
+  DeleteGood = 'DELETE_GOOD',
 }

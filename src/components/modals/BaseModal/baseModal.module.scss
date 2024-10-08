@@ -19,7 +19,7 @@
     padding: 32px;
     width: 100%;
     background-color: var(--color-gray-100);
-    border-radius: 12px;
+    border-radius: var(--radius-50);
   }
 
   &__close {
@@ -27,7 +27,7 @@
     height: 20px;
     position: absolute;
     top: 16px;
-    right: 16px;
+    right: 26px;
     display: flex;
     align-items: center;
     justify-content: center;

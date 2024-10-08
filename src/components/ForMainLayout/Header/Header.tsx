@@ -1,19 +1,19 @@
-'use client';
-import { useCallback, useState } from 'react';
-import classNames from 'classnames';
-import Image from 'next/image';
-import Link from 'next/link';
+"use client";
+import { useCallback, useState } from "react";
+import classNames from "classnames";
+import Image from "next/image";
+import Link from "next/link";
 
-import Logo from '@@/images/icons/logo.svg';
-import styles from './header.module.scss';
+import Logo from "@@/images/icons/logo.svg";
+import styles from "./header.module.scss";
 
-import Nav from '../Nav/Nav';
-import HeaderIcons from '../HeaderIcons/HeaderIcons';
-import { usePathname } from 'next/navigation';
+import Nav from "../Nav/Nav";
+import HeaderIcons from "../HeaderIcons/HeaderIcons";
+import { usePathname } from "next/navigation";
 export default function Header() {
   const [openMenu, setOpenMenu] = useState(false);
   const pathname = usePathname();
-  const isHidden = ['/admin-panel'].includes(pathname);
+  const isHidden = pathname.includes("/admin-panel");
   const toggleMenu = useCallback(() => {
     setOpenMenu((prevOpenMenu) => !prevOpenMenu);
   }, []);
@@ -40,10 +40,7 @@ export default function Header() {
         ></Image>
       </Link>
 
-      <Nav
-        isOpen={openMenu}
-        setOpenMenu={setOpenMenu}
-      />
+      <Nav isOpen={openMenu} setOpenMenu={setOpenMenu} />
       <HeaderIcons setOpenMenu={setOpenMenu} />
     </header>
   );

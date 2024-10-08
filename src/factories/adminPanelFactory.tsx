@@ -1,20 +1,21 @@
-import { AdminPanelTabs } from '@/types/enums/AdminPanelTabs';
+import { Goods } from "@/components/ForAdminPanel";
+import { AdminPanelTabs } from "@/types/enums/AdminPanelTabs";
 
 export const adminPanelFactory = (activeTab: AdminPanelTabs) => {
   switch (activeTab) {
     case AdminPanelTabs.ShopCategories:
-      return 'ShopCategories';
+      return "ShopCategories";
     case AdminPanelTabs.Goods:
-      return 'Goods';
+      return <Goods />;
     case AdminPanelTabs.Users:
-      return 'Users';
+      return "Users";
     case AdminPanelTabs.Orders:
-      return 'Orders';
+      return "Orders";
     case AdminPanelTabs.Grooming:
-      return 'Grooming';
+      return "Grooming";
     case AdminPanelTabs.Reviews:
-      return 'Reviews';
+      return "Reviews";
     default:
-      return 'ShopCategories';
+      return "ShopCategories";
   }
 };

@@ -9,7 +9,7 @@ import RadioGroup from "@/components/RadioGroup/RadioGroup";
 import Range from "../Range/Range";
 import Button from "../Button/Button";
 import Modal from "../Modal/Modal";
-import { Category, Product } from "@/types/Product";
+import { Category, Product, ProductTypes } from "@/types/Product";
 import {
   useParams,
   useSearchParams,
@@ -36,9 +36,16 @@ const step = 10;
 interface Props {
   category: string;
   categories: Category[];
+  type?: ProductTypes;
+  className?: string;
 }
 
-export default function CatalogHeader({ category, categories }: Props) {
+export default function CatalogHeader({
+  category,
+  categories,
+  type = "catalog",
+  className,
+}: Props) {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -96,7 +103,6 @@ export default function CatalogHeader({ category, categories }: Props) {
       }));
     });
 
-    // It removes scroll when modal is open
     if (isModalOpen) {
       document.body.style.overflow = "hidden";
     } else {
@@ -174,36 +180,43 @@ export default function CatalogHeader({ category, categories }: Props) {
   };
 
   return (
-    <div className={style.header}>
+    <div className={cn(style.header, [className])}>
       <div className={style.header__wrapper}>
-        <Select
-          isOpen={isCategoryOpen}
-          setIsOpen={setIsCategoryOpen}
-          styleName={cn(style.header__select, {
-            [style.header__hide]: isSortOpen,
-            [style.header__selectGreen]: category !== "all",
-            [style.header__selectActive]: isCategoryOpen,
-          })}
-          currentItemId={params.category || "all"}
-          onClick={selectCategoryHandler}
-          content={categories}
-          type="noBorder"
-          action="category"
-          isMobile={isMobile}
-        />
+        {type !== "admin-panel" && (
+          <Select
+            isOpen={isCategoryOpen}
+            setIsOpen={setIsCategoryOpen}
+            styleName={cn(style.header__select, {
+              [style.header__hide]: isSortOpen,
+              [style.header__selectGreen]: category !== "all",
+              [style.header__selectActive]: isCategoryOpen,
+            })}
+            currentItemId={params.category || "all"}
+            onClick={selectCategoryHandler}
+            content={categories}
+            type="noBorder"
+            action="category"
+            isMobile={isMobile}
+          />
+        )}
         <Input
-          styleName={style.header__input}
+          styleName={cn(style.header__input, {
+            [style.header__inputAdmin]: type === "admin-panel",
+          })}
           query={query}
           setQuery={setQuery}
           setQueryToRequest={setQueryToRequest}
           placeholder="Пошук"
           products={products}
           isLoading={isLoading}
+          type={type}
         />
         <FiltersGroup
           isOpen={isFilterGroupOpen}
           setIsOpen={setIsFilterGroupOpen}
-          styleName={style.header__group}
+          styleName={cn(style.header__group, {
+            [style.header__groupAdmin]: type === "admin-panel",
+          })}
         >
           <RadioGroup
             setBreed={setBreed}
@@ -237,6 +250,7 @@ export default function CatalogHeader({ category, categories }: Props) {
           styleName={cn(style.header__filter, {
             [style.header__hide]: isSortOpen || isCategoryOpen,
             [style.header__filterGreen]: amountOfFilters,
+            [style.header__filterAdmin]: type === "admin-panel",
           })}
           title={
             isMobile && amountOfFilters
@@ -252,6 +266,7 @@ export default function CatalogHeader({ category, categories }: Props) {
             [style.header__hide]: isCategoryOpen,
             [style.header__sortGreen]: sortBy,
             [style.header__sortActive]: isSortOpen,
+            [style.header__sortAdmin]: type === "admin-panel",
           })}
           currentItemId={sortBy}
           onClick={selectSortHandler}

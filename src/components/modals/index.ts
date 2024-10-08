@@ -4,3 +4,4 @@ export * from "./MakeOrderErrorModal";
 export * from "./MakeCheckEmailModal";
 export * from "./MakeResetPasswordModal";
 export * from "./AreYouSureModal";
+export * from "./DeleteGoodModal";

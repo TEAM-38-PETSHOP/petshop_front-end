@@ -1,5 +1,5 @@
-@import '../../../app/styles/extends.scss';
-@import '../../../app/styles/mixins.scss';
+@import "../../../app/styles/extends.scss";
+@import "../../../app/styles/mixins.scss";
 
 .header {
   @extend %container;
@@ -32,7 +32,7 @@
     &Green {
       @include sm {
         background-color: var(--color-secondary-green);
-        color: var( --color-gray-100);
+        color: var(--color-gray-100);
         & + div {
           border-color: transparent;
         }
@@ -57,6 +57,10 @@
       display: none;
     }
 
+    &Admin {
+      width: 40%;
+    }
+
     &__mobile {
       display: none;
       margin: 0;
@@ -79,6 +83,14 @@
     @include md {
       display: none;
     }
+
+    &Admin {
+      width: 29%;
+
+      @include lg {
+        width: 49%;
+      }
+    }
   }
 
   &__filter {
@@ -100,10 +112,16 @@
       line-height: 1.5;
     }
 
+    &Admin {
+      @include md {
+        width: 49%;
+      }
+    }
+
     &Green {
       @include sm {
         background-color: var(--color-secondary-green);
-        color: var( --color-gray-100);
+        color: var(--color-gray-100);
         border-color: transparent;
       }
     }
@@ -152,6 +170,14 @@
 
     @include md {
       width: 30%;
+    }
+
+    &Admin {
+      width: 29%;
+
+      @include lg {
+        width: 49%;
+      }
     }
 
     &Green {
